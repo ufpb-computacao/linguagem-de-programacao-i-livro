@@ -15,9 +15,9 @@
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="matrix.svg"
-   inkscape:export-filename="/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/images/cap1-revisao/matrix.png"
-   inkscape:export-xdpi="40"
-   inkscape:export-ydpi="40">
+   inkscape:export-filename="/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/images/cap1-revisao/matriz.png"
+   inkscape:export-xdpi="125.1035"
+   inkscape:export-ydpi="125.1035">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -181,7 +181,7 @@
          sodipodi:role="line"
          id="tspan3047"
          x="5.5815811"
-         y="316.21494">double matrix[3][4];</tspan></text>
+         y="316.21494">double matriz[3][4];</tspan></text>
     <rect
        y="501.02441"
        x="51.714466"
