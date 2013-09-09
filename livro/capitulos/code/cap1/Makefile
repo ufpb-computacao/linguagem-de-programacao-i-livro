@@ -2,8 +2,8 @@
 CFLAGS+=-Wall -g -std=c1x
 
 # all: ex3 ex4 ex5 aluno alunos revisao programa
-all: tamando_dos_tipos
+all: tamando_dos_tipos do_while_exemplo
 
 clean:
-	rm -f tamando_dos_tipos
+	rm -f tamando_dos_tipos do_while_exemplo
 
