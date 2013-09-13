@@ -8,7 +8,7 @@ int main(void) {
     printf ("\t(2)...Abacaxi\n");
     printf ("\t(3)...Laranja\n");
     scanf("%d", &i);
-  } while ((i<1) || (i>3));
+  } while ((i<1) || (i>3)); // <1>
 
   return 0;
 }
