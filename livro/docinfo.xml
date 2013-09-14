@@ -3,9 +3,19 @@
   rudder-doc-docinfo.xml
   DocBook document information file for rudder-doc.txt.
 -->
-  <edition>v0.2.0</edition>
+  <edition>v0.2.1</edition>
 
   <revhistory>
+    <revision>
+      <revnumber>v0.2.1</revnumber>
+      <date>13/Setembro/2013</date>
+      <authorinitials>Eduardo</authorinitials>
+      <revremark>
+        Recomendação do gist para compartilhar códigos.
+      </revremark>
+    </revision>
+
+
     <revision>
       <revnumber>v0.2.0</revnumber>
       <date>13/Setembro/2013</date>
