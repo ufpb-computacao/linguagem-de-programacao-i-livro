@@ -2,8 +2,9 @@
 
 #include<stdio.h>   // <1> 
 
-main()
+int main()
 {
-    printf("Hello World");   // <2> imprime "Hello Word" na tela.
+	printf("\nHello World!\n");   // <2> imprime "Hello Word" na tela.
+	return 0;
 }
 
