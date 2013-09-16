@@ -3,16 +3,26 @@
   rudder-doc-docinfo.xml
   DocBook document information file for rudder-doc.txt.
 -->
-  <edition>v0.2.2</edition>
+  <edition>v0.2.3</edition>
 
   <revhistory>
+
+    <revision>
+      <revnumber>v0.2.3</revnumber>
+      <date>X/Setembro/2013</date>
+      <authorinitials>Eduardo</authorinitials>
+      <revremark>
+       Inclusão de vídeo demonstrando como baixar os códigos no prefácio.
+      </revremark>
+    </revision>
+
 
     <revision>
       <revnumber>v0.2.2</revnumber>
       <date>16/Setembro/2013</date>
       <authorinitials>Eduardo</authorinitials>
       <revremark>
-        Inclusão de resposta do exercício 3d. Inclusão de código fonte de techos
+        Inclusão de resposta do exercício 3d. Inclusão de código fonte de trechos
 de códigos do Capítulo 1. Atualização da análise sobre Ponto no plano cartesiano - Capítulo 2.
       </revremark>
     </revision>
