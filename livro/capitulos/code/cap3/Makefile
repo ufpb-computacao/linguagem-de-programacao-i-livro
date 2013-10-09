@@ -2,8 +2,8 @@
 CFLAGS=-Wall -g -std=c1x
 
 # all: ex3 ex4 ex5 aluno alunos revisao programa
-all: variavel_nao_inicializada
+all: variavel_nao_inicializada operador_de_endereco
 
 clean:
-	rm -f variavel_nao_inicializada
+	rm -f variavel_nao_inicializada operador_de_endereco
 
