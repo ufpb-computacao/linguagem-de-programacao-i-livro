@@ -47,8 +47,7 @@ Para cada caso faça/desenhe a pilha de execução do programa.
 --
 [TIP]
 ====
-..Sabe-se que para ser triângulo, a medida de um lado qualquer deve ser inferior ou igual à soma das medidas dos outros dois lados. 
-..Triângulo equilátero possui todos os lados iguais; triângulo isósceles possui pelo menos dois lados de medidas iguais; triângulo escaleno possui as medidas dos três lados diferentes.
+Sabe-se que para ser triângulo, a medida de um lado qualquer deve ser inferior ou igual à soma das medidas dos outros dois lados. Triângulo equilátero possui todos os lados iguais; triângulo isósceles possui pelo menos dois lados de medidas iguais; triângulo escaleno possui as medidas dos três lados diferentes.
 ====
 --
 . Considere uma equação de movimento para calcular a posição (s) e velocidade (v) de uma partícula em um determinado instante t, dado sua aceleração a, posição s0 e velocidade v0. O programa abaixo ilustra o uso dessa equação, imprimindo os valores 55.5 e 25.0, que representam a posição e velocidade calculadas para os valores utilizados pelo programa.
