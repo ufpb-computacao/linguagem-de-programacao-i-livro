@@ -1,8 +1,8 @@
 === Atividades
 
-1. Defina ponteiros e explique usando exemplos a função dos operadores de indireção `*` e de endereço `&`.
+. Defina ponteiros e explique usando exemplos a função dos operadores de indireção `*` e de endereço `&`.
 
-2. Considere o código a seguir. Quais valores serão impressos na tela?
+. Considere o código a seguir. Quais valores serão impressos na tela?
 +
 ----
 #include <stdio.h>
@@ -22,8 +22,8 @@ return 0;
 }
 ----
 
-3. Escreva os comandos em linguagem C que realizam as tarefas dadas nos itens (b), (c), (d) e (e). Considere que a variável V1 é do tipo double. O item (a) está resolvido para que o aluno melhor entenda o que se pede na questão.
-
+. Escreva os comandos em linguagem C que realizam as tarefas dadas nos itens (b), (c), (d) e (e). Considere que a variável V1 é do tipo double. O item (a) está resolvido para que o aluno melhor entenda o que se pede na questão.
++
 a. Defina um ponteiro para double;
 b. Atribua o endereço da variável V1 ao ponteiro para double definido na letra (a);
 c. Imprima o endereço de memória da variável V1;
@@ -35,8 +35,8 @@ e. Inicialize a variável V1 em 12,5 e depois modifique o seu valor para 30,4 us
     double *ptr;
 ....
 
-4. Faça um programa em C para calcular a área de um retângulo. O programa deve solicitar ao usuário os dois lados do retângulo. Você deve fazer duas versões desse programa: 
-
+. Faça um programa em C para calcular a área de um retângulo. O programa deve solicitar ao usuário os dois lados do retângulo. Você deve fazer duas versões desse programa: 
++
 .. usando uma função com passagem por valor para calcular a área do retângulo; 
 .. usando uma função com passagem por referência para calcular a área do retângulo.
 +
