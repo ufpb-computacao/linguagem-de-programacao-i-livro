@@ -1,5 +1,3 @@
-// Capítulo 1 - Atividades
-
 === Atividades
 
 1. Faça um programa em C que receba o ano de nascimento de uma pessoa e o ano atual, calcule e 

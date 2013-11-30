@@ -4,73 +4,209 @@
 ____
 Ao final deste capítulo você deverá ser capaz de:
 
-* Fazer alocação dinâmica de memória em programas em linguagem C e entender 
-as suas vantagens com relação à alocação estática de memória.
+* Fazer alocação dinâmica de memória em programas em linguagem C 
+e entender as suas vantagens com relação à alocação estática de 
+memória.
 ____
 
-==== 3.4.1 Contextualização
+Até agora foi visto que ponteiros podem ser usados para guardar 
+endereços de variáveis já existentes em um programa em C. As 
+variáveis podem ser entendidas como um espaço de memória que é 
+rotulado durante o processo de compilação do programa em C. Ou 
+seja, é alocado um espaço de memória estático para as variáveis. 
+Nesse caso, foi visto que os ponteiros fornecem apenas uma segunda 
+forma de acesso às variáveis, pois recebem os endereços de 
+memória onde essas variáveis foram criadas. 
 
-Até agora foi visto que ponteiros podem ser usados para guardar endereços de variáveis já existentes em um programa em C. As variáveis podem ser entendidas como um espaço de memória que é rotulado durante o processo de compilação do programa em C. Ou seja, é alocado um espaço de memória estático para as variáveis. Nesse caso, foi visto que os ponteiros fornecem apenas uma segunda forma de acesso às variáveis, pois recebem os endereços de memória onde essas variáveis foram criadas. 
+Um ponto importante a ser notado é que durante a execução do 
+programa em C, uma vez criadas, essas variáveis não podem ser mais 
+apagadas da memória. Ou seja, os espaços de memória utilizados 
+pelas variáveis, não podem ser liberados para uso por outras 
+variáveis ou tipos de dados durante a execução desse programa. 
+Esse tipo de alocação de memória é chamada alocação estática. 
+Ou seja, esse espaço de memória alocado estaticamente fica 
+reservado para a variável (ou outro tipo/estrutura de dados, como 
+arrays, estruturas ou registros, dentre outros...) durante todo o 
+tempo de execução do programa.
 
-Um ponto importante a ser notado é que durante a execução do programa em C, uma vez criadas, essas variáveis não podem ser mais apagadas da memória. Ou seja, os espaços de memória utilizados pelas variáveis, não podem ser liberados para uso por outras variáveis ou tipos de dados durante a execução desse programa. Esse tipo de alocação de memória é chamada alocação estática. Ou seja, esse espaço de memória alocado estaticamente fica reservado para a variável (ou outro tipo/estrutura de dados, como arrays, estruturas ou registros, dentre outros...) durante todo o tempo de execução do programa.
+Outro ponto importante é que na alocação estática o programador 
+deve saber a quantidade de memória que é preciso ser definida no 
+programa. Todavia, há casos em que o programador não sabe, no 
+momento em que está montando o programa, a quantidade de memória 
+(ou de tipo/estrutura de dados) que o programa irá precisar. Ou 
+seja, há casos em que a quantidade de memória necessária varia de 
+acordo com a execução do próprio programa. Um exemplo é um 
+programa que permite múltiplos documentos abertos ao mesmo tempo, 
+como muitos processadores de texto. Nesse caso, o programa não 
+estima quantos documentos o usuário irá abrir nem qual o tamanho de 
+cada documento aberto. Faz-se então necessário estudar um mecanismo 
+que permita a alocação de memória de acordo com a necessidade e 
+durante a execução do próprio programa. Isso é o que se chama de 
+alocação dinâmica de memória.
 
-Outro ponto importante é que na alocação estática o programador deve saber a quantidade de memória que é preciso ser definida no programa. Todavia, há casos em que o programador não sabe, no momento em que está montando o programa, a quantidade de memória (ou de tipo/estrutura de dados) que o programa irá precisar. Ou seja, há casos em que a quantidade de memória necessária varia de acordo com a execução do próprio programa. Um exemplo é um programa que permite múltiplos documentos abertos ao mesmo tempo, como muitos processadores de texto. Nesse caso, o programa não estima quantos documentos o usuário irá abrir nem qual o tamanho de cada documento aberto. Faz-se então necessário estudar um mecanismo que permita a alocação de memória de acordo com a necessidade e durante a execução do próprio programa. Isso é o que se chama de alocação dinâmica de memória.
+Nesse cenário, os ponteiros são nossos aliados e o seu verdadeiro 
+poder está em apontar para memória não rotulada ou dinâmica, 
+alocada durante a execução do programa, i.e., alocada 
+dinamicamente. Para melhor entender o conceito de alocação 
+dinâmica, é discutida três formas para reservar espaço de 
+memória para o armazenamento de informações em um programa em C: 
+i) usar variáveis globais e estáticas; ii) usar variáveis locais; 
+iii) alocar memória dinamicamente.
 
-Nesse cenário, os ponteiros são nossos aliados e o seu verdadeiro poder está em apontar para memória não rotulada ou dinâmica, alocada durante a execução do programa, i.e., alocada dinamicamente. Para melhor entender o conceito de alocação dinâmica, é discutida três formas para reservar espaço de memória para o armazenamento de informações em um programa em C: i) usar variáveis globais e estáticas; ii) usar variáveis locais; iii) alocar memória dinamicamente.
+No caso de uso de variáveis globais e estáticas, sabe-se que o 
+espaço reservado de memória para a variável global existe enquanto 
+o programa estiver em execução e só pode ser utilizado pela 
+própria variável.
 
-No caso de uso de variáveis globais e estáticas, sabe-se que o espaço reservado de memória para a variável global existe enquanto o programa estiver em execução e só pode ser utilizado pela própria variável.
+No segundo caso, i.e. uso de variáveis locais em funções, como já 
+foi visto, o espaço de memória reservado para a variável só 
+existe enquanto a função que declarou a variável está sendo 
+executada. Quando a execução da função for concluída, esse 
+espaço de memória está liberado para outros usos e, portanto, as 
+informações armazenadas na variável são perdidas e não podem ser 
+mais recuperadas no escopo do programa.
 
-No segundo caso, i.e. uso de variáveis locais em funções, como já foi visto, o espaço de memória reservado para a variável só existe enquanto a função que declarou a variável está sendo executada. Quando a execução da função for concluída, esse espaço de memória está liberado para outros usos e, portanto, as informações armazenadas na variável são perdidas e não podem ser mais recuperadas no escopo do programa.
+A terceira opção é requisitar ao sistema, durante a execução do 
+programa, um espaço de memória de um determinado tamanho. Esse 
+espaço alocado dinamicamente permanece reservado até que seja 
+liberado pelo programa usando um comando específico que será visto 
+adiante. Com isso, pode-se alocar dinamicamente um espaço de 
+memória em uma função e acessá-lo em outra. Quando o espaço de 
+memória é liberado, ele fica liberado para outros usos dentro de 
+programa e não se pode mais acessá-lo. Como já foi discutida, uma 
+vantagem dessa abordagem é que, em problemas nos quais o programador 
+não sabe a dimensão ou espaço necessário dos tipos de dados que 
+irá utilizar no programa, pode-se usar a alocação dinâmica de 
+memória para alocar e liberar memória ao longo da execução de um 
+programa.
 
-A terceira opção é requisitar ao sistema, durante a execução do programa, um espaço de memória de um determinado tamanho. Esse espaço alocado dinamicamente permanece reservado até que seja liberado pelo programa usando um comando específico que será visto adiante. Com isso, pode-se alocar dinamicamente um espaço de memória em uma função e acessá-lo em outra. Quando o espaço de memória é liberado, ele fica liberado para outros usos dentro de programa e não se pode mais acessá-lo. Como já foi discutida, uma vantagem dessa abordagem é que, em problemas nos quais o programador não sabe a dimensão ou espaço necessário dos tipos de dados que irá utilizar no programa, pode-se usar a alocação dinâmica de memória para alocar e liberar memória ao longo da execução de um programa.
+A Fig. 3.7 ilustra um esquema didático do uso da memória RAM do 
+computador pelo sistema operacional durante a execução de um 
+programa. Quando um programa é executado, o seu código em linguagem 
+de máquina é carregado na memória RAM. Há espaços reservados 
+para gravação de variáveis globais e estáticas que possam existir 
+nesse programa. O restante da memória livre pode ser utilizado pelas 
+variáveis locais e pelas variáveis alocadas dinamicamente. Toda vez 
+quem uma função for chamada, é reservado um espaço na pilha de 
+execução para o armazenamento das variáveis locais da função. 
+Lembre-se que, conforme debatido anteriormente, esse espaço é 
+liberado quando a função acaba a sua execução. A parte da 
+memória não utilizada pela pilha de execução pode ser usada para 
+alocar memória dinamicamente. Caso a pilha de execução cresça 
+além do espaço de memória livre ou a quantidade de memória a ser 
+alocada dinamicamente seja maior que a memória livre, o programa 
+para de funcionar. Mais adiante, será visto como se deve fazer para 
+abordar o programa na situação de alocação de memória além do 
+espaço disponível.
 
-A Fig. 3.7 ilustra um esquema didático do uso da memória RAM do computador pelo sistema operacional durante a execução de um programa. Quando um programa é executado, o seu código em linguagem de máquina é carregado na memória RAM. Há espaços reservados para gravação de variáveis globais e estáticas que possam existir nesse programa. O restante da memória livre pode ser utilizado pelas variáveis locais e pelas variáveis alocadas dinamicamente. Toda vez quem uma função for chamada, é reservado um espaço na pilha de execução para o armazenamento das variáveis locais da função. Lembre-se que, conforme debatido anteriormente, esse espaço é liberado quando a função acaba a sua execução. A parte da memória não utilizada pela pilha de execução pode ser usada para alocar memória dinamicamente. Caso a pilha de execução cresça além do espaço de memória livre ou a quantidade de memória a ser alocada dinamicamente seja maior que a memória livre, o programa para de funcionar. Mais adiante, será visto como se deve fazer para abordar o programa na situação de alocação de memória além do espaço disponível.
+Fig. 3.7: Ilustração do uso da memória RAM do computador durante a 
+execução de um programa.
 
-Fig. 3.7: Ilustração do uso da memória RAM do computador durante a execução de um programa.
+=== 3.4.2 Alocação dinâmica de memória
 
-==== 3.4.2 Alocação dinâmica de memória
+A alocação dinâmica de memória é feita usando-se funções da 
+biblioteca padrão `stdlib.h`. As funções básicas para alocar e 
+liberar memória são a *((malloc))* e *((free))*, respectivamente. 
+Como será visto adiante, é possível fazer também realocação 
+dinâmica de memória usando o *((realloc))*, ou seja, dado que 
+existe um espaço de memória alocado dinamicamente é possível 
+realocar esse espaço de memória liberando parte do espaço de 
+memória que não vai se utilizar no programa.
 
-A alocação dinâmica de memória é feita usando-se funções da biblioteca padrão `stdlib.h`. As funções básicas para alocar e liberar memória são a *((malloc))* e *((free))*, respectivamente. Como será visto adiante, é possível fazer também realocação dinâmica de memória usando o *((realloc))*, ou seja, dado que existe um espaço de memória alocado dinamicamente é possível realocar esse espaço de memória liberando parte do espaço de memória que não vai se utilizar no programa.
+A função `malloc` recebe como parâmetro de entrada o número de 
+bytes que se deseja alocar e retorna o endereço de memória onde 
+inicia o bloco de memória alocada dinamicamente. O leitor já deve 
+ter percebido que para se armazenar o endereço de memória retornado 
+pela função `malloc` deve-se usar uma variável do tipo ponteiro. 
+Dessa forma, o esquema de alocação de memória em C é uma 
+relação entre o uso da função `malloc` e de ponteiros, além da 
+função `free` como será visto adiante.
 
-A função `malloc` recebe como parâmetro de entrada o número de bytes que se deseja alocar e retorna o endereço de memória onde inicia o bloco de memória alocada dinamicamente. O leitor já deve ter percebido que para se armazenar o endereço de memória retornado pela função `malloc` deve-se usar uma variável do tipo ponteiro. Dessa forma, o esquema de alocação de memória em C é uma relação entre o uso da função `malloc` e de ponteiros, além da função `free` como será visto adiante.
-
-Como exemplo, considere o caso que deseja alocar dinamicamente um vetor com 20 elementos reais do tipo `float`. Nesse caso, os comandos em linguagem C seriam
+Como exemplo, considere o caso que deseja alocar dinamicamente um 
+vetor com 20 elementos reais do tipo `float`. Nesse caso, os comandos 
+em linguagem C seriam
 
   float *ptr;
   ptr = (float*) malloc (20*sizeof(float));
 
-Em que ptr é um ponteiro que irá armazenar o valor retornado pela função malloc, note que é um ponteiro para um tipo float já que se trata de alocação de um vetor de tipos float. Conforme foi visto no Capítulo 1, o comando sizeof é utilizado para se computar a quantidade de bytes que um tipo de dado necessita para ser gravado na memória. Nesse caso, será alocado dinamicamente um espaço de memória equivalente a 20 variáveis do tipo float. Um último detalhe é que a parte (float*) é necessária porque a função malloc retorna ou não um ponteiro genérico para um tipo qualquer, sendo representado por void*. O (float*) é usado para transforma o ponteiro em ponteiro para float, visto que está se alocando memória para um tipo float. Algumas bibliotecas mais recentes de C não necessitam desse comando, fazendo a conversão do ponteiro automaticamente.
+Em que ptr é um ponteiro que irá armazenar o valor retornado pela 
+função malloc, note que é um ponteiro para um tipo float já que 
+se trata de alocação de um vetor de tipos float. Conforme foi visto 
+no Capítulo 1, o comando sizeof é utilizado para se computar a 
+quantidade de bytes que um tipo de dado necessita para ser gravado na 
+memória. Nesse caso, será alocado dinamicamente um espaço de 
+memória equivalente a 20 variáveis do tipo float. Um último 
+detalhe é que a parte (float*) é necessária porque a função 
+malloc retorna ou não um ponteiro genérico para um tipo qualquer, 
+sendo representado por void*. O (float*) é usado para transforma o 
+ponteiro em ponteiro para float, visto que está se alocando memória 
+para um tipo float. Algumas bibliotecas mais recentes de C não 
+necessitam desse comando, fazendo a conversão do ponteiro 
+automaticamente.
 
-A Fig. 3.8 ilustra como é que ocorre na memória a execução desse trecho de código. Observe na Fig. 3.8a que após a execução do comando que cria o ponteiro, um espaço é alocado na pilha de execução para ptr. Na Fig. 3.8b, considerando que um float ocupa 8 bytes, é ilustrada a situação da memória após o comando ptr = (float*) malloc (20*sizeof(float)).  Perceba também que 160 bytes são alocados dinamicamente na memória e que ptr recebe o endereço de memória onde inicia o bloco de 160 bytes recém alocados, ou seja, *ptr=0x36FC07.
+A Fig. 3.8 ilustra como é que ocorre na memória a execução desse 
+trecho de código. Observe na Fig. 3.8a que após a execução do 
+comando que cria o ponteiro, um espaço é alocado na pilha de 
+execução para ptr. Na Fig. 3.8b, considerando que um float ocupa 8 
+bytes, é ilustrada a situação da memória após o comando ptr = 
+(float*) malloc (20*sizeof(float)).  Perceba também que 160 bytes 
+são alocados dinamicamente na memória e que ptr recebe o endereço 
+de memória onde inicia o bloco de 160 bytes recém alocados, ou 
+seja, *ptr=0x36FC07.
 
-Fig. 3.8: Ilustração de alocação dinâmica de um vetor com 20 elementos do tipo float.
+Fig. 3.8: Ilustração de alocação dinâmica de um vetor com 20 
+elementos do tipo float.
 
-Pode acontecer a situação que não haja espaço suficiente de memória para a alocação que se deseja fazer. Nesse caso, a função malloc retorna um endereço nulo para o ponteiro, ou seja, é retornado NULL. Um código simples pode ser adicionado no programa para verificar se essa situação ocorre e abortar a execução do programa. Veja no exemplo a seguir que a função exit, a qual pertence à biblioteca stdlib.h, é utilizada para abortar o programa.
+Pode acontecer a situação que não haja espaço suficiente de 
+memória para a alocação que se deseja fazer. Nesse caso, a 
+função malloc retorna um endereço nulo para o ponteiro, ou seja, 
+é retornado NULL. Um código simples pode ser adicionado no programa 
+para verificar se essa situação ocorre e abortar a execução do 
+programa. Veja no exemplo a seguir que a função exit, a qual 
+pertence à biblioteca stdlib.h, é utilizada para abortar o programa.
 
 ----
   ...
   float *ptr;
   ptr = (float*) malloc(20*sizeof(float));
   if(ptr==NULL){
-    printf ("Não há memória suficiente para alocação. O programa será encerrado.");
-    exit(1); // aborta o programa e retorna 1 para o sistema operacional
+    printf ("Não há memória suficiente para alocação. O programa 
+será encerrado.");
+    exit(1); // aborta o programa e retorna 1 para o sistema 
+operacional
   }
   ...
 
 ----
 
 
-Para liberar o espaço de memória alocado dinamicamente a função free é utilizada. Essa função recebe como parâmetro de entrada o ponteiro que indica o início do bloco de memória a ser liberada. No exemplo em questão, seria o ponteiro prt. Dessa forma, para liberar o espaço de memória do vetor de 20 elementos float usa-se o comando
+Para liberar o espaço de memória alocado dinamicamente a função 
+free é utilizada. Essa função recebe como parâmetro de entrada o 
+ponteiro que indica o início do bloco de memória a ser liberada. No 
+exemplo em questão, seria o ponteiro prt. Dessa forma, para liberar 
+o espaço de memória do vetor de 20 elementos float usa-se o comando
 
   free(ptr);
 
-Vale a pena mencionar que o espaço de memória que foi liberado, não pode ser mais acessado pelo programa. Porém, pode ser reutilizado para armazenar outras informações, inclusive para se fazer uma nova alocação dinâmica de memória. Outro ponto importante é que o sistema operacional do computador é quem faz o trabalho de alocação e gerenciamento de memória. O programador apenas informa por meio dos comandos no programa que deseja fazer uma alocação de memória.
+Vale a pena mencionar que o espaço de memória que foi liberado, 
+não pode ser mais acessado pelo programa. Porém, pode ser 
+reutilizado para armazenar outras informações, inclusive para se 
+fazer uma nova alocação dinâmica de memória. Outro ponto 
+importante é que o sistema operacional do computador é quem faz o 
+trabalho de alocação e gerenciamento de memória. O programador 
+apenas informa por meio dos comandos no programa que deseja fazer uma 
+alocação de memória.
 
-TIP: A função free() não destrói o ponteiro que recebe como entrada. Portanto, esse ponteiro pode ser reaproveitado dentro do escopo do mesmo programa. A função free() apenas libera o espaço de memória que foi alocado dinamicamente no programa para que possa ser utilizado para armazenar outros dados.
+TIP: A função free() não destrói o ponteiro que recebe como 
+entrada. Portanto, esse ponteiro pode ser reaproveitado dentro do 
+escopo do mesmo programa. A função free() apenas libera o espaço 
+de memória que foi alocado dinamicamente no programa para que possa 
+ser utilizado para armazenar outros dados.
 
 [TIP]
 ====
-Não se pode liberar o mesmo bloco de memória duas vezes. Ou seja, basta utiliza uma vez a função free() para cada bloco de memória.
+Não se pode liberar o mesmo bloco de memória duas vezes. Ou seja, 
+basta utiliza uma vez a função free() para cada bloco de memória.
 
 ----
 float *ptr;
@@ -83,7 +219,8 @@ free(ptr); // comando incorreto
 
 [CAUTION]
 ====
-Não se pode usar free() para liberar memória criada com a declaração de variáveis.
+Não se pode usar free() para liberar memória criada com a 
+declaração de variáveis.
 
 ----
 int soma;
@@ -93,13 +230,26 @@ free(soma); // comando incorreto
 ----
 =====
 
-O código a seguir mostra que um ponteiro pode ser utilizado várias vezes para se alocar memória dinamicamente. O cuidado que o programador deve ter é liberar o espaço de memória alocado dinamicamente antes de fazer uma nova alocação usando o mesmo ponteiro. Outra observação importante é que quando esse código foi executado no computador do autor, o mesmo endereço de memória foi impresso nas 15 e 22. Ou seja, após a liberação do espaço de memória alocado dinamicamente (linha 17), o sistema operacional pode reutilizá-lo para outros fins, que nesse caso foi uma nova alocação dinâmica de memória (linha 18).
+O código a seguir mostra que um ponteiro pode ser utilizado várias 
+vezes para se alocar memória dinamicamente. O cuidado que o 
+programador deve ter é liberar o espaço de memória alocado 
+dinamicamente antes de fazer uma nova alocação usando o mesmo 
+ponteiro. Outra observação importante é que quando esse código 
+foi executado no computador do autor, o mesmo endereço de memória 
+foi impresso nas 15 e 22. Ou seja, após a liberação do espaço de 
+memória alocado dinamicamente (linha 17), o sistema operacional pode 
+reutilizá-lo para outros fins, que nesse caso foi uma nova 
+alocação dinâmica de memória (linha 18).
 
-Por fim, é possível fazer uma realocação de um espaço de memória que foi alocado dinamicamente. Isso é feito usando a função realloc(). O protótipo da função é 
+Por fim, é possível fazer uma realocação de um espaço de 
+memória que foi alocado dinamicamente. Isso é feito usando a 
+função realloc(). O protótipo da função é 
 
   void *realloc (void *ptr, tamanho do espaço a ser realocado);
 
-No exemplo a seguir é feita uma realocação em que o espaço alocado passa de 20 para 25 tipos float. E depois de 25 para 12 tipos floats.
+No exemplo a seguir é feita uma realocação em que o espaço 
+alocado passa de 20 para 25 tipos float. E depois de 25 para 12 tipos 
+floats.
 
 ----
 float *ptr = (float* ) malloc (20*sizeof(float));
@@ -110,7 +260,8 @@ ptr = (float* ) realloc (ptr, 25*sizeof(float));
 ----
 
 ----
-/* programa que usa o mesmo ponteiro para alocar memória dinamicamente em
+/* programa que usa o mesmo ponteiro para alocar memória 
+dinamicamente em
 duas situações diferentes*/
 #include <stdio.h>
 #include <stdlib.h>
@@ -118,21 +269,24 @@ int main(){
 int *ptr; // declara um ponteiro para um inteiro
 ptr = (int*) malloc(sizeof(int)); // aloca memória para um inteiro
 if(ptr==NULL){
-printf ("Não há memória suficiente para alocação. O programa será
+printf ("Não há memória suficiente para alocação. O programa 
+será
 encerrado.");
 exit(1); /* aborta o programa e retorna 1 para o sistema
 operacional */
 }
 *ptr=69; // coloca um valor lá
 printf("Valor inteiro = %d \n", *ptr); // imprimi valor
-printf("Localização na memória= %p \n\n", ptr); // imprimi endereço
+printf("Localização na memória= %p \n\n", ptr); // imprimi 
+endereço
 // de memória
 free(ptr); // o espaço de memória é liberado
 ptr = (int*) malloc(sizeof(int)); // usa o mesmo ponteiro para alocar
 // memória para outro inteiro
 *ptr=45;
 printf("Valor inteiro = %d \n", *ptr); // imprimi valor
-printf("Localização na memoria= %p \n\n", ptr); // imprimi endereço de
+printf("Localização na memoria= %p \n\n", ptr); // imprimi 
+endereço de
 // memória
 free(ptr); // o espaço de memória é liberado novamente
 system("pause");
@@ -141,17 +295,31 @@ return 0;
 
 ----
 
-==== 3.4.3 Arrays dinâmicos
-===== 3.4.3.1 Vetores dinâmicos
+=== 3.4.3 Arrays dinâmicos
 
-Na maioria das vezes reserva-se o uso de alocação dinâmica para os casos em que a dimensão do vetor é desconhecida. Quando se sabe a sua dimensão, é preferível usar vetores alocados estaticamente, visto que do ponto de vista de tempo de execução do programa, esse tipo de alocação de vetores é mais rápida. Um ponto importante é que caso o vetor seja definido dentro do escopo de uma função, então ele existirá quando essa função estiver sendo executada. Portanto, o programador deve atentar para a utilização de vetores dentro de funções.
+==== 3.4.3.1 Vetores dinâmicos
+
+Na maioria das vezes reserva-se o uso de alocação dinâmica para os 
+casos em que a dimensão do vetor é desconhecida. Quando se sabe a 
+sua dimensão, é preferível usar vetores alocados estaticamente, 
+visto que do ponto de vista de tempo de execução do programa, esse 
+tipo de alocação de vetores é mais rápida. Um ponto importante é 
+que caso o vetor seja definido dentro do escopo de uma função, 
+então ele existirá quando essa função estiver sendo executada. 
+Portanto, o programador deve atentar para a utilização de vetores 
+dentro de funções.
 
 Para alocar dinamicamente um vetor, pode-se usar o seguinte comando
 
   float *ptr;
   ptr = (float*) malloc(n*sizeof(float));
 
-Em que ptr é um ponteiro que irá armazenar o valor retornado pela função malloc, note que ptr é um ponteiro para um tipo float já que se trata de alocação de um vetor de tipos float. n representa a dimensão do vetor. A seguir é dado um exemplo de como se utilizar um vetor dinâmico em um programa em C que calcula a soma de dois vetores.
+Em que ptr é um ponteiro que irá armazenar o valor retornado pela 
+função malloc, note que ptr é um ponteiro para um tipo float já 
+que se trata de alocação de um vetor de tipos float. n representa a 
+dimensão do vetor. A seguir é dado um exemplo de como se utilizar 
+um vetor dinâmico em um programa em C que calcula a soma de dois 
+vetores.
 
 ----
 /* programa que soma dois vetores usando alocação dinâmica*/
@@ -189,25 +357,62 @@ return ptr2;
 }
 ----
 
-Note que há outras maneiras de se resolver o problema da soma de dois vetores. Esse  exemplo foi dado somente para ilustra o uso de alocação de um vetor dinamicamente. Veja que a alocação dinâmica de memória ocorreu no escopo da função soma_vet (linha 27). Como o vetor é de oito posições, foi alocado um espaço para oito números inteiros no comando da linha 27. O ponteiro ptr2 foi utilizado como marcador inicial do vetor para guardar a soma dos vetores va e vb. Um último detalhe é que o comando free(ptr2) não necessitou ser dado, já que após o comando de return na linha 33 o bloco de memória alocado será liberado automaticamente já que a função foi encerrada.
+Note que há outras maneiras de se resolver o problema da soma de 
+dois vetores. Esse  exemplo foi dado somente para ilustra o uso de 
+alocação de um vetor dinamicamente. Veja que a alocação dinâmica 
+de memória ocorreu no escopo da função soma_vet (linha 27). Como o 
+vetor é de oito posições, foi alocado um espaço para oito 
+números inteiros no comando da linha 27. O ponteiro ptr2 foi 
+utilizado como marcador inicial do vetor para guardar a soma dos 
+vetores va e vb. Um último detalhe é que o comando free(ptr2) não 
+necessitou ser dado, já que após o comando de return na linha 33 o 
+bloco de memória alocado será liberado automaticamente já que a 
+função foi encerrada.
 
-===== 3.4.3.2 Matrizes dinâmicas
-Para se definir matrizes dinâmicas na linguagem C enfrenta-se a limitação de que na linguagem C só é permitida fazer alocação dinâmica de memória de estruturas unidimensionais, como é o caso de vetores. Como uma matriz é uma estrutura com duas dimensões (linhas e colunas), para fazer uma alocação dinâmica de uma matriz é preciso utilizar artifícios de programação utilizando vetores.
+==== 3.4.3.2 Matrizes dinâmicas
+Para se definir matrizes dinâmicas na linguagem C enfrenta-se a 
+limitação de que na linguagem C só é permitida fazer alocação 
+dinâmica de memória de estruturas unidimensionais, como é o caso 
+de vetores. Como uma matriz é uma estrutura com duas dimensões 
+(linhas e colunas), para fazer uma alocação dinâmica de uma matriz 
+é preciso utilizar artifícios de programação utilizando vetores.
 
-Por exemplo, partindo da ideia de que para se alocar uma matriz na memória é preciso ter espaço suficiente para seus elementos, pode-se utilizar um vetor para tal fim. O tamanho do vetor alocado dinamicamente seria determinado de acordo com as dimensões da matriz que se deseja alocar. A ideia, portanto, é transformar, do ponto de vista conceitual, a matriz em um vetor unidimensional. A seguir é apresentada uma maneira de fazer tal transformação.
+Por exemplo, partindo da ideia de que para se alocar uma matriz na 
+memória é preciso ter espaço suficiente para seus elementos, 
+pode-se utilizar um vetor para tal fim. O tamanho do vetor alocado 
+dinamicamente seria determinado de acordo com as dimensões da matriz 
+que se deseja alocar. A ideia, portanto, é transformar, do ponto de 
+vista conceitual, a matriz em um vetor unidimensional. A seguir é 
+apresentada uma maneira de fazer tal transformação.
 
-Considere uma matriz com l linhas e c colunas, a qual pode ser representada na linguagem C como mtr[l][c]. É possível criar um vetor com l*c elementos, aqui chamado de vet[l*c], que representará a matriz mtr[l][c]. Para a correspondência entra a matriz e o vetor seja atendida, um elemento aij da matriz é mapeado no elemento k=i*c + j, em que c é o número de colunas da matriz, como foi definido no início desse parágrafo. Essa relação é utilizada para se encontra um elemento k do vetor vet[l*c], ou seja, o elemento vet[i*c + j]. A Fig. 3.9 mostra uma ilustração desse mapeamento de matriz em vetor. 
+Considere uma matriz com l linhas e c colunas, a qual pode ser 
+representada na linguagem C como mtr[l][c]. É possível criar um 
+vetor com l*c elementos, aqui chamado de vet[l*c], que representará 
+a matriz mtr[l][c]. Para a correspondência entra a matriz e o vetor 
+seja atendida, um elemento aij da matriz é mapeado no elemento k=i*c 
++ j, em que c é o número de colunas da matriz, como foi definido no 
+início desse parágrafo. Essa relação é utilizada para se 
+encontra um elemento k do vetor vet[l*c], ou seja, o elemento vet[i*c 
++ j]. A Fig. 3.9 mostra uma ilustração desse mapeamento de matriz 
+em vetor. 
 
-O ponto negativo dessa estratégia é que é preciso usar a notação vet[i*c + j] para acessar os elementos da matriz no vetor.
+O ponto negativo dessa estratégia é que é preciso usar a notação 
+vet[i*c + j] para acessar os elementos da matriz no vetor.
 
 Fig. 3.9: Ilustração do mapeamento de uma matriz em um vetor.
 
-Usando esse mapeamento, a alocação dinâmica de uma matriz recai no problema de alocação dinâmica de um vetor. De forma geral, se quisermos fazer a alocação dinâmica de uma matriz com l linha e c colunas para armazenar números reais, basta fazer como abaixo
+Usando esse mapeamento, a alocação dinâmica de uma matriz recai no 
+problema de alocação dinâmica de um vetor. De forma geral, se 
+quisermos fazer a alocação dinâmica de uma matriz com l linha e c 
+colunas para armazenar números reais, basta fazer como abaixo
 
-  float *mtr; // ponteiro para guardar o endereço onde inicia a alocação
-  mtr = (float*) malloc(l*c*sizeof(float)); // note que foram alocados l*c elementos
+  float *mtr; // ponteiro para guardar o endereço onde inicia a 
+alocação
+  mtr = (float*) malloc(l*c*sizeof(float)); // note que foram 
+alocados l*c elementos
 
-O exemplo a seguir mostra o uso dessa estratégia para uma matriz com 4 linhas e 3 colunas.
+O exemplo a seguir mostra o uso dessa estratégia para uma matriz com 
+4 linhas e 3 colunas.
 
 ----
 /* programa que usa um vetor para alocar dinamicamente uma matriz */
@@ -216,10 +421,12 @@ O exemplo a seguir mostra o uso dessa estratégia para uma matriz com 4 linhas e
 int main(){
 int i, *ptr1; // declara um inteiro e um ponteiro para inteiro
 int va[8], vb[8]; // declara dois vetores de inteiros com 8 posições
-int l=4, c=3; // declara dois inteiros, i.e., as linhas e colunas da matriz
+int l=4, c=3; // declara dois inteiros, i.e., as linhas e colunas da 
+matriz
 int i, j; // declara dois inteiros para serem os índices dos 'for'
 float *mtr; // declara dois floats e um ponteiro para float
-mtr = (float*) malloc(c*l*sizeof(float)); // alocação dinâmica de memória
+mtr = (float*) malloc(c*l*sizeof(float)); // alocação dinâmica de 
+memória
 if(mtr==NULL){
 printf("Memoria insuficiente para alocar os c*l elementos. ");
 return 1;
@@ -245,11 +452,14 @@ return 0;
 
 ----
 
-Como comentário final, existem outras maneiras de se alocar dinamicamente uma matriz, todavia, em geral, é preciso utilizar um vetor como estrutura auxiliar para representar a matriz.
+Como comentário final, existem outras maneiras de se alocar 
+dinamicamente uma matriz, todavia, em geral, é preciso utilizar um 
+vetor como estrutura auxiliar para representar a matriz.
 
-===== 3.4.4 Registros (estruturas) dinâmicas
+==== 3.4.4 Registros (estruturas) dinâmicas
 
-É possível também alocar dinamicamente um registro ou estrutura na linguagem C. Considere um registro definido como a seguir
+É possível também alocar dinamicamente um registro ou estrutura na 
+linguagem C. Considere um registro definido como a seguir
       
       struct jogador {
            char nome[40];
@@ -257,14 +467,36 @@ Como comentário final, existem outras maneiras de se alocar dinamicamente uma m
            unsigned gols;
       };
       
-      A alocação de registro dinamicamente segue a mesma lógica que já foi vista. Ou seja, deve-se inicialmente definir um ponteiro para o tipo de estrutura/tipo que se deseja alocar e em seguida usa-se a função malloc para fazer a alocação. Seguindo esse raciocínio, tem-se para o caso de um registro jogador
+      A alocação de registro dinamicamente segue a mesma lógica 
+que já foi vista. Ou seja, deve-se inicialmente definir um ponteiro 
+para o tipo de estrutura/tipo que se deseja alocar e em seguida 
+usa-se a função malloc para fazer a alocação. Seguindo esse 
+raciocínio, tem-se para o caso de um registro jogador
       
       struct jogador *ptr;
       ptr = (struct jogador*) malloc(sizeof(struct jogador));
       
-Nesses dois comandos é alocado dinamicamente um registro do tipo jogador que é capaz de armazenar o nome do jogador com até 40 caracteres, o salário e o números de gols. O espaço de memória reservado é igual à soma do espaço dos campos pertencentes ao registro jogador. O comando sizeof(struct jogador), por sua vez, automaticamente passa para a função malloc a quantidade de memória necessária para alocar a estrutura jogador. Note que o programador não precisa se preocupar em computar a quantidade de memória necessária, como foi dito, isso é feito automaticamente pelo comando sizeof(struct jogador).
+Nesses dois comandos é alocado dinamicamente um registro do tipo 
+jogador que é capaz de armazenar o nome do jogador com até 40 
+caracteres, o salário e o números de gols. O espaço de memória 
+reservado é igual à soma do espaço dos campos pertencentes ao 
+registro jogador. O comando sizeof(struct jogador), por sua vez, 
+automaticamente passa para a função malloc a quantidade de memória 
+necessária para alocar a estrutura jogador. Note que o programador 
+não precisa se preocupar em computar a quantidade de memória 
+necessária, como foi dito, isso é feito automaticamente pelo 
+comando sizeof(struct jogador).
 
-Um ponto importante a ser observado é que o operador para acessar os campos de um registro alocado dinamicamente é o ` -> ` e não o operador ponto `.`. O código a seguir ilustra a alocação dinâmica de registro e o preenchimento de seus campos. Perceba na linhas 12 e 13 que a alocação dinâmica do registro é feita, o preenchimento de seus campos é feitos nas linhas 16 a 18 e nas linhas 20 e 21 os valores gravados são impressos. Note que o operador ‘ -> ’ foi utilizado para acessar os campos do registro, tanto no preenchimento quanto na impressão. Na linha 22 a memória alocada é liberada usando o comando free(ptr).
+Um ponto importante a ser observado é que o operador para acessar os 
+campos de um registro alocado dinamicamente é o ` -> ` e não o 
+operador ponto `.`. O código a seguir ilustra a alocação dinâmica 
+de registro e o preenchimento de seus campos. Perceba na linhas 12 e 
+13 que a alocação dinâmica do registro é feita, o preenchimento 
+de seus campos é feitos nas linhas 16 a 18 e nas linhas 20 e 21 os 
+valores gravados são impressos. Note que o operador ‘ -> ’ foi 
+utilizado para acessar os campos do registro, tanto no preenchimento 
+quanto na impressão. Na linha 22 a memória alocada é liberada 
+usando o comando free(ptr).
 
 ----
 /* programa que aloca dinamicamente um registro */
@@ -278,7 +510,8 @@ unsigned gols;
 };
 int main(){
 struct jogador *ptr;// define um ponteiro para o registro 'jogador'
-ptr = (struct jogador*) malloc(sizeof(struct jogador)); // aloca dinamicamente
+ptr = (struct jogador*) malloc(sizeof(struct jogador)); // aloca 
+dinamicamente
 // um registro do tipo jogador
 // preenchendo o registro
 strcpy(ptr->nome, "Tulipa Goleador ");
@@ -293,17 +526,35 @@ return 0;
 }
 ----
 
-É possível também definir vetores de registros, i.e., vetores cujos elementos são registros. Em outras palavras, em cada posição desse vetor é gravado um registro inteiro. A Fig. 3.10 mostra um vetor de registro para o caso da estrutura jogador definida no início dessa seção. Note que, como destacado na figura, em cada posição do vetor tem-se armazenado os campos definidos na estrutura jogador, ou seja, os campos nome, salario e gols.
+É possível também definir vetores de registros, i.e., vetores 
+cujos elementos são registros. Em outras palavras, em cada posição 
+desse vetor é gravado um registro inteiro. A Fig. 3.10 mostra um 
+vetor de registro para o caso da estrutura jogador definida no 
+início dessa seção. Note que, como destacado na figura, em cada 
+posição do vetor tem-se armazenado os campos definidos na estrutura 
+jogador, ou seja, os campos nome, salario e gols.
 
 Fig. 3.10: Ilustração de um vetor de estruturas.
 
-Primeiramente, será mostrado como definir um vetor de estruturas para, se seguida apresentar como é feita a alocação dinâmica de um vetor de estruturas. Considerando a estrutura jogador, definida no início da seção, um vetor de estruturas pode ser definido da seguinte forma
+Primeiramente, será mostrado como definir um vetor de estruturas 
+para, se seguida apresentar como é feita a alocação dinâmica de 
+um vetor de estruturas. Considerando a estrutura jogador, definida no 
+início da seção, um vetor de estruturas pode ser definido da 
+seguinte forma
 
   struct jogador Treze[22];
 
-em que, struct é a palavra obrigatória na sintaxe do comando para especificar que trata-se de um registro ou estrutura, jogador é o tipo de registro que se pretende criar o vetor e Treze é o nome do vetor que acabou de ser criado. Observe que foi criado um vetor de estruturas com 22 posições.
+em que, struct é a palavra obrigatória na sintaxe do comando para 
+especificar que trata-se de um registro ou estrutura, jogador é o 
+tipo de registro que se pretende criar o vetor e Treze é o nome do 
+vetor que acabou de ser criado. Observe que foi criado um vetor de 
+estruturas com 22 posições.
 
-O exemplo a seguir mostra um código para preenchimento de um de vetor de estruturas com 22 posições ilustrando o cadastramento de uma equipe de futebol com 22 jogadores. Note nas linhas 15 a 17 e 21 e 22 que o operador ponto ‘.’ é utilizado para acessar os campos do registro.
+O exemplo a seguir mostra um código para preenchimento de um de 
+vetor de estruturas com 22 posições ilustrando o cadastramento de 
+uma equipe de futebol com 22 jogadores. Note nas linhas 15 a 17 e 21 
+e 22 que o operador ponto ‘.’ é utilizado para acessar os campos 
+do registro.
 
 
 ----
@@ -320,7 +571,8 @@ int main(){
 int i;
 struct jogador Treze[22];
 for (i=0;i<22;i++) {
-printf("Digite o nome, salario e gols do jogador %d do Treze : \n", i+1);
+printf("Digite o nome, salario e gols do jogador %d do Treze : \n", 
+i+1);
 scanf("%s", &Treze[i].nome);
 scanf("%f", &Treze[i].salario);
 scanf("%u", &Treze[i].gols);
@@ -336,15 +588,31 @@ return 0;
 
 ----
 
-A alocação de um vetor de registros dinamicamente segue a mesma lógica que já foi vista para um vetor de outros tipos (int, float, double, etc.). Ou seja, deve-se inicialmente definir um ponteiro para o tipo de estrutura/tipo que se deseja alocar e em seguida usa-se a função malloc para fazer a alocação dos espaços necessários que iram formar o vetor de registros. Seguindo esse raciocínio, tem-se para o caso de um registro jogador
+A alocação de um vetor de registros dinamicamente segue a mesma 
+lógica que já foi vista para um vetor de outros tipos (int, float, 
+double, etc.). Ou seja, deve-se inicialmente definir um ponteiro para 
+o tipo de estrutura/tipo que se deseja alocar e em seguida usa-se a 
+função malloc para fazer a alocação dos espaços necessários que 
+iram formar o vetor de registros. Seguindo esse raciocínio, tem-se 
+para o caso de um registro jogador
 
   struct jogador *Treze;
   Treze = (struct jogador*) malloc(22*sizeof(struct jogador));
 
-O exemplo a seguir é o mesmo código do exemplo anterior só que nesse caso o vetor de registros foi alocado dinamicamente. Note que na linha 25 o ponteiro Treze é liberado. Um detalhe de implementação é que o operador ponto ‘.’ foi utilizado para acessar os campos do vetor de registros pois a notação Treze[i] é a notação de vetor. Se a notação de ponteiro tivesse sido utilizada, ou seja (Treze + i), os campos seriam acessados usando-se o operador ‘->’ deveria ser usado. Assim, os campos seriam acessados por (Treze + i) ->nome, (Treze + i) ->salario e (Treze + i) ->gols.
+O exemplo a seguir é o mesmo código do exemplo anterior só que 
+nesse caso o vetor de registros foi alocado dinamicamente. Note que 
+na linha 25 o ponteiro Treze é liberado. Um detalhe de 
+implementação é que o operador ponto ‘.’ foi utilizado para 
+acessar os campos do vetor de registros pois a notação Treze[i] é 
+a notação de vetor. Se a notação de ponteiro tivesse sido 
+utilizada, ou seja (Treze + i), os campos seriam acessados usando-se 
+o operador ‘->’ deveria ser usado. Assim, os campos seriam 
+acessados por (Treze + i) ->nome, (Treze + i) ->salario e (Treze + i) 
+->gols.
 
 ----
-/* programa que aloca dinamicamente e preenche um vetor de registros */
+/* programa que aloca dinamicamente e preenche um vetor de registros 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -357,7 +625,8 @@ int main(){
 int i;
 struct jogador Treze[22];
 for (i=0;i<22;i++){
-printf("Digite o nome, salario e gols do jogador %d do Treze : \n", i+1);
+printf("Digite o nome, salario e gols do jogador %d do Treze : \n", 
+i+1);
 scanf("%s", &Treze[i].nome);
 scanf("%f", &Treze[i].salario);
 scanf("%u", &Treze[i].gols);
@@ -374,4 +643,5 @@ return 0;
 
 ----
 
+// Sempre terminar o arquivo com uma nova linha.
 
