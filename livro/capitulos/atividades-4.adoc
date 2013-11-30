@@ -1,0 +1,35 @@
+=== Atividades
+
+. Explique a diferença entre alocação estática e dinâmica de memória, citando vantagens e dando exemplo de uso. Dê pelos menos cinco situações nas quais alocação dinâmica de memória se faz necessária. Na sua resposta, use as Figs. 3.7 e 3.8 para ilustrar a utilização da memória do computador em cada um dos esquemas de alocação.
+
+. Explique dando exemplos de como funciona as funções malloc(), realloc() e free(). Faça uma pesquisa em livros, internet, etc..., e explique como funciona o comando calloc(), o qual não foi apresentado no texto desse capítulo.
+
+. Um professor de uma disciplina deseja montar um programa em linguagem C que seja capaz de receber as médias dos alunos de uma turma. O programa deve gravar as médias em um vetor que é alocado dinamicamente e ao final é liberado. Para dar uma ajuda ao professor, faça um programa que atenda o que foi dito. O programa deve conter uma função ou subrotina que receba o vetor com as médias, o qual foi alocado dinamicamente no programa, e calcular e retornar: i) a média da turma; ii) quantos alunos foram aprovados por média; iii) quantos alunos estão na prova final.
+Dica: Considere que o aluno é aprovado por média se media>=7,0. Se 3,5<media<7,0, o aluno estará na prova final.
+
+. Considerando a estrutura
++
+....
+struct Ponto {
+    int x;
+    int y;
+};
+....
++
+Para representar um ponto em uma grade 2D. Implemente um programa em C que contenha uma função ou sub-rotina que indique se um ponto p está localizado dentro ou fora de um retângulo. O retângulo é definido por seus vértices inferior esquerdo v1 e superior direito v2. A função deve retornar 1 caso o ponto esteja localizado dentro do retângulo e 0 caso contrário. Use alocação dinâmica de memória para alocar dinamicamente a estrutura Ponto. Essa função deve obedecer ao protótipo:
++
+....
+int dentroRet (struct Ponto* v1, struct Ponto* v2, struct Ponto* p).
+....
+
+. Considerando a estrutura Jogador definida na Seção 3.4.4, implemente um programa em C que preencha e imprima na tela todos os jogadores de todos os times de futebol do Campeonato Brasileiro da Série A. Considere que cada time possui 11 jogadores. Use alocação dinâmica de memória na sua solução.
++
+[TIP]
+====
+Crie uma função ou sub-rotina no programa, algo como Cadastra_equipe, para cadastrar uma equipe de futebol. Você poderá utilizar essa função para cadastrar as 20 equipes de futebol do Campeonato Brasileiro da Série A. Faça o mesmo para a parte da impressão na tela.
+====
+
+. Discuta o conceito de registros dinâmicos, matrizes dinâmicas e vetores dinâmicos dando exemplos e fazendo comparações. Usando o método da Seção 3.4.3.2 para representar matrizes de duas dimensões, é possível representar matrizes com três dimensões? Justifique a sua resposta.
+
+// Sempre terminar o arquivo com uma nova linha.
+
