@@ -192,7 +192,6 @@ conceito de ponteiros.
 
 [WARNING]
 ====
-
 Na declaração de um ponteiro o uso de espaços ao redor do * é opcional.
 
  int *pt;  // enfatiza que *pt é um int
@@ -212,15 +211,18 @@ Cuidado com declarações múltiplas.
 
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/codigo-a.c[code/cap3/codigo-a.c]
+{gitrepo}/blob/master/livro/capitulos/code/cap3/usando_ponteiro.c[code/cap3/usando_ponteiro.c]
 
 [source, c]
-.TODO código do professor
+.Usado ponteiro para alterar variável
 ----
-include::code/cap3/codigo-a.c[]
+include::code/cap3/usando_ponteiro.c[]
 ----
 
-
+.Resultado da execução
+....
+include::code/cap3/usando_ponteiro.out[]
+....
 
 Finalmente, recapitulando, note que há dois operadores que são utilizados 
 para a manipulação e/ou definição de ponteiros, a saber, o operador `&`, 
