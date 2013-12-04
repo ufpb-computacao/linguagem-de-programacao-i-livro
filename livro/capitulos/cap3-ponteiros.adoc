@@ -152,7 +152,7 @@ ponteiro só terá utilidade em um programa quando for inicializado, ou seja,
 for associado a algum elemento.
 
 Um ponteiro pode ser inicializado com `NULL`, 0 (zero) ou um endereço de uma 
-variável usando o operador de endereço `&`. Um ponteiro com valor `NULL` não 
+variável usando o operador de endereço ``&''. Um ponteiro com valor `NULL` não 
 aponta para nada. `NULL` é uma constante simbólica definida na biblioteca 
 `<stddef.h>` e também em `<stdio.h>`. A inicialização do ponteiro com o valor `0` 
 (zero) é equivalente a inicializar com `NULL`, todavia em geral usa-se a 
@@ -160,18 +160,20 @@ inicialização com `NULL`.
 
 NOTE: Outras linguagens de programação utilizam `nil`, ou `null` com o mesmo significado.
 
-Outra maneira de se inicializar ponteiros é associando-o diretamente a uma 
-variável. Para isso o operador de endereço `&` deve ser utilizado. A <<fig_inicializacao_ponteiro>>(a) 
-ilustra que, ao declarar um ponteiro, o computador não aloca automaticamente 
+Outra maneira de se inicializar ponteiros é associando-o diretamente a uma variável. Para isso o ((operador de endereço)) ``&'' deve ser utilizado.  A <<fig_inicializacao_ponteiro>>(a) ilustra que, ao declarar um ponteiro, o computador não aloca automaticamente 
 memória para guardar o valor apontado e, nesse caso, o comando `*pt = 230.8` 
 não faz sentido. É preciso inicializar o ponteiro como mostrado na <<fig_inicializacao_ponteiro>>(b), 
 ou seja, o ponteiro `pt` é declarado e associado a variável `N1`. Em seguida, 
 pode-se utilizar o ponteiro para armazenar o valor 230.8 na variável `N1`. 
 
 [[fig_inicializacao_ponteiro]]
-.Inicialização de um ponteiro. a) Forma errada. b) Forma correta.
-image::images/cap3/inicializacao-ponteiro.jpg[]
+.Utilização de ponteiro. 
+image::images/cap3/inicializacao-ponteiro.eps[scaledwidth="70%"]
 
+NOTE: Na <<fig_inicializacao_ponteiro>>(a) é demonstrada uma forma
+errada da utilização de ponteiro, ao atribuir um valor a um ponteiro
+não inicializado. Em b) é apresentada a forma correta, com atribuição
+de valor após ponteiro inicializado.  
 
 Com o intuito de sedimentar o conceito de ponteiros, o código a seguir mostra 
 um exemplo de como um ponteiro é usado para manipular o conteúdo da variável 
