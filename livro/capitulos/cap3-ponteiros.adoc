@@ -1,7 +1,5 @@
 == Ponteiros e Alocação Dinâmica de Memória
 
-// FIXME: Esta capítulo não abordou Alocação Dinâmica de Memória
-
 .Objetivos do capítulo
 ____
 Ao final deste capítulo você deverá ser capaz de:
@@ -52,7 +50,7 @@ preenchido quando um valor é atribuído a variável, como por exemplo, o valor 
 
 [[fig_uso_memoria_por_variavel]]
 .Ilustração de uso da memória por uma variável em um programa em C.
-image::images/cap3/memoria-soma.jpg[]
+image::images/cap3/declaracao-atribuicao-memoria.eps[]
 
 Um cuidado importante que todo programador deve ter é inicializar as 
 variáveis antes do seu uso. Veja no código a seguir que, quando não se 
