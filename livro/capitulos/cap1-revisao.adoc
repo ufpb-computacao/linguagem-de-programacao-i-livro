@@ -215,7 +215,7 @@ teste de uma condição. As estruturas de seleção ou decisão permitem que um 
 seja executado de acordo com a aceitação ou não de certas condições. Uma condição lógica 
 (boolena) é testada e, dependendo do resultado (*verdadeiro* ou *falso*), um determinado caminho 
 é seguido dentro do programa. Pode-se ter dois tipos de estrutura de decisão, a saber, decisão 
-simples e decisão múltipla. O Quadro 1.2 <<quadro_sintaxe_estrutura_controle_seleção_simples>> apresenta a sintaxe geral da estrutura de controle de 
+simples e decisão múltipla. O Quadro 1.2 <<quadro_sintaxe_estrutura_controle_selecao_simples>> apresenta a sintaxe geral da estrutura de controle de 
 seleção simples. Na opção 1, tem-se o teste da 'condição' e, caso seja *verdadeira*, o bloco 
 de comando 1 é executado. Caso seja *falsa*, serão executados os comandos após o fechamento da 
 chave. Na opção 2, tem-se o teste da 'condição' e, caso seja *verdadeira*, o bloco de comando 1 
@@ -234,7 +234,7 @@ são separados por chaves.
  ...
 ****
 
-[[sintaxe_estrutura_controle_seleção_simples]]
+[[sintaxe_estrutura_controle_selecao_simples]]
 .Sintaxe geral da estrutura de controle de seleção simples
 ****
 Opção 1:
