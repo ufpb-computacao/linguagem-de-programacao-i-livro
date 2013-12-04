@@ -48,6 +48,8 @@ declarada, é alocado na memória RAM do computador um espaço de memória para
 a essa variável (posições `0xCB22` e `0xCB23`). Esse espaço de memória é 
 preenchido quando um valor é atribuído a variável, como por exemplo, o valor 3126.
 
+// FIXME: dois bytes não equivale a uma short?
+
 [[fig_uso_memoria_por_variavel]]
 .Ilustração de uso da memória por uma variável em um programa em C.
 image::images/cap3/declaracao-atribuicao-memoria.eps[scaledwidth="70%"]
@@ -118,28 +120,27 @@ associado a uma variável, ou seja, o ponteiro contém um endereço de uma
 variável que contém um valor específico. A referência de um valor por meio 
 de um ponteiro é chamada de (((Ponteiro, indireção))) *indireção*.
 
-A declaração de um ponteiro segue o seguinte padrão
+A declaração de um ponteiro segue o seguinte padrão:
 
- float *ptr;
-
+ float *ptr; // Lê-se "ptr é um ponteiro para um float"
 
 Em que `float` especifica o tipo de elemento apontado pelo ponteiro, `ptr` é o 
-nome que está sendo dado ao ponteiro e `*` é o *s((operador de indireção))* e é 
-usado para se definir um ponteiro. Lê-se como ``ptr é um ponteiro para um float''.
+nome que está sendo dado ao ponteiro, ``*'' é o *((operador de indireção))* e é 
+usado para se definir um ponteiro. 
 
 Como o ponteiro contém um endereço de memória, diz-se que ele aponta para 
-aquela posição de memória. A <<fig_memoria_declaracao_inicializacao>> ilustra a definição de um ponteiro 
-com nome `ptr`, que é utilizado para apontar para a variável `float soma`. Note 
-que na linha 4 `ptr` é declarado. Até esse momento não existe nenhuma 
-relação entre o ponteiro `ptr` e a variável `soma`. Na linha 5, `ptr` é associado 
+aquela posição de memória. A <<fig_memoria_declaracao_inicializacao>> ilustra a 
+definição de um ponteiro com nome `ptr`, que é utilizado para apontar para a 
+variável `float soma`. Note que na linha 4 `ptr` é declarado. Até esse momento não existe nenhuma 
+relação entre o ponteiro `ptr` e a variável `soma`. No final, `ptr` é associado 
 a variável `soma` por meio do comando `ptr = &soma`, ou seja, `prt` recebe o 
 endereço de memória da variável `soma` usando o *((operador de endereço))* `&`. A 
 partir desse comando, o programador pode utilizar o ponteiro `ptr` para manipular 
 o conteúdo armazenado na variável `soma`. A seguir será visto como isso é feito.
 
 [[fig_memoria_declaracao_inicializacao]]
-.Ilustração de declaração e inicialização de um ponteiro.
-image::images/cap3/memoria-declaracao-e-inicializacao.jpg[]
+.Ilustração de declaração e inicialização de um ponteiro na memória
+image::images/cap3/memoria-declaracao-e-inicializacao-ponteiro.eps[scaledwidth="70%"]
 
 O nome de um ponteiro representa uma localização na memória. Outra função 
 do *((operador de indireção))* `*` é ser usado para se obter o valor armazenado na 
