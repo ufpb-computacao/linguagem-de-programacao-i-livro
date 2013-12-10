@@ -248,8 +248,8 @@ por exemplo, a *((pilha de execução))* de uma *((função))* e
 transferência de dados para o programa principal (função `main`).
 
 As funções em um programa em C são independentes entre si. Como 
-consequência, as *((variáveis locais))* definidas dentro do *((escopo
-de uma função))*, inclusive os parâmetros de entrada da função, não
+consequência, as *((variáveis locais))* definidas dentro do 
+*((escopo de uma função))*, inclusive os parâmetros de entrada da função, não
 existem fora dela. Isso significa que cada vez que uma função é
 executada, as suas variáveis locais são criadas, e após a sua
 execução, essas variáveis locais deixam de existir. 
