@@ -1,5 +1,5 @@
 Valor de total = 18
-Valor de pt = 18
-Endereço de total = 0xbf89ce48
-Valor de pt = 0xbf89ce48
-Apos soma usando ponteiro: total = 30
+Endereço de total = 0xbfd286a8
+Valor de pt = 0xbfd286a8
+Valor de *pt = 18
+Apos soma usando ponteiro: total=30

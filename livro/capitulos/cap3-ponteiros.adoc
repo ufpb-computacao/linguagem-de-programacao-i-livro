@@ -170,27 +170,12 @@ pode-se utilizar o ponteiro para armazenar o valor 230.8 na variável `N1`.
 .Utilização de ponteiro. 
 image::images/cap3/inicializacao-ponteiro.eps[scaledwidth="70%"]
 
-NOTE: Na <<fig_inicializacao_ponteiro>>(a) é demonstrada uma forma
+WARNING: Na <<fig_inicializacao_ponteiro>>(a) é demonstrada uma forma
 errada da utilização de ponteiro, ao atribuir um valor a um ponteiro
 não inicializado. Em b) é apresentada a forma correta, com atribuição
 de valor após ponteiro inicializado.  
 
-Com o intuito de sedimentar o conceito de ponteiros, o código a seguir mostra 
-um exemplo de como um ponteiro é usado para manipular o conteúdo da variável 
-para qual está apontando. Na linha 7, o ponteito `pt` é criado e inicializado 
-na linha 8, i.e., é associado à variável inteira `tot`. Note que nas linhas 10 
-e 11 o conteúdo da variável `tot` é impresso na tela usando a própria 
-variável (linha 10) e usando o ponteiro (linha 11). Para você se convencer de 
-que o ponteiro `pt` realmente armazena o endereço de memória da variável `tot`, 
-na linha 13 é impresso na tela o endereço de memória da variável `tot` e na 
-linha 14 o valor armazenado pelo ponteiro, ou seja, o endereço de memória que 
-o ponteiro `pt` está armazenando. Na linha 16, o ((operador de indireção)) `*` é 
-utilizado para alterar o valor da variável `tot` por meio do ((ponteiro)) `pt` e, na 
-linha 17, esse novo valor é impresso na tela. Execute esse programa no seu 
-computador e faça modificações à vontade para você melhor absorver o 
-conceito de ponteiros.
-
-[WARNING]
+[NOTE]
 ====
 Na declaração de um ponteiro o uso de espaços ao redor do * é opcional.
 
@@ -209,6 +194,10 @@ Cuidado com declarações múltiplas.
  char *p1, *p2;  // p1 e p2 são ponteiros para char
 ====
 
+Com o intuito de sedimentar o conceito de ponteiros, o código a seguir mostra 
+um exemplo de como um ponteiro é usado para manipular o conteúdo da variável 
+para qual está apontando.  Execute esse programa no seu computador e
+faça modificações à vontade para você melhor absorver o conceito de ponteiros.
 
 .Código fonte
 {gitrepo}/blob/master/livro/capitulos/code/cap3/usando_ponteiro.c[code/cap3/usando_ponteiro.c]
@@ -219,6 +208,16 @@ Cuidado com declarações múltiplas.
 include::code/cap3/usando_ponteiro.c[]
 ----
 
+<1> o ponteiro `pt` é criado
+<2> `pt` é inicializado com o endereço de `total`
+<3> Impressão do *valor* de `total` e seu *endereço*
+<4> Impressão do *endereço* apontado por `pt`
+<5> Impressão do *valor* endereçado por `pt`
+<6> ((operador de indireção)) `*` é utilizado para alterar o valor da
+    variável `total` por meio do ((ponteiro)) 
+<7> Impressão do *valor* da variável `total`, que teve seu valor alterado
+    pela utilização de ponteiro.
+
 .Resultado da execução
 ....
 include::code/cap3/usando_ponteiro.out[]
@@ -226,7 +225,8 @@ include::code/cap3/usando_ponteiro.out[]
 
 Finalmente, recapitulando, note que há dois operadores que são utilizados 
 para a manipulação e/ou definição de ponteiros, a saber, o operador `&`, 
-conhecido como *((operador de endereço))*, e o operador `*`, normalmente chamado de *((operador de indireção))*. 
+conhecido como *((operador de endereço))*, e o operador `*`,
+normalmente chamado de *((operador de indireção))*. 
 
 O operador de endereço:: é utilizado para se obter o 
 endereço de seu operando ou variável a que é aplicado. 
