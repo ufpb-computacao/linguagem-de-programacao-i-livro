@@ -228,33 +228,36 @@ para a manipulação e/ou definição de ponteiros, a saber, o operador `&`,
 conhecido como *((operador de endereço))*, e o operador `*`,
 normalmente chamado de *((operador de indireção))*. 
 
-O operador de endereço:: é utilizado para se obter o 
-endereço de seu operando ou variável a que é aplicado. 
+O operador de endereço:: é utilizado para se obter o endereço de seu
+operando ou variável a que é aplicado. 
 
-O operador de indireção:: pode ser utilizado de duas formas, a primeira para definição de 
-um ponteiro; já a segunda função é retornar o valor ou conteúdo da 
-variável para a qual um ponteiro está apontando.
+O operador de indireção:: pode ser utilizado de duas formas, a
+primeira para definição de um ponteiro; já a segunda função é retornar
+o valor ou conteúdo da variável para a qual um ponteiro está
+apontando.
 
 
 [[sec_ponteiros_funcao]]
-=== 3.3 Ponteiros em funções ou sub-rotinas
+=== Ponteiros em funções ou sub-rotinas
 
-==== 3.3.1 Contextualização
+==== Contextualização
 
 Para entendermos a utilidade do uso de ponteiros em funções é preciso antes 
-analisar aspectos da execução de uma função em um programa em C, como, por 
-exemplo, a ((pilha de execução)) de uma ((função)) e transferência de dados para o 
-programa principal (função `main`).
+analisar aspectos da execução de uma função em um programa em C, como,
+por exemplo, a *((pilha de execução))* de uma *((função))* e
+transferência de dados para o programa principal (função `main`).
 
 As funções em um programa em C são independentes entre si. Como 
-consequência, as ((variáveis locais)) definidas dentro do ((escopo de uma função)), 
-inclusive os parâmetros de entrada da função, não existem fora dela. Isso 
-significa que cada vez que uma função é executada, as suas variáveis locais 
-são criadas, e após a sua execução, essas variáveis locais deixam de 
-existir. Outra característica básica no conceito de funções é que a 
-transferência de dados entre funções é feita com o uso de parâmetros e do 
-valor de retorno da função chamada. Ou seja, uma função pode retornar um 
-valor para a função que a chamou por meio do comando `return`.
+consequência, as *((variáveis locais))* definidas dentro do *((escopo
+de uma função))*, inclusive os parâmetros de entrada da função, não
+existem fora dela. Isso significa que cada vez que uma função é
+executada, as suas variáveis locais são criadas, e após a sua
+execução, essas variáveis locais deixam de existir. 
+
+Outra característica básica no conceito de funções é que a transferência de
+dados entre funções é feita com o uso de parâmetros e do valor de
+retorno da função chamada. Ou seja, uma função pode retornar um valor
+para a função que a chamou por meio do comando `return`.
 
 Para entendermos melhor a transferência de dados entre funções e o fluxo de 
 dados dentre do escopo de uma função, um exemplo detalhado é dado e sua 
