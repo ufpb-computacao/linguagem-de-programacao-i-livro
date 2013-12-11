@@ -261,15 +261,17 @@ para a função que a chamou por meio do comando `return`.
 
 Para entendermos melhor a transferência de dados entre funções e o fluxo de 
 dados dentre do escopo de uma função, um exemplo detalhado é dado e sua 
-execução é analisada usando o esquema ilustrado na Fig. 3.4. Essa figura 
-esboça o conceito de ((pilha de execução)) na memória RAM do computador, na 
+execução é analisada usando o esquema ilustrado na <<fig_pilha_de_execucao>>. 
+Essa figura esboça o conceito de *((pilha de execução))* na memória RAM do computador, na 
 qual os nomes das variáveis e/ou das funções são mostrados à direita de 
 cada célula/linha, o valor/conteúdo que uma variável assume no momento da 
 execução da função é mostrado em cada célula/linha da coluna e, 
 finalmente, o endereço de memória onde cada variável está gravada é 
 mostrado à esquerda de cada célula/linha. 
 
-Fig. 3.4: Ilustração da pilha de execução na memória RAM do computador.
+[[fig_pilha_de_execucao]]
+.Ilustração da pilha de execução na memória RAM do computador.
+image::images/cap3/pilha_de_execucao.eps[scaledwidth="50%"]
 
 Considere agora o código mostrado a seguir. Esse exemplo mostra um programa 
 que calcula a soma dos números pares entre 0 e 200. A etapa de cálculo da 
@@ -285,6 +287,15 @@ foi alterado dentro da função principal. O que acontece é que `PAR`
 passado na chamada da função. Sendo assim, `PAR` dentro da função `f_soma` não 
 representa a `PAR` dentro da função main; o fato delas terem o mesmo nome é 
 indiferente.
+
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap3/f_soma.c[code/cap3/f_soma.c]
+
+[source, c]
+----
+include::code/cap3/f_soma.c[]
+----
+
 
 [TIP]
 Como exercício para casa e para visualizar o que foi dito, inclua, usando o 
