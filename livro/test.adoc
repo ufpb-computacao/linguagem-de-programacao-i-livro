@@ -18,6 +18,9 @@ tri
 1 2 4 5 6 4 1 
 ....
 
+
+Num seri o que... `(()) ((()))`.
+
 //include::capitulos/cap3-ponteiros.adoc[]
 //include::capitulos/atividades-3.adoc[]
 //include::capitulos/cap4-alocacao-dinamica.adoc[]
