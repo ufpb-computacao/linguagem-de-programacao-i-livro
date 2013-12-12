@@ -1,0 +1,19 @@
+== Premiação de alunos
+TODO: À fazer.
+=== Contexto e perspectiva
+TODO: À fazer.
+=== Objetivos de aprendizagem
+TODO: À fazer.
+=== Entendendo o problema
+TODO: À fazer.
+=== Planejando execução do projeto
+TODO: À fazer.
+=== Planejando a estrutura dos dados
+TODO: À fazer.
+=== Executando o projeto
+TODO: À fazer.
+=== Deploy do projeto
+TODO: À fazer.
+=== Avaliando o projeto
+TODO: À fazer.
+
