@@ -1,7 +1,21 @@
 == Premiação de alunos
 TODO: À fazer.
 === Contexto e perspectiva
-TODO: À fazer.
+Daniel é um diretor de escola privada que possui um sistema de notas
+informatizado. Para manter seus alunos motivados ele deseja premiar os
+melhores alunos de cada turma. Daniel conversou com o
+técnico responsável pelo sistema da escola e este lhe confirmou 
+que conseguiria obter uma listagem com todos os alunos e suas
+respectivas com médias. Com esta lista Daniel deseja obter os nomes
+dos alunos que deseja premiar. 
+
+Waleska e Luciano, alunos do curso de Licenciatura em Computação à
+distância, se voluntariaram para atender a demanda do diretor e estão
+confiantes que conseguirão realizá-la. Embora ainda estejam
+aprendendo a programar são capazes de pesquisar e aprender os conteúdos
+necessários para resolução dos problemas, e quander houver
+dificuldades sabem que podem consultar seus professores e tutores 
+
 === Objetivos de aprendizagem
 TODO: À fazer.
 === Entendendo o problema
