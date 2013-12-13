@@ -1,30 +1,116 @@
-== Premiação de alunos
+== Premiação de educadores
 TODO: À fazer.
 === Contexto e perspectiva
-Daniel é um novo coordenador regional de uma rede de escolas públicas, que
-possui um sistema de notas informatizado. Daniel acredita que seus
-alunos do terceiro ano podem ser motivados através da distribuição de
-premios para os melhores alunos de cada turma. Daniel conversou com o
-técnico responsável pelo sistema da sua rede de escolas e este lhe confirmou 
-que conseguiria obter uma listagem com todos os alunos e suas
-respectivas com médias. Com esta lista Daniel deseja obter os nomes
-dos alunos que deseja premiar. 
+Carlos é o coordenador da unidade de Educação a distância de uma
+universidade públic. Recentemente ele leu uma reportagem sobre
+http://www.administradores.com.br/artigos/carreira/avaliacao-do-desempenho-por-competencias/23428/[Avaliação
+do desempenho por competências], e está convencido que a universidade
+será beneficiada caso sejam realizadas avaliações sistematicamente em
+sua equipe docente. Para incentivar a realização das avaliações
+Carlos planeja distribuir premiações para os educadores com melhores
+indicativos de avaliação.
 
-Waleska e Luciano, alunos do curso de Licenciatura em Computação à
-distância, se voluntariaram para atender a demanda do coordenador e estão
-confiantes que conseguirão realizá-la. 
+// TODO: Você concorda com esta política? Como você implementaria a
+// sua?
+
+A demanda do coordenador foi encaminhada para a turma de Linguagem de
+Programação I executá-la.
+
+// A coordenação do curso de computação foi chamada para implementar 
+// Waleska e Luciano, alunos do curso de Licenciatura em Computação à
+// distância, se voluntariaram para atender a demanda do coordenador e estão
+// confiantes que conseguirão realizá-la. 
 
 === Objetivos de aprendizagem
 TODO: À fazer.
-=== Entendendo o problema
+=== Entendendo o projeto
 
-Para premiar seus alunos o coordenador da escola tem a sua dispoição . 
-O diretor daniel 
+Carlos planeja realizar avaliações sistemáticas na equipe docente da
+universidade, com o propósito de melhorar os serviços prestados por
+ela. Para dinamizar as realizações das avaliações, Carlos deseja que seja
+implementado um sistema informatizado que possa ser preenchido por
+todos que participarão da avaliação. Após a finalização da avaliação,
+uma relação contendo os nomes dos educadores com melhores desempenhos
+deverá ser gerada pelo sistema.
+
+A demanda do coordenador foi encaminhada a Jair, Professor de Linguagem de
+Programação I, que planeja distribuir entre seus alunos a execução do
+projeto.
+
+NOTE: A reportagem que Carlos leu sobre *((Avaliação do desempenho)) 
+por competências* encontra-se disponível em
+http://www.administradores.com.br/artigos/carreira/avaliacao-do-desempenho-por-competencias/23428/.
 
 === Entendo os dados
+Para a execução do projeto o coordenador solicitou à equipe que
+gerencia o banco de dados da universidade para exportar uma listagem 
+contendo todos os nomes das pessoas que serão avaliadas:
 
-TODO: À fazer.
+.equipe-docente.csv
+....
+id,nome,curso,disciplina,função
+1,Ana Maria,Computação,Introdução a Programação,Professor
+2,Tânia Helena,Computação,Introdução a Programação,Tutor
+3,Wilton Malheiros,Computação,Introdução a Programação,Tutor
+4,Márcia Sila,Computação,Matemática Elementar,Professor
+...
+60,Josefa,Pedagogia,Introdução a EAD,Professor
+61,Carla Paiva,Pedagogia,Introdução a EAD,Tutor
+...
+....
+
+=== Realizando análise inicial do projeto no fórum
+
+A primeira etapa que precisa ser realizada no projeto é uma *((análide
+inicial))*, portanto Jair reuni e equipe de mediadores, e explica que
+criará um fórum em sua sala de aula, solicitando que os alunos 
+realizem uma análise inicial do projeto. O propósito do fórum será
+possibilitar que os alunos vivenciem a realização de uma análise
+inicial de um projeto compreendendo o que é esta etapa.
+
+As mensagens postadas no fórum são apresentadas abaixo, divididas por
+categoria:
+
+O que será avaliado::
+* A elaboração das atividades no Moodle será um item da avaliação?
+* Será avaliado a disponibilidade? Interesse? Atualização de conteúdo?
+* Rapidez no feedback? Qualidade no feedback?
+* Participação/Diversidade nas atividades?
+* Como será a avaliação?
+* Como as pessoas serão avaliadas?
+Sobre o programa::
+* O programa vai ter que monitorar isso?
+* O programa será enviado para todos responderem?
+* Ele vai ser um complemento do moodle?
+* A avaliação será diferente para os tutores e professores?
+* O programa é pra ser desenvolvimento em qual linguagem?
+* O programa vai enviar um e-mail pra gente responder?
+Sobre a regularidade da avaliação::
+* A avaliação será realizada mais de uma vez ou vai ter sempre?
+Outras perguntas::
+* Os alunos também serão avaliados?
+* Não podemos utilizar um questionário já pronto?
+// Pergunta aparentemente estúpida, mas deve ser respeitada, uma vez
+// que prototipagem é um dos modelos de desenvolvimento.
+* Qual será o prêmio?
+* Todo mundo vai ter que fazer o mesmo programa?
+
+// TODO: Este trecho pode ser utilizado para analisar os discursos em
+// introdução a educação a distância? Como deve ser participação no
+// fóruns.
+
+==== Comentários e Respostas sobre o fórum
+
+TODO.
+
+
+
+
+
 === Planejando execução do projeto
+
+
+
 TODO: À fazer.
 === Planejando a estrutura dos dados
 TODO: À fazer.
