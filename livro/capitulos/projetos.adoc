@@ -7,8 +7,14 @@ em sala de aula.
 Antes de se aprofundar na proposta vamos revisar as finalidades da
 educação superior no Brasil.
 
-== Amparo Legal do Curso de Licenciatura em Computação
+== Amparo Legal do Curso de Licenciatura em Computação a Distância
 
+Antes de apresentarmos uma proposta de trabalho para o nosso curso,
+precisamos primeiro compreendermos o contexto em que ele está
+inserido e suas bases legais. 
+
+
+[[sec_finalidades]]
 === Finalidades da Educação Superior
 
 (((Educação Superior, Finalidades)))
@@ -41,7 +47,7 @@ VII) promover a extensão, aberta à participação da população, visando
 à difusão das conquistas e benefícios resultantes da criação cultural
 e da pesquisa científica e tecnológica geradas na instituição.
 
-Qualquer proprosta de trabalho no ensino superior deve está
+Qualquer proposta de trabalho no ensino superior deve está
 subordinada a este artigo.
 
 TIP: A LDB pode ser baixada em
@@ -54,10 +60,10 @@ TIP: Documento pode ser acessado em
 http://portal.mec.gov.br/index.php?option=com_docman&task=doc_download&gid=11205.
 
 
-
+[[sec_metodologia]]
 ==== Da Metodologia de Ensino
  
-``A metodologia de ensino deve ser
+A metodologia de ensino deve ser
 centrada no aluno como sujeito da aprendizagem e apoiada no professor
 como facilitador do processo de ensino- aprendizagem. O professor deve
 fortalecer o trabalho extraclasse como forma de o aluno aprender a
@@ -71,18 +77,17 @@ emprego de metodologias de ensino e aprendizagem que promovam a
 explicitação das relações entre os conteúdos abordados e as
 competências previstas para o egresso do curso. A metodologia de
 ensino deve desenvolver uma visão sistêmica para resolução de
-problemas.''
+problemas.
 
-==== Perfil dos Egressos
+[[sec_perfil_egresso]]
+==== Perfil de Egresso
+(((Perfil de Egresso)))
 
-NOTE: Muitas vezes o aluno de Licenciatura em Computação pode ingressar no
-curso pensando que irá cursar o curso de Bacharelado em Computação. 
-Para esclarecer a diferença vamos apresentar os perfis esperado para
-o curso de licenciatura seguido do perfil do bacharelado.
+IMPORTANT: Nas seções a seguir apresentamos o Perfil de Egresso do Curso de
+*Licenciatura em Computação*, não confundir com o Curso de *Bacharelado
+em Computação*.
 
-===== Perfil Geral dos Egressos dos Cursos de Bacharelado e de Licenciatura
-
-Os cursos de bacharelado e de licenciatura da área de Computação devem
+Os cursos de *bacharelado* e de *licenciatura* da área de Computação devem
 assegurar a formação de profissionais dotados:
 
 1. Do conhecimento das questões sociais, profissionais, legais,
@@ -112,14 +117,12 @@ assegurar a formação de profissionais dotados:
 
 8. Da capacidade de atuar em um mundo globalizado do trabalho.
 
-
-===== Perfil dos Egressos dos Cursos de Licenciatura em Computação
-``Levando em consideração a flexibilidade necessária para atender
+Levando em consideração a flexibilidade necessária para atender
 domínios diversificados de aplicação e as vocações institucionais,
-espera-se que os egressos dos cursos de licenciatura em Computação,
+espera-se que os egressos dos cursos de *licenciatura em Computação*,
 além de atenderem ao perfil geral previsto para os egressos dos cursos
 de Formação de Professores para a Educação Básica, estabelecido por
-meio da Resolução CNE/CP no 1/2002'':
+meio da Resolução CNE/CP no 1/2002:
 
 1. Possuam sólida formação em Ciência da Computação, Matemática e
    Educação visando ao ensino de Ciência da Computação nos níveis da
@@ -144,48 +147,10 @@ meio da Resolução CNE/CP no 1/2002'':
 // ===== Perfil referenciado
 // TODO: Formação de Professores para a Educação Básica
 
-===== Perfil dos Egressos dos Cursos de Bacharelado em Ciência da Computação
+[[sec_competencias]]
+==== Competências e Habilidades
 
-WARNING: Este é o perfil de Bacharelado! Não confundir com o de
-Licenciatura.
-
-Levando em consideração a flexibilidade necessária para atender
-domínios diversificados de aplicação e as vocações institucionais,
-espera-se que os egressos dos cursos de bacharelado em Ciência da
-Computação:
-
-1. Possuam sólida formação em Ciência da Computação e Matemática que
-   os capacitem a construir aplicativos de propósito geral,
-   ferramentas e infraestrutura de software de sistemas de computação
-   e de sistemas embarcados, gerar conhecimento científico e novação e
-   que os incentivem a estender suas competências à medida que a área
-   se desenvolva;
-
-2. Possuam visão global e interdisciplinar de sistemas e entendam que
-   esta visão transcende os detalhes de implementação dos vários
-   componentes e os conhecimentos dos domínios de aplicação;
-
-3. Conheçam a estrutura dos sistemas de computação e os processos
-   envolvidos na sua construção e análise;
-
-4. Conheçam os fundamentos teóricos da área de Computação e como eles
-   influenciam a prática profissional;
-
-5. Sejam capazes de agir de forma reflexiva na construção de sistemas
-   de computação por entender que eles atingem direta ou indiretamente
-   as pessoas e a sociedade;
-
-6. Sejam capazes de criar soluções, individualmente ou em equipe, para
-   problemas complexos caracterizados por relações entre domínios de
-   conhecimento e de aplicação;
-
-7. Reconheçam que é fundamental a inovação e a criatividade e entendam
-   as perspectivas de negócios e oportunidades relevantes.
-
-==== Competências
-
-===== Competências e Habilidades Gerais dos Egressos dos Cursos de Bacharelado e de Licenciatura
-Os cursos de bacharelado e de licenciatura em Computação devem formar
+Os cursos de *bacharelado* e de *licenciatura* em Computação devem formar
 profissionais que revelem pelo menos as competências e habilidades
 comuns para:
 
@@ -223,10 +188,9 @@ comuns para:
     dele pode ser derivada
 
 
-===== Competências e Habilidades dos Egressos dos Cursos de Licenciatura em Computação.
 Levando em consideração a flexibilidade necessária para atender
 domínios diversificados de aplicação e as vocações institucionais, os
-cursos de licenciatura em Computação devem prover uma formação
+cursos de *licenciatura* em Computação devem prover uma formação
 profissional que revele, pelo menos, as habilidades e competências
 para:
 
@@ -257,10 +221,8 @@ para:
 9. Propor, coordenar e avaliar, projetos de ensino-aprendizagem
    assistidos por computador que propiciem a pesquisa.
 
-
+[[sec_curriculo]]
 ==== Conteúdos Curriculares
-
-===== Formação Tecnológica e Básica para todos os Cursos de Bacharelado e de Licenciatura
 
 Os conteúdos tecnológicos e básicos comuns a todos os cursos são:
 sistemas operacionais; compiladores; engenharia de software; interação
@@ -283,10 +245,8 @@ avaliação de desempenho; ética e legislação; empreendedorismo;
 computação e sociedade; filosofia; metodologia cientifica; meio
 ambiente; fundamentos de administração; fundamentos de economia.
 
-===== Formação Tecnológica e Básica dos Cursos de Licenciatura em Computação
-
 Os conteúdos básicos e tecnológicos, específicos para os cursos de
-licenciatura em Computação, são os seguintes: educação assistida por
+*licenciatura* em Computação, são os seguintes: educação assistida por
 computador; estudo e desenvolvimento de tecnologias computacionais
 aplicadas à educação; adaptação e personalização de sistemas de
 avaliação de aprendizagem assistidas por computador; produção de
@@ -306,12 +266,12 @@ filosofia da educação, sociologia da educação; organização e sistemas
 educacionais, psicologia da aprendizagem; libras; educação à
 distância; avaliação da aprendizagem.
 
-Para a licenciatura deverão ser incluídos conteúdos de formação
+IMPORTANT: Para a *licenciatura* deverão ser incluídos conteúdos de formação
 pedagógica, considerando as Diretrizes Curriculares Nacionais para a
 formação de professores para a Educação Básica.
 
 
-
+[[sec_atividades_complementares]]
 ==== Atividades Complementares
 As atividades complementares são componentes curriculares que têm como
 objetivo principal enriquecer expandir o perfil do egresso com
@@ -336,6 +296,7 @@ mencionadas devem ser permanentemente incentivadas no cotidiano
 acadêmico, permitindo a diversificação das atividades complementares
 desenvolvidas pelos estudantes.
 
+[[sec_acompanhamento_avaliacao_do_curso]]
 ==== Acompanhamento e avaliação 
 O acompanhamento dos cursos deve ser contínuo, podendo se basear em
 autoavaliação e no relato das experiências de seus egressos. Espera-se
@@ -349,6 +310,46 @@ normalmente acompanhadas por um profissional sênior. Assim, o processo
 de avaliação dos cursos pode ser realimentado com informações
 relevantes sobre o desempenho nas atividades laborais ou por meio da
 comparação com egressos de mesmo perfil, de outras instituições.
+
+[[sec_qualidade]]
+=== Referenciais de Qualidade para Educação Superior a Distância
+
+Outro documento importante é o ``Referenciais de Qualidade para
+Educação Superior a Distância'', ele aborda diversos aspectos
+do curso como: 
+
+i) Concepção de educação e currículo no processo de ensino e
+aprendizagem; 
+
+ii) Sistemas de Comunicação; 
+
+iii) Material didático; 
+
+iv) Avaliação; 
+
+v) Equipe multidisciplinar; 
+
+vi) Infra-estrutura de apoio;
+
+vii) Gestão Acadêmico-Administrativa; 
+
+viii) Sustentabilidade financeira.
+
+
+TIP: Você pode encontrar o documento em:
+http://portal.mec.gov.br/seed/arquivos/pdf/legislacao/refead1.pdf
+
+[[sec_ppc]]
+=== Projeto Pedagógico do Curso - PPC
+(((PPC)))
+
+Todos os cursos possuem um PPC, que devem nortear a execução do curso.
+Conheça o seu!
+
+TIP: PPC do Curso de Licenciatura em Computação a Distância na UFPB: 
+http://portal.virtual.ufpb.br/wordpress/wp-content/uploads/2013/01/PPC-Licenciatura-Computa%C3%A7%C3%A3o-UFPB-Versao-Final-06082012.pdf
+
+
 
 
 

@@ -7,25 +7,11 @@
 :resposta: image:images/icons/resposta.eps[]
 :solucao: image:images/icons/solucao.eps[]
 
-== Novo
-
-tri
-
-....
-      1
-    1 2 1
-  1 2 3 3 1
-1 2 4 5 6 4 1 
-....
-
-
-Num seri o que... `(()) ((()))`.
-
 //include::capitulos/cap3-ponteiros.adoc[]
 //include::capitulos/atividades-3.adoc[]
 //include::capitulos/cap4-alocacao-dinamica.adoc[]
 //include::capitulos/atividades-4.adoc[]
-include::capitulos/projeto-premiacao-alunos.adoc[]
+include::capitulos/projetos.adoc[]
 
 
 
