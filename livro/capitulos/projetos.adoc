@@ -4,8 +4,10 @@ Trazemos uma proposta de trabalho que consiste em buscar
 manter os alunos motivados através da utilização de projetos com
 financiamento em sala de aula.
 
+=== As bases desta proprosta
 
-
+Esta proposta de trabalho foi concebida visando atender as Bases
+Legais (<<cap_bases_legais>>) apresentadas anteriormente. 
 
 === Premissas
 

@@ -11,10 +11,10 @@
 //include::capitulos/atividades-3.adoc[]
 //include::capitulos/cap4-alocacao-dinamica.adoc[]
 //include::capitulos/atividades-4.adoc[]
+
 include::capitulos/bases-legais.adoc[]
+
 include::capitulos/projetos.adoc[]
-
-
 
 // Sempre termine os arquivos com uma linha em branco.
 

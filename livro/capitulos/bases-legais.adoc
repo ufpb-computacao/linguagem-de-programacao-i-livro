@@ -1,13 +1,5 @@
-== Motivando alunos ao trabalhar com projetos financiados
-
-Trazemos uma proposta de trabalho que consiste em buscar
-fincanciamentos para os projetos dos alunos que serão realizados 
-em sala de aula. 
-
-Antes de se aprofundar na proposta vamos revisar as finalidades da
-educação superior no Brasil.
-
-== Amparo Legal do Curso de Licenciatura em Computação a Distância
+[[cap_bases_legais]]
+== Base Legal do Curso de Licenciatura em Computação a Distância
 
 Antes de apresentarmos uma proposta de trabalho para o nosso curso,
 precisamos primeiro compreendermos o contexto em que ele está
@@ -19,6 +11,7 @@ inserido e suas bases legais.
 
 (((Educação Superior, Finalidades)))
 (((LDB)))
+
 
 A Lei de Diretrizes e Bases da Educação Nacional (LDB) define as
 finalidades da Educação Superior no Art 43°:
@@ -65,7 +58,7 @@ http://portal.mec.gov.br/index.php?option=com_docman&task=doc_download&gid=11205
  
 A metodologia de ensino deve ser
 centrada no aluno como sujeito da aprendizagem e apoiada no professor
-como facilitador do processo de ensino- aprendizagem. O professor deve
+como facilitador do processo de ensino-aprendizagem. O professor deve
 fortalecer o trabalho extraclasse como forma de o aluno aprender a
 resolver problemas, aprender a aprender, tornar-se independente e
 criativo. O professor deve mostrar, ainda, as aplicações dos conteúdos
