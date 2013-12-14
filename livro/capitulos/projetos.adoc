@@ -1,0 +1,55 @@
+== Projetos
+
+// http://developer.ubuntu.com/resources/programming-languages/c-and-c-plus-plus/
+// http://www.codeblocks.org/
+
+Instalar o codeblocks:
+    
+    sudo apt-get install codeblocks
+
+Fazer um experimento, que ao descrevê-lo fique evidente o pensamento
+empirista, adaptando o experimento para torná-lo empirista.
+
+Pensar num experimento que possamos nos apropriar dos conhecimentos
+de cálculo ou matemática elementar.
+
+Fazer um programa em C para resolvê-lo.
+
+Se o problema fizer parte do dia-a-dia dos alunos, melhor ainda.
+
+Problema deve ser realizado por um grupo, no mínimo uma dupla.
+
+Deverá demonstrar a utilização dos compiladores, do git para
+compartilhar o código entre eles. Demonstrar a diferença de cultura de
+cultura entre eles.
+
+
+.Problemas
+* Contrução de um problema para controlar as cadernetas
+
+
+.Problemas que incomodam
+* Não receber o salário em dia
+* Receber informações em cima da hora, sobre assuntos que eram de
+  conhecimento de todos. (Em outras palavras: ser o último a saber).
+* Preenchimento de caderneta em papel, ao invés do digital
+** Como incorporar assuntos de outras disciplinas?
+** Metodologia do trabalho / Publicando um artigo com o projeto?
+** Cálculo: Análise das notas? Das Presenças? Como utilizar funções?
+Funções injetoras? função inversa? Limites? Continuidade? Derivada?
+Reta tangente? Valor médio? Integral?
+** Inglês: escrita do abstract? Escrita da documentação e aplicação em
+ingles?
+** Fundamentação Psicológica da Educação: Analisar o conhecimento
+obtido durante o projeto pelos integrantes? Artigo?
+
+Analisar as repercursões do uso do programa. Fases do desenvolvimento:
+análise, desenvolvimento e deploy.
+
+Projeto para analisar o dados dos alunos?
+Utilizar o github para juntar os dados de forma distribuída.
+Desenhar gráficos? Usar o `dot` ou outra ferramenta para desenho?
+
+Google API?
+
+

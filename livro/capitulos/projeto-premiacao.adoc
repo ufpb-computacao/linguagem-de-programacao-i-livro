@@ -2,7 +2,7 @@
 TODO: À fazer.
 === Contexto e perspectiva
 Carlos é o coordenador da unidade de Educação a distância de uma
-universidade públic. Recentemente ele leu uma reportagem sobre
+universidade pública. Recentemente ele leu uma reportagem sobre
 http://www.administradores.com.br/artigos/carreira/avaliacao-do-desempenho-por-competencias/23428/[Avaliação
 do desempenho por competências], e está convencido que a universidade
 será beneficiada caso sejam realizadas avaliações sistematicamente em
@@ -13,17 +13,77 @@ indicativos de avaliação.
 // TODO: Você concorda com esta política? Como você implementaria a
 // sua?
 
-A demanda do coordenador foi encaminhada para a turma de Linguagem de
-Programação I executá-la.
-
+A demanda do coordenador foi encaminhada a Jair, Professor de Linguagem de
+Programação I, que planeja trabalhar com seus alunos através da
+execução de projetos.
 // A coordenação do curso de computação foi chamada para implementar 
 // Waleska e Luciano, alunos do curso de Licenciatura em Computação à
 // distância, se voluntariaram para atender a demanda do coordenador e estão
 // confiantes que conseguirão realizá-la. 
 
+=== Reunião com a equipe multidisciplinar
+
+Jair convida seus colegas de trabalho para uma reunião onde pretende
+discutir com os professores e tutores como esta demanda poderia ser
+trabalhada com os alunos da educação a distância. Os professores e
+tutores das seguintes disciplinas foram convidados para a reunião:
+
+* Cálculo Diferencial e Integral
+* Inglês Instrumental
+* Fundamentos Psicológicos da Educação
+* Linguagem de Programação I
+* Metodologia do Trabalho Científico
+
+==== Referenciais para a Reunião
+
+* REFERENCIAIS DE QUALIDADE PARA EDUCAÇÃO SUPERIOR A DISTÂNCIA
+* PPC do curso
+
+==== Pontos chaves da reunião
+
+* Os alunos deverão trabalhar em grupos
+* Cada grupo irá elaborar um projeto de pesquisa e executá-lo
+* Os professores irão utilizar o mesmo projeto para avaliar os alunos
+* O projeto de pesquisa elaborado por cada grupo deverá conter
+  evidências necessárias para sua avaliação.
+* A equipe de cada disciplina irá informar as evidências que precisarão
+  estarem contidas em cada projeto, para possibilitar sua avaliação.
+* Os alunos _desblocados_ participarão do projeto, mas só serão
+  avaliado pelas disciplinas que está cursando.
+* Os tutores das disciplinas escolherão quais projetos irão
+  _apadrinhar_, se envolvendo com o projeto e acompanhando os alunos
+  durante a disciplina.
+
+
+=== Planejamento das avaliações
+
+Cada grupo deverá escrever e entregar o seu projeto de pesquisa.
+
+Metodologia do Trabalho Científico:: Esta disciplina trabalhará a
+escrita do projeto de pesquisa durante o semestre. Auxiliará os alunos
+na elaboração do documento (projeto) que será entregue.
+
+Linguagem de Programação I:: Cada grupo precisá elaborar um aplicativo
+que será avaliado por esta disciplina.
+
+Inglês Instrumental:: O projeto deverá produzir evidências de como o
+idioma em inglês foi utilizado. Os códigos fontes do aplicativo
+deverão ser escritos e comentados em inglês. Além do código fonte, os
+aplicativos também deverão ser entregues com manuais escritos em
+inglês. Produção de video-tutoriais em inglês também serão aceitos.
+
+Cálculo Diferencial e Integral:: Ainda não ficou claro como esta
+disciplina poderá utilizar o projeto.
+
+Fundamentos Psicológicos da Educação:: O projeto de pesquisa deverá
+conter uma análise sobre o método de avaliação empregado, as
+consequências da sua adoção, e as bases psicológicas do método
+empregado.
+
+
 === Objetivos de aprendizagem
 TODO: À fazer.
-=== Entendendo o projeto
+=== Entendendo a demanda de Carlos
 
 Carlos planeja realizar avaliações sistemáticas na equipe docente da
 universidade, com o propósito de melhorar os serviços prestados por
@@ -33,9 +93,7 @@ todos que participarão da avaliação. Após a finalização da avaliação,
 uma relação contendo os nomes dos educadores com melhores desempenhos
 deverá ser gerada pelo sistema.
 
-A demanda do coordenador foi encaminhada a Jair, Professor de Linguagem de
-Programação I, que planeja distribuir entre seus alunos a execução do
-projeto.
+
 
 NOTE: A reportagem que Carlos leu sobre *((Avaliação do desempenho)) 
 por competências* encontra-se disponível em
@@ -103,6 +161,11 @@ Outras perguntas::
 
 TODO.
 
+==== Elaborando o projeto de pesquisa
+
+Jair compreende a importância dos alunos aprenderem a elaborarem
+projetos, portanto 
+
 
 
 
@@ -121,3 +184,26 @@ TODO: À fazer.
 === Avaliando o projeto
 TODO: À fazer.
 
+
+== Editais
+
+http://captacao.org/recursos/editais-abertos
+http://www.finep.gov.br/editais/vigentes.asp
+http://www.gife.org.br/artigos_reportagens_editais.asp?quantpaginas=50
+http://www.gife.org.br
+http://www.conselhos.mg.gov.br/consea/noticia/confira-os-editais-abertos
+http://ppc.petrobras.com.br/
+http://www.franca.adm.br/fontes-de-financiamento-para-projetos-sociais.html
+http://www.fundacaogeracoes.org.br/index.php?page=oportunidades
+https://www.convenios.gov.br/portal/
+http://www.enap.gov.br
+http://valberlucio.wordpress.com/category/editais/
+http://pnc.culturadigital.br
+http://www.paraiba.pb.gov.br
+http://www.fnde.gov.br/programas/livro-didatico/livro-didatico-editais
+http://simec.mec.gov.br
+http://www.alliancemagazine.org
+
+passados:
+
+http://captacao.org/recursos/editais-abertos/1051-uniao-europeia-lanca-novo-edital-de-financiamento-de-projetos-no-brasil
