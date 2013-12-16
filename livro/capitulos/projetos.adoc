@@ -4,10 +4,38 @@ Trazemos uma proposta de trabalho que consiste em buscar
 manter os alunos motivados através da utilização de projetos com
 financiamento em sala de aula.
 
-=== As bases desta proprosta
+=== As bases desta proposta
 
 Esta proposta de trabalho foi concebida visando atender as Bases
 Legais (<<cap_bases_legais>>) apresentadas anteriormente. 
+
+=== Metodologia
+
+. O aluno deve compreender a classe de problemas que o conteúdo da
+  disciplina pretender abordar.
+. O aluno deve identificar um destes problemas que está associado a 
+sua realidade e buscar um edital de financiamento em que possa
+submeter um projeto.
+. O aluno deve elaborar um projeto de acordo com as exigências do
+  edital.
+. O aluno deve buscar formar um grupo para realização do projeto.
+. Os tutores devem escolher quais projetos irão _apadrinhar_,
+  acompanhando e/ou se envolvendo com o desenvolvimento do projeto.
+. O aluno deve acordar com a equipe docente as evidências que precisam
+  serem produzidas, durante a execução do projeto, para gerar a
+  *Ficha de Avaliação do Projeto*, que também contém as datas
+  para as entregas parciais.
+. Durante a execução do projeto os alunos deverão fornecer, sempre que
+  solicitado, a Planilha de Avaliação do Projeto devidamente
+  preenchida  
+. O professores e tutores devem avaliar os alunos com base nas
+  evidências apresentadas.
+
+=== Acordando evidências para a avaliação
+
+=== Avaliação do aluno
+
+
 
 === Premissas
 

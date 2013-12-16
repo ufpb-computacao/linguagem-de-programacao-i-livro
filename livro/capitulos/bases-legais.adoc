@@ -142,10 +142,11 @@ meio da Resolução CNE/CP no 1/2002:
 
 [[sec_competencias]]
 ==== Competências e Habilidades
-
-Os cursos de *bacharelado* e de *licenciatura* em Computação devem formar
-profissionais que revelem pelo menos as competências e habilidades
-comuns para:
+Levando em consideração a flexibilidade necessária para atender
+domínios diversificados de aplicação e as vocações institucionais, os
+cursos de *licenciatura* em Computação devem prover uma formação
+profissional que revele, pelo menos, as habilidades e competências
+para:
 
 1. Identificar problemas que tenham solução algorítmica;
 
@@ -180,38 +181,31 @@ comuns para:
 12. Ser capaz de realizar trabalho cooperativo e entender a força que
     dele pode ser derivada
 
-
-Levando em consideração a flexibilidade necessária para atender
-domínios diversificados de aplicação e as vocações institucionais, os
-cursos de *licenciatura* em Computação devem prover uma formação
-profissional que revele, pelo menos, as habilidades e competências
-para:
-
-1. Especificar os requisitos pedagógicos na interação
+a. Especificar os requisitos pedagógicos na interação
    humano-computador;
 
-2. Especificar e avaliar softwares e equipamentos para aplicações
+b. Especificar e avaliar softwares e equipamentos para aplicações
    educacionais e em Educação à Distância;
 
-3. Projetar e desenvolver softwares e hardware educacionais e para
+c. Projetar e desenvolver softwares e hardware educacionais e para
    Educação à Distância em equipes interdisciplinares;
 
-4. Atuar junto ao corpo docente das Escolas nos níveis da Educação
+d. Atuar junto ao corpo docente das Escolas nos níveis da Educação
    Básica e Técnico e suas modalidades e demais organizações no uso
    efetivo e adequado das tecnologias da educação;
 
-5. Produzir materiais didáticos com a utilização de recursos
+e. Produzir materiais didáticos com a utilização de recursos
    computacionais, propiciando inovações nos produtos, processos e
    metodologias de ensino aprendizagem;
 
-6. Administrar laboratórios de informática para fins educacionais;
+f. Administrar laboratórios de informática para fins educacionais;
 
-7. Atuar como agentes integradores promovendo a acessibilidade
+g. Atuar como agentes integradores promovendo a acessibilidade
    digital;
 
-8. Atuar como docente com a visão de avaliação crítica e reflexiva;
+h. Atuar como docente com a visão de avaliação crítica e reflexiva;
 
-9. Propor, coordenar e avaliar, projetos de ensino-aprendizagem
+i. Propor, coordenar e avaliar, projetos de ensino-aprendizagem
    assistidos por computador que propiciem a pesquisa.
 
 [[sec_curriculo]]
