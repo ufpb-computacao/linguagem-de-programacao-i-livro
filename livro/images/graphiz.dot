@@ -1,0 +1,44 @@
+/*  Este arquivo pode ser utilizado para geração de gráficos.
+http://www.graphviz.org/Gallery.php 
+*/
+
+digraph G {
+  rankdir="LR"
+  node[shape=box]
+  label="Representação de Arquivo"
+
+  relativo[label="Caminho Relativo"];
+  absoluto[label="Caminho Absoluto"];
+  
+  absoluto_ex[shape=none, label="c:\\\\Users\\\\Aluno\\\\Documentos\\\\relatorio-de-estagio.pdf"];
+  relativo_ex[shape=none, label="Documentos\\relatorio-de-estagio.pdf"];
+  relativo_ex2[shape=none, label="relatorio-de-estagio.pdf"];
+
+  absoluto->absoluto_ex;
+  relativo->relativo_ex;
+  relativo->relativo_ex2;
+}
+
+/*
+Problema:
+
+Abrir um arquivo
+  Escrever no arquivo
+  Ler do arquivo
+Fechar arquivo
+Gerenciar erros
+
+
+Problemas: 
+* Representar um arquivo
+** Nome do arquivo
+** Caminho do arquivo
+** Tipo do arquivo?
+** Permissão do arquivo
+
+Manipulações:
+  Ler informação no arquivo
+  
+
+
+*/
