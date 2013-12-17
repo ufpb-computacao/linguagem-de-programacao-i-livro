@@ -1,0 +1,73 @@
+== Arquivos
+
+.Objetivos do capítulo
+____
+
+Ao final deste capítulo você deverá ser capaz de:
+
+* Entender o conceito de arquivos e seus tipos;
+* Aprofundar o conhecimento sobre armazenamento e manipulação de dados
+  no computador por meio do uso de arquivos;
+* Fazer manipulação de dados em arquivos por meio de operações como
+  leitura, escrita, dentre outras.  
+
+____
+
+
+Até agora foi visto como é possível gravar e acessar informações/dados
+na memória primária/principal do computador (também chamada memória
+RAM). Para isso, foi visto que o uso de ponteiros é fundamental. O
+problema dessa abordagem é que as informações/dados de um programa em
+C gravadas na memória RAM são perdidas após o término da execução
+desse programa. Ou seja, não se pode mais acessá-las ou recuperá-las.
+Como fazer para, após a execução de um programa em C, ter acesso a
+dados/informações manipuladas nesse programa? Uma solução é gravar
+esses dados/informações em um arquivo na memória secundária do
+computador (também chamado de Disco Rígido – Hard Disk drive). Nesse
+caso, após a execução do programa em C, esses dados/informações
+estarão disponíveis no arquivo gravado no disco rígido da máquina.
+
+Nesse capítulo serão abordados conceitos básicos sobre arquivos e
+formas de manipulação de dados no disco rígido na linguagem C, como
+por exemplo, estratégias para salvar e recuperar dados/informações em
+arquivos.
+
+=== Gravação de dados no disco rígido
+TODO.
+
+=== Funções básicas para abrir e fechar arquivos na linguagem C
+TODO.
+
+
+=== Arquivos em modo texto
+TODO.
+==== Funções para leitura de dados em arquivos
+TODO.
+
+
+==== Funções para escrita de dados em arquivos
+TODO.
+
+
+==== Funções para manipulação de dados em arquivos texto
+TODO.
+
+
+=== Arquivos em modo binário
+TODO.
+==== Funções para leitura de dados em arquivos binários
+TODO.
+
+==== Funções para escrita de dados em arquivos binários
+TODO.
+
+==== Funções para manipulação de dados em arquivos binários
+TODO.
+
+=== Comparação entre arquivo em modo texto e binário
+TODO.
+
+////
+Terminando arquivo com linha em branco
+////
+
