@@ -35,7 +35,7 @@ arquivos.
 
 ["graphviz"]
 ----
-include::../images/graphiz.dot[]
+include::../images/cap5/string.dot[]
 ----
 
 === Gravação de dados no disco rígido
