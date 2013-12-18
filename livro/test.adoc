@@ -17,12 +17,14 @@
 //include::capitulos/projetos.adoc[]
 include::capitulos/cap5-arquivos.adoc[]
 
+////
 == Graficos
 
 ["graphviz"]
 ----
 include::images/graphiz.dot[]
 ----
+////
 
 // Sempre termine os arquivos com uma linha em branco.
 
