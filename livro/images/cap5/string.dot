@@ -1,0 +1,57 @@
+/*  Este arquivo pode ser utilizado para geração de gráficos.
+http://www.graphviz.org/Gallery.php 
+*/
+
+digraph G {
+  rankdir="LR"
+  node[shape=box]
+  label="Representação de Strings"
+  labelloc=t
+
+  subgraph cluster_string{
+    label="String"
+    mensagem[label="\"Alunos:\\nWaleska, Luciano\""];
+    musica_nacional[label="\"Músicas\\nacionais\""];
+    musica_nacional_escaped[label="\"Músicas\\\\nacionais\""];
+    path[label="\"C:\\\\Users\\\\Waleska\\\\Músicas\\\\nacionais\""];
+    path_unix[label="\"/home/luciano/Músicas/nacionais\""];
+  }
+  subgraph cluster_representacao{
+    node[shape=none]
+    label="Representação"
+    r_mensagem[label="Alunos:\nWaleska, Luciano"];
+    r_musica_nacional[label="Músicas\nacionais"];
+    r_musica_nacional_escaped[label="Músicas\\nacionais"];
+    r_path[label="C:\\Users\\Waleska\\Músicas\\nacionais"];
+    r_path_unix[label="/home/luciano/Músicas/nacionais"];
+  }
+  mensagem->r_mensagem;
+  musica_nacional->r_musica_nacional;
+  musica_nacional_escaped -> r_musica_nacional_escaped;
+  path->r_path;
+  path_unix->r_path_unix;
+}
+
+/*
+Problema:
+
+Abrir um arquivo
+  Escrever no arquivo
+  Ler do arquivo
+Fechar arquivo
+Gerenciar erros
+
+
+Problemas: 
+* Representar um arquivo
+** Nome do arquivo
+** Caminho do arquivo
+** Tipo do arquivo?
+** Permissão do arquivo
+
+Manipulações:
+  Ler informação no arquivo
+  
+
+
+*/

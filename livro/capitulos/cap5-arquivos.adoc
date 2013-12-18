@@ -32,6 +32,13 @@ formas de manipulação de dados no disco rígido na linguagem C, como
 por exemplo, estratégias para salvar e recuperar dados/informações em
 arquivos.
 
+
+
+[graphviz]
+----
+include::images/cap5/string.dot[]
+----
+
 === Gravação de dados no disco rígido
 TODO.
 
