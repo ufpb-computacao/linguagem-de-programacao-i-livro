@@ -33,7 +33,7 @@ por exemplo, estratégias para salvar e recuperar dados/informações em
 arquivos.
 
 
-["graphviz"]
+["graphviz", scaledwidth="70%"]
 ----
 include::../images/cap5/string.dot[]
 ----
