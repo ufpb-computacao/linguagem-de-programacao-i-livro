@@ -91,4 +91,17 @@ Desenhar gráficos? Usar o `dot` ou outra ferramenta para desenho?
 
 Google API?
 
+=== CGI
+
+www.boutell.com/cgic/
+libcgic-dev
+
+libcgic2
+cgilib
+
+libapache2-mod-fastcgi
+
+libfcgi-dev (instalado) http://www.fastcgi.com/drupal/ Header files of FastCGI
+programa: cgi-fcgi
+libfcgi0ldbl
 

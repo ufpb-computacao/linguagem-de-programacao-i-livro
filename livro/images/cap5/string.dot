@@ -4,21 +4,19 @@ http://www.graphviz.org/Gallery.php
 
 digraph G {
   rankdir="LR"
-  node[shape=box]
+  node[shape=none]
   label="Representação de Strings"
   labelloc=t
 
-  subgraph cluster_string{
-    label="String"
-    mensagem[label="\"Alunos:\\nWaleska, Luciano\""];
-    musica_nacional[label="\"Músicas\\nacionais\""];
-    musica_nacional_escaped[label="\"Músicas\\\\nacionais\""];
-    path[label="\"C:\\\\Users\\\\Waleska\\\\Músicas\\\\nacionais\""];
-    path_unix[label="\"/home/luciano/Músicas/nacionais\""];
-  }
+  mensagem[label="\"Alunos:\\nWaleska, Luciano\""];
+  musica_nacional[label="\"Músicas\\nacionais\""];
+  musica_nacional_escaped[label="\"Músicas\\\\nacionais\""];
+  path[label="\"C:\\\\Users\\\\Waleska\\\\Músicas\\\\nacionais\""];
+  path_unix[label="\"/home/luciano/Músicas/nacionais\""];
+
   subgraph cluster_representacao{
     node[shape=none]
-    label="Representação"
+    label="Representa"
     r_mensagem[label="Alunos:\nWaleska, Luciano"];
     r_musica_nacional[label="Músicas\nacionais"];
     r_musica_nacional_escaped[label="Músicas\\nacionais"];
