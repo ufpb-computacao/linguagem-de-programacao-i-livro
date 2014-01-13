@@ -32,6 +32,147 @@ formas de manipulação de dados no disco rígido na linguagem C, como
 por exemplo, estratégias para salvar e recuperar dados/informações em
 arquivos.
 
+=== Lingua do i
+
+Nós vamos aprender a manipular arquivos em C através da contrução de
+um pequeno aplicativo que possa ler de um arquivo o texto em português
+e convertê-lo para a Lingua do i.
+
+A ((*Lingua do i*)) é uma brincadeira infantil que consiste em falar ou
+escrever palavras trocando todas as vogais por ``i'':
+
+ Ela ama banana. (em português)
+ Ili imi binini. (na língua do i)
+
+=== Exemplos e diferenças entre Arquivos e Streams
+
+|====
+| Exemplo | Tipo | Origem
+| Documento do Word | Arquivo | Disco
+| Música MP3 | Arquivo | Disco
+| Música em rádio on-line | Stream | Placa de Rede
+| Vídeo on-line | Stream | Placa de Rede
+| Comandos de voz | Stream | Microfone
+| Comandos de texto | Stream | Teclado
+| Imagem JPG | Arquivo | Discofootnote:[Se a imagem teve origem numa
+câmera, você provavelmente copiou a imagem do cartão de memória (que é
+um disco).]
+| Vídeo de Segurança | Stream | Webcam
+|====
+
+Em C Arquivos e Streams (fluxos) são representados da mesma forma,
+possuindo uma interface única para processar os dados. No entanto,
+eles possuem características diferentes:
+
+|====
+| Recurso | Arquivo | Stream/Fluxo
+| Podemos ler/escrever bytes/caracteres | Sim | Sim
+| Sabemos o seu tamanho antecipadamente | Sim | Não
+| São finitos | Sim | Não 
+| Seu tamanho pode ser maior do que a RAM do computador | Sim | Sim
+| Podemos retroceder ou avançar para ler outra parte | Sim | Não
+| A leitura/escrita podem ser realizadas por partes | Sim | Sim
+| Origem mais comum | Disco | Dispositivos
+|====
+
+=== Tentativa da implementação da Língua do i
+
+Vamos pensar um pouco no nosso programa que irá codificar um texto na
+Língua do i. 
+
+Qual será a fonte a dados que o programa irá processar?
+
+* Teclado?
+* Arquivo pre-fixado como `portugues.txt`?
+* Qualquer arquivo solicitado pelo usuário?
+
+[NOTE]
+====
+A leitura através do *teclado* geralmente consiste em escrever uma
+mensagem na tela solicitando o usuário digitar o texto e em seguida
+ler o que foi digitado e processar. 
+
+* Digitar um texto grande pode ser tedioso. 
+* Como interajo com o programa para informar que ele deve ser finalizado?
+  Quando eu digitar a palavra 'Sair' numa linha vazia? Quando não
+  digitar nada numa linha vazia?
+
+A leitura através de um *arquivo pré-fixado* pode ser mais simples de
+ser implementado, pois provavelmente não há tratamento de configuração
+para descobrir qual o arquivo. No entanto, é chato ter sempre que
+atualizar um arquivo único para funcionar.
+
+A leitura de qualquer arquivo pode facilitar caso o usuário possua
+vários arquivos com conteúdos longos que precisam ser traduzidos.
+Provavelmente iremos precisar tratar qual o arquivo será utilizado no
+processamento.
+====
+
+Como a entrada será processada?
+
+* Ler o conteúdo inteiro e depois processa?
+* Ler uma linha por vês e processa?
+* Ler um carácter por vez e processa?
+
+[NOTE]
+====
+Ler o conteúdo inteiro geralmente parece ser a opção mais fácil quando
+estamos processando arquivos. No entanto, esta solução pode
+inviabilizar o processamento quando a entrada for um fluxo sem fim, ou
+até mesmo quando o conteúdo for maior do que a memória do computador.
+
+Ler uma linha por vez pode ser uma solução fácil de implementar, pois
+os arquivos de texto são naturalmente divididos em linhas.
+
+Como a tradução para a Língua do i pode ser realizada um carácter por
+vez, ela solução também parece viável.
+====
+
+Aonde o resultado será apresentado?
+
+* Na tela?
+* Em um arquivo fixo como `texto-na-lingua-do-i.txt`?
+* Em qualquer arquivo configurado pelo usuário?
+
+[NOTE]
+====
+A apresentação na tela pode ser uma solução viável caso os conteúdos
+a serem traduzidos sejam possuam poucas linhas, caso contrário é
+melhor salvar o resultado num arquivo.
+
+Salvar o resultado em um arquivo fixo geralmente não é uma boa
+solução, pois não poderíamos processar dois arquivos ao mesmo tempo,
+correndo o risco do resultado de um processamento ser sobrescrito pelo
+outro.
+====
+
+Aonde as mensagens de erros serão apresentadas?
+
+* Na tela?
+* Em um arquivo fixo como `erros.txt`?
+
+
+[NOTE]
+====
+A primeira vista apresentar os erros na tela parece ser uma boa
+solução, no entanto, caso o seu programa esteja rodando em um serviço
+num servidor as vezes é mais fácil acessar um arquivo contendo os
+erros, pois a ``tela'' do processo talvez esteja indisponível.
+====
+
+=== Entrada e Saídas Padrões
+
+
+
+
+Teclado:: caso a fonte seja o teclado, o usuário precisará digitar
+todo o conteúdo que deseja traduzir ou 
+
+
+Como iremos desejar que nosso programa funcione
+
+* Passando um arquivo como parâmetro para que a leitura ocorra
+* 
 
 ["graphviz", scaledwidth="70%"]
 ----
