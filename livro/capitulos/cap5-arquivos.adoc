@@ -439,9 +439,53 @@ continua falhando:
 ....
 include::{local}/etapa2/make-command.txt[]
 ....
-+
+
 Apesar do teste continuar falhando, agora nós temos certeza do ponto
-onde está ocorrendo a falha.
+onde está ocorrendo a falha, na linha 8 do arquivo
+`lingua-do-i-test.c`, como indicado na mensagem: `lingua-do-i-test.c:8`.
+
+=== Etapa 3: Fazendo o teste passar
+
+Nesta etapa iremos fazer o teste passar, para garantir que nosso teste
+está funcionando corretamente.
+
+Para isso é necessário apenas que nossa função `lerConteudoDoArquivo`
+retorne o valor esperado, que corresponde ao conteúdo do arquivo.
+
+==== Código da etapa
+
+===== Implementação para fazer o teste passar
+
+.Código fonte
+{online}/etapa3/src/lingua-do-i-core.c[{local}/etapa3/src/lingua-do-i-core.c]
+
+[source, c]
+.Core do programa, onde as funções serão implementadas
+----
+include::{local}/etapa3/src/lingua-do-i-core.c[]
+----
+<1> inclusão de variável com o valor esperado
+<2> retornando o valor esperado
+
+
+===== Passos de implementação da etapa
+
+Fazendo o teste passar::
+Este passo consiste em realizar as alterações necessárias para o teste
+passar.
+
+Execução do teste::
+Os arquivos são compilados e verificamos a execução do teste passando:
++
+....
+include::{local}/etapa3/make-command.txt[]
+....
+
+IMPORTANT: Apesar de ser esperado que o teste passe, é importante
+executá-lo e vê-lo passando, pois as vezes a verificação do teste está
+implementada errada proprocionando conclusões erradas.
+
+
 
 * Escrever uma função que seja responsável por ler o conteúdo de um
   arquivo e retornar o conteúdo lido como um string (`char *`).
