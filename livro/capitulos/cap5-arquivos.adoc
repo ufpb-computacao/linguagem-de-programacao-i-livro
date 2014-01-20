@@ -1,5 +1,8 @@
 == Arquivos
 
+:online: {gitrepo}/blob/master/livro/capitulos/code/cap5
+:local: code/cap5
+
 .Objetivos do capítulo
 ____
 
@@ -34,15 +37,421 @@ arquivos.
 
 === Lingua do i
 
-Nós vamos aprender a manipular arquivos em C através da contrução de
+Nós vamos aprender a manipular arquivos em C através da construção de
 um pequeno aplicativo que possa ler de um arquivo o texto em português
-e convertê-lo para a Lingua do i.
+e convertê-lo para a Língua do i.
 
 A ((*Lingua do i*)) é uma brincadeira infantil que consiste em falar ou
 escrever palavras trocando todas as vogais por ``i'':
 
  Ela ama banana. (em português)
  Ili imi binini. (na língua do i)
+
+=== Etapa 1: Estrutura inicial do projeto
+
+Vamos começar montando uma estrutura inicial do nosso projeto, que
+consistirá em:
+
+* Um arquivo que conterá o `main` da aplicação
+* Um arquivo _core_ e seu cabeçalho, que conterão as principais funções da aplicação
+* Um arquivo para codificação dos testes
+* Um arquivo para ser lido nos testes: um trecho de música 
+* Um arquivo Makefile para compilação e execução dos testes
+* Existirão ao total 3 arquivos fontes (`.c`). Um deles será para
+  execução da aplicação e outro para execução dos testes. Estes dois
+  arquivos são independentes entre si. O último arquivo, chamado de
+  *core*, conterá as as implementações das funcionalidades que
+  precisarão ser incluídas e ligadas nos outros dois arquivos para
+  funcionarem em conjunto.
+
+==== Código da etapa
+
+===== Main da aplicação
+
+.Código fonte
+{online}/etapa1/src/lingua-do-i.c[{local}/etapa1/src/lingua-do-i.c]
+
+[source, c]
+.Código que contém o main do aplicativo, com implementação estúpida
+----
+include::{local}/etapa1/src/lingua-do-i.c[]
+----
+
+<1> *Implementação estúpida* para o main da aplicação.
+<2> Retorna `EXIT_SUCCESS` indicando que a aplicação saiu sem erros.
+
+NOTE: `EXIT_SUCCESS` é definido em `stdlib.h`, junto com
+`EXIT_FAILURE` que tem o propósito inverso: indicar que houve erro na
+execução da aplicação.
+
+TIP: O termo técnico *((implementação estúpida))* provém do inglês:
+*dummy implementation*. Geralmente utilizado quando não desejamos
+implementar apropriadamente ainda, também costuma ter o propósito de
+fazer o código compilar ou apenas preencher algum trecho do código.
+
+[IMPORTANT]
+====
+Este arquivo será o responsável por iniciar a aplicação, no entanto,
+por enquanto ele possui uma implementação estúpida, pois não será
+utilizado no momento. 
+
+Nós vamos primeiro construir as funcionalidades do programa e os
+testes para verificar que elas estão funcionando apropriadamente,
+antes de integrá-las na aplicação.  
+
+====
+
+===== Teste das funcionalidades
+.Código fonte
+{online}/etapa1/src/lingua-do-i-test.c[{local}/etapa1/src/lingua-do-i-test.c]
+
+[source, c]
+.Código fonte para os testes
+----
+include::{local}/etapa1/src/lingua-do-i-test.c[]
+----
+<1> Finaliza aplicação indicando que houve um erro.
+<2> Executa `strcomp` (definida em `string.h`) que compara dois
+    strings, retorna `0` somente se ambos os string forem iguais. A
+    variável `comparacao` irá guardar o resultado da comparação.
+<3> Inclui/chama uma função que desejamos criar em _core_. Ela precisa ser
+    *definida no arquivo de cabeçalho de core* e *implementa no arquivo
+    fonte de core*. Para ser utilizada aqui é necessário a *inclusão
+    do arquivo de cabeçalho* e *ligar* arquivo do _core_ durante a
+    compilação do arquivo  (ver no Makefile). Neste trecho estamos
+    definindo como desejamos que função se comporte.
+<4> Chama uma função de teste que tem o propósito de garantir
+    que o conteúdo lido é igual ao conteúdo esperado. Caso os
+    conteúdos sejam diferentes a aplicação será aborta com um erro.
+    Caso contrário, podemos considerar o teste como uma comprovação de
+    que a função `lerConteudoDoArquivo` está funcionando corretamente.
+<5> Chamada a função que executa um teste de leitura de arquivo. Esta
+    função será executada quando o programa de teste for compilado e
+    invocado, pois está dentro da função `main` do arquivo de testes.
+
+TIP: Percebam que os _nomes_ das funções descrevem o comportamento
+esperado, sem a necessidade comentários: `lerConteudoDoArquivo`,
+`testLerConteudoDoArquivo` e `verificaConteudosSaoIguais`.  Além
+disso, as variáveis também seguem a recomendação de que as constantes
+devem ser escritas em caixa alta: `NOME_DO_ARQUIVO`,
+`CONTEUDO_ESPERADO` e `conteudo`. Esta é uma boa prática que você pode
+utilizar em seus projetos.
+
+Este é o principal arquivo desta etapa, onde está codificado um teste
+de uma funcionalidade que desejamos implementar: leitura do conteúdo
+de um arquivo.
+
+===== Cabeçalho de Core
+
+.Código fonte
+{online}/etapa1/src/lingua-do-i-core.h[{local}/etapa1/src/lingua-do-i-core.h]
+
+[source, c]
+.Cabeçaho do Core
+----
+include::{local}/etapa1/src/lingua-do-i-core.h[]
+----
+
+<1> Estratégia para definição de cabeçalho que evita erros caso o
+    arquivo seja incluído mais de uma vezes. Todos os arquivos de
+    cabeçalho da biblioteca padrão de C utiliza esta estratégia.
+<2> Definição da função que será implementada no arquivo `.c`
+
+===== Core da aplicação
+
+.Código fonte
+{online}/etapa1/src/lingua-do-i-core.c[{local}/etapa1/src/lingua-do-i-core.c]
+
+[source, c]
+.Core do programa, onde as funções serão implementadas
+----
+include::{local}/etapa1/src/lingua-do-i-core.c[]
+----
+<1> Inclusão do arquivo de cabeçalho, onde estão definidas as funções
+    públicas (visíveis ao ligar este arquivo). Por enquanto só contém
+    um única função: `lerConteudoDoArquivo`.
+<2> Implementação estúpida da função que desejamos implementar.
+
+===== Arquivo texto para teste
+
+.Código fonte
+{online}/etapa1/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Conteúdo do arquivo que está sendo utilizado no testes
+----
+include::{local}/etapa1/src/musica-trecho.txt[]
+----
+
+.Execução do hexdump para verificar conteúdo do arquivo em hexadecimal
+----
+include::{local}/etapa1/hexdump-command.txt[]
+----
+
+O conteúdo deste arquivo contém apenas uma frase, para simplificar a
+execução do teste. A ((codificação)) utilizada na escrita do arquivo
+foi a UFT-8.
+
+O programa `hexdump`, disponível no Linux, exibe o conteúdo do arquivo
+em hexadecimal. Nele você poderá ver como os caracteres estão escritos
+no disco:
+
+Pela execução do `hexdump`, verificamos que o arquivo possui *0x23
+bytes de tamanho* (equivale a `2x16+3=35`), indicado na última linha.
+
+Também podemos perceber que todos os carácteres foram codificados com
+1 byte cada (basta contar os carácteres). 
+
+O arquivo não termina com o carácter de fim de linha -- ele finaliza
+apenas com o carácter `o`, que tem seu código ASCII igual a `0x6f`. 
+
+TIP: Você pode consultar a tabela ASCII em http://www.asciitable.com,
+ou se estiver no Linux através do comando `man ascii`.
+
+IMPORTANT: Ao criar um arquivo de texto para os testes, certifique-se
+de conhecer o conteúdo do arquivo criado. As vezes os editores de
+texto podem adicionar carácteres de fim de linha que talvez não esteja
+visível para você. A execução do `hexdump` é recomendada nestes casos.
+
+===== Makefile
+
+.Código fonte
+{online}/etapa1/src/Makefile[{local}/etapa1/src/Makefile]
+
+.Makefile do projeto, demonstra como compilar os programas
+----
+include::{local}/etapa1/src/Makefile[]
+----
+
+Por fim, temos um Makefile para gerenciar a compilação e execução dos
+testes.
+
+NOTE: Este arquivo foi criado para funcionar no Linux, para funcionar
+em outras plataformas serão necessários pequenos ajustes.
+
+`CC`:: indica qual o compilador estamos utilizando. Caso utilize outro,
+configure o seu compilador aqui.
+
+`CFLAGS`:: configura algumas _flags_ de compilação. Inclusive a
+utilização do padrão *c1x*. Caso seu compilador aceite estas _flags_,
+não haverá necessidade de configuração.
+
+`all`:: indica quais as regras serão executadas por padrão quando
+executamos o comando `make` sem nenhum parâmetro.
+
+`lingua-do-i` e `lingua-do-i-test`:: regras para construção dos
+aplicativos.
+
+`test_all`:: regra para execução dos testes. Consiste em invocar o
+aplicativo de teste.
+
+`clean`:: regra para apagar os arquivos construídos. A implementação
+desta regra consiste em invocar o comando `rm` no Linux, que realiza a
+exclusão dos arquivos passados como parâmetros.
+
+Para compilar os aplicativos podemos executar:
+
+  make clean && make all
+
+Para compilar e testar os aplicativos podemos executar:
+
+  make clean && make all && make test_all
+
+==== Processo de implementação da etapa
+Nesta seção elencamos os passos que foram necessários para
+implementação do código desta etapa:
+
+Estrutura dos arquivos com testes::
+Sem dúvida o primeiro passo foi decidir que iríamos construir nosso
+aplicativo utilizando testes. Para isso é necessário quebrar nosso
+aplicativo em códigos fontes separados:
+* um código para conter as implementações das funções da nossa
+  aplicação, que estamos chamando de *core*.
+* outro código para testar o funcionamento destas funções
+* e outro que seja o aplicativo propriamente dito.
+* para utilizar as funcionalidades de core será necessário incluir o
+  cabeçalho (arquivo `.h`) antes de invocá-lo. Além disso, será
+  necessário ligá-lo durante a compilação do teste ou aplicativo.
+
+Escolhendo a primeira função que será implementada::
+A próxima etapa foi escolher que função iremos implementar. Para a
+implementação da língua do i, julgamos que a primeira funcionalidade
+deveria ser ler o conteúdo que será traduzido.
+
+Escrevendo o teste antes da implementação::
+Antes de implementar uma função para ler o conteúdo, primeiro
+escrevemos o teste que irá validar a implementação:
++
+[source,c]
+----
+char* NOME_DO_ARQUIVO = "...";
+char* CONTEUDO_ESPERADO = "...";
+void testLerConteudoDoArquivo(){
+  char* conteudo = lerConteudoDoArquivo(NOME_DO_ARQUIVO);
+  verificaConteudosSaoIguais(conteudo, CONTEUDO_ESPERADO);
+}
+----
++
+Neste momento as seguintes funções ainda não existiam:
+`lerConteudoDoArquivo` e `verificaConteudosSaoIguais`. No entanto ao
+escrevermos assim, nós já decidimos qual serão os propósitos delas e
+como elas serão invocadas. 
+
+Preparar os dados do teste::
+O próximo passo foi criar um arquivo com conteúdo textual. Por enquanto
+bastava apenas uma frase. Escolhi uma  música de Luiz Gonzaga, chamda
+_Súplica Cearense_, e salvei apenas a primeira frase no arquivo
+`musica-trecho.txt`. Em seguida atualizei o arquivo do teste:
++
+[source,c]
+----
+char* NOME_DO_ARQUIVO = "musica-trecho.txt";
+char* CONTEUDO_ESPERADO = "Oh! Deus, perdoe este pobre coitado";
+----
+
+O primeiro passo ao escrever este arquivo foi decidir o que desejamos
+fazer primeiro:  
+
+Criando implementação idiota da função::
+O próximo passo foi criar o arquivo de cabeçalho de core, adicionando
+o protótipo da função `lerConteudoDoArquivo`:
++
+[source,c]
+----
+#ifndef LINGUA_DO_I_CORE_H_
+#define LINGUA_DO_I_CORE_H_
+
+char* lerConteudoDoArquivo(char* nomeDoArquivo);
+
+#endif
+----
++
+Em seguida incluímos o cabeçalho no arquivo de teste e para possibilitar
+invocação da função, e do core onde a função será implementada:
++
+[source,c]
+----
+#include "lingua-do-i-core.h"
+----
++
+Por último criamos uma implementação estúpida da função em core:
++
+[source,c]
+----
+char* lerConteudoDoArquivo(char* nomeDoArquivo){
+  return NULL;
+}
+----
+
+Atualização do Makefile::
+Inclusão das regras para compilação e execução dos testes:
++
+----
+lingua-do-i-test: lingua-do-i-test.c
+  $(CC) $(CFLAGS) lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+----
+
+Implementação da verificação do teste::
+Neste passo implementamos a função que irá validar o teste:
++
+[source,c]
+----
+void verificaConteudosSaoIguais(char* conteudo, char* esperado){
+  if(conteudo == NULL){
+    exit(EXIT_FAILURE);
+  }
+  int comparacao = strcmp(conteudo, esperado);
+  if (comparacao!=0){
+    exit(EXIT_FAILURE);
+  };
+}
+----
+
+Execução do teste::
+Para execução do teste utilizamos o seguinte comando:
++
+....
+include::{local}/etapa1/make-command.txt[]
+....
++
+Os arquivos estão compilando e o teste retorna erro, indicando que os
+strings não são iguais.
+
+Estamos no bom caminho, agora só precisamos
+`lerConteudoDoArquivo` para o teste passar.
+
+=== Etapa 2: Utilizando assert ao invés de exit
+
+(((assert)))
+
+Nesta etapa vamos apenas utilizar a função `assert` ao invés de
+`exit(EXIT_FAILURE)`.
+
+A função `assert`, definida em `assert.h`, costuma ser utilizada para
+depuração dos programas. Caso a função receba como parâmetro o valor
+igual a 0 (zero) causará uma falha na execução da aplicação, indicando
+o local da falha no arquivo. Desta forma nós temos como saber
+precisamente onde o erro ocorreu.
+
+TIP: Mais informações sobre esta função pode ser consultada na seção
+``7.2 Diagnostics <assert.h>'', do documento público do padrão C1X da
+linguagem C. Os seguintes sites também podem ajudá-lo a compreender
+esta função: http://www.acm.uiuc.edu/webmonkeys/book/c_guide/2.1.html
+e http://www.cplusplus.com/reference/cassert/assert/.
+
+==== Código da etapa
+
+===== Teste das funcionalidades
+
+.Código fonte
+{online}/etapa2/src/lingua-do-i-test.c[{local}/etapa2/src/lingua-do-i-test.c]
+
+[source, c]
+.Inclusão de assert no código fonte para os testes
+----
+include::{local}/etapa2/src/lingua-do-i-test.c[]
+----
+<1> Inclusão da biblioteca `assert.h`
+<2> Atualização das verificações utilizando `assert`
+
+==== Passos de implementação da etapa
+
+Atualização do teste::
+Neste passo incluímos a bibliote `assert.h` e atualizamos a função
+`verificaConteudosSaoIguais` para chamar a função `assert`, incluindo
+uma mensagem para descrever o erro:
++
+[source,c]
+----
+#include <assert.h>
+// (...)
+void verificaConteudosSaoIguais(char* conteudo, char* esperado){
+  assert(conteudo != NULL && "conteúdo não pode ser NULL");
+
+  assert( strcmp(conteudo, esperado) == 0
+          && "conteúdo deve ser igual ao esperado");
+}
+----
+
+Compilação e execução do teste::
+O próximo passo é compilar e executar o teste, verificando que ele
+continua falhando:
++
+....
+include::{local}/etapa2/make-command.txt[]
+....
++
+Apesar do teste continuar falhando, agora nós temos certeza do ponto
+onde está ocorrendo a falha.
+
+* Escrever uma função que seja responsável por ler o conteúdo de um
+  arquivo e retornar o conteúdo lido como um string (`char *`).
+* Esta função se chamará `lerConteudoDoArquivo` e terá como parâmetro
+  o nome do arquivo que desejamos ler (`char* nomeDoArquivo`).
+* Esta função será definida no arquivo de cabeçalho
+  (`lingua-do-i-core.h`) e implementada no arquivo fonte
+  (`lingua-do-i-core.c`).
+* Para 
+
 
 === Exemplos e diferenças entre Arquivos e Streams
 
@@ -75,7 +484,7 @@ eles possuem características diferentes:
 | Origem mais comum | Disco | Dispositivos
 |====
 
-=== Tentativa da implementação da Língua do i
+=== Pensando sobre a implementação da Língua do i
 
 Vamos pensar um pouco no nosso programa que irá codificar um texto na
 Língua do i. 
@@ -160,19 +569,133 @@ num servidor as vezes é mais fácil acessar um arquivo contendo os
 erros, pois a ``tela'' do processo talvez esteja indisponível.
 ====
 
-=== Entrada e Saídas Padrões
+=== Entrada padrão, saída padrão e saída de erros
+
+Todo programa em C possui automaticamente definido um arquivo para a
+entrada padrão, um arquivo para a saída padrão e outro arquivo para
+onde a emissão de mensages de erro será direcionada.
+
+Quando vamos executar um programa podemos redirecionar a entrada e as
+saídas para outros lugares, no entanto, se não houve nenhuma
+configuração o sistema operacional irá configurá-las da seguinte
+forma:
+
+.Configuração padrão para as saídas e entradas
+|====
+| Entrada Padrão | Teclado
+| Saída Padrão | Tela
+| Saída de Erros | Tela
+|====
+
+(((Redirecionar, Entrada Padrão)))
+
+Para redirecinar a Entrada Padrão para um arquivo qualquer basta
+executar o programa informando o nome do arquivo da seguinte forma:
+
+ meu-programa < nome-do-arquivo-de-entrada
+
+Para testar a mudança da entrada padrão recomendo a utilização do
+aplicativo `sort` (disponível no Linux, OSx e Windows), que realiza
+ordenação a partir da entrada padrão.
+
+.caminho do arquivo frutas
+....
+include::code/cap5/frutas.txt[]
+....
+
+ sort < frutas.txt
+
+.Resultado da execução do comando
+....
+include::code/cap5/frutas-ordenadas.txt[]
+....
+
+Além de redirecionar a entrada, nós também podemos redirecionar a
+saída para um arquivo da seguinte forma:
+
+ sort < frutas.txt > frutas-ordenadas.txt
+
+Desta forma, o arquivo `frutas-ordenadas.txt` será criado
+contendo o mesmo resultado da execução anterior. 
+
+Para demonstrar o redirecionamento da saída de erro vamos utilizar o
+comando `mkdir` para tentar criar um diretório que já existe.
+
+ mkdir meudir
+ mkdir meudir
+ mkdir meudir 2> erros.txt
+
+Na primeira invocação do mkdir o diretório `meu-dir` será criado. Na
+segunda invocação, você verá na tela a mensagem de erro relativo a
+impossibilidade de criar um diretório que já existe. Na última
+execução, as mensagens de erros serão redirecionadas para um arquivo
+`erros.txt` que será criado após a execução.
+
+IMPORTANT: Quando os programas vão escrever mensagens devem escolher
+cuidadosamente quais as saídas utilizar.
+
+TIP: Para conhecer um pouco mais sobre redirecionamentos consulte:
+http://edusantana.github.io/dev/redirecionamentos.html.
+
+=== Decisões sobre a implementação: entrada e saída 
+
+O nosso aplicativo irá *ler o texto da entrada padrão e escrever a
+mensagem traduzida na saída padrão*. Caso o usuário deseja traduzir um
+arquivo bastará executar a aplicação passando o arquivo pela entrada
+padrão. De forma similar, também podemos redirecionar o resultado para
+um arquivo se desejar-mos.
+
+.Questões em aberto
+* Como a entrada será processada?
+** Ler o conteúdo inteiro e depois processa?
+** Ler uma linha por vês e processa?
+** Ler um carácter por vez e processa?
+
+Para aprender todas as formas de processar a entrada vamos implementar
+todas as opções.
+
+=== Lendo o conteúdo inteiro
+Ler o conteúdo inteiro antes de processar poderá causa erro de
+execução caso o arquivo de entrada seja grande demais.
+
+Durante a implementação precisaremos consultar o tamanho total do
+arquivo para poder alocar espaço suficiente para o arquivo. Em
+seguida, iremos criar um string contendo todos os caracteres do texto.
+
+Com o string em memória, poderemos processar os caracteres na ordem
+que aparecem e trocar as vogais por `i`, imprimindo juntamente os
+caracteres restantes que não forem vogais no saída padrão.
+
+=== Lendo uma linha por vez
+Para ler uma linha por vez precisamos alocar um espaço suficiente para
+salvar uma linha, em seguida preenchê-lo com os caracteres lidos até
+encontrar o carácter final de linha, representado por `\n`.
+
+NOTE: Não há problemas em alocar espaço maior do que for utilizado,
+contanto que o espaço restante seja inicializado com `\0`, pois a
+primeira ocorrência indicará o final de um string, o restante será
+ignorado.
+
+=== Lendo um carácter por vez
+Ler um carácter por vez não envolve necessidade de alocar espaço na
+memória para leitura dos dados.
+
+NOTE: Talvez teremos problemas com codificação do arquivo. Pois
+caracteres especiais ocupam mais de um byte quando codificados em
+*UTF-8* por exemplo. 
+
+=== Biblioteca e Padrão da Linguagem C
+
+O último padrão adotado para a Linguagem C foi publicado pela ISO em
+12/8/2011 no documento: ISO/IEC 9899:2011. Este padrão é conhecido
+como C11 ou C1X, você pode consultar gratuitamente a última versão
+pública do documento em:
+http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf.
+
+Neste capítulo nós iremos direcioná-lo a consultar este documento para
+conhecer a descrição das bibliotecas e funções que iremos utilizar.
 
 
-
-
-Teclado:: caso a fonte seja o teclado, o usuário precisará digitar
-todo o conteúdo que deseja traduzir ou 
-
-
-Como iremos desejar que nosso programa funcione
-
-* Passando um arquivo como parâmetro para que a leitura ocorra
-* 
 
 ["graphviz", scaledwidth="70%"]
 ----
