@@ -298,7 +298,7 @@ como elas serão invocadas.
 
 Preparar os dados do teste::
 O próximo passo foi criar um arquivo com conteúdo textual. Por enquanto
-bastava apenas uma frase. Escolhi uma  música de Luiz Gonzaga, chamda
+bastava apenas uma frase. Escolhi uma  música de Luiz Gonzaga, chamada
 _Súplica Cearense_, e salvei apenas a primeira frase no arquivo
 `musica-trecho.txt`. Em seguida atualizei o arquivo do teste:
 +
@@ -416,7 +416,7 @@ include::{local}/etapa2/src/lingua-do-i-test.c[]
 ==== Passos de implementação da etapa
 
 Atualização do teste::
-Neste passo incluímos a bibliote `assert.h` e atualizamos a função
+Neste passo incluímos a biblioteca `assert.h` e atualizamos a função
 `verificaConteudosSaoIguais` para chamar a função `assert`, incluindo
 uma mensagem para descrever o erro:
 +
@@ -513,6 +513,9 @@ diversos testes demonstrando as funções de manipulação de arquivos.
 ----
 include::{local}/etapa4/src/lingua-do-i-core.c[]
 ----
+<1> Inclusão da biblioteca `stdbool.h`, que define o tipo `bool`.
+<2> Inclui diversas funções copiadas de
+    https://gist.github.com/edusantana/8291576.
 
 A implementação faz referência a diversas funções que ainda não vimos
 como funciona: `fopen`, `fclose`, `fread` e `fseek`. Além disso, os
@@ -524,7 +527,7 @@ seguinte forma: `File *arquivo`.
 Implementando leitura do arquivo::
 Neste passo nós copiamos as funções contidas em
 https://gist.github.com/edusantana/8291576 que estão relacionadas a
-leitura do conteúdo de um arquivo.
+leitura do conteúdo de um arquivo e atualizamos nosso arquivo core.
 
 Compilando e executando o teste::
 Após as modificações vamos verificar se as funções copiadas realmente
@@ -534,6 +537,9 @@ fazem o que se propões a fazer corretamente:
 include::{local}/etapa4/make-command.txt[]
 ....
 
+Nosso teste continua passando! Isto quer dizer que estas funções
+realmente leem o conteúdo do arquivo corretamente, caso contrário o
+teste estaria falhando, o que não aconteceu.
 
 
 === XXX
