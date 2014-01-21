@@ -537,10 +537,8 @@ fazem o que se propões a fazer corretamente:
 include::{local}/etapa4/make-command.txt[]
 ....
 
-Nosso teste continua passando! Isto quer dizer que estas funções
-realmente leem o conteúdo do arquivo corretamente, caso contrário o
-teste estaria falhando, o que não aconteceu.
-
+Nosso teste continua passando! Isto quer dizer que nossa função foi
+capaz de ler o conteúdo do arquivo corretamente.
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
