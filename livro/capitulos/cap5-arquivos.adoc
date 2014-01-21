@@ -468,7 +468,7 @@ include::{local}/etapa3/src/lingua-do-i-core.c[]
 <2> retornando o valor esperado
 
 
-===== Passos de implementação da etapa
+==== Passos de implementação da etapa
 
 Fazendo o teste passar::
 Este passo consiste em realizar as alterações necessárias para o teste
@@ -476,6 +476,9 @@ passar.
 
 Execução do teste::
 Os arquivos são compilados e verificamos a execução do teste passando:
+Compilando e executando o teste::
+Após as modificações vamos verificar se as funções copiadas realmente
+fazem o que se propões a fazer corretamente:
 +
 ....
 include::{local}/etapa3/make-command.txt[]
@@ -483,10 +486,57 @@ include::{local}/etapa3/make-command.txt[]
 
 IMPORTANT: Apesar de ser esperado que o teste passe, é importante
 executá-lo e vê-lo passando, pois as vezes a verificação do teste está
-implementada errada proprocionando conclusões erradas.
+implementada errada, proporcionando conclusões erradas.
+
+=== Etapa 4: Lendo do arquivo
+
+Nesta etapa precisamos implementar a leitura do arquivo e verificar o
+teste passando.
+
+NOTE: A documentação sobre as funções de leitura de arquivo estão contidas
+na seção ``7.21 Input/output <stdio.h>'' do padrão c1x de C.
+
+TIP: Para verificar como as funções que manipulam arquivos em C são
+invocadas para realizar tarefas comuns, recomendo acessar a página
+https://gist.github.com/edusantana/8291576 onde estão reunidos
+diversos testes demonstrando as funções de manipulação de arquivos.
+
+==== Código da etapa
+
+===== Fornecendo código para leitura de arquivo
+
+.Código fonte
+{online}/etapa4/src/lingua-do-i-core.c[{local}/etapa4/src/lingua-do-i-core.c]
+
+[source, c]
+.Atualização do code com funções para leitura de arquivo
+----
+include::{local}/etapa4/src/lingua-do-i-core.c[]
+----
+
+A implementação faz referência a diversas funções que ainda não vimos
+como funciona: `fopen`, `fclose`, `fread` e `fseek`. Além disso, os
+arquivos são referenciados através de um ponteiro para `FILE`, da
+seguinte forma: `File *arquivo`.  
+
+==== Passos de implementação da etapa
+
+Implementando leitura do arquivo::
+Neste passo nós copiamos as funções contidas em
+https://gist.github.com/edusantana/8291576 que estão relacionadas a
+leitura do conteúdo de um arquivo.
+
+Compilando e executando o teste::
+Após as modificações vamos verificar se as funções copiadas realmente
+fazem o que se propões a fazer corretamente:
++
+....
+include::{local}/etapa4/make-command.txt[]
+....
 
 
 
+=== XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
   arquivo e retornar o conteúdo lido como um string (`char *`).
 * Esta função se chamará `lerConteudoDoArquivo` e terá como parâmetro
