@@ -594,16 +594,20 @@ incluir código aqui.
 
 === Etapa 6: Fazendo o teste passar
 
+:etapa: etapa6
+
 ==== Passos
 
 ===== Fazendo o teste passar
 Alteramos a função `traduzParaLingaDoI` para retornar o valor
 esperado.
 
+.Código fonte
+{online}/etapa6/src/lingua-do-i-core.c[{local}/etapa6/src/lingua-do-i-core.c]
+
 [source,c]
 ----
-char* TRADUCAO= "Minhis vigiis, tidi iqui.";
-
+char* TRADUCAO="Minhis vigiis, tidi iqui.";
 char* traduzParaLingaDoI(char* mensagemOriginal){
 	return TRADUCAO;
 }
@@ -618,6 +622,15 @@ lingua-do-i-test
 ....
 
 Ótimo, nosso teste está passando! 
+
+==== Código da etapa
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+[source, c]
+----
+include::{local}/{etapa}/src/lingua-do-i-core.c[]
+----
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
