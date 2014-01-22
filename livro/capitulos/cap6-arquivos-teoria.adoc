@@ -1,0 +1,79 @@
+== Arquivos: Teoria
+
+:online: {gitrepo}/blob/master/livro/capitulos/code/cap6
+:local: code/cap6
+
+.Objetivos do capítulo
+____
+
+// FIXME atualizar objetivos
+Ao final deste capítulo você deverá ser capaz de:
+
+* Entender o conceito de arquivos e seus tipos;
+* Aprofundar o conhecimento sobre armazenamento e manipulação de dados
+  no computador por meio do uso de arquivos;
+* Fazer manipulação de dados em arquivos por meio de operações como
+  leitura, escrita, dentre outras.  
+
+____
+
+
+=== Biblioteca e Padrão da Linguagem C
+
+O último padrão adotado para a Linguagem C foi publicado pela ISO em
+12/8/2011 no documento: ISO/IEC 9899:2011. Este padrão é conhecido
+como C11 ou C1X, você pode consultar gratuitamente a última versão
+pública do documento em:
+http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf.
+
+Neste capítulo nós iremos direcioná-lo a consultar este documento para
+conhecer a descrição das bibliotecas e funções que iremos utilizar.
+
+
+
+["graphviz", scaledwidth="70%"]
+----
+include::../images/cap5/string.dot[]
+----
+
+=== Gravação de dados no disco rígido
+TODO.
+
+=== Funções básicas para abrir e fechar arquivos na linguagem C
+TODO.
+
+
+=== Arquivos em modo texto
+TODO.
+==== Funções para leitura de dados em arquivos
+TODO.
+
+
+==== Funções para escrita de dados em arquivos
+TODO.
+
+
+==== Funções para manipulação de dados em arquivos texto
+TODO.
+
+
+=== Arquivos em modo binário
+TODO.
+==== Funções para leitura de dados em arquivos binários
+TODO.
+
+==== Funções para escrita de dados em arquivos binários
+TODO.
+
+==== Funções para manipulação de dados em arquivos binários
+TODO.
+
+=== Comparação entre arquivo em modo texto e binário
+TODO.
+
+
+
+////
+Terminando arquivo com linha em branco
+////
+

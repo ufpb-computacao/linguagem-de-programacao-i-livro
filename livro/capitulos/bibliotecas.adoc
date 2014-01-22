@@ -1,0 +1,53 @@
+== Bibliotecas
+
+:online: {gitrepo}/blob/master/livro/capitulos/code/biblioteca
+:local: code/biblioteca
+
+[[c1x]]
+=== Padrão C1X da Linguagem C
+
+O último padrão adotado para a Linguagem C foi publicado pela ISO em
+12/8/2011 no documento: ISO/IEC 9899:2011. Este padrão é conhecido
+como C11 ou C1X, você pode consultar gratuitamente a última versão
+pública do documento em:
+http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf.
+
+NOTE: Durante o livro iremos referenciar este documento apenas por
+``Padão C1X''.
+
+IMPORTANT: Nas seções a seguir nós resumimos a documentação das
+funções e bibliotecas utilizadas neste livro. No entanto, nós
+recomendamos a consulta da documentação original (em inglês).
+
+[[assert_h]]
+=== assert.h
+
+TIP: Mais informações sobre esta função pode ser consultada na seção
+``7.2 Diagnostics <assert.h>'' no padrão C1X da linguagem C. Os
+seguintes sites também podem ajudá-lo a compreender esta função:
+http://www.acm.uiuc.edu/webmonkeys/book/c_guide/2.1.html,
+http://pt.wikipedia.org/wiki/Assert.h e
+http://www.cplusplus.com/reference/cassert/assert/.
+
+
+
+[[f_assert]]
+==== assert()
+
+ void assert ( int expressao )
+
+Esta função costuma ser utilizado
+
+[[TIP]]
+====
+Exemplo(s): <<e_assert>>
+Ajuda online:
+http://www.cplusplus.com/reference/cassert/assert/
+
+====
+
+
+////
+Terminando arquivo com linha em branco
+////
+

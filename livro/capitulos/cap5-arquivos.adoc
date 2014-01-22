@@ -386,17 +386,11 @@ Estamos no bom caminho, agora só precisamos
 Nesta etapa vamos apenas utilizar a função `assert` ao invés de
 `exit(EXIT_FAILURE)`.
 
-A função `assert`, definida em `assert.h`, costuma ser utilizada para
-depuração dos programas. Caso a função receba como parâmetro o valor
+A função `assert`, definida em <<assert_h>>, costuma ser utilizada para
+depuração dos programas. Caso a função receba uma expressão com o valor
 igual a 0 (zero) causará uma falha na execução da aplicação, indicando
 o local da falha no arquivo. Desta forma nós temos como saber
 precisamente onde o erro ocorreu.
-
-TIP: Mais informações sobre esta função pode ser consultada na seção
-``7.2 Diagnostics <assert.h>'', do documento público do padrão C1X da
-linguagem C. Os seguintes sites também podem ajudá-lo a compreender
-esta função: http://www.acm.uiuc.edu/webmonkeys/book/c_guide/2.1.html
-e http://www.cplusplus.com/reference/cassert/assert/.
 
 ==== Código da etapa
 
@@ -405,6 +399,7 @@ e http://www.cplusplus.com/reference/cassert/assert/.
 .Código fonte
 {online}/etapa2/src/lingua-do-i-test.c[{local}/etapa2/src/lingua-do-i-test.c]
 
+[[e_assert]]
 [source, c]
 .Inclusão de assert no código fonte para os testes
 ----
@@ -513,9 +508,27 @@ diversos testes demonstrando as funções de manipulação de arquivos.
 ----
 include::{local}/etapa4/src/lingua-do-i-core.c[]
 ----
-<1> Inclusão da biblioteca `stdbool.h`, que define o tipo `bool`.
-<2> Inclui diversas funções copiadas de
-    https://gist.github.com/edusantana/8291576.
+<1> Inclusão da biblioteca `stdbool.h`, que define o tipo `bool`. Este
+    tipo pode ser utilizado como retorno de expressões lógicas. Além
+    disso também estão definidos macro `true` com o valor `1` e
+    `false` com o valor `0`.
+<2> A função `fopen` retorna um ponteiro para `File` se conseguir
+    abrir o arquivo, caso contrário retorna `NULL`. Esta função
+    tem o propósito de verificar o resultado da chamada àquela
+    função.
+<3> Para ler o tamanho de um arquivo é necessário ir para o final dele
+    e solicitar a posição atual, que corresponde a quantidade de bytes
+    que o arquivo possui. Caso o arquivo seja um fluxo (_stream_)
+    talvez não seja possível ir *ao final do fluxo*.
+<4> Para criar um string com o conteúdo do arquivo, primeiro
+    precisamos alocar uma sequência contínua de memória que comporte o
+    conteúdo que será lido. Além disso, um string deve terminar com o
+    caractér `\0`, para utilização das funções de string. A função
+    `calloc`, além de alocar espaço na memória, inicializa todo o
+    espaço alocado com `0` (zeros). Nem sempre é possível alocar
+    espaço para armazenar o espaço do arquivo inteiro, caso ele seja
+    grande demais.
+<5> Um arquivo para ser lido precisa ser aberto e fechado.
 
 A implementação faz referência a diversas funções que ainda não vimos
 como funciona: `fopen`, `fclose`, `fread` e `fseek`. Além disso, os
