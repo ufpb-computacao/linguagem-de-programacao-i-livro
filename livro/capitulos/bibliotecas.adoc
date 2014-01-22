@@ -83,6 +83,10 @@ TODO
 
 TODO: funçõe de string.
 
+[id="strlen", reftext="strlen()"]
+====  strlen()
+Retorna tamanho do string, até encontrar o caracter `\0`.
+
 [id="stdbool_h", reftext="stdbool.h"]
 === stdbool.h
 

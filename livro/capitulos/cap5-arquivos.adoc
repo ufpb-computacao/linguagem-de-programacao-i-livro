@@ -632,6 +632,76 @@ lingua-do-i-test
 include::{local}/{etapa}/src/lingua-do-i-core.c[]
 ----
 
+=== Etapa 7: Implementando troca das vogais
+
+:etapa: etapa7
+
+==== Implementando troca das vogais
+
+Inclusão de <<string_h>>, pois vamos usar a função <<strlen>>.
+
+Atualiza `traduzParaLingaDoI` 
+
+[source,c]
+----
+char* traduzParaLingaDoI(char* mensagemOriginal){ 
+	int tamanhoDaMensagem = strlen(mensagemOriginal);
+	char* resposta = calloc(1, tamanhoDaMensagem+1);
+	for(int i=0; i<tamanhoDaMensagem; i++){
+		char caracterDaMensagemOriginal = mensagemOriginal[i];
+		resposta[i] = traduzCaracterParaLinguaDoI(
+				caracterDaMensagemOriginal);
+	}
+	return resposta;
+}
+----
+
+
+Cria `traduzCaracterParaLinguaDoI`
+
+[source,c]
+----
+char traduzCaracterParaLinguaDoI(char original){ 
+	char resposta;
+	switch (original) {
+	case 'a':
+	case 'e':
+	case 'i':
+	case 'o':
+	case 'u':
+		resposta = 'i';
+		break;
+	default:
+		resposta = original;
+	}
+	return resposta;
+}
+----
+
+.Apesar da nossa implementação o erro continua
+....
+$ make clean && make lingua-do-i-test && ./lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+Abortado (imagem do núcleo gravada)
+....
+
+==== Código da etapa
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+[source, c]
+----
+include::{local}/{etapa}/src/lingua-do-i-core.c[]
+----
+<1> Inclusão de `string.h`
+<2> Criação de função para traduzir um carácter.
+<3> Implementação real da função de traduzir
+<4> Optamos por criar uma nova mensagem como resposta, ao invés de
+    alterar a mensagem original.
+
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
   arquivo e retornar o conteúdo lido como um string (`char *`).
