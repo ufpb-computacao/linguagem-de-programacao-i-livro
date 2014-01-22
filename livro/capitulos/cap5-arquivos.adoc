@@ -558,6 +558,36 @@ xx
 
 Inclusão de teste de tradução::
 xx.
++
+Compilando para descrobrir o próximo passo:
++
+....
+$ make clean && make lingua-do-i-test && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test.c: Na função ‘testTraducaoParaLinguaDoI’:
+lingua-do-i-test.c:24:2: aviso: implicit declaration of function ‘traduzParaLingaDoI’ [-Wimplicit-function-declaration]
+lingua-do-i-test.c:24:28: aviso: initialization makes pointer from integer without a cast [habilitado por padrão]
+/tmp/ccsT5OZs.o: In function `testTraducaoParaLinguaDoI':
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa5/src/lingua-do-i-test.c:24: undefined reference to `traduzParaLingaDoI'
+collect2: ld returned 1 exit status
+make: ** [lingua-do-i-test] Erro 1
+....
+
+Criando função `traduzParaLingaDoI`::
+Adição da definição no cabeçalho e implementação estúpida no arquivo
+core.
++
+Compilando e executando o teste para descobrir o próximo passo:
++
+....
+$ make clean && make lingua-do-i-test && ./lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:8: verificaConteudosSaoIguais: Assertion `conteudo != ((void *)0) && "conteúdo não pode ser NULL"' failed.
+Abortado (imagem do núcleo gravada)
+....
+
 
 
 === XXX
