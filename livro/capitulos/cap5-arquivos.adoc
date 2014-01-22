@@ -550,6 +550,16 @@ include::{local}/etapa4/make-command.txt[]
 Nosso teste continua passando! Isto quer dizer que nossa função foi
 capaz de ler o conteúdo do arquivo corretamente.
 
+=== Etapa 5: Trocando as vogais do string por i
+
+xx
+
+==== Passos
+
+Inclusão de teste de tradução::
+xx.
+
+
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
   arquivo e retornar o conteúdo lido como um string (`char *`).
