@@ -588,7 +588,36 @@ lingua-do-i-test: lingua-do-i-test.c:8: verificaConteudosSaoIguais: Assertion `c
 Abortado (imagem do núcleo gravada)
 ....
 
+==== Código da etapa
 
+incluir código aqui.
+
+=== Etapa 6: Fazendo o teste passar
+
+==== Passos
+
+===== Fazendo o teste passar
+Alteramos a função `traduzParaLingaDoI` para retornar o valor
+esperado.
+
+[source,c]
+----
+char* TRADUCAO= "Minhis vigiis, tidi iqui.";
+
+char* traduzParaLingaDoI(char* mensagemOriginal){
+	return TRADUCAO;
+}
+----
+
+.Execução do teste após modificação
+....
+$ make clean && make lingua-do-i-test && ./lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o
+lingua-do-i-test
+....
+
+Ótimo, nosso teste está passando! 
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
