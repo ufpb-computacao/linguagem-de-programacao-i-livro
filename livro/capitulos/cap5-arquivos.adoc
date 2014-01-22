@@ -80,7 +80,7 @@ include::{local}/etapa1/src/lingua-do-i.c[]
 <1> *Implementação estúpida* para o main da aplicação.
 <2> Retorna `EXIT_SUCCESS` indicando que a aplicação saiu sem erros.
 
-NOTE: `EXIT_SUCCESS` é definido em `stdlib.h`, junto com
+NOTE: `EXIT_SUCCESS` é definido em <<stdlib_h>>, junto com
 `EXIT_FAILURE` que tem o propósito inverso: indicar que houve erro na
 execução da aplicação.
 
@@ -111,7 +111,7 @@ antes de integrá-las na aplicação.
 include::{local}/etapa1/src/lingua-do-i-test.c[]
 ----
 <1> Finaliza aplicação indicando que houve um erro.
-<2> Executa `strcomp` (definida em `string.h`) que compara dois
+<2> Executa `strcomp` (definida em <<string_h>>) que compara dois
     strings, retorna `0` somente se ambos os string forem iguais. A
     variável `comparacao` irá guardar o resultado da comparação.
 <3> Inclui/chama uma função que desejamos criar em _core_. Ela precisa ser
@@ -387,10 +387,10 @@ Nesta etapa vamos apenas utilizar a função `assert` ao invés de
 `exit(EXIT_FAILURE)`.
 
 A função `assert`, definida em <<assert_h>>, costuma ser utilizada para
-depuração dos programas. Caso a função receba uma expressão com o valor
-igual a 0 (zero) causará uma falha na execução da aplicação, indicando
-o local da falha no arquivo. Desta forma nós temos como saber
-precisamente onde o erro ocorreu.
+depuração dos programas. Caso a função receba uma expressão com o
+valor igual a 0 (zero) causará uma falha na execução da aplicação,
+indicando, através de uma mensagem, a linha do código fonte onde a
+falha está ocorrendo. 
 
 ==== Código da etapa
 
@@ -411,7 +411,7 @@ include::{local}/etapa2/src/lingua-do-i-test.c[]
 ==== Passos de implementação da etapa
 
 Atualização do teste::
-Neste passo incluímos a biblioteca `assert.h` e atualizamos a função
+Neste passo incluímos a biblioteca <<assert_h>> e atualizamos a função
 `verificaConteudosSaoIguais` para chamar a função `assert`, incluindo
 uma mensagem para descrever o erro:
 +
@@ -488,9 +488,6 @@ implementada errada, proporcionando conclusões erradas.
 Nesta etapa precisamos implementar a leitura do arquivo e verificar o
 teste passando.
 
-NOTE: A documentação sobre as funções de leitura de arquivo estão contidas
-na seção ``7.21 Input/output <stdio.h>'' do padrão c1x de C.
-
 TIP: Para verificar como as funções que manipulam arquivos em C são
 invocadas para realizar tarefas comuns, recomendo acessar a página
 https://gist.github.com/edusantana/8291576 onde estão reunidos
@@ -508,13 +505,13 @@ diversos testes demonstrando as funções de manipulação de arquivos.
 ----
 include::{local}/etapa4/src/lingua-do-i-core.c[]
 ----
-<1> Inclusão da biblioteca `stdbool.h`, que define o tipo `bool`. Este
+<1> Inclusão da biblioteca <<stdbool_h>>, que define o tipo `bool`. Este
     tipo pode ser utilizado como retorno de expressões lógicas. Além
     disso também estão definidos macro `true` com o valor `1` e
     `false` com o valor `0`.
-<2> A função `fopen` retorna um ponteiro para `File` se conseguir
-    abrir o arquivo, caso contrário retorna `NULL`. Esta função
-    tem o propósito de verificar o resultado da chamada àquela
+<2> A função `fopen` (<<fopen>>) retorna um ponteiro para `File` se
+    conseguir abrir o arquivo, caso contrário retorna `NULL`. Esta
+    função tem o propósito de verificar o resultado da chamada àquela
     função.
 <3> Para ler o tamanho de um arquivo é necessário ir para o final dele
     e solicitar a posição atual, que corresponde a quantidade de bytes
@@ -524,16 +521,16 @@ include::{local}/etapa4/src/lingua-do-i-core.c[]
     precisamos alocar uma sequência contínua de memória que comporte o
     conteúdo que será lido. Além disso, um string deve terminar com o
     caractér `\0`, para utilização das funções de string. A função
-    `calloc`, além de alocar espaço na memória, inicializa todo o
-    espaço alocado com `0` (zeros). Nem sempre é possível alocar
-    espaço para armazenar o espaço do arquivo inteiro, caso ele seja
-    grande demais.
+    `calloc` (<<calloc>>), além de alocar espaço na memória,
+    inicializa todo o espaço alocado com `0` (zeros). Nem sempre é
+    possível alocar espaço para armazenar o espaço do arquivo inteiro,
+    caso ele seja grande demais.
 <5> Um arquivo para ser lido precisa ser aberto e fechado.
 
 A implementação faz referência a diversas funções que ainda não vimos
-como funciona: `fopen`, `fclose`, `fread` e `fseek`. Além disso, os
-arquivos são referenciados através de um ponteiro para `FILE`, da
-seguinte forma: `File *arquivo`.  
+como funciona: <<fopen>>, <<fclose>>, <<fread>> e <<fseek>>. Além
+disso, os arquivos são referenciados através de um ponteiro para
+`FILE` (`File *arquivo`).  
 
 ==== Passos de implementação da etapa
 

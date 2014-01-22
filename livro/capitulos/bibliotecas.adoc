@@ -19,7 +19,7 @@ IMPORTANT: Nas seções a seguir nós resumimos a documentação das
 funções e bibliotecas utilizadas neste livro. No entanto, nós
 recomendamos a consulta da documentação original (em inglês).
 
-[[assert_h]]
+[id="assert_h",reftext="assert.h"]
 === assert.h
 
 TIP: Mais informações sobre esta função pode ser consultada na seção
@@ -31,7 +31,7 @@ http://www.cplusplus.com/reference/cassert/assert/.
 
 
 
-[[f_assert]]
+[id="assert", reftext="assert()"]
 ==== assert()
 
  void assert ( int expressao )
@@ -46,6 +46,79 @@ http://www.cplusplus.com/reference/cassert/assert/
 
 ====
 
+[id="stdlib_h",reftext="stdlib.h"]
+=== stdlib.h
+
+==== EXIT_SUCCESS
+Constante para indicar que não houve erro.
+
+==== EXIT_FAILURE
+Constante para indicar que houve erro na execução do arquivo.
+
+
+[[f_exit]]
+==== exit()
+
+  void exit( int codigoDeErro )
+
+Termina o programa indicando o código de erro.
+
+==== Gerência de memória
+
+[[malloc]]
+===== malloc
+TODO
+
+[[calloc]]
+===== calloc
+TODO
+
+[[free]]
+===== free
+TODO
+
+
+[id="string_h", reftext="string.h"]
+=== string.h
+
+TODO: funçõe de string.
+
+[id="stdbool_h", reftext="stdbool.h"]
+=== stdbool.h
+
+TODO: atualizar.
+
+Inclusão da biblioteca <<stdbool_h>>, que define o tipo `bool`. Este
+tipo pode ser utilizado como retorno de expressões lógicas. Além disso
+também estão definidos macro `true` com o valor `1` e `false` com o
+valor `0`.
+
+[id="stdio_h", reftext="stdio.h"]
+=== stdio.h
+
+NOTE: A documentação sobre as funções de leitura de arquivo estão contidas
+na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
+
+[[fopen]]
+[id="fopen", reftext="fopen()"]
+==== fopen()
+
+TODO.
+
+[[fclose]]
+[id="fclose", reftext="fclose()"]
+==== fclose()
+TODO
+
+[[fread]]
+[id="fread", reftext="fread()"]
+==== fread()
+TODO
+
+[[fseek]]
+[id="fseek", reftext="fseek()"]
+==== fseek()
+TODO.
 
 ////
 Terminando arquivo com linha em branco
