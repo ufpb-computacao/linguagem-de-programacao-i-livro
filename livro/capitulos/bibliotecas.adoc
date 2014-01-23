@@ -87,6 +87,14 @@ TODO: funçõe de string.
 ====  strlen()
 Retorna tamanho do string, até encontrar o caracter `\0`.
 
+[id="strcmp", reftext="strcmp()"]
+==== strcmp()
+Compara dois strings.
+
+[id="strncmp", reftext="strncmp()"]
+==== strncmp()
+Compara dois strings até uma posição específica.
+
 [id="stdbool_h", reftext="stdbool.h"]
 === stdbool.h
 

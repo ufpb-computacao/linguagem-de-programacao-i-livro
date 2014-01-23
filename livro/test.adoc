@@ -17,6 +17,7 @@
 //include::capitulos/projetos.adoc[]
 include::capitulos/cap5-arquivos.adoc[]
 include::capitulos/cap6-arquivos-teoria.adoc[]
+include::capitulos/depuracao.adoc[]
 include::capitulos/bibliotecas.adoc[]
 
 ////

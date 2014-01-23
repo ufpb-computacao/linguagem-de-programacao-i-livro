@@ -1,0 +1,56 @@
+$ gdb ./lingua-do-i-test 
+GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+Copyright (C) 2012 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "i686-linux-gnu".
+For bug reporting instructions, please see:
+<http://bugs.launchpad.net/gdb-linaro/>...
+Lendo símbolos de /home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa7/src/lingua-do-i-test...concluído.
+(gdb) break 24 <1>
+Ponto de parada 1 at 0x80485f2: file lingua-do-i-test.c, line 24.
+(gdb) run <2>
+Starting program: /home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa7/src/lingua-do-i-test 
+
+Breakpoint 1, testTraducaoParaLinguaDoI () at lingua-do-i-test.c:24
+24		char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);
+(gdb) next <3>
+25		verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);
+(gdb) s <4>
+verificaConteudosSaoIguais (conteudo=0x804b008 "Minhis vigiis, tidi iqii.", 
+    esperado=0x80489ba "Minhis vigiis, tidi iqui.") at lingua-do-i-test.c:8
+8		assert(conteudo != NULL && "conteúdo não pode ser NULL");
+(gdb) next <5>
+10		assert( strcmp(conteudo, esperado) == 0
+(gdb) print conteudo <6>
+$1 = 0x804b008 "Minhis vigiis, tidi iqii."
+(gdb) print esperado  <6>
+$2 = 0x80489ba "Minhis vigiis, tidi iqui."
+(gdb) print strcmp (conteudo , esperado) <7>
+$3 = -1
+(gdb) print strncmp (conteudo , esperado,15) <8>
+$4 = 0
+(gdb) print strncmp (conteudo , esperado,20) <8>
+$5 = 0
+(gdb) print strncmp (conteudo , esperado,25) <8>
+$6 = -1
+(gdb) print strncmp (conteudo , esperado,21) <8>
+$7 = 0
+(gdb) print strncmp (conteudo , esperado,22) <8>
+$8 = 0
+(gdb) print strncmp (conteudo , esperado,23) <8>
+$9 = -1
+(gdb) print conteudo[22] <9>
+$10 = 105 'i'
+(gdb) print esperado[22] <9>
+$11 = 117 'u'
+(gdb) print esperado 
+$12 = 0x80489ba "Minhis vigiis, tidi iqui."
+(gdb) quit <10>
+A debugging session is active.
+
+	Inferior 1 [process 13644] will be killed.
+
+Quit anyway? (y or n) y

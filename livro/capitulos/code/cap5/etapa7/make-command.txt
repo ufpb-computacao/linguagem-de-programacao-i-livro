@@ -1,0 +1,6 @@
+$ make clean && make lingua-do-i-test && ./lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+Abortado (imagem do núcleo gravada)
+

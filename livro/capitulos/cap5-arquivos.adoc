@@ -68,13 +68,15 @@ consistirá em:
 
 ===== Main da aplicação
 
+:etapa: etapa1
+
 .Código fonte
-{online}/etapa1/src/lingua-do-i.c[{local}/etapa1/src/lingua-do-i.c]
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
 
 [source, c]
 .Código que contém o main do aplicativo, com implementação estúpida
 ----
-include::{local}/etapa1/src/lingua-do-i.c[]
+include::{local}/{etapa}/src/lingua-do-i.c[]
 ----
 
 <1> *Implementação estúpida* para o main da aplicação.
@@ -102,13 +104,15 @@ antes de integrá-las na aplicação.
 ====
 
 ===== Teste das funcionalidades
+:etapa: etapa1
+
 .Código fonte
-{online}/etapa1/src/lingua-do-i-test.c[{local}/etapa1/src/lingua-do-i-test.c]
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
 
 [source, c]
 .Código fonte para os testes
 ----
-include::{local}/etapa1/src/lingua-do-i-test.c[]
+include::{local}/{etapa}/src/lingua-do-i-test.c[]
 ----
 <1> Finaliza aplicação indicando que houve um erro.
 <2> Executa `strcomp` (definida em <<string_h>>) que compara dois
@@ -680,11 +684,7 @@ char traduzCaracterParaLinguaDoI(char original){
 
 .Apesar da nossa implementação o erro continua
 ....
-$ make clean && make lingua-do-i-test && ./lingua-do-i-test
-rm -rf lingua-do-i lingua-do-i-test
-gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
-lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
-Abortado (imagem do núcleo gravada)
+include::{local}/{etapa}/make-command.txt[]
 ....
 
 ==== Código da etapa
@@ -701,6 +701,58 @@ include::{local}/{etapa}/src/lingua-do-i-core.c[]
 <3> Implementação real da função de traduzir
 <4> Optamos por criar uma nova mensagem como resposta, ao invés de
     alterar a mensagem original.
+
+[[sec_etapa8]]
+=== Etapa 8: Depurando a aplicação
+:etapa: etapa8
+
+Por alguma razão nosso teste está falhando, apesar da implementação
+simples aparentar estar correta.
+
+Esta é uma boa oportunidade para *((Depurar))* a execução do programa.
+A depuração será abordada em um capítulo a parte: <<cap_depuracao>>.
+
+TIP: Apesar de não ser um pré-requisito para continuação desta
+capítulo, convidamos você a ler o <<cap_depuracao>> antes de continuar
+para conhecer o processo de depuração.
+
+==== Passos
+
+===== Depuração do programa
+A depuração do programa pode ser vista na <<sec_depuracao>> e a
+identificação do problema na <<sec_depuracao_resultado>>.
+
+===== Correção e verificação do teste passando
+
+Após a correção do código fonte, executamos o teste novamente:
+
+.Re-executando o teste após a correção
+....
+$ make clean && make && ./lingua-do-i-test 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+....
+
+Nosso teste está passando novamente!
+
+[[sec_etapa8_codigo]]
+==== Código
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+[source, c]
+.Código fonte para os testes
+----
+include::{local}/{etapa}/src/lingua-do-i-test.c[]
+----
+<1> Correção realizada
+
+
+
+
+
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um

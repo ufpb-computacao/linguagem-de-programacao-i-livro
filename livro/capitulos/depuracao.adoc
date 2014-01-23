@@ -1,0 +1,195 @@
+[[cap_depuracao]]
+== Depuração
+
+:online: {gitrepo}/blob/master/livro/capitulos/code/cap5
+:local: code/cap5
+
+.Objetivos do capítulo
+____
+
+// FIXME atualizar objetivos
+Ao final deste capítulo você deverá ser capaz de:
+
+* Saber os requisitos para depuração de um programa;
+* Depurar programas utilizando o `gdb`;
+____
+
+=== O que é depuração?
+
+A *((Depuração))* de um programa consiste em acompanhar a execução do
+programa, parando em pontos específicos do código fonte e verificando
+os valores das variáveis do programa.
+
+=== Requisitos da depuração
+
+Para depurar um programa é necessário que o programa seja compilado
+com instruções para o depurar, com o `gcc` isto é possível através do
+parâmetro `-g`.
+
+=== Depurando o programa ligua do i
+
+Como exemplo de depuração nós vamos utilizar o programa que estava
+sendo desenvolvido em <<sec_etapa8>>.
+
+==== Checando o pré-requisito para depuração
+:etapa: etapa7
+
+(((Makefile)))
+Vamos verificar o `Makefile` do projeto:
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+----
+include::{local}/{etapa}/src/Makefile[]
+----
+
+Percebam que o parâmetro `-g` está presente nas ((flags de
+compilação)):
+
+ CFLAGS=-Wall -g -std=c1x
+
+==== Última teste realizado
+
+Vamos relembrar o resultado da última execução do programa:
+
+.Última execução do teste
+....
+include::{local}/{etapa}/make-command.txt[]
+....
+
+O código fonte utilizado no teste foi:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+[source, c, numbered]
+.Código fonte para os testes
+----
+include::{local}/{etapa}/src/lingua-do-i-test.c[]
+----
+
+==== Escolha do ponto de parada
+
+Com base no desenvolvimento do projeto e com a mensagem de erro nós
+temos algumas opções de ponto de parada:
+
+. Na linha do erro
++
+----
+assert( strcmp(conteudo, esperado) == 0
+  && "conteúdo deve ser igual ao esperado");
+----
++
+Este é um ponto de parada bastante intuitivo, uma vez que a mensagem
+de erro indicou ela. A desvantagem deste ponto é que a função
+`verificaConteudosSaoIguais` é chamada mais de uma vez no arquivo,
+então teríamos que descobrir a interação que ocorreu o erro. Embora
+neste caso ela só foi chamada uma única vez, em aplicações maiores
+talvez seja trabalhoso identificar a iteração onde ocorrerá o erro.
+
+. No método de tradução
++
+----
+char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);
+----
++
+Nós estávamos elaborando a função `traduzParaLingaDoI` antes do teste
+falhar, então talvez seja conveniente adicionar um ponto de parada
+nesta linha e acompanhar a execução. Uma desvantagem é que dentro
+desta função existe um loop com várias iterações, talvez seja difícil
+encontrar a iteração com erro.
+
+. Antes de verificação
++
+----
+verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);
+----
++
+Inicialmente este parece ser um ótimo ponto de parada para compreender
+o problema, pois teríamos como comparar os valores de
+`mensagemTraduzida` com `TRADUCAO_ESPERADA`. Dependendo da diferença
+poderemos ter uma dica do problema.
+
+NOTE: Nós vamos escolher a *linha 24* como nosso ponto de parada.
+
+
+[[sec_depuracao]]
+==== Realizando a depuração com o gdb
+
+:etapa: etapa8
+
+TIP: O `gdb` é o depurador que utilizaremos para inspecionar nosso
+programa.  Para saber mais detalhes sobre o `gdb` recomendamos a
+leitura do livro ``Debugging with gdb'', disponível em
+http://www.gnu.org/software/gdb/documentation/ ele está
+disponível https://sourceware.org/gdb/current/onlinedocs/gdb/[na
+versão on-line] ou em
+http://sourceware.org/gdb/current/onlinedocs/gdb.pdf.gz[PDF].
+
+.Depuração do programa
+----
+include::{local}/{etapa}/gdb-execution.txt[]
+----
+<1> Antes de iniciar a execução do aplicativo, nós estabelecemos nosso
+    ponto de parada, através deste comando: `break 24`.
+<2> Em seguida solicitamos a execução do programa através do comando
+    `run`. O programa então é executado até chegar no ponto de parada,
+    quando então imprime número da linha, seguido do código contido
+    nesta linha.
+<3> Neste momento temos duas escolhas, ou podemos entrar na função
+    `traduzParaLingaDoI` através do comando `s` ou podemos pular para
+    próxima linha através do comando `next`. Antes de inspecionar o
+    funcionamento da função, decidimos primeiro inspecionar porque a
+    verificação estava falhando.
+<4> Diferente do comando `next` que avança para a próxima linha,
+    decidimos entrar na função `verificaConteudosSaoIguais` através
+    do comando *step* (`s`). O depurador entra na função imprimindo os
+    valores que foram passados como parâmetro, seguido da linha e o
+    código atual.
+<5> Nós sabemos que conteúdo não é `NULL`, então avançamos para a
+    próxima linha.
+<6> Neste momento estamos utilizando o comando `print` para exibir os
+    conteúdos das variáveis. Até agora percebemos a razão do teste
+    está falhando.
+<7> Solicitamos a impressão da função em C que realiza comparação
+    de strings (<<strcmp>>) passando os dois strings com parâmetros. A
+    resposta indica que eles realmente são diferentes, mas ainda não
+    percebi a diferença.
+<8> Outra função que realiza comparação é a <<strncmp>>, que possui um
+    último parâmetro para indicar o tamanho da comparação. Realizamos
+    diversas inspecções para identificar aonde os strings são
+    diferentes. Percebemos que os strings diferem no 23º carácter.
+<9> Imprimimos o 23º carácter dos dois strings. Neste momento
+    percebemos que há algo de errado com o string `esperado`. O
+    programa lingua do i converte todas as vogais para *i*, não
+    deveria nenhuma outra vogal, inclusive o *u*. Em seguida
+    percebemos que o erro estava na palavra `iqui`, na frase que
+    utilizamos no teste como resultado esperado.
+<10> Pressionamos `CTRL+D` para sair do programa.
+
+[[sec_depuracao_resultado]]
+==== Resultado da depuração
+
+Após realizamos a depuração fomos capazes de identificar o erro, que
+estava no nosso arquivo de teste, na palavra `iqui`:
+
+ char* TRADUCAO_ESPERADA= "Minhis vigiis, tidi iqui.";
+
+O correto seria:
+
+ char* TRADUCAO_ESPERADA= "Minhis vigiis, tidi iqii.";
+
+A correção do arquivo de teste pode ser visto na
+<<sec_etapa8_codigo>>.
+
+NOTE: Embora você pode ter percebido este erro muito antes,
+frequentemente estamos tão envolvidos com o código fonte que não
+conseguimos perceber os erros mesmo estando evidentes para terceiros.
+Por isso a depuração é tão importante, ela nos permite perceber estes
+erros.
+
+////
+Terminando arquivo com linha em branco
+////
+
