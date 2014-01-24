@@ -13,7 +13,7 @@ pública do documento em:
 http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf.
 
 NOTE: Durante o livro iremos referenciar este documento apenas por
-``Padão C1X''.
+``Padrão C1X''.
 
 IMPORTANT: Nas seções a seguir nós resumimos a documentação das
 funções e bibliotecas utilizadas neste livro. No entanto, nós
@@ -85,7 +85,7 @@ TODO: funçõe de string.
 
 [id="strlen", reftext="strlen()"]
 ====  strlen()
-Retorna tamanho do string, até encontrar o caracter `\0`.
+Retorna tamanho do string, até encontrar o carácter `\0`.
 
 [id="strcmp", reftext="strcmp()"]
 ==== strcmp()

@@ -563,7 +563,7 @@ xx
 Inclusão de teste de tradução::
 xx.
 +
-Compilando para descrobrir o próximo passo:
+Compilando para descobrir o próximo passo:
 +
 ....
 $ make clean && make lingua-do-i-test && make test_all
@@ -706,15 +706,20 @@ include::{local}/{etapa}/src/lingua-do-i-core.c[]
 === Etapa 8: Depurando a aplicação
 :etapa: etapa8
 
-Por alguma razão nosso teste está falhando, apesar da implementação
-simples aparentar estar correta.
+Apesar da nossa simples implementação aparentar está correta, por uma
+razão ainda desconhecida o nosso teste está falhando.
 
 Esta é uma boa oportunidade para *((Depurar))* a execução do programa.
-A depuração será abordada em um capítulo a parte: <<cap_depuracao>>.
+A depuração será abordada em um capítulo a parte: <<cap_depuracao>>. O
+processo de depuração permite-nos identificar sem precisar alterar o
+código inserindo várias mensagens do tipo:
 
-TIP: Apesar de não ser um pré-requisito para continuação desta
-capítulo, convidamos você a ler o <<cap_depuracao>> antes de continuar
-para conhecer o processo de depuração.
+  printf("passou por aqui...")
+  printf("O valor de var=%d",var)
+
+TIP: Apesar de não ser um pré-requisito para continuação deste
+capítulo, convidamos você a ler o <<cap_depuracao>> antes de
+continuar, para conhecer o processo de depuração.
 
 ==== Passos
 
@@ -750,6 +755,131 @@ include::{local}/{etapa}/src/lingua-do-i-test.c[]
 <1> Correção realizada
 
 
+[[sec_etapa9]]
+=== Etapa 9: Inclusão de novos testes
+
+Após a correção, nossos testes estão passando. Mas será que a
+implementação de `traduzParaLingaDoI` está correta?  Vamos adicionar
+novos testes para garantir isso.
+
+==== Passos
+
+===== Adição de testes
+[source,c]
+----
+char* MENSAGEM_ORIGINAL2 = "Oh! Deus, será que o senhor se zangou";
+char* TRADUCAO_ESPERADA2= "Ih! Diis, sirí qii i sinhir si zingii";
+
+void testTraducaoParaLinguaDoI(){
+	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);
+	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);
+	verificaConteudosSaoIguais(MENSAGEM_ORIGINAL2, traduzParaLingaDoI(TRADUCAO_ESPERADA2));
+}
+----
+
+===== Execução do teste
+
+.Execução do teste
+....
+$ make clean && make && ./lingua-do-i-test 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+Abortado (imagem do núcleo gravada)
+....
+
+Como a falha ocorreu devido a inclusão do novo teste, isto que dizer
+que precisamos atualizar a implementação para fazer o teste passar.
+
+===== Atualizar a implementação para fazer o teste passar
+
+A diferença do teste adicionado é que ele adiciona uma vogal
+maiúscula, e outra vogal com acento: *``Oh! Deus, será''*.
+
+Vamos atualizar nossa implementação para possibilitar esta conversão
+também:
+
+[source,c]
+....
+char traduzCaracterParaLinguaDoI(char original){
+	char resposta;
+	switch (original) {
+	case 'a':
+	case 'e':
+	case 'i':
+	case 'o':
+	case 'u':
+		resposta = 'i';
+		break;
+	case 'A':
+	case 'E':
+	case 'I':
+	case 'O':
+	case 'U':
+		resposta = 'I'; // <1>
+		break;
+	case 'á':
+	case 'é':
+	case 'í':
+	case 'ó':
+	case 'ú':
+		resposta = 'í'; // <2>
+		break;
+	default:
+		resposta = original;
+	}
+	return resposta;
+}
+....
+
+<1> Inclusão de conversão de letra maiúscula.
+<2> Conversão de caracteres com acentos.
+
+===== Execução dos testes após modificação
+.Execução dos testes após modificação
+....
+$ make clean && make && ./lingua-do-i-test 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+lingua-do-i-core.c: Na função ‘traduzCaracterParaLinguaDoI’:
+lingua-do-i-core.c:64:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:64:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:65:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:65:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:66:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:66:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:67:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:67:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:68:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:68:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:69:14: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:69:3: aviso: overflow in implicit constant conversion [-Woverflow]
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-core.c: Na função ‘traduzCaracterParaLinguaDoI’:
+lingua-do-i-core.c:64:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:64:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:65:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:65:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:66:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:66:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:67:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:67:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:68:7: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:68:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+lingua-do-i-core.c:69:14: aviso: constante de caractere multi-caractere [-Wmultichar]
+lingua-do-i-core.c:69:3: aviso: overflow in implicit constant conversion [-Woverflow]
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+Abortado (imagem do núcleo gravada)
+....
+
+Quando executamos o teste, verificamos que o compilador apresentou
+vários avisos e o teste falhou.
+
+=== Etapa 10: Tratando texto com acentos
+
+Na etapa anterior percebemos que a utilização de acentos provocou
+falha no nosso teste.
 
 
 
@@ -996,58 +1126,6 @@ NOTE: Talvez teremos problemas com codificação do arquivo. Pois
 caracteres especiais ocupam mais de um byte quando codificados em
 *UTF-8* por exemplo. 
 
-=== Biblioteca e Padrão da Linguagem C
-
-O último padrão adotado para a Linguagem C foi publicado pela ISO em
-12/8/2011 no documento: ISO/IEC 9899:2011. Este padrão é conhecido
-como C11 ou C1X, você pode consultar gratuitamente a última versão
-pública do documento em:
-http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf.
-
-Neste capítulo nós iremos direcioná-lo a consultar este documento para
-conhecer a descrição das bibliotecas e funções que iremos utilizar.
-
-
-
-["graphviz", scaledwidth="70%"]
-----
-include::../images/cap5/string.dot[]
-----
-
-=== Gravação de dados no disco rígido
-TODO.
-
-=== Funções básicas para abrir e fechar arquivos na linguagem C
-TODO.
-
-
-=== Arquivos em modo texto
-TODO.
-==== Funções para leitura de dados em arquivos
-TODO.
-
-
-==== Funções para escrita de dados em arquivos
-TODO.
-
-
-==== Funções para manipulação de dados em arquivos texto
-TODO.
-
-
-=== Arquivos em modo binário
-TODO.
-==== Funções para leitura de dados em arquivos binários
-TODO.
-
-==== Funções para escrita de dados em arquivos binários
-TODO.
-
-==== Funções para manipulação de dados em arquivos binários
-TODO.
-
-=== Comparação entre arquivo em modo texto e binário
-TODO.
 
 ////
 Terminando arquivo com linha em branco
