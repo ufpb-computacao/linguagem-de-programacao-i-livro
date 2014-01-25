@@ -765,15 +765,15 @@ novos testes para garantir isso.
 ==== Passos
 
 ===== Adição de testes
+
 [source,c]
 ----
 char* MENSAGEM_ORIGINAL2 = "Oh! Deus, será que o senhor se zangou";
 char* TRADUCAO_ESPERADA2= "Ih! Diis, sirí qii i sinhir si zingii";
-
 void testTraducaoParaLinguaDoI(){
 	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);
 	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);
-	verificaConteudosSaoIguais(MENSAGEM_ORIGINAL2, traduzParaLingaDoI(TRADUCAO_ESPERADA2));
+	verificaConteudosSaoIguais(traduzParaLingaDoI(MENSAGEM_ORIGINAL2), TRADUCAO_ESPERADA2);
 }
 ----
 
@@ -839,7 +839,7 @@ char traduzCaracterParaLinguaDoI(char original){
 ===== Execução dos testes após modificação
 .Execução dos testes após modificação
 ....
-$ make clean && make && ./lingua-do-i-test 
+$ make clean && make && make test_all
 rm -rf lingua-do-i lingua-do-i-test
 gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
 lingua-do-i-core.c: Na função ‘traduzCaracterParaLinguaDoI’:
@@ -869,8 +869,9 @@ lingua-do-i-core.c:68:7: aviso: constante de caractere multi-caractere [-Wmultic
 lingua-do-i-core.c:68:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
 lingua-do-i-core.c:69:14: aviso: constante de caractere multi-caractere [-Wmultichar]
 lingua-do-i-core.c:69:3: aviso: overflow in implicit constant conversion [-Woverflow]
+./lingua-do-i-test
 lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
-Abortado (imagem do núcleo gravada)
+make: *** [test_all] Abortado (arquivo core criado)
 ....
 
 Quando executamos o teste, verificamos que o compilador apresentou
@@ -878,8 +879,118 @@ vários avisos e o teste falhou.
 
 === Etapa 10: Tratando texto com acentos
 
+:etapa: etapa10
+
 Na etapa anterior percebemos que a utilização de acentos provocou
 falha no nosso teste.
+
+Para compreender o problema precisamos entender sobre
+*((codificação))* de arquivos.
+
+Enquanto caracteres ASCII são facilmente codificados, pois cada
+carácter possui um único byte (que corresponde ao tamanho de um
+`char`), outras codificações, como UTF-8, podem possuir carácteres com
+tamanhos diferentes. Alem disso, pode existir mais de uma codificação
+para o mesmo carácter.
+
+Por enquanto nós iremos utilizar o ((Algorítmo do Avestruz)) para
+resolução de problemas: nós iremos ignorar o problema e continuar
+nossa implementação ignorando o tratamento de acentos. Depois, quando
+tivermos conhecimento suficiente para tratar este problema poderemos
+voltar a ele.
+
+TIP: Você conhecer mais sobre o *Algorítmo do Avestruz* em
+http://pt.wikipedia.org/wiki/Algoritmo_do_avestruz.
+
+==== Passos
+
+===== Desfazer teste com acentos
+[source,c]
+----
+char* MENSAGEM_ORIGINAL2="Oh! Deus, será que o senhor se zangou";
+char* TRADUCAO_ESPERADA2="Ih! Diis, sirá qii i sinhir si zingii";<1>
+----
+<1> Substituição do `í` por `á`. Por enquanto nosso programa não irá
+    tratar acentos. 
+
+===== Desfazer implementação de core que tratava acentos
+
+[source,c]
+----
+char traduzCaracterParaLinguaDoI(char original){
+	char resposta;
+
+	switch (original) {
+	case 'a':
+	case 'e':
+	case 'i':
+	case 'o':
+	case 'u':
+		resposta = 'i';
+		break;
+	case 'A':
+	case 'E':
+	case 'I':
+	case 'O':
+	case 'U':
+		resposta = 'I';
+		break;
+	default:
+		resposta = original;
+	}
+
+	return resposta;
+}
+----
+===== Re-execução dos testes
+
+.Re-execução dos testes após remoção de tratamento de acentos
+....
+$ make clean && make && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o
+lingua-do-i-test
+./lingua-do-i-test
+....
+
+===== Criação de arquivo TODO
+
+Criamos um arquivo entitulado `TODO.txt` que manterá registro de
+atividades que gostaríamos de realizar no futuro:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/TODO.txt]
+
+[source, c]
+.Criação do arquivo TODO.txt
+....
+include::{local}/{etapa}/TODO.txt[]
+....
+
+A criação de um arquivo *TODO* possibilita comunicar para as demais
+pessoas (envolvidas ou que irão se envolver no projeto) onde elas
+podem contribuir para o projeto.
+
+==== Código fonte da etapa
+
+===== Código do teste
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+[source, c]
+----
+include::{local}/{etapa}/src/lingua-do-i-test.c[]
+----
+
+===== Código do core
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+[source, c]
+----
+include::{local}/{etapa}/src/lingua-do-i-core.c[]
+----
 
 
 

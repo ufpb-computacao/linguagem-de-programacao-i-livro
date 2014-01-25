@@ -21,7 +21,7 @@ void testLerConteudoDoArquivo(){
 char* MENSAGEM_ORIGINAL = "Minhas vogais, tudo aqui.";
 char* TRADUCAO_ESPERADA= "Minhis vigiis, tidi iqii.";
 char* MENSAGEM_ORIGINAL2 = "Oh! Deus, será que o senhor se zangou";
-char* TRADUCAO_ESPERADA2= "Ih! Diis, sirí qii i sinhir si zingii";
+char* TRADUCAO_ESPERADA2= "Ih! Diis, sirá qii i sinhir si zingii";
 void testTraducaoParaLinguaDoI(){
 	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);
 	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);
