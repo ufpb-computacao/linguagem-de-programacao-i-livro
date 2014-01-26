@@ -132,6 +132,16 @@ TODO
 ==== fseek()
 TODO.
 
+[[printf]]
+[id="printf", reftext="printf()"]
+==== printf()
+TODO.
+
+[[fprintf]]
+[id="fprintf", reftext="fprintf()"]
+==== fprintf
+TODO.
+
 ////
 Terminando arquivo com linha em branco
 ////

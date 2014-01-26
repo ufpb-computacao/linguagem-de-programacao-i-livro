@@ -992,8 +992,134 @@ include::{local}/{etapa}/src/lingua-do-i-test.c[]
 include::{local}/{etapa}/src/lingua-do-i-core.c[]
 ----
 
+=== Etapa 11: Salvando conteúdo em arquivo
+
+Além de traduzir mensagens nosso programa também precisa salvar seu
+conteúdo em arquivo. Nesta etapa vamos atualizar nossa implementação
+para possibilitar o salvamento.
+
+==== Passos
+
+===== Adicionar teste de salvamento de conteúdo
+
+Mas uma vez, antes de iniciar a implementação da nossa funcionalidade
+iremos escrever um teste para ela.
+
+[source, c]
+.Adicionando teste de salvamento de arquivo em lingua-do-i-test.c
+----
+void verificaConteudoFoiSalvo( FILE* arquivo, 
+    char* conteudo_esperado ){
+  char* conteudo = lerConteudoDeArquivoArberto(arquivo); <1>
+  assert( strcmp(conteudo, conteudo_esperado) == 0
+    && "Conteúdo do arquivo não corresponde ao esperado");
+}
+
+FILE * criaArquivoTemporario(){
+	return tmpfile();
+}
+
+char* CONTEUDO_QUALQUER = "abracadabra";
+void testSalvaConteudoEmArquivo(){
+  FILE * arquivoDestino = criaArquivoTemporario(); <2>
+  salvaConteudo(arquivoDestino, CONTEUDO_QUALQUER); <3>
+  verificaConteudoFoiSalvo(arquivoDestino, CONTEUDO_QUALQUER); <4>
+
+  fclose(arquivoDestino); <5>
+}
+----
+<1> A função `lerConteudoDeArquivoArberto` foi implementada em
+    `lingua-do-i-core.c`, mas ainda não está visível aqui,
+    precisaremos adicioná-la ao cabeçalho mais adiante.
+<2> Criação de um arquivo temporário para o teste, o conteúdo do teste
+    será escrito nele. Se estivéssemos utilizando um arquivo normal,
+    deveríamos nos certificar de que o arquivo não existia antes, em
+    decorrência de execuções anteriores. Arquivos temporários são bons
+    para os testes pois quando fechados são automaticamente excluídos.
+<3> Esta função será implementada no core. Percebam que escrevemos a
+    função sem passar o nome do arquivo, mas um parâmetro do tipo
+    `File*`. Decidimos assim, pois pretendemos salvar o conteúdo
+    também na saída padrão (que é do tipo `File*`). 
+<4> Função para verificar que o conteúdo escrito no arquivo
+    corresponde ao conteúdo passado para a função `salvaConteudo`.
+<5> Fechamento do arquivo.
 
 
+===== Atualização do arquivo de cabeçalho do core
+Sabemos que temos algumas alterações pendentes para serem realizadas
+no arquivo de cabeçalho do core, vamos realizá-las agora:
+
+[source,c]
+.Atualização de lingua-do-i-core.h
+----
+void salvaConteudo(FILE* arquivoDestino, char* conteudo); <1>
+char* lerConteudoDeArquivoArberto(FILE* arquivo); <2>
+----
+<1> Função que desejamos implementar
+<2> Declaração de função já implementada em core mas que não estava
+    visível externamente ao arquivo.
+
+===== Implementação vazia para possibilitar teste falhar
+
+Antes de compilar e executar o teste, precisamos ainda criar uma
+implementação vazia de `salvaConteudo`:
+
+[source,c]
+.Implementação vazia em lingua-do-i-core.c
+----
+void salvaConteudo(FILE* arquivoDestino, char* conteudo){
+}
+----
+
+===== Verificando o teste falhando
+
+Com a implementação da função realizada, vamos compilar os arquivos e
+executar os testes:
+
+.Compilação e execução dos testes
+....
+$ make clean && make && ./lingua-do-i-test 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o
+lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:28: verificaConteudoFoiSalvo:
+Assertion `strcmp(conteudo, conteudo_esperado) == 0 && "Conteúdo do
+arquivo não corresponde ao esperado"' failed.
+Abortado (imagem do núcleo gravada)
+....
+
+Como esperado, o teste falhou pois a função que deveria escrever o
+conteúdo está vazia.
+
+===== Fazendo o teste passar
+
+Desta vez não há uma forma simples de fazer o teste passar, precisamos
+realmente escrever o conteúdo no arquivo para que o teste passe.
+
+Então implementamos a função `salvaConteudo` da seguinte forma:
+
+[source,c]
+.Implementação para escrever conteúdo no arquivo
+----
+void salvaConteudo(FILE* arquivoDestino, char* conteudo){
+  fprintf(arquivoDestino, "%s", conteudo);
+}
+----
+
+TIP: A função <<fprintf>> é similar a <<printf>>, a única diferença é
+que `printf` escreve sempre na saída padrão, enquanto que `fprintf`
+recebe como parâmetro qual o arquivo onde será escrito o conteúdo.
+
+.Execução do teste
+....
+$ make clean && make && ./lingua-do-i-test 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+....
+
+Ótimo, nossos testes estão passando novamente!
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
