@@ -49,26 +49,33 @@ escrever palavras trocando todas as vogais por ``i'':
 
 === Etapa 1: Estrutura inicial do projeto
 
+:etapa: etapa1
+
 Vamos começar montando uma estrutura inicial do nosso projeto, que
 consistirá em:
 
-* Um arquivo que conterá o `main` da aplicação
-* Um arquivo _core_ e seu cabeçalho, que conterão as principais funções da aplicação
-* Um arquivo para codificação dos testes
-* Um arquivo para ser lido nos testes: um trecho de música 
-* Um arquivo Makefile para compilação e execução dos testes
-* Existirão ao total 3 arquivos fontes (`.c`). Um deles será para
-  execução da aplicação e outro para execução dos testes. Estes dois
-  arquivos são independentes entre si. O último arquivo, chamado de
-  *core*, conterá as as implementações das funcionalidades que
-  precisarão ser incluídas e ligadas nos outros dois arquivos para
-  funcionarem em conjunto.
+.Lista de arquivos do projeto
+`lingua-do-i.c`:: Conterá o `main` da aplicação.
 
-==== Código da etapa
+`lingua-do-i-core.c`:: Conterá as implementações das principais
+funções da aplicação, frequentemente este arquivo será referenciado
+apenas como o _core_.  
 
-===== Main da aplicação
+`lingua-do-i-core.h`:: Conterá as definições das funções de core.
 
-:etapa: etapa1
+`lingua-do-i-test.c`:: Conterá os testes da aplicação.
+
+`musica-trecho.txt`:: Trecho de música que será utilizado no teste de
+leitura de arquivo.  
+
+`Makefile`:: Makefile para compilar o projeto e
+executar os testes.
+
+==== Criando um main estúpido
+
+Embora não iremos nos preocupar com o main da aplicação ainda, nosso
+primeiro passo será criar o main da aplicação `lingua-do-i` apenas
+registrar didaticamente o propósito que este arquivo terá.
 
 .Código fonte
 {online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
@@ -87,147 +94,94 @@ NOTE: `EXIT_SUCCESS` é definido em <<stdlib_h>>, junto com
 execução da aplicação.
 
 TIP: O termo técnico *((implementação estúpida))* provém do inglês:
-*dummy implementation*. Geralmente utilizado quando não desejamos
-implementar apropriadamente ainda, também costuma ter o propósito de
-fazer o código compilar ou apenas preencher algum trecho do código.
+*dummy implementation*. Geralmente utilizado quando desejamor aguardar
+o momento oportuno para realizar a implementação apropriada, também
+costuma ter o propósito de fazer o código compilar ou apenas preencher
+algum trecho do código.
 
 [IMPORTANT]
 ====
 Este arquivo será o responsável por iniciar a aplicação, no entanto,
-por enquanto ele possui uma implementação estúpida, pois não será
-utilizado no momento. 
-
-Nós vamos primeiro construir as funcionalidades do programa e os
-testes para verificar que elas estão funcionando apropriadamente,
-antes de integrá-las na aplicação.  
+por enquanto ele possui uma implementação estúpida, será relegado até
+se tornar importante novamente.
 
 ====
 
-===== Teste das funcionalidades
-:etapa: etapa1
+Nas próximas seções daremos mais atenção aos testes, enquanto iremos
+implementar, aos poucos, as funcionalidades que o aplicativo terá.
+
+Por último, iremos integrar as funcionalides implementadas ao
+aplicativo em `main`.
+
+==== Iniciando um teste
+
+Neste passo nós iremos iniciar a implementação dos testes.  Decidimos
+começar os nossos testes tentando ler o conteúdo de um arquivo:
+
+[source,c]
+.Elaborando o primeiro teste no arquivo lingua-do-i-test.c
+----
+#include "lingua-do-i-core.h"
+
+char* NOME_DO_ARQUIVO = "musica-trecho.txt";
+char* CONTEUDO_ESPERADO = "Oh! Deus, perdoe este pobre coitado";
+void testLerConteudoDoArquivo(){
+	char* conteudo = lerConteudoDoArquivo(NOME_DO_ARQUIVO);
+	verificaConteudosSaoIguais(conteudo, CONTEUDO_ESPERADO);
+}
+----
+
+Você é capaz de identificar a ideia da implementação deste teste?
+Pense um pouco!
+
+.Pontos a serem observados
+. O primeiro ponto a ser observado é o nome da função:
+  `testLerConteudoDoArquivo`. O nome de uma função deve ser suficiente
+  para descrever qual é o seu propósito. 
+. Em seguida, vemos a chamada da função `lerConteudoDoArquivo`, que
+  ainda não existe, mas estamos planejando sua implementação. 
+  +
+  Durante a elaboração dos testes nós escrevemos funções supondo a sua
+  existência, mas tarde implementaremos elas, somente se demonstrarem
+  necessárias. 
+  +
+  Outro ponto importante, é que estamos definindo qual será interface
+  da função: (a) ela terá somente um parâmetro que será o nome do
+  arquivo que será lido; (b) ela irá retornar um ponteiro (`char*`)
+  que conterá o conteúdo lido no arquivo.
+. O último comando irá chamar a função `verificaConteudosSaoIguais`,
+  que também não foi implementada, mas comunica qual será seu
+  propósito: verificar que o conteúdo retornado pela função
+  `lerConteudoDoArquivo` corresponde ao conteúdo do arquivo.
+. A constante `NOME_DO_ARQUIVO` corresponde ao nome de um
+  arquivofootnote:[O arquivo deve existir no mesmo diretório do
+  executável] que supostamente possui o mesmo conteúdo da variável
+  `CONTEUDO_ESPERADO`. Embora as constantes poderiam ser declaradas
+  dentro das funções, a declaração externa possibilita uma maior
+  legibilidade no código do teste, mas não há certo ou errado aqui,
+  apenas estilo.
+. Um ponto que talvez passe despercebido é a inclusão do arquivo de
+  cabeçalho `lingua-do-i-core.h`. Ao fazermos isso, estamos
+  antecipando uma dependência que nosso teste terá com
+  `lingua-do-i-core.c`. Estamos planejando implementar a função
+  `lerConteudoDoArquivo` neste arquivo. Durante o processo de
+  compilação dos testes precisaremos ligar (_linkar_) o arquivo de
+  teste com este código fonte. O Makefile do projeto deverá refletir
+  esta ligação.
+
+
+==== Elaborando o Makefile
+
+Estamos planejando a elaboração de uma aplicação e um teste, portanto
+nosso Makefile ficou da seguinte forma:
 
 .Código fonte
-{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
-
-[source, c]
-.Código fonte para os testes
-----
-include::{local}/{etapa}/src/lingua-do-i-test.c[]
-----
-<1> Finaliza aplicação indicando que houve um erro.
-<2> Executa `strcomp` (definida em <<string_h>>) que compara dois
-    strings, retorna `0` somente se ambos os string forem iguais. A
-    variável `comparacao` irá guardar o resultado da comparação.
-<3> Inclui/chama uma função que desejamos criar em _core_. Ela precisa ser
-    *definida no arquivo de cabeçalho de core* e *implementa no arquivo
-    fonte de core*. Para ser utilizada aqui é necessário a *inclusão
-    do arquivo de cabeçalho* e *ligar* arquivo do _core_ durante a
-    compilação do arquivo  (ver no Makefile). Neste trecho estamos
-    definindo como desejamos que função se comporte.
-<4> Chama uma função de teste que tem o propósito de garantir
-    que o conteúdo lido é igual ao conteúdo esperado. Caso os
-    conteúdos sejam diferentes a aplicação será aborta com um erro.
-    Caso contrário, podemos considerar o teste como uma comprovação de
-    que a função `lerConteudoDoArquivo` está funcionando corretamente.
-<5> Chamada a função que executa um teste de leitura de arquivo. Esta
-    função será executada quando o programa de teste for compilado e
-    invocado, pois está dentro da função `main` do arquivo de testes.
-
-TIP: Percebam que os _nomes_ das funções descrevem o comportamento
-esperado, sem a necessidade comentários: `lerConteudoDoArquivo`,
-`testLerConteudoDoArquivo` e `verificaConteudosSaoIguais`.  Além
-disso, as variáveis também seguem a recomendação de que as constantes
-devem ser escritas em caixa alta: `NOME_DO_ARQUIVO`,
-`CONTEUDO_ESPERADO` e `conteudo`. Esta é uma boa prática que você pode
-utilizar em seus projetos.
-
-Este é o principal arquivo desta etapa, onde está codificado um teste
-de uma funcionalidade que desejamos implementar: leitura do conteúdo
-de um arquivo.
-
-===== Cabeçalho de Core
-
-.Código fonte
-{online}/etapa1/src/lingua-do-i-core.h[{local}/etapa1/src/lingua-do-i-core.h]
-
-[source, c]
-.Cabeçaho do Core
-----
-include::{local}/etapa1/src/lingua-do-i-core.h[]
-----
-
-<1> Estratégia para definição de cabeçalho que evita erros caso o
-    arquivo seja incluído mais de uma vezes. Todos os arquivos de
-    cabeçalho da biblioteca padrão de C utiliza esta estratégia.
-<2> Definição da função que será implementada no arquivo `.c`
-
-===== Core da aplicação
-
-.Código fonte
-{online}/etapa1/src/lingua-do-i-core.c[{local}/etapa1/src/lingua-do-i-core.c]
-
-[source, c]
-.Core do programa, onde as funções serão implementadas
-----
-include::{local}/etapa1/src/lingua-do-i-core.c[]
-----
-<1> Inclusão do arquivo de cabeçalho, onde estão definidas as funções
-    públicas (visíveis ao ligar este arquivo). Por enquanto só contém
-    um única função: `lerConteudoDoArquivo`.
-<2> Implementação estúpida da função que desejamos implementar.
-
-===== Arquivo texto para teste
-
-.Código fonte
-{online}/etapa1/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
-
-.Conteúdo do arquivo que está sendo utilizado no testes
-----
-include::{local}/etapa1/src/musica-trecho.txt[]
-----
-
-.Execução do hexdump para verificar conteúdo do arquivo em hexadecimal
-----
-include::{local}/etapa1/hexdump-command.txt[]
-----
-
-O conteúdo deste arquivo contém apenas uma frase, para simplificar a
-execução do teste. A ((codificação)) utilizada na escrita do arquivo
-foi a UFT-8.
-
-O programa `hexdump`, disponível no Linux, exibe o conteúdo do arquivo
-em hexadecimal. Nele você poderá ver como os caracteres estão escritos
-no disco:
-
-Pela execução do `hexdump`, verificamos que o arquivo possui *0x23
-bytes de tamanho* (equivale a `2x16+3=35`), indicado na última linha.
-
-Também podemos perceber que todos os carácteres foram codificados com
-1 byte cada (basta contar os carácteres). 
-
-O arquivo não termina com o carácter de fim de linha -- ele finaliza
-apenas com o carácter `o`, que tem seu código ASCII igual a `0x6f`. 
-
-TIP: Você pode consultar a tabela ASCII em http://www.asciitable.com,
-ou se estiver no Linux através do comando `man ascii`.
-
-IMPORTANT: Ao criar um arquivo de texto para os testes, certifique-se
-de conhecer o conteúdo do arquivo criado. As vezes os editores de
-texto podem adicionar carácteres de fim de linha que talvez não esteja
-visível para você. A execução do `hexdump` é recomendada nestes casos.
-
-===== Makefile
-
-.Código fonte
-{online}/etapa1/src/Makefile[{local}/etapa1/src/Makefile]
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
 
 .Makefile do projeto, demonstra como compilar os programas
 ----
-include::{local}/etapa1/src/Makefile[]
+include::{local}/{etapa}/src/Makefile[]
 ----
-
-Por fim, temos um Makefile para gerenciar a compilação e execução dos
-testes.
 
 NOTE: Este arquivo foi criado para funcionar no Linux, para funcionar
 em outras plataformas serão necessários pequenos ajustes.
@@ -236,7 +190,7 @@ em outras plataformas serão necessários pequenos ajustes.
 configure o seu compilador aqui.
 
 `CFLAGS`:: configura algumas _flags_ de compilação. Inclusive a
-utilização do padrão *c1x*. Caso seu compilador aceite estas _flags_,
+utilização do padrão <<c1x>>. Caso seu compilador aceite estas _flags_,
 não haverá necessidade de configuração.
 
 `all`:: indica quais as regras serão executadas por padrão quando
@@ -260,190 +214,364 @@ Para compilar e testar os aplicativos podemos executar:
 
   make clean && make all && make test_all
 
-==== Processo de implementação da etapa
-Nesta seção elencamos os passos que foram necessários para
-implementação do código desta etapa:
+==== Criando um main e compilando o teste
 
-Estrutura dos arquivos com testes::
-Sem dúvida o primeiro passo foi decidir que iríamos construir nosso
-aplicativo utilizando testes. Para isso é necessário quebrar nosso
-aplicativo em códigos fontes separados:
-* um código para conter as implementações das funções da nossa
-  aplicação, que estamos chamando de *core*.
-* outro código para testar o funcionamento destas funções
-* e outro que seja o aplicativo propriamente dito.
-* para utilizar as funcionalidades de core será necessário incluir o
-  cabeçalho (arquivo `.h`) antes de invocá-lo. Além disso, será
-  necessário ligá-lo durante a compilação do teste ou aplicativo.
+Vamos adicionar um `main` ao nosso arquivo de teste e chamar a função
+`testLerConteudoDoArquivo` a partir dele:
 
-Escolhendo a primeira função que será implementada::
-A próxima etapa foi escolher que função iremos implementar. Para a
-implementação da língua do i, julgamos que a primeira funcionalidade
-deveria ser ler o conteúdo que será traduzido.
-
-Escrevendo o teste antes da implementação::
-Antes de implementar uma função para ler o conteúdo, primeiro
-escrevemos o teste que irá validar a implementação:
-+
 [source,c]
 ----
-char* NOME_DO_ARQUIVO = "...";
-char* CONTEUDO_ESPERADO = "...";
-void testLerConteudoDoArquivo(){
-  char* conteudo = lerConteudoDoArquivo(NOME_DO_ARQUIVO);
-  verificaConteudosSaoIguais(conteudo, CONTEUDO_ESPERADO);
-}
-----
-+
-Neste momento as seguintes funções ainda não existiam:
-`lerConteudoDoArquivo` e `verificaConteudosSaoIguais`. No entanto ao
-escrevermos assim, nós já decidimos qual serão os propósitos delas e
-como elas serão invocadas. 
+#include <stdlib.h>
+#include "lingua-do-i-core.h"
 
-Preparar os dados do teste::
-O próximo passo foi criar um arquivo com conteúdo textual. Por enquanto
-bastava apenas uma frase. Escolhi uma  música de Luiz Gonzaga, chamada
-_Súplica Cearense_, e salvei apenas a primeira frase no arquivo
-`musica-trecho.txt`. Em seguida atualizei o arquivo do teste:
-+
-[source,c]
-----
 char* NOME_DO_ARQUIVO = "musica-trecho.txt";
 char* CONTEUDO_ESPERADO = "Oh! Deus, perdoe este pobre coitado";
-----
+void testLerConteudoDoArquivo(){
+	char* conteudo = lerConteudoDoArquivo(NOME_DO_ARQUIVO);
+	verificaConteudosSaoIguais(conteudo, CONTEUDO_ESPERADO);
+}
 
-O primeiro passo ao escrever este arquivo foi decidir o que desejamos
-fazer primeiro:  
+int main(void) {
+	testLerConteudoDoArquivo();
 
-Criando implementação idiota da função::
-O próximo passo foi criar o arquivo de cabeçalho de core, adicionando
-o protótipo da função `lerConteudoDoArquivo`:
-+
-[source,c]
-----
-#ifndef LINGUA_DO_I_CORE_H_
-#define LINGUA_DO_I_CORE_H_
-
-char* lerConteudoDoArquivo(char* nomeDoArquivo);
-
-#endif
-----
-+
-Em seguida incluímos o cabeçalho no arquivo de teste e para possibilitar
-invocação da função, e do core onde a função será implementada:
-+
-[source,c]
-----
-#include "lingua-do-i-core.h"
-----
-+
-Por último criamos uma implementação estúpida da função em core:
-+
-[source,c]
-----
-char* lerConteudoDoArquivo(char* nomeDoArquivo){
-  return NULL;
+	return EXIT_SUCCESS;
 }
 ----
 
-Atualização do Makefile::
-Inclusão das regras para compilação e execução dos testes:
-+
-----
-lingua-do-i-test: lingua-do-i-test.c
-  $(CC) $(CFLAGS) lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
-----
 
-Implementação da verificação do teste::
-Neste passo implementamos a função que irá validar o teste:
-+
+Nós temos algumas funções que ainda não foram escritas, mas vamos
+tentar compilar o código mesmo assim, para verificar os erros que
+serão aprensentados pelo compilador:
+
+.Execução do comando para compilação
+....
+
+$ make clean && make lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test.c: Na função ‘testLerConteudoDoArquivo’:
+lingua-do-i-test.c:7:2: aviso: implicit declaration of function ‘lerConteudoDoArquivo’ [-Wimplicit-function-declaration]
+lingua-do-i-test.c:7:19: aviso: initialization makes pointer from integer without a cast [habilitado por padrão]
+lingua-do-i-test.c:8:2: aviso: implicit declaration of function ‘verificaConteudosSaoIguais’ [-Wimplicit-function-declaration]
+/tmp/ccEcEbRI.o: In function `testLerConteudoDoArquivo':
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa1/src/lingua-do-i-test.c:7:
+undefined reference to `lerConteudoDoArquivo' <1>
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa1/src/lingua-do-i-test.c:8:
+undefined reference to `verificaConteudosSaoIguais' <1>
+collect2: ld returned 1 exit status
+make: ** [lingua-do-i-test] Erro 1
+....
+<1> Mensagem informando que não foram encontradas referências às
+    funções `lerConteudoDoArquivo` e `verificaConteudosSaoIguais`.
+
+Como esperado, ocorreu erro no processo de compilação devido a
+utilização de funções que não foram implementadas ainda.
+
+
+==== Implementando a função verificaConteudosSaoIguais
+
+Nosso próximo passo será a implementação da função que verifica se o
+teste irá falha ou não:
+
 [source,c]
 ----
+#include <string.h> <1>
+
+...
+
 void verificaConteudosSaoIguais(char* conteudo, char* esperado){
-  if(conteudo == NULL){
-    exit(EXIT_FAILURE);
-  }
-  int comparacao = strcmp(conteudo, esperado);
-  if (comparacao!=0){
-    exit(EXIT_FAILURE);
-  };
+	if(conteudo == NULL){
+		exit(EXIT_FAILURE); // não pode ser NULL <2>
+	}
+	int comparacao = strcmp(conteudo, esperado); // <3>
+	if (comparacao!=0){
+		exit(EXIT_FAILURE); // strings tem que ser iguais <2>
+	};
 }
 ----
+<1> Inclusão de `string.h`, que possui várias funções de manipulação
+    de strings, inclusive comparação.
+<2> Finaliza aplicação indicando que houve um erro.
+<3> Executa `strcomp` (definida em <<string_h>>) que compara dois
+    strings, retorna `0` somente se ambos os string forem iguais. A
+    variável `comparacao` irá guardar o resultado da comparação.
 
-Execução do teste::
-Para execução do teste utilizamos o seguinte comando:
-+
+Com a implementação desta função esperamos que o teste falhe caso 
+`conteudo` for diferente de `esperado`.
+
+Vamos compilar novamente para verificar os erros.
+
+.Compilação após implementação da função verificaConteudosSaoIguais
 ....
-include::{local}/etapa1/make-command.txt[]
+$ make clean && make lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o
+lingua-do-i-test
+lingua-do-i-test.c: Na função ‘testLerConteudoDoArquivo’:
+lingua-do-i-test.c:18:2: aviso: implicit declaration of function
+‘lerConteudoDoArquivo’ [-Wimplicit-function-declaration]
+lingua-do-i-test.c:18:19: aviso: initialization makes pointer from
+integer without a cast [habilitado por padrão]
+/tmp/ccqV7RJy.o: In function `testLerConteudoDoArquivo':
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa1/src/lingua-do-i-test.c:18:
+undefined reference to `lerConteudoDoArquivo'
+collect2: ld returned 1 exit status
+make: ** [lingua-do-i-test] Erro 1
 ....
-+
-Os arquivos estão compilando e o teste retorna erro, indicando que os
-strings não são iguais.
 
-Estamos no bom caminho, agora só precisamos
-`lerConteudoDoArquivo` para o teste passar.
+Ótimo, agora só estamos com um erro, devido a ausência da
+implementação de `lerConteudoDoArquivo`.
 
-=== Etapa 2: Utilizando assert ao invés de exit
+==== Implementando estúpida de lerConteudoDoArquivo
 
-(((assert)))
+Vamos adicionar uma implementação estúpida de `lerConteudoDoArquivo`
+somente para conseguir compilar o código.
 
-Nesta etapa vamos apenas utilizar a função `assert` ao invés de
-`exit(EXIT_FAILURE)`.
+.Código fonte
+{online}/etapa1/src/lingua-do-i-core.c[{local}/etapa1/src/lingua-do-i-core.c]
 
-A função `assert`, definida em <<assert_h>>, costuma ser utilizada para
-depuração dos programas. Caso a função receba uma expressão com o
-valor igual a 0 (zero) causará uma falha na execução da aplicação,
-indicando, através de uma mensagem, a linha do código fonte onde a
-falha está ocorrendo. 
+[source, c]
+.Core do programa, onde as funções serão implementadas
+----
+include::{local}/etapa1/src/lingua-do-i-core.c[]
+----
+<1> Inclusão do arquivo de cabeçalho, onde estarão definidas as funções
+    públicas (visíveis ao ligar este arquivo). 
+<2> Implementação estúpida da função que desejamos implementar.
+
+Com esta função implementada, vamos tentar compilar novamente:
+
+.Compilação após implementação da função que faltava
+....
+$ make clean && make lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test.c: Na função ‘testLerConteudoDoArquivo’:
+lingua-do-i-test.c:18:2: aviso: implicit declaration of function ‘lerConteudoDoArquivo’ [-Wimplicit-function-declaration]
+lingua-do-i-test.c:18:19: aviso: initialization makes pointer from integer without a cast [habilitado por padrão]
+....
+
+Algo estranho aconteceu, apesar de realizar a implementação da última
+função que estava faltando. O compilador continua indicando que não
+encontrou a função! Por que será?
+
+==== Implementando o cabeçalho de core
+Percebemos que ao compilar o arquivo de teste, não foi possível
+encontrar a função `lerConteudoDoArquivo` que estava implementada no
+arquivo `lingua-do-i-core.c`.
+
+Isto costuma ocorrer pelas seguintes razões:
+
+- A função não existe
+- A função existe mas não está visível no processo de compilação
+  devido a ligação ou falta de inclusão do arquivo de cabeçalho,
+  indicando as definições das funções.
+
+No nosso caso, faltou implementar o arquivo de cabeçalho, que já
+estava sendo incluído em ambos os arquivos:
+
+.Código fonte
+{online}/etapa1/src/lingua-do-i-core.h[{local}/etapa1/src/lingua-do-i-core.h]
+
+[source, c]
+.Cabeçaho do Core
+----
+include::{local}/etapa1/src/lingua-do-i-core.h[]
+----
+
+<1> Estratégia para definição de cabeçalho que evita erros caso o
+    arquivo seja incluído mais de uma vezes. Todos os arquivos de
+    cabeçalho da biblioteca padrão de C utiliza esta estratégia.
+<2> Definição da função que foi implementada no arquivo `.c`
+
+Vamos compilar novamente!
+
+
+.Compilando após implementação do cabeçalho
+....
+$ make clean && make lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+....
+
+Ótimo! O arquivo agora está compilando. 
+
+==== Arquivo texto para o teste
+
+Antes de executar o teste, ainda é preciso criar o arquivo de texto
+contendo o conteúdo de `CONTEUDO_ESPERADO`. Escolhi uma música de Luiz
+Gonzaga, chamada _Súplica Cearense_, e salvei apenas a primeira frase
+no arquivo `musica-trecho.txt`.
+
+.Código fonte
+{online}/etapa1/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Conteúdo do arquivo que está sendo utilizado no testes
+----
+include::{local}/etapa1/src/musica-trecho.txt[]
+----
+
+O conteúdo deste arquivo contém apenas uma frase, para simplificar a
+execução do teste. A ((codificação)) utilizada na escrita do arquivo
+foi a UFT-8.
+
+O programa `hexdump`, disponível no Linux, exibe o conteúdo do arquivo
+em hexadecimal. Nele você poderá ver como os caracteres estão escritos
+no disco:
+
+.Execução do hexdump para verificar conteúdo do arquivo em hexadecimal
+----
+include::{local}/etapa1/hexdump-command.txt[]
+----
+
+Pela execução do `hexdump`, verificamos que o arquivo possui *0x23
+bytes de tamanho* (equivale a `2x16+3=35`), indicado na última linha.
+
+Também podemos perceber que todos os carácteres foram codificados com
+1 byte cada (basta contar os carácteres). 
+
+O arquivo não termina com o carácter de fim de linha -- ele finaliza
+apenas com o carácter `o`, que tem seu código ASCII igual a `0x6f`. 
+
+TIP: Você pode consultar a tabela ASCII em http://www.asciitable.com,
+ou se estiver no Linux através do comando `man ascii`.
+
+IMPORTANT: Ao criar um arquivo de texto para os testes, certifique-se
+de conhecer o conteúdo do arquivo criado. As vezes os editores de
+texto podem adicionar carácteres de fim de linha que talvez não esteja
+visível para você. A execução do `hexdump` é recomendada nestes casos.
+
+==== Verificando o teste falhar
+
+O nosso código já está compilando, agora vamos executar o teste e
+verificar o resultado:
+
+.Execução do teste
+....
+$ make clean && make lingua-do-i-test && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+make: ** [test_all] Erro 1
+....
+
+Como esperado, nosso teste está falhando. Lembra que nossa função
+`lerConteudoDoArquivo` possui uma implementação estúpida? Não há como
+passar com uma implementação daquela.
+
+Apesar do erro esperado, a mensagem de erro do teste não foi muito
+amigável, indicando apenas que houve `Erro 1`. Vamos corrigir isto na
+próxima etapa.
 
 ==== Código da etapa
 
-===== Teste das funcionalidades
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
 
 .Código fonte
-{online}/etapa2/src/lingua-do-i-test.c[{local}/etapa2/src/lingua-do-i-test.c]
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
 
-[[e_assert]]
-[source, c]
-.Inclusão de assert no código fonte para os testes
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+Certifique-se de ter compreendido esta etapa antes de prosseguir para
+a próxima.
+
+=== Etapa 2: Utilizando assert ao invés de exit
+
+:etapa: etapa2
+
+(((assert)))
+
+Na final da etapa anterior vimos que nosso teste não apresentava um
+mensagem de erro amigável, informando qual a razão da falha.  Nesta
+etapa vamos apenas utilizar a função `assert` ao invés de
+`exit(EXIT_FAILURE)`, para mudar isso.
+
+A função `assert`, definida em <<assert_h>>, costuma ser utilizada para
+depuração dos programas. Caso a função receba uma expressão com o
+valor igual a 0 (mero) causará uma falha na execução da aplicação,
+indicando, através de uma mensagem, a linha do código fonte onde a
+falha está ocorrendo. 
+
+[[exemplo_assert]]
+==== Utilizando assert no teste 
+Neste passo incluímos a biblioteca <<assert_h>> e atualizamos a função
+`verificaConteudosSaoIguais` para chamar a função `assert`, incluindo
+uma mensagem para descrever o erro:
+
+[source,c]
 ----
-include::{local}/etapa2/src/lingua-do-i-test.c[]
+#include <assert.h> <1>
+// (...)
+void verificaConteudosSaoIguais(char* conteudo, char* esperado){
+assert(conteudo != NULL && "conteúdo não pode ser NULL"); <2>
+
+assert( strcmp(conteudo, esperado) == 0 <2>
+        && "conteúdo deve ser igual ao esperado");
+}
 ----
 <1> Inclusão da biblioteca `assert.h`
 <2> Atualização das verificações utilizando `assert`
 
-==== Passos de implementação da etapa
-
-Atualização do teste::
-Neste passo incluímos a biblioteca <<assert_h>> e atualizamos a função
-`verificaConteudosSaoIguais` para chamar a função `assert`, incluindo
-uma mensagem para descrever o erro:
-+
-[source,c]
-----
-#include <assert.h>
-// (...)
-void verificaConteudosSaoIguais(char* conteudo, char* esperado){
-  assert(conteudo != NULL && "conteúdo não pode ser NULL");
-
-  assert( strcmp(conteudo, esperado) == 0
-          && "conteúdo deve ser igual ao esperado");
-}
-----
-
-Compilação e execução do teste::
-O próximo passo é compilar e executar o teste, verificando que ele
-continua falhando:
+==== Compilação e execução do teste
+Vamos compilar e executar o teste, verificando que ele
+continuará falhando:
 +
 ....
-include::{local}/etapa2/make-command.txt[]
+$ make clean && make && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:7: verificaConteudosSaoIguais: Assertion `conteudo != ((void *)0) && "conteúdo não pode ser NULL"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
 ....
 
 Apesar do teste continuar falhando, agora nós temos certeza do ponto
-onde está ocorrendo a falha, na linha 8 do arquivo
-`lingua-do-i-test.c`, como indicado na mensagem: `lingua-do-i-test.c:8`.
+onde está ocorrendo a falha, sabemos exatamente o arquivo e a linha,
+como indicado na mensagem: `lingua-do-i-test.c:7`.
+
+Maravilha! Agora estamos recebendo mensagens mais informativas.
+
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
 
 === Etapa 3: Fazendo o teste passar
+:etapa: etapa3
 
 Nesta etapa iremos fazer o teste passar, para garantir que nosso teste
 está funcionando corretamente.
@@ -451,9 +579,7 @@ está funcionando corretamente.
 Para isso é necessário apenas que nossa função `lerConteudoDoArquivo`
 retorne o valor esperado, que corresponde ao conteúdo do arquivo.
 
-==== Código da etapa
-
-===== Implementação para fazer o teste passar
+==== Implementação para fazer o teste passar
 
 .Código fonte
 {online}/etapa3/src/lingua-do-i-core.c[{local}/etapa3/src/lingua-do-i-core.c]
@@ -487,7 +613,33 @@ IMPORTANT: Apesar de ser esperado que o teste passe, é importante
 executá-lo e vê-lo passando, pois as vezes a verificação do teste está
 implementada errada, proporcionando conclusões erradas.
 
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+
+
 === Etapa 4: Lendo do arquivo
+:etapa: etapa4
 
 Nesta etapa precisamos implementar a leitura do arquivo e verificar o
 teste passando.
@@ -497,9 +649,7 @@ invocadas para realizar tarefas comuns, recomendo acessar a página
 https://gist.github.com/edusantana/8291576 onde estão reunidos
 diversos testes demonstrando as funções de manipulação de arquivos.
 
-==== Código da etapa
-
-===== Fornecendo código para leitura de arquivo
+==== Fornecendo código para leitura de arquivo
 
 .Código fonte
 {online}/etapa4/src/lingua-do-i-core.c[{local}/etapa4/src/lingua-do-i-core.c]
@@ -554,11 +704,33 @@ include::{local}/etapa4/make-command.txt[]
 Nosso teste continua passando! Isto quer dizer que nossa função foi
 capaz de ler o conteúdo do arquivo corretamente.
 
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+
 === Etapa 5: Trocando as vogais do string por i
 
-xx
-
-==== Passos
+:etapa: etapa5
 
 Inclusão de teste de tradução::
 xx.
@@ -594,15 +766,34 @@ Abortado (imagem do núcleo gravada)
 
 ==== Código da etapa
 
-incluir código aqui.
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
 
 === Etapa 6: Fazendo o teste passar
 
 :etapa: etapa6
 
-==== Passos
 
-===== Fazendo o teste passar
+==== Fazendo o teste passar
 Alteramos a função `traduzParaLingaDoI` para retornar o valor
 esperado.
 
@@ -628,13 +819,28 @@ lingua-do-i-test
 Ótimo, nosso teste está passando! 
 
 ==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
 .Código fonte
 {online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
 
-[source, c]
-----
-include::{local}/{etapa}/src/lingua-do-i-core.c[]
-----
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
 
 === Etapa 7: Implementando troca das vogais
 
@@ -702,6 +908,30 @@ include::{local}/{etapa}/src/lingua-do-i-core.c[]
 <4> Optamos por criar uma nova mensagem como resposta, ao invés de
     alterar a mensagem original.
 
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+
 [[sec_etapa8]]
 === Etapa 8: Depurando a aplicação
 :etapa: etapa8
@@ -721,13 +951,11 @@ TIP: Apesar de não ser um pré-requisito para continuação deste
 capítulo, convidamos você a ler o <<cap_depuracao>> antes de
 continuar, para conhecer o processo de depuração.
 
-==== Passos
-
-===== Depuração do programa
+==== Depuração do programa
 A depuração do programa pode ser vista na <<sec_depuracao>> e a
 identificação do problema na <<sec_depuracao_resultado>>.
 
-===== Correção e verificação do teste passando
+==== Correção e verificação do teste passando
 
 Após a correção do código fonte, executamos o teste novamente:
 
@@ -754,6 +982,28 @@ include::{local}/{etapa}/src/lingua-do-i-test.c[]
 ----
 <1> Correção realizada
 
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
 
 [[sec_etapa9]]
 === Etapa 9: Inclusão de novos testes
@@ -762,9 +1012,7 @@ Após a correção, nossos testes estão passando. Mas será que a
 implementação de `traduzParaLingaDoI` está correta?  Vamos adicionar
 novos testes para garantir isso.
 
-==== Passos
-
-===== Adição de testes
+==== Adição de testes
 
 [source,c]
 ----
@@ -777,7 +1025,7 @@ void testTraducaoParaLinguaDoI(){
 }
 ----
 
-===== Execução do teste
+==== Execução do teste
 
 .Execução do teste
 ....
@@ -792,7 +1040,7 @@ Abortado (imagem do núcleo gravada)
 Como a falha ocorreu devido a inclusão do novo teste, isto que dizer
 que precisamos atualizar a implementação para fazer o teste passar.
 
-===== Atualizar a implementação para fazer o teste passar
+==== Atualizar a implementação para fazer o teste passar
 
 A diferença do teste adicionado é que ele adiciona uma vogal
 maiúscula, e outra vogal com acento: *``Oh! Deus, será''*.
@@ -836,7 +1084,7 @@ char traduzCaracterParaLinguaDoI(char original){
 <1> Inclusão de conversão de letra maiúscula.
 <2> Conversão de caracteres com acentos.
 
-===== Execução dos testes após modificação
+==== Execução dos testes após modificação
 .Execução dos testes após modificação
 ....
 $ make clean && make && make test_all
@@ -877,6 +1125,30 @@ make: *** [test_all] Abortado (arquivo core criado)
 Quando executamos o teste, verificamos que o compilador apresentou
 vários avisos e o teste falhou.
 
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+
 === Etapa 10: Tratando texto com acentos
 
 :etapa: etapa10
@@ -902,9 +1174,8 @@ voltar a ele.
 TIP: Você conhecer mais sobre o *Algorítmo do Avestruz* em
 http://pt.wikipedia.org/wiki/Algoritmo_do_avestruz.
 
-==== Passos
 
-===== Desfazer teste com acentos
+==== Desfazer teste com acentos
 [source,c]
 ----
 char* MENSAGEM_ORIGINAL2="Oh! Deus, será que o senhor se zangou";
@@ -913,7 +1184,7 @@ char* TRADUCAO_ESPERADA2="Ih! Diis, sirá qii i sinhir si zingii";<1>
 <1> Substituição do `í` por `á`. Por enquanto nosso programa não irá
     tratar acentos. 
 
-===== Desfazer implementação de core que tratava acentos
+==== Desfazer implementação de core que tratava acentos
 
 [source,c]
 ----
@@ -942,7 +1213,7 @@ char traduzCaracterParaLinguaDoI(char original){
 	return resposta;
 }
 ----
-===== Re-execução dos testes
+==== Re-execução dos testes
 
 .Re-execução dos testes após remoção de tratamento de acentos
 ....
@@ -954,7 +1225,7 @@ lingua-do-i-test
 ./lingua-do-i-test
 ....
 
-===== Criação de arquivo TODO
+==== Criação de arquivo TODO
 
 Criamos um arquivo entitulado `TODO.txt` que manterá registro de
 atividades que gostaríamos de realizar no futuro:
@@ -971,8 +1242,6 @@ include::{local}/{etapa}/TODO.txt[]
 A criação de um arquivo *TODO* possibilita comunicar para as demais
 pessoas (envolvidas ou que irão se envolver no projeto) onde elas
 podem contribuir para o projeto.
-
-==== Código fonte da etapa
 
 ===== Código do teste
 .Código fonte
@@ -992,15 +1261,37 @@ include::{local}/{etapa}/src/lingua-do-i-test.c[]
 include::{local}/{etapa}/src/lingua-do-i-core.c[]
 ----
 
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+
 === Etapa 11: Salvando conteúdo em arquivo
 
 Além de traduzir mensagens nosso programa também precisa salvar seu
 conteúdo em arquivo. Nesta etapa vamos atualizar nossa implementação
 para possibilitar o salvamento.
 
-==== Passos
-
-===== Adicionar teste de salvamento de conteúdo
+==== Adicionar teste de salvamento de conteúdo
 
 Mas uma vez, antes de iniciar a implementação da nossa funcionalidade
 iremos escrever um teste para ela.
@@ -1045,7 +1336,7 @@ void testSalvaConteudoEmArquivo(){
 <5> Fechamento do arquivo.
 
 
-===== Atualização do arquivo de cabeçalho do core
+==== Atualização do arquivo de cabeçalho do core
 Sabemos que temos algumas alterações pendentes para serem realizadas
 no arquivo de cabeçalho do core, vamos realizá-las agora:
 
@@ -1059,7 +1350,7 @@ char* lerConteudoDeArquivoArberto(FILE* arquivo); <2>
 <2> Declaração de função já implementada em core mas que não estava
     visível externamente ao arquivo.
 
-===== Implementação vazia para possibilitar teste falhar
+==== Implementação vazia para possibilitar teste falhar
 
 Antes de compilar e executar o teste, precisamos ainda criar uma
 implementação vazia de `salvaConteudo`:
@@ -1071,7 +1362,7 @@ void salvaConteudo(FILE* arquivoDestino, char* conteudo){
 }
 ----
 
-===== Verificando o teste falhando
+==== Verificando o teste falhando
 
 Com a implementação da função realizada, vamos compilar os arquivos e
 executar os testes:
@@ -1092,7 +1383,7 @@ Abortado (imagem do núcleo gravada)
 Como esperado, o teste falhou pois a função que deveria escrever o
 conteúdo está vazia.
 
-===== Fazendo o teste passar
+==== Fazendo o teste passar
 
 Desta vez não há uma forma simples de fazer o teste passar, precisamos
 realmente escrever o conteúdo no arquivo para que o teste passe.
@@ -1120,6 +1411,30 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 ....
 
 Ótimo, nossos testes estão passando novamente!
+
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/etapa1/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um

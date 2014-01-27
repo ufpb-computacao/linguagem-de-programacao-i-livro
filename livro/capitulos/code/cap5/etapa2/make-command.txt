@@ -1,7 +1,0 @@
-$ make clean && make && make test_all
-rm -rf lingua-do-i lingua-do-i-test
-gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
-gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
-./lingua-do-i-test
-lingua-do-i-test: lingua-do-i-test.c:8: verificaConteudosSaoIguais: Assertion `conteudo != ((void *)0) && "conteúdo não pode ser NULL"' failed.
-make: *** [test_all] Abortado (arquivo core criado)

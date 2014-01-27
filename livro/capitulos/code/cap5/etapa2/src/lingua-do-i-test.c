@@ -1,5 +1,4 @@
 #include <assert.h> // <1>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "lingua-do-i-core.h"
