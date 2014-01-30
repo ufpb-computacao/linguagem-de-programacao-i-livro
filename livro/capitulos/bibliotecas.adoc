@@ -19,6 +19,11 @@ IMPORTANT: Nas seções a seguir nós resumimos a documentação das
 funções e bibliotecas utilizadas neste livro. No entanto, nós
 recomendamos a consulta da documentação original (em inglês).
 
+
+[id="sec_main",reftext="main()"]
+=== main()
+TODO: Explicar os parâmetros da função `main`.
+
 [id="assert_h",reftext="assert.h"]
 === assert.h
 
