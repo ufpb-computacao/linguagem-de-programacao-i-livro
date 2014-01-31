@@ -1755,8 +1755,112 @@ arquivos:
 .Código fonte
 {online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
 
-// ==== Fazendo o teste passar
+=== Etapa 13: Fazendo os testes de entrada passarem
+:etapa: etapa13
 
+
+==== Fazendo os testes passarem
+
+Antes de fazer o teste passar, vamos verificar o teste falhando
+novamente:
+
+.Verificando teste da entrada padrão falhando
+....
+$ make clean && make lingua-do-i-test && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:53: verificaEntradaFoiEntradaPadrao: Assertion `entrada == stdin && "Entrada deveria ser Entrada Padrão"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
+....
+
+Para o teste passar, precisamos retornar `stdin` quando o aplicativo
+for invocado sem parâmetros:
+
+[source, c]
+----
+FILE* determinaEntrada(int argc, const char* argv[]){
+	FILE* entrada;
+	if (argc == 1){
+		entrada = stdin; <1>
+	}else{
+		entrada = stdin;
+	}
+	return entrada;
+}
+----
+<1> Quando `argc == 1`, então não há nenhum parâmetro e devemos
+    retornar a entrada padrão. 
+
+Vamos executar os testes novamente:
+
+.Re-execução dos testes
+....
+$ make clean && make lingua-do-i-test && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:58: verificaEntradaFoiArquivoValido: Assertion `entrada != ((void *)0) && entrada!= stdin && "Entrada deveria ser um arquivo válido"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
+....
+
+Ótimo, nosso primeiro teste passou, e a falha do segundo foi
+apresentada. Próximo passo será fazer o segundo teste passar:
+
+[source,c]
+.Ajuste para fazer o segundo teste passar
+----
+FILE* determinaEntrada(int argc, const char* argv[]){
+	FILE* entrada;
+	if (argc == 1){
+		entrada = stdin;
+	}else{
+		entrada = fopen(argv[1], "r"); <1>
+	}
+	return entrada;
+}
+----
+<1> Utiliza <<fopen>> para abrir arquivo para leitura, utilizando o
+    nome do arquivo passado como parâmetro.
+
+.Re-execução dos testes
+....
+$ make clean && make lingua-do-i-test && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+....
+
+Com esta última modificação todos os nossos testes estão passando! Na
+próxima etapa iremos unir a implementação de core no `main()`.
+
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/{etapa}/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+=== Etapa 14: Fazendo os testes de entrada passarem
+:etapa: etapa14
+
+TODO.
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
