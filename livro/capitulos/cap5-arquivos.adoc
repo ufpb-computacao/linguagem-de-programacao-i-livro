@@ -1857,10 +1857,101 @@ arquivos:
 .Código fonte
 {online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
 
-=== Etapa 14: Fazendo os testes de entrada passarem
+=== Etapa 14: Implementando aplicaçaõ da lingua-do-i
 :etapa: etapa14
 
-TODO.
+==== Construindo o main
+
+Agora que já possuímos várias funções implementadas vamos
+incorporá-las ao main da aplicação.
+
+[source, c]
+----
+#include <stdio.h>
+#include <stdlib.h>
+#include "lingua-do-i-core.h" <1>
+
+int main(int argc, const char* argv[]) {<2>
+
+	FILE* entrada = determinaEntrada(argc, argv);
+
+	if (entrada){<3>
+		char* conteudo=lerConteudoDeArquivoArberto(entrada);<4>
+		char* mensagem = traduzParaLingaDoI(conteudo);<4>
+		salvaConteudo(stdout, mensagem);<5>
+	}else{
+		fprintf(stderr, "Problema ao abrir arquivo: %s\n",
+				argv[1]);<6>
+		exit(EXIT_FAILURE);<6>
+	}
+
+	return EXIT_SUCCESS;
+}
+----
+
+<1> Nosso primeiro passo é incluir o cabeçalho de core, para poder
+    utilizar as funções definidas lá.
+<2> Atualizamos o cabeçalho do `main`, adicionando os parâmetros que
+    serão atribuídos pelo sistema operacional ao invocar a aplicação.
+<3> Em C é comum a checagem de parâmetros desta forma, caso o
+    parâmetro seja diferente de zero ou `NULL`, então é um valor válido.
+<4> Ler conteúdo da entrada e traduz para língua do i
+<5> Salva a mensagem traduzida na saída padrão, o usuário poderá
+    redirecionar para um arquivo se desejar.
+<6> Caso o arquivo não exista, a aplicação finaliza com mensagem de
+    erro.
+
+A seguir você pode conferir a compilação com sucesso da aplicação:
+
+.Compilação de lingua-do-i
+....
+$ make clean && make && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+....
+
+
+
+==== Executando lingua-do-i
+
+Primeiro vamos testar a tradução lendo de um arquivo passado como
+parâmetro:
+
+.Lendo de arquivo passado como parâmetro
+....
+$ ./lingua-do-i musica-trecho.txt 
+Ih! Diis, pirdii isti pibri ciitidi
+....
+
+Em seguida, vamos testar ler da entrada padrão, direcionada de um
+arquivo:
+
+....
+$ ./lingua-do-i < musica-trecho.txt 
+Ih! Diis, pirdii isti pibri ciitidi
+....
+
+Ainda faltamos testar se foi passado um arquivo que não existe:
+
+....
+$ ./lingua-do-i arquivo-que-nao-existe.txt
+Problema ao abrir arquivo: arquivo-que-nao-existe.txt
+....
+
+Nosso aplicativo foi capaz de ler de um arquivo, passado como
+parâmetro ou lendo direcionado pela entrada padrão, mas será que ele é
+capaz de ler a partir da entrada padrão sem ser direcionado de um
+arquivo? Vamos fazer o teste!
+
+Tentando ler da entrada padrão
+....
+$ cat musica-trecho.txt | ./lingua-do-i
+....
+
+O resultado esperado não foi satisfatório, ele deveria ser capaz de
+ler da entrada padrão, o que está errado com a nossa implementação?
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
