@@ -1863,7 +1863,7 @@ arquivos:
 ==== Construindo o main
 
 Agora que já possuímos várias funções implementadas vamos
-incorporá-las ao main da aplicação.
+incorporá-las ao `main` da aplicação.
 
 [source, c]
 ----
