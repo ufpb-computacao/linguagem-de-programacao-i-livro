@@ -147,6 +147,14 @@ TODO.
 ==== fprintf
 TODO.
 
+==== frewind
+TODO.
+
+[[fgets]]
+[id="fgets", reftext="fgets()"]
+==== fgets
+TODO.
+
 ////
 Terminando arquivo com linha em branco
 ////

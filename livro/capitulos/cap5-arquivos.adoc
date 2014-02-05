@@ -1945,13 +1945,333 @@ parâmetro ou lendo direcionado pela entrada padrão, mas será que ele é
 capaz de ler a partir da entrada padrão sem ser direcionado de um
 arquivo? Vamos fazer o teste!
 
-Tentando ler da entrada padrão
+Tentando ler da entrada padrão:
 ....
 $ cat musica-trecho.txt | ./lingua-do-i
 ....
 
 O resultado esperado não foi satisfatório, ele deveria ser capaz de
 ler da entrada padrão, o que está errado com a nossa implementação?
+
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/{etapa}/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
+
+=== Etapa 15: Processando entrada por fluxo
+
+:etapa: etapa15
+
+
+==== Incluindo teste para tradução de fluxo
+
+Neste teste, estamos desejando implementar uma função
+`traduzFluxoDeEntradaNaSaida` que irá traduzir a mensagem de entrada e
+salvar a tradução na saída.  
+
+[source,c]
+.Teste de tradução de fluxo
+----
+char* MUSICA_COMPLETA = "musica-completa.txt";
+char* MUSICA_COMPLETA_TRAUDIZADA = "musica-completa-traduzida.txt";
+void testTraduzFluxoDeEntrada(){
+
+	FILE* entrada = fopen(MUSICA_COMPLETA,"r");
+	FILE* saida = tmpfile();
+	traduzFluxoDeEntradaNaSaida(entrada,saida);
+
+	verificaMusicaFoiTraduzidaCorretamenteNaSaida(saida,
+			MUSICA_COMPLETA_TRAUDIZADA);
+
+	fclose(entrada);
+	fclose(saida);
+}
+----
+
+Para garantir a tradução correta, criamos um arquivo temporário para
+servir como saída da função, em seguida,
+`verificaMusicaFoiTraduzidaCorretamenteNaSaida` irá ler o conteúdo
+escrito em `saida` e verificar o conteúdo do arquivo
+`MUSICA_COMPLETA_TRAUDIZADA`:
+
+[source,c]
+----
+void verificaMusicaFoiTraduzidaCorretamenteNaSaida(
+    FILE* fluxo, char* arquivoComTraducaoCorreta){
+  
+  rewind(fluxo); // volta para ler do início da saída
+  char* conteudo=lerConteudoDeArquivoArberto(fluxo);
+  char* traducao=lerConteudoDoArquivo(arquivoComTraducaoCorreta);
+
+  assert( strcmp(conteudo, traducao) == 0
+      && "Arquivo deve ser traduzido corretamente");
+}
+----
+
+==== Salvando a letra da música e sua tradução
+
+.Música completa
+....
+Oh! Deus, perdoe este pobre coitado
+Que de joelhos rezou um bocado
+Pedindo pra chuva cair sem parar
+
+(...)
+
+Desculpe eu pedir a toda hora pra chegar o inverno
+Desculpe eu pedir para acabar com o inferno
+Que sempre queimou o meu Ceará
+....
+
+.Música traduzida
+....
+Ih! Diis, pirdii isti pibri ciitidi
+Qii di jiilhis rizii im bicidi
+Pidindi pri chivi ciir sim pirir
+
+(...)
+
+Discilpi ii pidir i tidi hiri pri chigir i invirni
+Discilpi ii pidir piri icibir cim i infirni
+Qii simpri qiiimii i mii Ciirá
+....
+
+NOTE: Ainda não estamos tratando vogais acentuadas.
+
+==== Fazendo o teste falhar
+
+.Compilando o código
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test.c: Na função ‘testTraduzFluxoDeEntrada’:
+lingua-do-i-test.c:107:2: aviso: implicit declaration of function ‘traduzFluxoDeEntradaNaSaida’ [-Wimplicit-function-declaration]
+/tmp/ccPNDB7P.o: In function `testTraduzFluxoDeEntrada':
+/home/santana/livro/capitulos/code/cap5/etapa15/src/lingua-do-i-test.c:107: undefined reference to `traduzFluxoDeEntradaNaSaida'
+collect2: ld returned 1 exit status
+make: ** [lingua-do-i-test] Erro 1
+....
+
+O compilador nos avisou que precisamos criar a função
+`traduzFluxoDeEntradaNaSaida`:
+
+[source,c]
+.Atualização do cabeçalho
+----
+void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida);
+----
+
+[source,c]
+.Criando função vazia no core
+----
+void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
+}
+----
+
+.Compilando e executando teste
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:98: verificaMusicaFoiTraduzidaCorretamenteNaSaida: Assertion `strcmp(conteudo, traducao) == 0 && "Arquivo deve ser traduzido corretamente"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
+....
+
+Ótimo, nosso teste está falhando!
+
+==== Fazendo o teste passar
+Uma vez que nosso teste está falhando, o próximo passo é fazê-lo
+passar com o esforço mínimo. Para isso, vamos atualizar a função
+`traduzFluxoDeEntradaNaSaida` para escrever na saída o valor que
+esperamos:
+
+[source,c]
+.Fazendo o teste passar com esforço mínimo
+----
+void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
+	char* traducao = lerConteudoDoArquivo("musica-completa-traduzida.txt");
+	int tamanhoDaTraducao = strlen(traducao);
+	fwrite(traducao,1,tamanhoDaTraducao,saida);
+}
+----
+
+Executando o teste para verificar passando:
+
+.Verificação do teste passando
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+....
+
+Ótimo! Nossos testes estão passando novamente. Agora precisamos
+substituir a implementação da função por outra que continue passando.
+
+==== Implementando tradução por fluxo
+
+Quando estamos tratando um fluxo, precisamos lê-lo por partes. Só
+podemos ler uma outra parte após tratar a anterior. Em nosso caso,
+vamos dividir o fluxo em linhas. Ficaremos em _loop_, lendo uma linha,
+traduzindo-a e salvando a tradução na saída, até que cheguemos ao
+final da entrada:
+
+[source,c]
+.Tradução do fluxo por linhas
+----
+void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
+	while (naoChegouNoFinal(entrada)){
+		char* linha = lerLinhaDaEntrada(entrada);
+		char* traducao = traduzParaLingaDoI(linha);
+		salvaConteudoNaSaida(traducao,saida);
+	}
+}
+----
+
+Enquanto estamos lendo do fluxo de entrada, precisamos processá-lo
+enquanto não chegou no final, implementado na função que se segue:
+
+[source,c]
+----
+bool naoChegouNoFinal(FILE* stream){
+	return !feof(stream);
+}
+----
+
+Escolhemos ler o fluxo de entrada por linhas, o código a seguir
+implementa esta funcionalidade:
+
+[source,c]
+----
+int TAMANHO_MAXIMO_DA_LINHA = 2048; <1>
+char* lerLinhaDaEntrada(FILE* entrada){
+	char* linha = calloc(1, TAMANHO_MAXIMO_DA_LINHA); <2>
+	return fgets(linha, TAMANHO_MAXIMO_DA_LINHA, entrada); <3>
+}
+----
+<1> Definindo tamanho da linha (buffer).
+<2> Alocando espaço suficiente para caber uma linha.
+<3> Lendo da entrada e salvando o conteúdo lido no buffer (linha).
+
+Para compreender esta função é preciso entender que <<fgets>> irá ler
+até encontrar o fim de linha, ou até chegar ao final do fluxo ou até
+ler a quantidade de caracteres referenciada por
+`TAMANHO_MAXIMO_DA_LINHA`.
+
+A primeira pergunta que pode surgir seria: ``E se a linha for maior do
+que este tamanho máximo?'' Vamos supor que o tamanho máximo fosse 10
+caracteres, e a linha tivesse 15 caracteres. Na primeira chamada a
+este método seriam lidos os 10 primeiro caracteres, traduzidos e
+processados. A próxima chamada iria ler os caracteres restante até o
+final da linha. 
+
+Finalmente, precisamos salvar o conteúdo traduzido na saída:
+
+[source,c]
+.Escrevendo conteúdo na saída
+----
+void salvaConteudoNaSaida(char* conteudo, FILE* saida){
+	int tamanhoDaMensagem = strlen(conteudo);
+	fwrite(conteudo,1,tamanhoDaMensagem,saida);
+}
+----
+
+==== Verificando que teste continua passando
+
+Após estas atualizações, vamos verificar se nossos testes continuam
+passando:
+
+.Verificando os testes passando após as modificações
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+....
+
+==== Atualizando aplicação para processar fluxos
+
+Após os testes passarem, nosso próximo passo será a atualização da
+aplicação para utilizar a nova implementação:
+
+[source,c]
+.Atualizando main para processar fluxos
+----
+int main(int argc, const char* argv[]) {
+	FILE* entrada = determinaEntrada(argc, argv);
+	if (entrada){
+		traduzFluxoDeEntradaNaSaida(entrada, stdout);
+	}else{
+		fprintf(stderr, "Problema ao abrir arquivo: %s\n",
+				argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	return EXIT_SUCCESS;
+}
+----
+
+.Compilando a aplicação
+....
+$ make clean && make lingua-do-i
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+....
+
+Verificando aplicação processando entrada por fluxo:
+
+.Utilizando aplicação para traduzir fluxo
+....
+$ cat musica-trecho.txt | ./lingua-do-i
+Ih! Diis, pirdii isti pibri ciitidi
+....
+
+Ótimo! Nossa aplicação agora é capaz de processar o fluxo de entrada
+também.
+
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/{etapa}/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
 
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
