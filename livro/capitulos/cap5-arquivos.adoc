@@ -2275,6 +2275,128 @@ arquivos:
 {online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
 
 
+=== Etapa 16: Tratando acentos
+
+Revendo nosso arquivo `TODO.txt`, lembramos que ainda está faltando
+processar mensagens com acentos.
+
+==== Fazendo o teste de tradução de vogais acentuadas falhar
+
+Nós temos dois testes relacionados à tradução para lingua do i. Por
+enquanto eles foram implementados para não traduzirem vogais
+acentuadas e estão passando com esta implementação. Para fazê-los
+falharem nós precisaremos atualizá-los da seguinte forma: 
+
+Atualizamos o arquivo `musica-completa-traduzida.txt` substituindo
+todas as vogais acentuadas pelas suas respectivas representações na
+lingua do i: 
+
+`testTraducaoParaLinguaDoI`:: Atualizar o string
+`TRADUCAO_ESPERADA2`, substituindo `á` por `í`:
++
+[source,c]
+----
+char* TRADUCAO_ESPERADA2= "Ih! Diis, sirí qii i sinhir si zingii";
+----
+
+`testTraduzFluxoDeEntrada`:: Neste teste utilizamos o arquivo
+`musica-completa-traduzida.txt` que contém o resultado esperado da
+tradução, será necessário atualizar todas as vogais acentudas nele.
+
+Após estes modificações, executamos os testes e verificamos que
+primeira falha está relacionada ao nosso primeiro teste, devido
+a nossa alteração em `TRADUCAO_ESPERADA2`.
+
+.Rexecutando os testes após as modifições com vogais acentuadas
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
+....
+
+
+==== Entendendo o que é necessário para fazer o teste passar
+
+Para fazer o teste passar, precisamos transformar ``á'' em ``í''.
+Sabemos até agora que estes carácteres são representados com mais de
+um byte. Vamos verificar sua representação em decimal:
+
+.Utilizando comando od para ver representação dos caracteres
+....
+$ echo áéíóú | od -t d1
+0000000  -61  -95  -61  -87  -61  -83  -61  -77  -61  -70   10
+0000013
+....
+
+TIP: O comando `od`, disponível no linux possui várias opções para
+exibição de conteúdos binários. Neste caso estamos utilizando para
+imprimir o valor de um byte com sinal, que equivale ao valor de
+`signed char`.
+
+Descobrimos que todos estes carácteres possuem dois bytes, onde o
+primeiro tem valor `-61` e o segundo depende da vogal utilizada,
+confira as representações na tabela a seguir:
+
+.Representação de carácteres acentuados em UTF-8
+|====
+| Carácter | Primeiro Byte | Segundo Byte
+| á | -61 | -95
+| é | -61 | -87
+| í | -61 | -83
+| ó | -61 | -77
+| ú | -61 | -70
+|====
+
+==== Fazendo os testes passarem
+
+Vamos modificar a função `traduzParaLingaDoI` responsável por traduzir
+uma linha:
+
+[source,c]
+----
+char* traduzParaLingaDoI(char* mensagemOriginal){
+	int tamanhoDaMensagem = strlen(mensagemOriginal);
+	char* traducao = calloc(1, tamanhoDaMensagem+1);
+
+	for(int i=0; i<tamanhoDaMensagem; i++){
+		char caracterDaMensagemOriginal = mensagemOriginal[i];
+		if
+		(podeSerVogalAcentuada(caracterDaMensagemOriginal)){ <1>
+			int incremento = traduzCaracteresAcentuados(
+					mensagemOriginal,i,traducao);<2>
+			i+=incremento;<3>
+		}else{ <1>
+			traducao[i] = traduzCaracterParaLinguaDoI(<1>
+				caracterDaMensagemOriginal);<1>
+		}
+	}
+	return traducao;
+}
+----
+<1> Nossa primeira modificação consiste em verificar se o primeiro
+    byte lido corresponde ao início de uma letra acentuada. Se ela não
+    for, então seguirá o fluxo normal, sendo traduzida pela função que
+    traduz carácteres de um byte, e adicionada ao string que
+    corresponde à tradução.
+<2> Caso o primeiro byte lido seja o início da vogal acentuda,
+    chamaremos a função `traduzCaracteresAcentuados` que deverá ler
+    mais um carácter na posição atual e salvá-los no string
+    `traducao`. Teoricamente o carácter acentuado porderia possuir
+    mais de 2 bytes, portanto esta unção precisa retornar um
+    incremento para ser utilizado em `i`, para garantir a consistência
+    da posição de leitura.
+<3> Atualizamos o valor de `i` com o incremento necessário. É
+    importante perceber que no comando `for`, a variável já é
+    incrementada (`i++`), portanto não precisamos incrementá-la se
+    apenas um carácter for lido em `traduzCaracteresAcentuados`.
+
+ }else if(s==-94 or s==-86 or s==-82 or s==-76 or s==-69){
+   traducao[posicao+1] = -82; // î
+
+
 === XXX
 * Escrever uma função que seja responsável por ler o conteúdo de um
   arquivo e retornar o conteúdo lido como um string (`char *`).
