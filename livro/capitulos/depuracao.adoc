@@ -44,21 +44,20 @@ Vamos verificar o `Makefile` do projeto:
 include::{local}/{etapa}/src/Makefile[]
 ----
 
-Percebam que o parâmetro `-g` está presente nas ((flags de
-compilação)):
+Percebam que o parâmetro `-g` está presente nas ((flags de compilação)):
 
  CFLAGS=-Wall -g -std=c1x
 
-==== Última teste realizado
+==== Última execução do programa
 
 Vamos relembrar o resultado da última execução do programa:
 
-.Última execução do teste
+.Última execução de lingua-do-i-test
 ....
 include::{local}/{etapa}/make-command.txt[]
 ....
 
-O código fonte utilizado no teste foi:
+O código fonte utilizado na execução foi:
 
 .Código fonte
 {online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
@@ -82,7 +81,7 @@ assert( strcmp(conteudo, esperado) == 0
 ----
 +
 Este é um ponto de parada bastante intuitivo, uma vez que a mensagem
-de erro indicou ela. A desvantagem deste ponto é que a função
+de erro indicou-a. A desvantagem deste ponto é que a função
 `verificaConteudosSaoIguais` é chamada mais de uma vez no arquivo,
 então teríamos que descobrir a interação que ocorreu o erro. Embora
 neste caso ela só foi chamada uma única vez, em aplicações maiores

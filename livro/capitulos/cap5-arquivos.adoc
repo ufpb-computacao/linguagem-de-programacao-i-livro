@@ -2277,6 +2277,8 @@ arquivos:
 
 === Etapa 16: Tratando acentos
 
+:etapa: etapa16
+
 Revendo nosso arquivo `TODO.txt`, lembramos que ainda está faltando
 processar mensagens com acentos.
 
@@ -2284,24 +2286,26 @@ processar mensagens com acentos.
 
 Nós temos dois testes relacionados à tradução para lingua do i. Por
 enquanto eles foram implementados para não traduzirem vogais
-acentuadas e estão passando com esta implementação. Para fazê-los
+acentuadas e estão passando deste jeito. Para fazê-los
 falharem nós precisaremos atualizá-los da seguinte forma: 
-
-Atualizamos o arquivo `musica-completa-traduzida.txt` substituindo
-todas as vogais acentuadas pelas suas respectivas representações na
-lingua do i: 
 
 `testTraducaoParaLinguaDoI`:: Atualizar o string
 `TRADUCAO_ESPERADA2`, substituindo `á` por `í`:
 +
 [source,c]
 ----
+// ANTES
+char* TRADUCAO_ESPERADA2= "Ih! Diis, sirá qii i sinhir si zingii";
+// DEPOIS
 char* TRADUCAO_ESPERADA2= "Ih! Diis, sirí qii i sinhir si zingii";
 ----
 
 `testTraduzFluxoDeEntrada`:: Neste teste utilizamos o arquivo
 `musica-completa-traduzida.txt` que contém o resultado esperado da
-tradução, será necessário atualizar todas as vogais acentudas nele.
+tradução. Você pode encontrar o arquivo referido já traduzido na pasta
+do código desta etapa: 
+{online}/etapa16/src/musica-completa-traduzida.txt 
+
 
 Após estes modificações, executamos os testes e verificamos que
 primeira falha está relacionada ao nosso primeiro teste, devido
@@ -2331,7 +2335,7 @@ $ echo áéíóú | od -t d1
 0000013
 ....
 
-TIP: O comando `od`, disponível no linux possui várias opções para
+TIP: O comando `od`, disponível no Linux possui várias opções para
 exibição de conteúdos binários. Neste caso estamos utilizando para
 imprimir o valor de um byte com sinal, que equivale ao valor de
 `signed char`.
@@ -2340,7 +2344,9 @@ Descobrimos que todos estes carácteres possuem dois bytes, onde o
 primeiro tem valor `-61` e o segundo depende da vogal utilizada,
 confira as representações na tabela a seguir:
 
-.Representação de carácteres acentuados em UTF-8
+[[tab_acento_agudo]]
+[options="header",cols="^m,^m,^m"]
+.Representação de vogais acentuados em UTF-8
 |====
 | Carácter | Primeiro Byte | Segundo Byte
 | á | -61 | -95
@@ -2350,10 +2356,14 @@ confira as representações na tabela a seguir:
 | ú | -61 | -70
 |====
 
-==== Fazendo os testes passarem
+NOTE: O que precisamos fazer é implementar uma tradução que
+identifique dois bytes consecutivos desta tabela e escreva na saída os
+dois bytes do carácter `í`.
 
-Vamos modificar a função `traduzParaLingaDoI` responsável por traduzir
-uma linha:
+==== Fazendo o primeiro teste de tradução acentuada passar
+
+Decidimos modificar a função `traduzParaLingaDoI`, atualmente
+responsável por traduzir uma linha para a língua do i:
 
 [source,c]
 ----
@@ -2363,8 +2373,7 @@ char* traduzParaLingaDoI(char* mensagemOriginal){
 
 	for(int i=0; i<tamanhoDaMensagem; i++){
 		char caracterDaMensagemOriginal = mensagemOriginal[i];
-		if
-		(podeSerVogalAcentuada(caracterDaMensagemOriginal)){ <1>
+		if (podeSerVogalAcentuada(caracterDaMensagemOriginal)){ <1>
 			int incremento = traduzCaracteresAcentuados(
 					mensagemOriginal,i,traducao);<2>
 			i+=incremento;<3>
@@ -2377,24 +2386,422 @@ char* traduzParaLingaDoI(char* mensagemOriginal){
 }
 ----
 <1> Nossa primeira modificação consiste em verificar se o primeiro
-    byte lido corresponde ao início de uma letra acentuada. Se ela não
-    for, então seguirá o fluxo normal, sendo traduzida pela função que
-    traduz carácteres de um byte, e adicionada ao string que
-    corresponde à tradução.
-<2> Caso o primeiro byte lido seja o início da vogal acentuda,
-    chamaremos a função `traduzCaracteresAcentuados` que deverá ler
-    mais um carácter na posição atual e salvá-los no string
-    `traducao`. Teoricamente o carácter acentuado porderia possuir
-    mais de 2 bytes, portanto esta unção precisa retornar um
-    incremento para ser utilizado em `i`, para garantir a consistência
-    da posição de leitura.
+    byte lido corresponde ao início de uma vogal acentuada
+    (`podeSerVogalAcentuada`). Se ele *não* for, então seguirá o fluxo
+    normal, sendo traduzida pela função que traduz carácteres de um
+    byte (`traduzCaracterParaLinguaDoI`), e adicionada ao String que
+    corresponde à tradução. *Ainda precisamos criar a função
+    `podeSerVogalAcentuada`*.
+<2> Caso o primeiro byte lido seja o início de vogal acentuada,
+    chamaremos a função `traduzCaracteresAcentuados` que deverá ler os
+    bytes restantes necessários para representar o carácter e
+    salvá-los na posição indicada por `i` no String `traducao`.
+    Teoricamente um carácter acentuado poderia possuir mais de 2
+    bytes, portanto esta função precisará retornar um incremento para ser
+    utilizado em `i`, para garantir a consistência da posição de
+    leitura. *A função `traduzCaracteresAcentuados` ainda não existe*,
+    será criada mais adiante.
 <3> Atualizamos o valor de `i` com o incremento necessário. É
     importante perceber que no comando `for`, a variável já é
     incrementada (`i++`), portanto não precisamos incrementá-la se
-    apenas um carácter for lido em `traduzCaracteresAcentuados`.
+    apenas um byte for lido em `traduzCaracteresAcentuados`.
 
- }else if(s==-94 or s==-86 or s==-82 or s==-76 or s==-69){
-   traducao[posicao+1] = -82; // î
+TIP: Certifique-se de ter entendido o código apresentado antes de
+continuar.
+
+Dando sequência, vamos criar as funções que desejamos utilizar,
+iniciaremos com `podeSerVogalAcentuada`:
+
+[source,c]
+----
+bool podeSerVogalAcentuada(char caracterInicial){
+	return caracterInicial == -61; <1>
+}
+----
+
+<1> A implementação desta função é muito simples, conforme resumido na
+    <<tab_acento_agudo>>, o primeiro byte de todas as vogais com
+    acento agudo tem o valor `-61`. A função simplesmente compara o
+    byte lido com este valor, retornando o resultado da comparação.
+
+Em seguida, vamos implementar a última função que ficou faltando:
+
+[source,c]
+----
+int traduzCaracteresAcentuados(char* mensagem, int i,
+		char* traducao){
+	int incremento;
+	char primeiroByte = mensagem [i];
+	char s = mensagem [i+1]; // segundo byte <1>
+
+	assert (primeiroByte == -61); // prefixo dos acentos <2>
+	traducao[i] = primeiroByte; // passa o primeiro byte <3>
+
+	if (s==-95 or s==-87 or s==-77 or s==-70){//áéóú <4>
+		traducao[i+1] = -83; // í <5>
+	}else{
+		traducao[i+1] = mensagem[i+1]; <6>
+	}
+	incremento = 1; <7>
+	return incremento;
+}
+----
+
+<1> Iniciamos a função buscando os valores dos dois primeiros bytes. É
+    importante observar aqui os nomes das variáveis. A variável
+    `primeiroByte` possui um nome bastante representativo, não há
+    necessidade de comentários. Já o segundo byte lido, estamos
+    nomeando-o apenas por `s`, para diminuir o tamanho do código. No
+    entanto, estamos adicionando um comentário explicando qual o
+    propósito desta variável, esta é uma boa prática!
+<2> A função `assert` está indicando que o pré-requisito desta função
+    é ser chamada quando o primeiro byte possuir o valor `-61`, caso
+    contrário seu comportamento não está definido. Aqui o comentário
+    mais uma vez é importante, sem ele o número em questão poderia ser
+    considerado um Número Mágico.footnote:[Você pode saber mais sobre
+    Número Mágico em informática no seguinte link:
+    http://pt.wikipedia.org/wiki/Número_mágico_(informática)] Para
+    utilização do `assert`, também foi necessário incluir no início do
+    código: `#include <assert.h>`.
+<3> `traducao[i]` corresponde a posição onde deveremos escrever a
+    tradução do carácter lido. Neste trecho, escrevemos o primeiro 
+    byte lido na posição correspondente.
+<4> Neste `if` estamos comparando o segundo byte lido com o segundo byte
+    dos carácteres `áéóú`, conforme indicado no comentário.
+<5> Caso o segundo byte lido corresponda ao segundo byte dos
+    carácteres indicados, sua tradução corresponderá ao segundo byte
+    de `í`, que possui o valor `-83`. Salvamos a tradução na posição
+    `traducao[i+1]`.
+<6> Caso contrário, o segundo byte é escrito conforme lido. Este é o
+    caso inclusive do carácter `í`, que sua tradução corresponde a ele
+    mesmo.
+<7> Por fim, retornamos `1` como incremento, indicando que só foi
+    necessário ler um byte após o primeiro. Também seria possível
+    implementar o retorno da seguinte forma: `return 1;`, mas a
+    intenção não fica bem transmitida.
+
+Após as alterações em `traduzCaracteresAcentuados`, vamos re-executar
+os testes:
+
+.Re-execução dos testes após modificações
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:98: verificaMusicaFoiTraduzidaCorretamenteNaSaida: Assertion `strcmp(conteudo, traducao) == 0 && "Arquivo deve ser traduzido corretamente"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
+....
+
+Perceba que a falha agora é outra, nosso primeiro testes passou! A
+falha ocorre em `verificaMusicaFoiTraduzidaCorretamenteNaSaida` que
+corresponde ao segundo teste, devido as atualizações que
+fizemos no arquivo `musica-completa-traduzida.txt`. Isto significa que
+nossa implementação conseguiu traduzir corretamente `á` para `í`. Mas
+será que ela traduz também `é` para `í`? Nós esperamos que sim, mas
+não temos nenhum teste comprovando isso. Vamos fazer isto a seguir.
+
+==== Criando teste de tradução específico para vogais acentuadas
+
+Vamos criar um novo teste com o propósito específico para traduzir
+vogais acentuadas:
+
+[source,c]
+.Teste específico para vogais acentuadas
+----
+char* VOGAIS_ACENTUADAS= "áéíóúÁÉÍÓÚ-âêîôûÂÊÎÔÛ-àèìòùÀÈÌÒÙ";
+char* ACENTOS_ESPERADOS= "íííííÍÍÍÍÍ-îîîîîÎÎÎÎÎ-ìììììÌÌÌÌÌ";
+void testTraduzVogaisAcentuadas(){
+	char* traducao = traduzParaLingaDoI(VOGAIS_ACENTUADAS);
+	verificaConteudosSaoIguais(traducao, ACENTOS_ESPERADOS);
+}
+----
+
+O teste é bastante simples, todas as vogais no String
+`VOGAIS_ACENTUADAS` deverão ser traduzidas por suas correspondentes em
+`ACENTOS_ESPERADOS`. Na última linha verificaremos se os conteúdos são
+idênticos.
+
+Um detalhe importante, é que este teste deve ser chamado antes
+de `testTraduzFluxoDeEntrada`, que ainda está falhando na tradução da
+música:
+
+[source,c]
+.Posição da evocação do teste testTraduzFluxoDeEntrada no main
+----
+int main(void) {
+	testLerConteudoDoArquivo();
+	testSalvaConteudoEmArquivo();
+	testTraducaoParaLinguaDoI();
+
+	testDefinirEntradaPadrao();
+	testDefinirEntradaDeArquivo();
+	testDefinirEntradaDeArquivoInexistente();
+
+	testTraduzVogaisAcentuadas(); <1>
+	testTraduzFluxoDeEntrada();
+
+	return EXIT_SUCCESS;
+}
+----
+<1> Precisa ser evocado antes de `testTraduzFluxoDeEntrada`.
+
+Vamos executar os testes novamente, esperamos que a falha seja
+diferente da anterior:
+
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
+....
+
+Ótimo! Como podemos ver, temos uma falha diferente devido a inclusão
+do nosso novo teste. O próximo passo será fazer o teste passar.
+
+==== Fazendo o teste específico das vogais acentuadas passar
+
+Nós já temos toda a _infraestrutura_ necessária para tradução das
+vogais acentuadas, precisamos apenas descobrir os bytes que
+representam todas estas letras e atualizar a função
+`traduzCaracteresAcentuados`.
+
+Invocaremos o comando `od` novamente para descobrir os bytes dos
+carácteres:
+
+....
+$ echo áéíóú ÁÉÍÓÚ âêîôû ÂÊÎÔÛ àèìòù ÀÈÌÒÙ | od -t d1
+0000000  -61  -95  -61  -87  -61  -83  -61  -77  -61  -70   32  -61 -127  -61 -119  -61
+0000020 -115  -61 -109  -61 -102   32  -61  -94  -61  -86  -61  -82  -61  -76  -61  -69
+0000040   32  -61 -126  -61 -118  -61 -114  -61 -108  -61 -101   32  -61  -96  -61  -88
+0000060  -61  -84  -61  -78  -61  -71   32  -61 -128  -61 -120  -61 -116  -61 -110  -61
+0000100 -103   10
+0000102
+....
+
+Sabendo que espaço corresponde ao carácter `32`, percebemos que todas
+as nossas vogais começam com *o valor do primeiro byte igual a `-61`*.
+Vamos construir outra tabela para auxiliar na tradução:
+
+[[tab_vogais_acentuadas]]
+[options="header",cols="^m,^m,^m,^m,^m,^m,^m,^m,^m,^m,^m,^m"]
+.Representação das vogais acentuadas em UTF-8
+|====
+| Char | 2º Byte | Char | 2º Byte | Char | 2º Byte | Char | 2º Byte | Char | 2º Byte | Char | 2º Byte
+| á | -95 | Á | -127 | â | -94 |Â | -126 |à | -96 |À | -128
+| é | -87 | É | -119 | ê | -86 |Ê | -118 |è | -88 |È | -120
+| í | -83 | Í | -115 | î | -82 |Î | -114 |ì | -84 |Ì | -116
+| ó | -77 | Ó | -109 | ô | -76 |Ô | -108 |ò | -78 |Ò | -110
+| ú | -70 | Ú | -102 | û | -69 |Û | -101 |ù | -71 |Ù | -103
+|====
+
+A atualização da implementação é trivial, basta comparar o segundo
+byte do carácter com os valores da tabela, substituindo-o pelo segundo
+byte da vogal i com o acento correspondente:
+
+[source,c]
+.Atualizando para tradução dos carácteres acentuados
+----
+int traduzCaracteresAcentuados(char* mensagem, int i,
+		char* traducao){
+	int incremento;
+	char primeiroByte = mensagem [i];
+	char s = mensagem [i+1]; // segundo byte
+
+	assert (primeiroByte == -61); // prefixo dos acentos
+	traducao[i] = primeiroByte; // passa o primeiro byte
+
+	if (s==-94 or s==-86 or s==-76 or s==-69){//âêôû
+		traducao[i+1] = -82; //î
+	}else if (s==-95 or s==-87 or s==-77 or s==-70){//áéóú
+		traducao[i+1] = -83; // í
+	}else if (s==-96 or s==-88 or s==-78 or s==-71){//àèòù
+		traducao[i+1] = -84; //ì
+	}else if (s==-126 or s==-118 or s==-108 or s==-101){//ÂÊÔÛ
+		traducao[i+1] = -114; //Î
+	}else if (s==-127 or s==-119 or s==-109 or s==-102){//ÁÉÓÚ
+		traducao[i+1] = -115; //Í
+	}else if (s==-128 or s==-120 or s==-110 or s==-103){//ÀÈÒÙ
+		traducao[i+1] = -116; //Ì
+	}else{
+		traducao[i+1] = mensagem[i+1];
+	}
+	incremento = 1;
+	return incremento;
+}
+----
+
+Após nossas modificações, vamos executar os testes novamente:
+
+.Executando o teste após as modificações
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:98: verificaMusicaFoiTraduzidaCorretamenteNaSaida: Assertion `strcmp(conteudo, traducao) == 0 && "Arquivo deve ser traduzido corretamente"' failed.
+make: *** [test_all] Abortado (arquivo core criado)
+....
+
+Estranho! Nosso teste passou e a falha ocorrida foi na função
+`verificaMusicaFoiTraduzidaCorretamenteNaSaida`. Mas o estranho é que
+teoricamente, uma vez que nossa função de tradução estivesse corretada, ela
+deveria traduzir a música também!
+
+==== Fazendo o teste de tradução da música passar com os acentos
+
+A causa da falha é mais fácil de ser encontrada quando sabemos depurar
+um programa. Após uma depuração (não mostrada aqui), descobrimos que o
+teste falhou pois o programa não conseguiu traduzir `ã` para `ĩ`.
+
+Realmente, nosso programa não estava traduzindo os carácteres com `~`.
+Vamos descobrir suas representações:
+
+....
+$ echo "ã ~e ĩ õ ũ  Ã ~E Ĩ Õ Ũ" | od -t d1
+0000000  -61  -93   32  -31  -70  -67   32  -60  -87   32  -61  -75   32  -59  -87   32
+0000020   32  -61 -125   32  -31  -70  -68   32  -60  -88   32  -61 -107   32  -59  -88
+0000040   10
+....
+
+IMPORTANT: Infelizmente tivemos um problema técnico na impressão do
+carácter `e` acentuado com o `~`, estaremos representando o carácter
+acentuado através do prefixo `~`. Então `~e` e `~E` representam os
+carácteres acentuados em minúsculo e maiúsculo, o equivalente com a
+vogal `a` seriam: `ã` e `Ã`.
+
+Desta vez, nos deparamos com uma novidade! Os carácteres `~e` e `~E` são
+codificados com 3 bytes e também não começam com `-61`! Vamos
+construir nossa tabela para resumir a representação dos carácteres:
+
+.Representação de vogais com `~`
+[options="header",cols="^m,^m,^m,^m"]
+|====
+| Carácter | Bytes       | Carácter | Bytes
+| `ã`        | -61 -93     | `Ã` | -61 -125
+| `~e`       | -31 -70 -67 | `~E` | -31 -70 -68
+| `ĩ`        | -60 -87     | `Ĩ` | -60 -88
+| `õ`        | -61 -75     | `Õ` | -61 -107
+| `ũ`        | -59 -87     | `Ũ` | -58 -88
+|====
+
+Com a tabela em mãos, precisamos atualizar nossa função que detecta
+uma possível vogal acentuada:
+
+[source,c ]
+.Atualização da detecção do primeiro byte de uma vogal acentuada
+----
+bool podeSerVogalAcentuada(char caracter) {
+	return caracter == -61 or caracter == -31 or caracter == -60
+			or caracter == -59;
+}
+----
+
+Em seguida, atualizamos a regra de tradução na função
+`traduzCaracteresAcentuados` da seguinte forma:
+
+[source,c]
+.Atualização da função para incluir tradução com tio
+----
+int traduzCaracteresAcentuados(char* mensagem, int i,
+		char* traducao){
+	int incremento = 1; // por padrão ler dois bytes
+	char primeiroByte = mensagem [i];
+	char s = mensagem [i+1]; // segundo byte
+
+	assert (primeiroByte == -61); // prefixo dos acentos
+	traducao[i] = primeiroByte; // passa o primeiro byte por padrão
+
+	if (primeiroByte == -61){
+		if (s==-94 or s==-86 or s==-76 or s==-69){//âêôû
+			traducao[i+1] = -82; //î
+		}else if (s==-95 or s==-87 or s==-77 or s==-70){//áéóú
+			traducao[i+1] = -83; // í
+		}else if (s==-96 or s==-88 or s==-78 or s==-71){//àèòù
+			traducao[i+1] = -84; //ì
+		}else if (s==-126 or s==-118 or s==-108 or s==-101){//ÂÊÔÛ
+			traducao[i+1] = -114; //Î
+		}else if (s==-127 or s==-119 or s==-109 or s==-102){//ÁÉÓÚ
+			traducao[i+1] = -115; //Í
+		}else if (s==-128 or s==-120 or s==-110 or s==-103){//ÀÈÒÙ
+			traducao[i+1] = -116; //Ì
+		}else if (s==-93 or s==-75){//ãõ
+			traducao[i] = -60; //ĩ - substitui primeiro byte
+			traducao[i+1] = -87; //ĩ
+		}else{
+			traducao[i+1] = mensagem[i+1];
+		}
+	}else if (primeiroByte == -31){
+		char terceiro = mensagem[i+2];
+		if (s == -70 and terceiro == -67){ // ẽ
+			traducao[i] = -60; // ĩ
+			traducao[i+1] = -87; // ĩ
+			incremento = 2; // descartamos o terceiro byte
+		}else{
+			traducao[i] = primeiroByte;
+			traducao[i+1] = s;
+			incremento = 1;
+		}
+	}else if (primeiroByte == -59){
+		if ( s == -87 ) { // ũ
+			traducao[i] = -60; // ĩ
+			traducao[i+1] = -87; // ĩ
+		}else{
+			traducao[i] = primeiroByte;
+			traducao[i+1] = s;
+		}
+	}else{
+		traducao[i] = primeiroByte;
+		traducao[i+1] = s;
+	}
+	return incremento;
+}
+----
+
+Nossa implementação ficou grande,footnote:[Alguns estilos de código
+defendem que se o código de uma função não couber na tela, ela está
+grande demais e deveria delegar responsabilidades para outras
+funções.] mas vamos verificar se ela está correta executando os
+testes:
+
+.Executando os testes após as modificações
+....
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+....
+
+
+Ótimo! Nossos testes estão passando novamente! Nosso programa está
+traduzindo corretamente para língua do i!footnote:[Realmente, um
+programa está correto até que alguém encontre um erro ou _bug_.]
+
+==== Código da etapa
+
+Você pode consultar o código final desta etapa nos seguintes
+arquivos:
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-core.h[{local}/{etapa}/src/lingua-do-i-core.h]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/{etapa}/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
+
 
 
 === XXX
