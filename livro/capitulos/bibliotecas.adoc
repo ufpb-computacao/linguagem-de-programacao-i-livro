@@ -155,6 +155,12 @@ TODO.
 ==== fgets
 TODO.
 
+[[feof]]
+[id="feof", reftext="feof()"]
+==== feof
+TODO.
+
+
 ////
 Terminando arquivo com linha em branco
 ////

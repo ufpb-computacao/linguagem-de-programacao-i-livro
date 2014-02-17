@@ -176,10 +176,20 @@ void salvaConteudoNaSaida(char* conteudo, FILE* saida){
 	fwrite(conteudo,1,tamanhoDaMensagem,saida);
 }
 
+bool tentouLerAposFinalDoArquivo(char* linha){
+	return linha == NULL;
+}
+
 void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
-	while (naoChegouNoFinal(entrada)){
+	bool chegouNoFinalDoArquivo = false;
+
+	while (!chegouNoFinalDoArquivo){
 		char* linha = lerLinhaDaEntrada(entrada);
-		char* traducao = traduzParaLingaDoI(linha);
-		salvaConteudoNaSaida(traducao,saida);
+		if (tentouLerAposFinalDoArquivo(linha)) {
+			chegouNoFinalDoArquivo = true;
+		} else {
+			char* traducao = traduzParaLingaDoI(linha);
+			salvaConteudoNaSaida(traducao, saida);
+		}
 	}
 }

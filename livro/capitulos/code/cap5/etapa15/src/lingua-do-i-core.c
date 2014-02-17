@@ -95,10 +95,6 @@ FILE* determinaEntrada(int argc, const char* argv[]){
 	return entrada;
 }
 
-bool naoChegouNoFinal(FILE* stream){
-	return !feof(stream);
-}
-
 int TAMANHO_MAXIMO_DA_LINHA = 2048;
 char* lerLinhaDaEntrada(FILE* entrada){
 	char* linha = calloc(1, TAMANHO_MAXIMO_DA_LINHA);
@@ -110,10 +106,20 @@ void salvaConteudoNaSaida(char* conteudo, FILE* saida){
 	fwrite(conteudo,1,tamanhoDaMensagem,saida);
 }
 
+bool tentouLerAposFinalDoArquivo(char* linha){
+	return linha == NULL;
+}
+
 void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
-	while (naoChegouNoFinal(entrada)){
+	bool chegouNoFinalDoArquivo = false;
+
+	while (!chegouNoFinalDoArquivo){
 		char* linha = lerLinhaDaEntrada(entrada);
-		char* traducao = traduzParaLingaDoI(linha);
-		salvaConteudoNaSaida(traducao,saida);
+		if (tentouLerAposFinalDoArquivo(linha)) {
+			chegouNoFinalDoArquivo = true;
+		} else {
+			char* traducao = traduzParaLingaDoI(linha);
+			salvaConteudoNaSaida(traducao, saida);
+		}
 	}
 }

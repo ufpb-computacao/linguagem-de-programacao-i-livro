@@ -2133,36 +2133,52 @@ substituir a implementação da função por outra que continue passando.
 ==== Implementando tradução por fluxo
 
 Quando estamos tratando um fluxo, precisamos lê-lo por partes. Só
-podemos ler uma outra parte após tratar a anterior. Em nosso caso,
-vamos dividir o fluxo em linhas. Ficaremos em _loop_, lendo uma linha,
-traduzindo-a e salvando a tradução na saída, até que cheguemos ao
-final da entrada:
+podemos ler uma outra parte após tratar a anterior. Em nossa
+implementação, decidimos dividir o fluxo por linhas:
 
 [source,c]
 .Tradução do fluxo por linhas
 ----
 void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
-	while (naoChegouNoFinal(entrada)){
+	bool chegouNoFinalDoArquivo = false;
+
+	while (!chegouNoFinalDoArquivo){
 		char* linha = lerLinhaDaEntrada(entrada);
-		char* traducao = traduzParaLingaDoI(linha);
-		salvaConteudoNaSaida(traducao,saida);
+		if (tentouLerAposFinalDoArquivo(linha)) {
+			chegouNoFinalDoArquivo = true;
+		} else {
+			char* traducao = traduzParaLingaDoI(linha);
+			salvaConteudoNaSaida(traducao, saida);
+		}
 	}
 }
 ----
 
-Enquanto estamos lendo do fluxo de entrada, precisamos processá-lo
-enquanto não chegou no final. A implementação desta funcionalidade
-ocorreu na função que se segue:
+A lógica da função `traduzFluxoDeEntradaNaSaida` consiste em ler a
+entrada por linhas. A função entra em loop enquanto não chegou ao
+final do arquivo: lendo uma linha da entrada por vez, traduz e em
+seguida salva a tradução na saída. A condicação de parada do loop
+só ocorre quando última linha foi traduzida e o final do arquivo foi
+atingido.
 
-[source,c]
-----
-bool naoChegouNoFinal(FILE* stream){
-	return !feof(stream);
-}
-----
 
-Escolhemos ler o fluxo de entrada por linhas, o código a seguir
-implementa esta funcionalidade:
+A condição de parada é implementada através da variável
+`chegouNoFinalDoArquivo`, que inicia com valor `false` e só será
+modificada quando `tentouLerAposFinalDoArquivo` retornar verdadeiro.
+
+A função `lerLinhaDaEntrada` será responsável por ler do fluxo de
+entrada uma linha linhas. E `salvaConteudoNaSaida` será responsável
+por salvar a tradução na saída.
+
+Estas três funções ainda não existem, precisaremos implementá-las a
+seguir.
+
+===== Lendo conteúdo da entrada com fgets
+
+Vamos iniciar a implementação com a função `lerLinhaDaEntrada`,
+responsável por ler uma linha da entrada:
+
+(((fgets)))(((calloc)))
 
 [source,c]
 ----
@@ -2172,21 +2188,74 @@ char* lerLinhaDaEntrada(FILE* entrada){
 	return fgets(linha, TAMANHO_MAXIMO_DA_LINHA, entrada); <3>
 }
 ----
-<1> Definindo tamanho da linha (buffer).
+<1> Definindo tamanho máximo de leitura de linha (buffer).
 <2> Alocando espaço suficiente para caber uma linha.
 <3> Lendo da entrada e salvando o conteúdo lido no buffer (linha).
 
 Para compreender esta função é preciso entender que <<fgets>> irá ler
-até encontrar o fim de linha, ou até chegar ao final do fluxo ou até
-ler a quantidade de caracteres referenciada por
+até:
+
+1. Encontrar o fim de linha, 
+2. Ou até chegar ao final do fluxo 
+3. Ou até ler a quantidade de caracteres referenciada por
 `TAMANHO_MAXIMO_DA_LINHA`.
 
-A primeira pergunta que pode surgir seria: ``E se a linha for maior do
-que este tamanho máximo?'' Vamos supor que o tamanho máximo fosse 10
+[[sec_fgets_feof]]
+===== Sobre as funções fgets e feof
+
+O propósito da função <<feof>> é indicar se em leituras anteriores o
+final do arquivo foi _atingido_. Para que isto ocorra, as funções de
+leitura, como `fgets`, devem registrar na estrutura `FILE` quando
+detectarem o final do fluxo.
+
+A função <<fgets>> só poderá indicar que chegou ao final do arquivo
+quando ela _atingir_ o final do arquivo. A <<fig_fgets>> ilustra o
+funcionamento da função `fgets`:
+
+[[fig_fgets]]
+.Entendendo a leitura com fgets
+image::images/cap5/fgets.eps[]
+
+Quando última linha não termina com o carácter de final de linha::
+Neste caso, os bytes são lidos até quando tentou ler o próximo byte e
+identificou que chegou no final do arquivo. Neste momento a função irá
+retornar todos os bytes lidos e registrar que o final do arquivo foi
+_atingido_. Chamadas subsequentes a `feof` saberão do ocorrido.
+
+Quando a última linha termina com carácter final de linha::
+A função `fgets` irá retornar todos os carácteres da última linha,
+inclusive o `\n`. Ao encontrar o final de linha, a leitura da linha é
+finalizada. Não houve nenhum registo de que se chegou ao final do
+arquivo. Somente ao tentar ler mais uma linha, é que a função
+`fgets` irá perceber que chegou ao final do arquivo e irá registrar o
+ocorrido. Diferente do caso anterior, o retorno da função será `NULL`,
+indicando que não houve nenhum conteúdo lido.
+
+===== Condição de parada tentouLerAposFinalDoArquivo
+
+Para garantir que todas as linhas lidas sejam traduzidas, não basta
+ler até atingir o final do arquivo, precisamos nos certificar que
+mesmo atingido o final, a última linha seja traduzida. Portanto, a
+condição de parada será ler até que `fgets` retorne null:
+
+[source,c]
+----
+bool tentouLerAposFinalDoArquivo(char* linha){
+	return linha == NULL;
+}
+----
+
+
+////
+E sobre o tamanho máximo da linha? E se a linha for maior do
+que este tamanho máximo? Vamos supor que o tamanho máximo fosse 10
 caracteres, e a linha tivesse 15 caracteres. Na primeira chamada a
 este método seriam lidos os 10 primeiros caracteres, traduzidos e
 processados. A próxima chamada iria ler os caracteres restante até o
 final da linha. 
+////
+
+===== Salvando o conteúdo com a função fwrite
 
 Finalmente, precisamos salvar o conteúdo traduzido na saída:
 
@@ -2199,7 +2268,7 @@ void salvaConteudoNaSaida(char* conteudo, FILE* saida){
 }
 ----
 
-==== Verificando que teste continua passando
+==== Verificando que os testes continuam passando
 
 Após estas atualizações, vamos verificar se nossos testes continuam
 passando:
@@ -2212,13 +2281,15 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 ./lingua-do-i-test
 ....
 
+Ótimo, nossos testes estão passando novamente!
+
 ==== Atualizando aplicação para processar fluxos
 
 Após os testes passarem, nosso próximo passo será a atualização da
 aplicação para utilizar a nova implementação:
 
 [source,c]
-.Atualizando main para processar fluxos
+.Atualizando main em lingua-do-i.c para processar fluxos
 ----
 int main(int argc, const char* argv[]) {
 	FILE* entrada = determinaEntrada(argc, argv);
@@ -2233,6 +2304,8 @@ int main(int argc, const char* argv[]) {
 }
 ----
 
+Após atualização, vamos compilar a aplicação:
+
 .Compilando a aplicação
 ....
 $ make clean && make lingua-do-i
@@ -2240,7 +2313,7 @@ rm -rf lingua-do-i lingua-do-i-test
 gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
 ....
 
-Verificando aplicação processando entrada por fluxo:
+Verificando que a aplicação está processando a entrada por fluxo:
 
 .Utilizando aplicação para traduzir fluxo
 ....
@@ -2798,6 +2871,12 @@ arquivos:
 
 .Código fonte
 {online}/{etapa}/src/musica-trecho.txt[{local}/{etapa}/src/musica-trecho.txt]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/{etapa}/src/musica-completa.txt]
+
+.Código fonte
+{online}/{etapa}/src/musica-trecho.txt[{local}/{etapa}/src/musica-completa-traduzida.txt]
 
 .Código fonte
 {online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
