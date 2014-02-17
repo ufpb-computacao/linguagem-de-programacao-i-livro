@@ -2213,8 +2213,8 @@ quando ela _atingir_ o final do arquivo. A <<fig_fgets>> ilustra o
 funcionamento da função `fgets`:
 
 [[fig_fgets]]
-.Entendendo a leitura com fgets
-image::images/cap5/fgets.eps[]
+.Ilustração de leitura com fgets
+image::images/cap5/fgets.eps[scaledwidth="80%"]
 
 Quando última linha não termina com o carácter de final de linha::
 Neste caso, os bytes são lidos até quando tentou ler o próximo byte e
