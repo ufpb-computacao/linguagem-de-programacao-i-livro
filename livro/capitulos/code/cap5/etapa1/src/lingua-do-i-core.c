@@ -5,4 +5,3 @@
 char* lerConteudoDoArquivo(char* nomeDoArquivo){
 	return NULL; // <2>
 }
-z

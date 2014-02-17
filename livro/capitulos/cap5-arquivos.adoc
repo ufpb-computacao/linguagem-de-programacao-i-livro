@@ -94,29 +94,24 @@ NOTE: `EXIT_SUCCESS` é definido em <<stdlib_h>>, junto com
 execução da aplicação.
 
 TIP: O termo técnico *((implementação estúpida))* provém do inglês:
-*dummy implementation*. Geralmente utilizado quando desejamor aguardar
+*dummy implementation*. Geralmente utilizado quando desejamos aguardar
 o momento oportuno para realizar a implementação apropriada, também
 costuma ter o propósito de fazer o código compilar ou apenas preencher
 algum trecho do código.
 
-[IMPORTANT]
-====
-Este arquivo será o responsável por iniciar a aplicação, no entanto,
-por enquanto ele possui uma implementação estúpida, será relegado até
-se tornar importante novamente.
-
-====
-
 Nas próximas seções daremos mais atenção aos testes, enquanto iremos
 implementar, aos poucos, as funcionalidades que o aplicativo terá.
 
-Por último, iremos integrar as funcionalides implementadas ao
+Por último, iremos integrar as funcionalidades implementadas ao
 aplicativo em `main`.
 
 ==== Iniciando um teste
 
-Neste passo nós iremos iniciar a implementação dos testes.  Decidimos
-começar os nossos testes tentando ler o conteúdo de um arquivo:
+IMPORTANT: Ao decorrer do capítulo iremos escrever vários testes,
+este será o primeiro deles. Leia com bastante atenção para perceber
+como eles são elaborados.
+
+Decidimos começar os nossos testes tentando ler o conteúdo de um arquivo:
 
 [source,c]
 .Elaborando o primeiro teste no arquivo lingua-do-i-test.c
@@ -132,23 +127,22 @@ void testLerConteudoDoArquivo(){
 ----
 
 Você é capaz de identificar a ideia da implementação deste teste?
-Pense um pouco!
+Pense um pouco antes de prosseguir!
 
-.Pontos a serem observados
-. O primeiro ponto a ser observado é o nome da função:
+.Pontos a serem observados no teste
+. O primeiro ponto a ser observado é o nome do teste:
   `testLerConteudoDoArquivo`. O nome de uma função deve ser suficiente
   para descrever qual é o seu propósito. 
 . Em seguida, vemos a chamada da função `lerConteudoDoArquivo`, que
   ainda não existe, mas estamos planejando sua implementação. 
   +
   Durante a elaboração dos testes nós escrevemos funções supondo a sua
-  existência, mas tarde implementaremos elas, somente se demonstrarem
-  necessárias. 
+  existência, mas tarde implementaremos elas. 
   +
   Outro ponto importante, é que estamos definindo qual será interface
-  da função: (a) ela terá somente um parâmetro que será o nome do
-  arquivo que será lido; (b) ela irá retornar um ponteiro (`char*`)
-  que conterá o conteúdo lido no arquivo.
+  da função `lerConteudoDoArquivo`: (a) ela terá somente um parâmetro
+  que será o nome do arquivo que será lido; (b) ela irá retornar um
+  ponteiro (`char*`) que conterá o conteúdo lido no arquivo.
 . O último comando irá chamar a função `verificaConteudosSaoIguais`,
   que também não foi implementada, mas comunica qual será seu
   propósito: verificar que o conteúdo retornado pela função
@@ -156,19 +150,23 @@ Pense um pouco!
 . A constante `NOME_DO_ARQUIVO` corresponde ao nome de um
   arquivofootnote:[O arquivo deve existir no mesmo diretório do
   executável] que supostamente possui o mesmo conteúdo da variável
-  `CONTEUDO_ESPERADO`. Embora as constantes poderiam ser declaradas
-  dentro das funções, a declaração externa possibilita uma maior
-  legibilidade no código do teste, mas não há certo ou errado aqui,
-  apenas estilo.
+  `CONTEUDO_ESPERADO`. 
+  +
+  Embora as constantes poderiam ser declaradas dentro das funções, a
+  declaração externa possibilita uma maior legibilidade no código do
+  teste, mas não há certo ou errado aqui, apenas estilo.
 . Um ponto que talvez passe despercebido é a inclusão do arquivo de
   cabeçalho `lingua-do-i-core.h`. Ao fazermos isso, estamos
   antecipando uma dependência que nosso teste terá com
   `lingua-do-i-core.c`. Estamos planejando implementar a função
-  `lerConteudoDoArquivo` neste arquivo. Durante o processo de
-  compilação dos testes precisaremos ligar (_linkar_) o arquivo de
-  teste com este código fonte. O Makefile do projeto deverá refletir
-  esta ligação.
+  `lerConteudoDoArquivo` neste arquivo. 
+  +
+  Durante o processo de compilação dos testes precisaremos ligar
+  (_linkar_) o arquivo de teste com este código fonte. O Makefile do
+  projeto deverá refletir esta ligação.
 
+Nosso próximo passo será elaborar o Makefile para que será responsável
+pela compilação do projeto.
 
 ==== Elaborando o Makefile
 
@@ -186,33 +184,37 @@ include::{local}/{etapa}/src/Makefile[]
 NOTE: Este arquivo foi criado para funcionar no Linux, para funcionar
 em outras plataformas serão necessários pequenos ajustes.
 
-`CC`:: indica qual o compilador estamos utilizando. Caso utilize outro,
+`CC`:: Indica qual o compilador estamos utilizando. Caso utilize outro,
 configure o seu compilador aqui.
 
-`CFLAGS`:: configura algumas _flags_ de compilação. Inclusive a
-utilização do padrão <<c1x>>. Caso seu compilador aceite estas _flags_,
-não haverá necessidade de configuração.
+`CFLAGS`:: Configura algumas _flags_ de compilação. Inclusive a
+utilização do padrão C1X (<<c1x>>). Caso seu compilador aceite estas
+_flags_, não haverá necessidade de configuração.
 
-`all`:: indica quais as regras serão executadas por padrão quando
+`all`:: Indica quais as regras serão executadas por padrão quando
 executamos o comando `make` sem nenhum parâmetro.
 
-`lingua-do-i` e `lingua-do-i-test`:: regras para construção dos
+`lingua-do-i` e `lingua-do-i-test`:: Regras para construção dos
 aplicativos.
 
-`test_all`:: regra para execução dos testes. Consiste em invocar o
+`test_all`:: Regra para execução dos testes. Consiste em invocar o
 aplicativo de teste.
 
-`clean`:: regra para apagar os arquivos construídos. A implementação
+`clean`:: Regra para apagar os arquivos construídos. A implementação
 desta regra consiste em invocar o comando `rm` no Linux, que realiza a
 exclusão dos arquivos passados como parâmetros.
 
-Para compilar os aplicativos podemos executar:
+Para compilar os aplicativos podemos executar::
++
+....
+make clean && make all
+....
 
-  make clean && make all
-
-Para compilar e testar os aplicativos podemos executar:
-
-  make clean && make all && make test_all
+Para compilar e testar os aplicativos podemos executar::
++
+....
+make clean && make all && make test_all
+....
 
 ==== Criando um main e compilando o teste
 
@@ -220,6 +222,7 @@ Vamos adicionar um `main` ao nosso arquivo de teste e chamar a função
 `testLerConteudoDoArquivo` a partir dele:
 
 [source,c]
+.Atualizando lingua-do-i-test.c para invocar o teste
 ----
 #include <stdlib.h>
 #include "lingua-do-i-core.h"
@@ -238,10 +241,9 @@ int main(void) {
 }
 ----
 
-
 Nós temos algumas funções que ainda não foram escritas, mas vamos
 tentar compilar o código mesmo assim, para verificar os erros que
-serão aprensentados pelo compilador:
+serão apresentados pelo compilador:
 
 .Execução do comando para compilação
 ....
@@ -268,12 +270,27 @@ Como esperado, ocorreu erro no processo de compilação devido a
 utilização de funções que não foram implementadas ainda.
 
 
+[TIP]
+====
+Uma abordagem comum no desenvolvimento utilizando testes é:
+
+. Escrever o teste supondo a existência das funções.
+. Fazer o teste compilar utilizando o compilador para determinar o
+  próximo ponto que será implementado.
+. Fazer o teste falhar.
+. Fazer o teste passar.
+. Realizar ajustes se necessário.
+
+====
+
 ==== Implementando a função verificaConteudosSaoIguais
+
 
 Nosso próximo passo será a implementação da função que verifica se o
 teste irá falha ou não:
 
 [source,c]
+.Implementando função verificaConteudosSaoIguais em lingua-do-i-test.c
 ----
 #include <string.h> <1>
 
@@ -297,9 +314,8 @@ void verificaConteudosSaoIguais(char* conteudo, char* esperado){
     variável `comparacao` irá guardar o resultado da comparação.
 
 Com a implementação desta função esperamos que o teste falhe caso 
-`conteudo` for diferente de `esperado`.
-
-Vamos compilar novamente para verificar os erros.
+`conteudo` for diferente de `esperado`.  Vamos compilar novamente para
+verificar os erros:
 
 .Compilação após implementação da função verificaConteudosSaoIguais
 ....
@@ -336,7 +352,7 @@ somente para conseguir compilar o código.
 include::{local}/{etapa}/src/lingua-do-i-core.c[]
 ----
 <1> Inclusão do arquivo de cabeçalho, onde estarão definidas as funções
-    públicas (visíveis ao ligar este arquivo). 
+    públicas. 
 <2> Implementação estúpida da função que desejamos implementar.
 
 Com esta função implementada, vamos tentar compilar novamente:
@@ -496,13 +512,13 @@ a próxima.
 (((assert)))
 
 Na final da etapa anterior vimos que nosso teste não apresentava um
-mensagem de erro amigável, informando qual a razão da falha.  Nesta
+mensagem de erro amigável (informando qual a razão da falha).  Nesta
 etapa vamos apenas utilizar a função `assert` ao invés de
 `exit(EXIT_FAILURE)`, para mudar isso.
 
 A função `assert`, definida em <<assert_h>>, costuma ser utilizada para
 depuração dos programas. Caso a função receba uma expressão com o
-valor igual a 0 (mero) causará uma falha na execução da aplicação,
+valor igual a 0 (zero) causará uma falha na execução da aplicação,
 indicando, através de uma mensagem, a linha do código fonte onde a
 falha está ocorrendo. 
 
@@ -528,8 +544,8 @@ assert( strcmp(conteudo, esperado) == 0 <2>
 
 ==== Compilação e execução do teste
 Vamos compilar e executar o teste, verificando que ele
-continuará falhando:
-+
+continuará falhando, mas agora com uma mensagem de erro amigável:
+
 ....
 $ make clean && make && make test_all
 rm -rf lingua-do-i lingua-do-i-test
@@ -581,6 +597,9 @@ retorne o valor esperado, que corresponde ao conteúdo do arquivo.
 
 ==== Implementação para fazer o teste passar
 
+Este passo consiste em realizar as alterações necessárias para o teste
+passar.
+
 .Código fonte
 {online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
 
@@ -592,26 +611,21 @@ include::{local}/{etapa}/src/lingua-do-i-core.c[]
 <1> inclusão de variável com o valor esperado
 <2> retornando o valor esperado
 
+IMPORTANT: Com esta implementação parece óbvio o teste passará, mas é
+importante executá-lo e vê-lo passando, pois as vezes a verificação do
+teste está implementada errada, proporcionando conclusões erradas. 
 
-==== Passos de implementação da etapa
-
-Fazendo o teste passar::
-Este passo consiste em realizar as alterações necessárias para o teste
-passar.
-
-Execução do teste::
-Os arquivos são compilados e verificamos a execução do teste passando:
-Compilando e executando o teste::
 Após as modificações vamos verificar se as funções copiadas realmente
 fazem o que se propões a fazer corretamente:
-+
-....
-include::{local}/{etapa}/make-command.txt[]
-....
 
-IMPORTANT: Apesar de ser esperado que o teste passe, é importante
-executá-lo e vê-lo passando, pois as vezes a verificação do teste está
-implementada errada, proporcionando conclusões erradas.
+.Compilando e verificando o teste passar
+....
+$ make clean && make && make test_all
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
+....
 
 ==== Código da etapa
 
@@ -635,7 +649,6 @@ arquivos:
 
 .Código fonte
 {online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
-
 
 
 === Etapa 4: Lendo do arquivo
@@ -2210,11 +2223,7 @@ detectarem o final do fluxo.
 
 A função <<fgets>> só poderá indicar que chegou ao final do arquivo
 quando ela _atingir_ o final do arquivo. A <<fig_fgets>> ilustra o
-funcionamento da função `fgets`:
-
-[[fig_fgets]]
-.Ilustração de leitura com fgets
-image::images/cap5/fgets.eps[scaledwidth="80%"]
+funcionamento da função `fgets`, estamos evidenciando dois casos:
 
 Quando última linha não termina com o carácter de final de linha::
 Neste caso, os bytes são lidos até quando tentou ler o próximo byte e
@@ -2230,6 +2239,10 @@ arquivo. Somente ao tentar ler mais uma linha, é que a função
 `fgets` irá perceber que chegou ao final do arquivo e irá registrar o
 ocorrido. Diferente do caso anterior, o retorno da função será `NULL`,
 indicando que não houve nenhum conteúdo lido.
+
+[[fig_fgets]]
+.Ilustração de leitura com fgets
+image::images/cap5/fgets.eps[scaledwidth="80%"]
 
 ===== Condição de parada tentouLerAposFinalDoArquivo
 
