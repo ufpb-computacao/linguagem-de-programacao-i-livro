@@ -4,33 +4,42 @@
 ____
 Ao final deste capítulo você deverá ser capaz de:
 
-* Entender e relembrar os principais conceitos vistos na disciplina Introdução à Programação;
+* Entender e relembrar os principais conceitos vistos na disciplina
+  Introdução à Programação;
 
-* Ser capaz de utilizar em programas em linguagem C estruturas de controle (estruturas de seleção 
-ou decisão, estruturas de repetição);
+* Ser capaz de utilizar em programas em linguagem C estruturas de
+  controle (estruturas de seleção ou decisão, estruturas de
+  repetição);
 
 * Ser capaz de elaborar programas em linguagem C que utilizem arrays (vetores, matrizes, etc.) e 
 funções ou sub-rotinas.
 ____
 
 
-A Informática é uma área que se caracteriza por sofrer transformações em um curto espaço 
-de tempo. Isso, principalmente, em decorrência do surgimento e aprimoramento de novas tecnologias 
-de hardware, de novas técnicas e paradigmas de desenvolvimento de software e do contínuo 
-desenvolvimento de ferramentas e aplicativos para a Internet. Entretanto, mesmo com todo o avanço 
-e rápidas mudanças, ainda é preciso ter profissionais com conhecimento em programação de 
-computadores, tanto nos paradigmas mais tradicionais e em programação estruturada e orientada a 
-objeto, quanto nos paradigmas mais modernos como o de programação concorrente. A porta de entrada para 
-o mundo da programação de computadores ainda continua sendo o aprendizado da construção de 
-*((algoritmos))*, pois aprender programação de computadores não significa aprender apenas a 
-sintaxe de uma linguagem de programação, mas, principalmente, saber modelar um problema a ser 
-resolvido em uma linguagem computacional. O ciclo de aprendizado se completa quando se usa uma 
-linguagem de programação para exercitar e representar o problema modelado previamente e 
-executá-lo em um computador.
+A Informática é uma área que se caracteriza por sofrer transformações
+em um curto espaço de tempo. Isso, principalmente, em decorrência do
+surgimento e aprimoramento de novas tecnologias de hardware, de novas
+técnicas e paradigmas de desenvolvimento de software e do contínuo
+desenvolvimento de ferramentas e aplicativos para a Internet.
+Entretanto, mesmo com todo o avanço e rápidas mudanças, ainda é
+preciso ter profissionais com conhecimento em programação de
+computadores, tanto nos paradigmas mais tradicionais e em programação
+estruturada e orientada a objeto, quanto nos paradigmas mais modernos
+como o de programação concorrente. A porta de entrada para o mundo da
+programação de computadores ainda continua sendo o aprendizado da
+construção de *((algoritmos))*, pois aprender programação de
+computadores não significa aprender apenas a sintaxe de uma linguagem
+de programação, mas, principalmente, saber modelar um problema a ser
+resolvido em uma linguagem computacional. O ciclo de aprendizado se
+completa quando se usa uma linguagem de programação para exercitar e
+representar o problema modelado previamente e executá-lo em um
+computador.
 
-Neste capítulo serão revisados os principais conceitos vistos na disciplina 'Introdução à 
-Programação', no entanto, não é objetivo rever a definição de algoritmo e aspectos básicos de 
-programação, já que entende-se que estes tópicos já foram abordados na referida disciplina.
+Neste capítulo serão revisados os principais conceitos vistos na
+disciplina 'Introdução à Programação', no entanto, não é objetivo
+rever a definição de algoritmo e aspectos básicos de programação, já
+que entende-se que estes tópicos já foram abordados na referida
+disciplina.
 
 === Algoritmos computacionais
 
@@ -489,7 +498,7 @@ por que o vetor possui apenas uma dimensão. A sintaxe geral é então:
 tipo-de-dado  nome_do_array [dimensão1][dimensão2]...[dimensãoD];
 ----
 
-em que:
+Em que:
 
 `tipo-de-dado`:: corresponde ao tipo de dado (`int`, `float`, `double`, ...) a ser armazenado na 
 matriz;
