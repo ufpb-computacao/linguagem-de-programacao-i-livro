@@ -1026,10 +1026,6 @@ a mensagem. A função precisará retornar um novo string, do mesmo
 tamanho da mensagem original, copiando os caracteres originais da
 mensagem e só traduzindo as vogais para i:
 
-Inclusão de <<string_h>>, pois vamos usar a função <<strlen>>.
-
-Atualiza `traduzParaLingaDoI` 
-
 [source,c]
 ----
 char* traduzParaLingaDoI(char* mensagemOriginal){ 
@@ -1040,7 +1036,7 @@ char* traduzParaLingaDoI(char* mensagemOriginal){
 		resposta[i] = traduzCaracterParaLinguaDoI(
 				caracterDaMensagemOriginal);<4>
 	}
-	return resposta;
+	return resposta;<5>
 }
 ----
 <1> Consulta o tamanho do string. Para utilização de <<strlen>> é
@@ -1052,11 +1048,18 @@ char* traduzParaLingaDoI(char* mensagemOriginal){
 <4> Chama função `traduzCaracterParaLinguaDoI` para traduzir o
     carácter. Em seguida, salva sua tradução na posição correspondente
     em `resposta`.
+<5> Retorna string do mesmo tamanho de `mensagemOriginal` com sua
+    tradução.
 
-Nós poderíamos ter adicionado neste função a lógica de verificar se o 
-carácter é uma vogal, e só invocar a tradução nestes casos. No
+TIP: Nós poderíamos ter adicionado neste função a lógica de verificar
+se o carácter é uma vogal, e só invocar a tradução nestes casos. No
 entanto, parecia responsabilidade demais para uma única função,
 decidimos atribuí-la a outra função.
+
+NOTE: Outra solução poderia ser alterar diretamente as vogais de
+`mensagemOriginal`, o que certamente pouparia espaço para alocação de
+memória. Neste caso teríamos que alterar o teste também, pois
+`MENSAGEM_ORIGINAL` não mais conteria a mensagem original. 
 
 ==== Construindo função para tradução de carácteres
 
