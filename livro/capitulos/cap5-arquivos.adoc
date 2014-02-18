@@ -662,6 +662,123 @@ invocadas para realizar tarefas comuns, recomendo acessar a página
 https://gist.github.com/edusantana/8291576 onde estão reunidos
 diversos testes demonstrando as funções de manipulação de arquivos.
 
+
+==== Implementando leitura do arquivo
+
+Implementamos a leitura do arquivo através de três funções, vamos ver
+cada uma delas a seguir.
+
+A implementação fará referências a diversas funções como: <<fopen>>,
+<<fclose>>, <<fread>> e <<fseek>>. Além disso, os arquivos são
+referenciados através de um ponteiro para `FILE` (`File *arquivo`).  
+
+===== Implementando lerConteudoDoArquivo com fopen e fclose
+
+[source, c]
+----
+char* lerConteudoDoArquivo(char* nomeDoArquivo) {
+	char* conteudo; <1>
+
+	FILE* arquivo = fopen(nomeDoArquivo, "r"); // <2>
+	if (arquivoAbertoComSucesso(arquivo)) { <3>
+		conteudo = lerConteudoDeArquivoArberto(arquivo);<4>
+		fclose(arquivo); // fecha arquivo <5>
+	} else {
+		conteudo = NULL;  <6>
+	}
+
+	return conteudo; <7>
+}
+----
+<1> Variável `conteudo` irá salvar o conteúdo do arquivo.
+<2> Utilização da função <<fopen>> para abrir o arquivo para leitura.
+<3> Função que irá verificar se o arquivo foi aberto com sucesso
+<4> Função que irá ler o conteúdo do arquivo que já foi aberto com
+    sucesso
+<5> Todo arquivo que é aberto precisa ser fechado após sua utilização.
+<6> Retorna `NULL` em caso de erro na abertura.
+<7> Retorna o conteúdo lido ou `NULL` se houve algum erro na abertura
+    do arquivo.
+
+==== Verificando se o arquivo foi aberto com sucesso
+
+Verificar se um arquivo foi aberto com sucesso é muito simples:
+
+[source, c]
+.Função pare verificar se arquivo foi aberto com sucesso
+----
+#include <stdbool.h> <1>
+
+...
+
+bool arquivoAbertoComSucesso(FILE* arquivo) {
+  return arquivo != NULL; <2>
+}
+----
+<1> Inclusão da biblioteca <<stdbool_h>>, que define o tipo `bool`. Este
+    tipo pode ser utilizado como retorno de expressões lógicas. Além
+    disso também estão definidos macro `true` com o valor `1` e
+    `false` com o valor `0`.
+<2> A função `fopen` retorna `NULL` caso houve algum erro na abertura
+    do arquivo.
+
+==== Lendo conteúdo do arquivo aberto
+
+A função que ler o conteúdo do arquivo foi implementada assim:
+
+[source, c]
+----
+char* lerConteudoDeArquivoArberto(FILE* arquivo) {
+	int tamanhoDoArquivo = lerTamanhoDoArquivo(arquivo);<1>
+	char* conteudo = calloc(1, tamanhoDoArquivo+1);<2>
+
+	fread(conteudo, tamanhoDoArquivo, 1, arquivo);<3>
+
+	return conteudo; <4>
+}
+----
+<1> Nesta implementação estamos lendo o conteúdo inteiro do arquivo,
+    para isso precisamos saber qual o tamanho total do arquivo. Vamos
+    implementar a função `lerTamanhoDoArquivo` que será responsável
+    por obter o tamanho do arquivo.
+<2> Com o tamanho do arquivo salvo na variável `tamanhoDoArquivo` será
+    necessário alocar o espaço para guardar todo o conteúdo do arquivo
+    e mais um byte zero, para indicar o final do String.
+<3> Com o buffer `conteudo` inicializado com zeros, chamamos a função
+    `fread` para ler o conteúdo do arquivo e salvá-lo no buffer
+    `conteudo`.
+<4> Por fim, retornamos o buffer contendo o conteúdo lido.
+
+==== Descobrindo o tamanho do arquivo
+
+Para descobrir o tamanho do arquivo, vamos utilizar as funções `fseek`
+e `ftell`:
+
+[source,c]
+----
+/* Efeito colateral: 
+Cabeçote de leitura vai para o início do arquivo.*/
+int lerTamanhoDoArquivo(FILE* arquivo) {
+	fseek(arquivo, 0, SEEK_END); // vai para o final do arquivo
+	int tamanho = ftell(arquivo); // pega posição atual (final)
+
+	fseek(arquivo, 0, SEEK_SET); // volta para o início
+	return tamanho;i
+}
+----
+
+
+Na implementação:
+
+1. Utilizando a função `fseek` para mover a cabeça de leitura para o
+   final do arquivo. 
+2. Em seguida, chamamos a função `ftell` para pegar a posição atual de
+   leitura do arquivo, que irá corresponder ao tamanho do arquivo.
+3. Retornamos para o início do arquivo, para que próximas leituras
+   ocorram no início.
+4. Retornamos o tamanho do arquivo
+5. Registramos como comentário o *Efeito colateral* da função.
+
 ==== Fornecendo código para leitura de arquivo
 
 .Código fonte
@@ -672,10 +789,6 @@ diversos testes demonstrando as funções de manipulação de arquivos.
 ----
 include::{local}/{etapa}/src/lingua-do-i-core.c[]
 ----
-<1> Inclusão da biblioteca <<stdbool_h>>, que define o tipo `bool`. Este
-    tipo pode ser utilizado como retorno de expressões lógicas. Além
-    disso também estão definidos macro `true` com o valor `1` e
-    `false` com o valor `0`.
 <2> A função `fopen` (<<fopen>>) retorna um ponteiro para `File` se
     conseguir abrir o arquivo, caso contrário retorna `NULL`. Esta
     função tem o propósito de verificar o resultado da chamada àquela
@@ -693,11 +806,6 @@ include::{local}/{etapa}/src/lingua-do-i-core.c[]
     possível alocar espaço para armazenar o espaço do arquivo inteiro,
     caso ele seja grande demais.
 <5> Um arquivo para ser lido precisa ser aberto e fechado.
-
-A implementação faz referência a diversas funções que ainda não vimos
-como funciona: <<fopen>>, <<fclose>>, <<fread>> e <<fseek>>. Além
-disso, os arquivos são referenciados através de um ponteiro para
-`FILE` (`File *arquivo`).  
 
 ==== Passos de implementação da etapa
 
