@@ -1100,9 +1100,10 @@ Abortado (imagem do núcleo gravada)
 ....
 
 Oops! O teste está falhando! Como isto é possível? Nossa implementação
-é extremamente simples, ele deveria passar! Nestes casos, somente a
-*depuração* do programa para encontrar o erro, é exatamente o que
-faremos na próxima etapa.
+é extremamente simples, ele deveria passar! 
+
+Em casos de erros que não compreendemos a causa, *depurar* o programa
+pode ajudar bastante -- é exatamente o que faremos na próxima etapa.
 
 ==== Código da etapa
 
@@ -1137,8 +1138,9 @@ razão ainda desconhecida o nosso teste está falhando.
 
 Esta é uma boa oportunidade para *((Depurar))* a execução do programa.
 A depuração será abordada em um capítulo a parte: <<cap_depuracao>>. O
-processo de depuração permite-nos identificar sem precisar alterar o
-código inserindo várias mensagens do tipo:
+processo de depuração possibilita evitar alterar o programa incluindo
+diversas mensagens com o propósito de compreender a execução do
+programa, como estas:
 
   printf("passou por aqui...")
   printf("O valor de var=%d",var)
@@ -1164,19 +1166,6 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 ....
 
 Nosso teste está passando novamente!
-
-[[sec_etapa8_codigo]]
-==== Código
-
-.Código fonte
-{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
-
-[source, c]
-.Código fonte para os testes
-----
-include::{local}/{etapa}/src/lingua-do-i-test.c[]
-----
-<1> Correção realizada
 
 ==== Código da etapa
 
