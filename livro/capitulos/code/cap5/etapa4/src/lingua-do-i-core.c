@@ -1,15 +1,15 @@
-#include <stdbool.h> // <1>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "lingua-do-i-core.h"
 
-bool arquivoAbertoComSucesso(FILE* arquivo) {//<2>
+bool arquivoAbertoComSucesso(FILE* arquivo) {
 	return arquivo != NULL;
 }
 
 /*Efeito colateral:
 Cabeçote de leitura vai para o início do arquivo.*/
-int lerTamanhoDoArquivo(FILE* arquivo) {//<3>
+int lerTamanhoDoArquivo(FILE* arquivo) {
 	fseek(arquivo, 0, SEEK_END); // vai para o final do arquivo
 	int tamanho = ftell(arquivo); // pega posição atual (final)
 
@@ -17,7 +17,7 @@ int lerTamanhoDoArquivo(FILE* arquivo) {//<3>
 	return tamanho;
 }
 
-char* lerConteudoDeArquivoArberto(FILE* arquivo) {//<4>
+char* lerConteudoDeArquivoArberto(FILE* arquivo) {
 	int tamanhoDoArquivo = lerTamanhoDoArquivo(arquivo);
 	// 7.22.3.2 The calloc function
 	char* conteudo = calloc(1, tamanhoDoArquivo+1);
@@ -28,13 +28,13 @@ char* lerConteudoDeArquivoArberto(FILE* arquivo) {//<4>
 	return conteudo;
 }
 
-char* lerConteudoDoArquivo(char* nomeDoArquivo) {//<5>
+char* lerConteudoDoArquivo(char* nomeDoArquivo) {
 	char* conteudo;
 
-	FILE* arquivo = fopen(nomeDoArquivo, "r"); // <6>
+	FILE* arquivo = fopen(nomeDoArquivo, "r");
 	if (arquivoAbertoComSucesso(arquivo)) {
 		conteudo = lerConteudoDeArquivoArberto(arquivo);
-		fclose(arquivo); // fecha arquivo <7>
+		fclose(arquivo); // fecha arquivo
 	} else {
 		conteudo = NULL;
 	}

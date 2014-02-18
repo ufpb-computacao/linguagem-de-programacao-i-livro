@@ -657,22 +657,15 @@ arquivos:
 Nesta etapa precisamos implementar a leitura do arquivo e verificar o
 teste passando.
 
-TIP: Para verificar como as funções que manipulam arquivos em C são
-invocadas para realizar tarefas comuns, recomendo acessar a página
-https://gist.github.com/edusantana/8291576 onde estão reunidos
-diversos testes demonstrando as funções de manipulação de arquivos.
+TIP: No link https://gist.github.com/edusantana/8291576 existem vários
+testes com operações em arquivo, você pode utilizá-lo para consultar
+como realizar diversas operações, algumas funções deste capítulo estão
+disponíveis lá. Este link é um bom recurso de aprendizagem.
 
+===== Abrindo e fechando arquivo para leitura
 
-==== Implementando leitura do arquivo
-
-Implementamos a leitura do arquivo através de três funções, vamos ver
-cada uma delas a seguir.
-
-A implementação fará referências a diversas funções como: <<fopen>>,
-<<fclose>>, <<fread>> e <<fseek>>. Além disso, os arquivos são
-referenciados através de um ponteiro para `FILE` (`File *arquivo`).  
-
-===== Implementando lerConteudoDoArquivo com fopen e fclose
+Antes de iniciar a leitura do conteúdo do arquivos,
+é necessário abrir o arquivo para leitura:
 
 [source, c]
 ----
@@ -690,15 +683,19 @@ char* lerConteudoDoArquivo(char* nomeDoArquivo) {
 	return conteudo; <7>
 }
 ----
-<1> Variável `conteudo` irá salvar o conteúdo do arquivo.
+<1> Variável `conteudo` irá armazenar o conteúdo do arquivo.
 <2> Utilização da função <<fopen>> para abrir o arquivo para leitura.
-<3> Função que irá verificar se o arquivo foi aberto com sucesso
+<3> Função que irá verificar se o arquivo foi aberto com sucesso.
 <4> Função que irá ler o conteúdo do arquivo que já foi aberto com
-    sucesso
+    sucesso.
 <5> Todo arquivo que é aberto precisa ser fechado após sua utilização.
 <6> Retorna `NULL` em caso de erro na abertura.
 <7> Retorna o conteúdo lido ou `NULL` se houve algum erro na abertura
     do arquivo.
+
+Esta função utiliza outras que ainda não foram criadas e
+serão apresentadas nas próximas seções: `arquivoAbertoComSucesso` e
+`lerConteudoDeArquivoArberto`.
 
 ==== Verificando se o arquivo foi aberto com sucesso
 
@@ -708,7 +705,6 @@ Verificar se um arquivo foi aberto com sucesso é muito simples:
 .Função pare verificar se arquivo foi aberto com sucesso
 ----
 #include <stdbool.h> <1>
-
 ...
 
 bool arquivoAbertoComSucesso(FILE* arquivo) {
@@ -717,12 +713,22 @@ bool arquivoAbertoComSucesso(FILE* arquivo) {
 ----
 <1> Inclusão da biblioteca <<stdbool_h>>, que define o tipo `bool`. Este
     tipo pode ser utilizado como retorno de expressões lógicas. Além
-    disso também estão definidos macro `true` com o valor `1` e
+    disso, na biblioteca também estão definidos macro `true` com o valor `1` e
     `false` com o valor `0`.
 <2> A função `fopen` retorna `NULL` caso houve algum erro na abertura
     do arquivo.
 
+Na prática, não há necessidade de utilizar o tipo `bool`, mas esta
+solução é mais elegante.
+
 ==== Lendo conteúdo do arquivo aberto
+
+Para criar um string com o conteúdo do arquivo, primeiro precisamos
+alocar uma sequência contínua de memória que comporte o conteúdo que
+será lido. Além disso, devemos alocar um byte a mais pois um string
+deve terminar com o carácter `\0`, para utilização das funções de
+string. No entanto, nem sempre é possível alocar espaço na memória
+para armazenar o conteúdo inteiro do arquivo inteiro.
 
 A função que ler o conteúdo do arquivo foi implementada assim:
 
@@ -738,21 +744,28 @@ char* lerConteudoDeArquivoArberto(FILE* arquivo) {
 }
 ----
 <1> Nesta implementação estamos lendo o conteúdo inteiro do arquivo,
-    para isso precisamos saber qual o tamanho total do arquivo. Vamos
+    para isso precisamos saber qual o _tamanho total_ do arquivo. Vamos
     implementar a função `lerTamanhoDoArquivo` que será responsável
-    por obter o tamanho do arquivo.
-<2> Com o tamanho do arquivo salvo na variável `tamanhoDoArquivo` será
-    necessário alocar o espaço para guardar todo o conteúdo do arquivo
-    e mais um byte zero, para indicar o final do String.
+    apenas por obter o tamanho do arquivo.
+<2> Com o tamanho do arquivo salvo na variável `tamanhoDoArquivo`, será
+    necessário alocar (<<calloc>>) o espaço para guardar todo o
+    conteúdo do arquivo e mais um byte zero, para indicar o final do
+    String.
 <3> Com o buffer `conteudo` inicializado com zeros, chamamos a função
-    `fread` para ler o conteúdo do arquivo e salvá-lo no buffer
+    <<fread>> para ler o conteúdo do arquivo e salvá-lo no buffer
     `conteudo`.
-<4> Por fim, retornamos o buffer contendo o conteúdo lido.
+<4> Por fim, retornamos o buffer com o conteúdo lido.
+
+As funções devem possuir responsabilidades limitadas, por isso
+decidimos delegar a responsabilidade de ler o tamanho do arquivo para
+outra função apenas com este propósito: `lerTamanhoDoArquivo`.
 
 ==== Descobrindo o tamanho do arquivo
 
-Para descobrir o tamanho do arquivo, vamos utilizar as funções `fseek`
-e `ftell`:
+Para ler o tamanho de um arquivo é necessário ir para o final dele e
+solicitar a posição atual, que corresponde a quantidade de bytes que o
+arquivo possui. Caso o arquivo seja um fluxo (_stream_) talvez não
+seja possível ir *ao final do fluxo*.
 
 [source,c]
 ----
@@ -767,59 +780,28 @@ int lerTamanhoDoArquivo(FILE* arquivo) {
 }
 ----
 
-
 Na implementação:
 
-1. Utilizando a função `fseek` para mover a cabeça de leitura para o
+1. Utilizando a função <<fseek>> para mover a cabeça de leitura para o
    final do arquivo. 
-2. Em seguida, chamamos a função `ftell` para pegar a posição atual de
+2. Em seguida, chamamos a função <<ftell>> para pegar a posição atual de
    leitura do arquivo, que irá corresponder ao tamanho do arquivo.
 3. Retornamos para o início do arquivo, para que próximas leituras
    ocorram no início.
 4. Retornamos o tamanho do arquivo
 5. Registramos como comentário o *Efeito colateral* da função.
 
-==== Fornecendo código para leitura de arquivo
+==== Executando o teste
 
-.Código fonte
-{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
+Agora que implementamos as funções para leitura, vamos executar o 
+teste:
 
-[source, c]
-.Atualização do code com funções para leitura de arquivo
-----
-include::{local}/{etapa}/src/lingua-do-i-core.c[]
-----
-<2> A função `fopen` (<<fopen>>) retorna um ponteiro para `File` se
-    conseguir abrir o arquivo, caso contrário retorna `NULL`. Esta
-    função tem o propósito de verificar o resultado da chamada àquela
-    função.
-<3> Para ler o tamanho de um arquivo é necessário ir para o final dele
-    e solicitar a posição atual, que corresponde a quantidade de bytes
-    que o arquivo possui. Caso o arquivo seja um fluxo (_stream_)
-    talvez não seja possível ir *ao final do fluxo*.
-<4> Para criar um string com o conteúdo do arquivo, primeiro
-    precisamos alocar uma sequência contínua de memória que comporte o
-    conteúdo que será lido. Além disso, um string deve terminar com o
-    caractér `\0`, para utilização das funções de string. A função
-    `calloc` (<<calloc>>), além de alocar espaço na memória,
-    inicializa todo o espaço alocado com `0` (zeros). Nem sempre é
-    possível alocar espaço para armazenar o espaço do arquivo inteiro,
-    caso ele seja grande demais.
-<5> Um arquivo para ser lido precisa ser aberto e fechado.
-
-==== Passos de implementação da etapa
-
-Implementando leitura do arquivo::
-Neste passo nós copiamos as funções contidas em
-https://gist.github.com/edusantana/8291576 que estão relacionadas a
-leitura do conteúdo de um arquivo e atualizamos nosso arquivo core.
-
-Compilando e executando o teste::
-Após as modificações vamos verificar se as funções copiadas realmente
-fazem o que se propões a fazer corretamente:
-+
+.Executando o teste
 ....
-include::{local}/{etapa}/make-command.txt[]
+$ make clean && make lingua-do-i-test && make test_all 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+./lingua-do-i-test
 ....
 
 Nosso teste continua passando! Isto quer dizer que nossa função foi

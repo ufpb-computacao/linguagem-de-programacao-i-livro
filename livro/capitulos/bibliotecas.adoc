@@ -76,7 +76,10 @@ TODO
 
 [[calloc]]
 ===== calloc
-TODO
+
+A função `calloc`, além de alocar espaço na memória, inicializa todo o
+espaço alocado com `0` (zeros). 
+
 
 [[free]]
 ===== free
@@ -119,8 +122,8 @@ na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
 [[fopen]]
 [id="fopen", reftext="fopen()"]
 ==== fopen()
-
-TODO.
+A função `fopen` retorna um ponteiro para `FILE` se conseguir abrir o
+arquivo, caso contrário retorna `NULL`. 
 
 [[fclose]]
 [id="fclose", reftext="fclose()"]
@@ -137,6 +140,11 @@ TODO
 ==== fseek()
 TODO.
 
+[[ftell]]
+[id="ftell", reftext="ftell()"]
+==== ftell()
+TODO.
+
 [[printf]]
 [id="printf", reftext="printf()"]
 ==== printf()
@@ -147,6 +155,8 @@ TODO.
 ==== fprintf
 TODO.
 
+[[frewind]]
+[id="frewind", reftext="frewind()"]
 ==== frewind
 TODO.
 
