@@ -1,14 +1,14 @@
-#include <assert.h> // <1>
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "lingua-do-i-core.h"
 
 void verificaConteudosSaoIguais(char* conteudo, char* esperado){
-	assert(conteudo != NULL && "conteúdo não pode ser NULL"); // <2>
+	assert(conteudo != NULL && "conteúdo não pode ser NULL");
 
 	assert( strcmp(conteudo, esperado) == 0
-			&& "conteúdo deve ser igual ao esperado"); // <2>
+			&& "conteúdo deve ser igual ao esperado");
 }
 
 char* NOME_DO_ARQUIVO = "musica-trecho.txt";

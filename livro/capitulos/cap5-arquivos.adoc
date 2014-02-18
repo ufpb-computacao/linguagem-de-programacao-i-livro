@@ -942,15 +942,19 @@ arquivos:
 
 :etapa: etapa6
 
+O propósito desta etapa é ver o teste passando com o menor esforço
+possível.
 
-==== Fazendo o teste passar
-Alteramos a função `traduzParaLingaDoI` para retornar o valor
-esperado.
+==== Fazendo o teste passar com esforço mínimo
+
+Como fazer nosso teste passar com o esforço mínimo? Vamos tentar
+assim:
 
 .Código fonte
 {online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
 
 [source,c]
+.Alterando função para retornar resultado esperado
 ----
 char* TRADUCAO="Minhis vigiis, tidi iqui.";
 char* traduzParaLingaDoI(char* mensagemOriginal){
@@ -958,7 +962,10 @@ char* traduzParaLingaDoI(char* mensagemOriginal){
 }
 ----
 
-.Execução do teste após modificação
+Vamos executar novamente os testes para verificar o teste passando
+
+
+.Execução dos testes para verificar eles passando
 ....
 $ make clean && make lingua-do-i-test && ./lingua-do-i-test
 rm -rf lingua-do-i lingua-do-i-test
@@ -966,7 +973,14 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o
 lingua-do-i-test
 ....
 
-Ótimo, nosso teste está passando! 
+Ótimo, nosso teste está passando! Na próxima etapa iremos atualizar
+nossa implementação.
+
+NOTE: Talvez você tenha achado esta etapa estranha, e está se
+perguntando _qual o setindo de uma implementação viciada deste jeito?_
+Agora que vimos o teste falhar e passar temos confiança de modificar o
+código, enquanto os testes permanecerem passando nossa implementação
+estará correta.
 
 ==== Código da etapa
 
