@@ -1167,6 +1167,19 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 
 Nosso teste está passando novamente!
 
+[[sec_etapa8_codigo]]
+==== Código
+
+.Código fonte
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
+
+[source, c]
+.Código fonte para os testes
+----
+include::{local}/{etapa}/src/lingua-do-i-test.c[]
+----
+<1> Correção realizada
+
 ==== Código da etapa
 
 Você pode consultar o código final desta etapa nos seguintes
