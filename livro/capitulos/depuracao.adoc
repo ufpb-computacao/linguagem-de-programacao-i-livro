@@ -7,7 +7,6 @@
 .Objetivos do capítulo
 ____
 
-// FIXME atualizar objetivos
 Ao final deste capítulo você deverá ser capaz de:
 
 * Saber os requisitos para depuração de um programa;
@@ -23,13 +22,13 @@ os valores das variáveis do programa.
 === Requisitos da depuração
 
 Para depurar um programa é necessário que o programa seja compilado
-com instruções para o depurar, com o `gcc` isto é possível através do
+com instruções para depuração. No `gcc` isto é possível através do
 parâmetro `-g`.
 
 === Depurando o programa ligua do i
 
 Como exemplo de depuração nós vamos utilizar o programa que estava
-sendo desenvolvido em <<sec_etapa8>>.
+sendo desenvolvido na <<sec_etapa8>>.
 
 ==== Checando o pré-requisito para depuração
 :etapa: etapa7
@@ -54,7 +53,11 @@ Vamos relembrar o resultado da última execução do programa:
 
 .Última execução de lingua-do-i-test
 ....
-include::{local}/{etapa}/make-command.txt[]
+$ make clean && make lingua-do-i-test && ./lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+Abortado (imagem do núcleo gravada)
 ....
 
 O código fonte utilizado na execução foi:
@@ -110,7 +113,9 @@ o problema, pois teríamos como comparar os valores de
 `mensagemTraduzida` com `TRADUCAO_ESPERADA`. Dependendo da diferença
 poderemos ter uma dica do problema.
 
-NOTE: Nós vamos escolher a *linha 24* como nosso ponto de parada.
+NOTE: Nós vamos escolher a *linha 24* como nosso ponto de parada. O
+número da linha será utilizado no comando `break` para definir o ponto
+de parada na próxima seção.
 
 
 [[sec_depuracao]]
@@ -131,7 +136,8 @@ http://sourceware.org/gdb/current/onlinedocs/gdb.pdf.gz[PDF].
 include::{local}/{etapa}/gdb-execution.txt[]
 ----
 <1> Antes de iniciar a execução do aplicativo, nós estabelecemos nosso
-    ponto de parada, através deste comando: `break 24`.
+    ponto de parada (_break point_), através deste comando: `break
+    24`, definindo que a depuração irá iniciar na linha 24.
 <2> Em seguida solicitamos a execução do programa através do comando
     `run`. O programa então é executado até chegar no ponto de parada,
     quando então imprime número da linha, seguido do código contido
@@ -149,9 +155,9 @@ include::{local}/{etapa}/gdb-execution.txt[]
 <5> Nós sabemos que conteúdo não é `NULL`, então avançamos para a
     próxima linha.
 <6> Neste momento estamos utilizando o comando `print` para exibir os
-    conteúdos das variáveis. Até agora percebemos a razão do teste
+    conteúdos das variáveis. Até agora *não* percebemos a razão do teste
     está falhando.
-<7> Solicitamos a impressão da função em C que realiza comparação
+<7> Solicitamos a invocação da função em C que realiza comparação
     de strings (<<strcmp>>) passando os dois strings com parâmetros. A
     resposta indica que eles realmente são diferentes, mas ainda não
     percebi a diferença.

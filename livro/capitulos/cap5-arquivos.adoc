@@ -1090,7 +1090,8 @@ char traduzCaracterParaLinguaDoI(char original){
 Com nossa implementação super simples, vamos executar nossos testes
 com a esperança de que eles estejam passando:
 
-.Testes falhando apesar da nossa implementação
+
+.Execução dos testes após nossa implementação
 ....
 $ make clean && make lingua-do-i-test && ./lingua-do-i-test
 rm -rf lingua-do-i lingua-do-i-test
@@ -1098,6 +1099,10 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
 Abortado (imagem do núcleo gravada)
 ....
+
+// O resultado destes testes também é mostrado no capítulo de
+// depuração.
+
 
 Oops! O teste está falhando! Como isto é possível? Nossa implementação
 é extremamente simples, ele deveria passar! 
@@ -1168,17 +1173,19 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 Nosso teste está passando novamente!
 
 [[sec_etapa8_codigo]]
-==== Código
+==== Correção realizada
+
+Após a depuração identificamos o problema e corrigimos o erro que
+estava em nosso arquivo de teste:
 
 .Código fonte
 {online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
 
-[source, c]
-.Código fonte para os testes
+[source,c]
+.Correção do texto de TRADUCAO_ESPERADA no teste
 ----
-include::{local}/{etapa}/src/lingua-do-i-test.c[]
+char* TRADUCAO_ESPERADA= "Minhis vigiis, tidi iqii.";
 ----
-<1> Correção realizada
 
 ==== Código da etapa
 
