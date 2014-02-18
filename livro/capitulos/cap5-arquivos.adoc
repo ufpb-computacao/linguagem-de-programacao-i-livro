@@ -962,7 +962,7 @@ char* traduzParaLingaDoI(char* mensagemOriginal){
 }
 ----
 
-Vamos executar novamente os testes para verificar o teste passando
+Vamos executar novamente os testes para verificar o teste passando:
 
 
 .Execução dos testes para verificar eles passando
@@ -976,11 +976,16 @@ lingua-do-i-test
 Ótimo, nosso teste está passando! Na próxima etapa iremos atualizar
 nossa implementação.
 
-NOTE: Talvez você tenha achado esta etapa estranha, e está se
+[NOTE]
+====
+Talvez você tenha achado esta etapa estranha, e se
 perguntando _qual o setindo de uma implementação viciada deste jeito?_
+
 Agora que vimos o teste falhar e passar temos confiança de modificar o
 código, enquanto os testes permanecerem passando nossa implementação
 estará correta.
+
+====
 
 ==== Código da etapa
 
@@ -1010,7 +1015,16 @@ arquivos:
 
 :etapa: etapa7
 
-==== Implementando troca das vogais
+Agora que nossos testes estão passando, precisamos fornecer uma outra
+implementação de `traduzParaLingaDoI` que seja capaz de traduzir a
+mensagem e que mantenha nossos testes passando.
+
+==== Implementando visão geral da tradução
+
+Vamos atualizar a implementação de `traduzParaLingaDoI` para traduzir
+a mensagem. A função precisará retornar um novo string, do mesmo
+tamanho da mensagem original, copiando os caracteres originais da
+mensagem e só traduzindo as vogais para i:
 
 Inclusão de <<string_h>>, pois vamos usar a função <<strlen>>.
 
@@ -1019,21 +1033,39 @@ Atualiza `traduzParaLingaDoI`
 [source,c]
 ----
 char* traduzParaLingaDoI(char* mensagemOriginal){ 
-	int tamanhoDaMensagem = strlen(mensagemOriginal);
-	char* resposta = calloc(1, tamanhoDaMensagem+1);
-	for(int i=0; i<tamanhoDaMensagem; i++){
-		char caracterDaMensagemOriginal = mensagemOriginal[i];
+	int tamanhoDaMensagem = strlen(mensagemOriginal);<1>
+	char* resposta = calloc(1, tamanhoDaMensagem+1);<2>
+	for(int i=0; i<tamanhoDaMensagem; i++){<3>
+		char caracterDaMensagemOriginal=mensagemOriginal[i];<3>
 		resposta[i] = traduzCaracterParaLinguaDoI(
-				caracterDaMensagemOriginal);
+				caracterDaMensagemOriginal);<4>
 	}
 	return resposta;
 }
 ----
+<1> Consulta o tamanho do string. Para utilização de <<strlen>> é
+    necessário incluir <<string_h>> no início do arquivo.
+<2> Alocação de espaço para guardar o string do mesmo tamanho da
+    mensagem original.
+<3> Percorre todos os carácteres de `mensagemOriginal` e salva em
+    `caracterDaMensagemOriginal` para ser traduzido.
+<4> Chama função `traduzCaracterParaLinguaDoI` para traduzir o
+    carácter. Em seguida, salva sua tradução na posição correspondente
+    em `resposta`.
 
+Nós poderíamos ter adicionado neste função a lógica de verificar se o 
+carácter é uma vogal, e só invocar a tradução nestes casos. No
+entanto, parecia responsabilidade demais para uma única função,
+decidimos atribuí-la a outra função.
 
-Cria `traduzCaracterParaLinguaDoI`
+==== Construindo função para tradução de carácteres
+
+Como vimos anteriormente, vamos construir uma função cujo único
+propósito será traduzir vogais para `i` e retornar o valor original
+caso o carácter não seja uma vogal:
 
 [source,c]
+.Implementando função de tradução de carácteres em lingua-do-i-core.c
 ----
 char traduzCaracterParaLinguaDoI(char original){ 
 	char resposta;
@@ -1052,25 +1084,22 @@ char traduzCaracterParaLinguaDoI(char original){
 }
 ----
 
-.Apesar da nossa implementação o erro continua
+Com nossa implementação super simples, vamos executar nossos testes
+com a esperança de que eles estejam passando:
+
+.Testes falhando apesar da nossa implementação
 ....
-include::{local}/{etapa}/make-command.txt[]
+$ make clean && make lingua-do-i-test && ./lingua-do-i-test
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `strcmp(conteudo, esperado) == 0 && "conteúdo deve ser igual ao esperado"' failed.
+Abortado (imagem do núcleo gravada)
 ....
 
-==== Código da etapa
-
-.Código fonte
-{online}/{etapa}/src/lingua-do-i-core.c[{local}/{etapa}/src/lingua-do-i-core.c]
-
-[source, c]
-----
-include::{local}/{etapa}/src/lingua-do-i-core.c[]
-----
-<1> Inclusão de `string.h`
-<2> Criação de função para traduzir um carácter.
-<3> Implementação real da função de traduzir
-<4> Optamos por criar uma nova mensagem como resposta, ao invés de
-    alterar a mensagem original.
+Oops! O teste está falhando! Como isto é possível? Nossa implementação
+é extremamente simples, ele deveria passar! Nestes casos, somente a
+*depuração* do programa para encontrar o erro, é exatamente o que
+faremos na próxima etapa.
 
 ==== Código da etapa
 

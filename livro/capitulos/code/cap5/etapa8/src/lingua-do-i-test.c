@@ -18,8 +18,8 @@ void testLerConteudoDoArquivo(){
 	verificaConteudosSaoIguais(conteudo, CONTEUDO_ESPERADO);
 }
 
-char* MENSAGEM_ORIGINAL = "Minhas vogais, tudo aqui.";
-char* TRADUCAO_ESPERADA= "Minhis vigiis, tidi iqii."; //<1>
+char* MENSAGEM_ORIGINAL="Minhas vogais, tudo aqui.";
+char* TRADUCAO_ESPERADA="Minhis vigiis, tidi iqii."; //<1>
 void testTraducaoParaLinguaDoI(){
 	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);
 	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);
