@@ -835,11 +835,34 @@ arquivos:
 
 :etapa: etapa5
 
-Inclusão de teste de tradução::
-xx.
-+
-Compilando para descobrir o próximo passo:
-+
+==== Inclusão de teste de tradução
+
+Vamos iniciar a implementação desta etapa construindo um teste de
+tradução, que consistirá em traduzir as vogais para a letra i:
+
+[source,c]
+----
+char* MENSAGEM_ORIGINAL="Minhas vogais, tudo aqui.";<1>
+char* TRADUCAO_ESPERADA="Minhis vigiis, tidi iqui.";<2>
+void testTraducaoParaLinguaDoI(){
+	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);<3>
+	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);<4>
+}
+----
+<1> Mensagem original que será traduzida.
+<2> Tradução esperada para a mensagem original.
+<3> Invoca função `traduzParaLingaDoI` que deverá traduzir a mensagem
+    passada como parâmetro e retornar sua tradução.
+<4> Verifica que o resultado da tradução é identico ao esperado
+    (`TRADUCAO_ESPERADA`).
+
+Este teste consiste em invocar a função `traduzParaLingaDoI` passando
+`MENSAGEM_ORIGINAL` para ser traduzida. 
+
+Com o teste elaborado, vamos invocar o compilador para descobrir o
+próximo passo:
+
+.Invocando o compilador para descobrir o próximo passo
 ....
 $ make clean && make lingua-do-i-test && make test_all
 rm -rf lingua-do-i lingua-do-i-test
@@ -853,12 +876,33 @@ collect2: ld returned 1 exit status
 make: ** [lingua-do-i-test] Erro 1
 ....
 
-Criando função `traduzParaLingaDoI`::
-Adição da definição no cabeçalho e implementação estúpida no arquivo
-core.
-+
-Compilando e executando o teste para descobrir o próximo passo:
-+
+A função `traduzParaLingaDoI` que utilizamos no teste ainda não
+existe, vamo criá-la.
+
+==== Criando a função traduzParaLingaDoI
+
+Primeiro precisaremos atualizar o cabeçalho do core:
+
+[source,c]
+.Adicionando função em lingua-do-i-core.h
+----
+char* traduzParaLingaDoI(char* mensagemOriginal);
+----
+
+Em seguida, vamos criar a função com uma implementação estúpida:
+
+[source,c]
+.Implementação estúpida de traduzParaLingaDoI em lingua-do-i-core.c
+----
+char* traduzParaLingaDoI(char* mensagemOriginal){
+	return NULL;
+}
+----
+
+Vamos compilar e executar os nossos testes para descobrir o próximo
+passo:
+
+.Compilando e executando os testes:
 ....
 $ make clean && make lingua-do-i-test && ./lingua-do-i-test
 rm -rf lingua-do-i lingua-do-i-test
@@ -866,6 +910,9 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 lingua-do-i-test: lingua-do-i-test.c:8: verificaConteudosSaoIguais: Assertion `conteudo != ((void *)0) && "conteúdo não pode ser NULL"' failed.
 Abortado (imagem do núcleo gravada)
 ....
+
+Ótimo! O código compilou e estamos com o teste falhando. Nossa próxima
+etapa será fazer o teste passar.
 
 ==== Código da etapa
 
