@@ -1530,9 +1530,9 @@ FILE * criaArquivoTemporario(){
 ----
 <1> Neste função apenas invocamos a função `tmpfile()`.
 
-Decidimos criar a função `criaArquivoTemporario` apenas para aumentar
-a legibilidade do código para os leitores em português. Na prática,
-não haveria a necessidade de criá-la.
+NOTE: Decidimos criar a função `criaArquivoTemporario` apenas para
+aumentar a legibilidade do código para os leitores em português. Na
+prática, não haveria a necessidade de criá-la.
 
 ==== Verificando conteúdo salvo no arquivo
 
@@ -1609,8 +1609,9 @@ arquivo não corresponde ao esperado"' failed.
 Abortado (imagem do núcleo gravada)
 ....
 
-Como esperado, o teste falhou pois a função que deveria escrever o
-conteúdo está vazia.
+Como esperado, o teste falhou exatamente porque a função que deveria
+escrever o conteúdo está vazia. Repare que a mensagem da falha
+corresponde à mesma da verificação que adicionamos nesta etapa.
 
 ==== Fazendo o teste passar
 
@@ -1675,15 +1676,32 @@ Nesta etapa vamos definir como o programa irá determinar qual a
 entrada será processada, se utilizará a entrada padrão ou a partir de
 um arquivo.
 
-Caso o aplicativo seja invocado sem nenhum parâmetro, ele irá ler da
-entrada padrão, caso seja especificado o nome de um arquivo, ele será
-utilizado.
+Nesta funcionalidade, caso o aplicativo seja invocado sem nenhum
+parâmetro, ele irá ler da entrada padrão, caso seja especificado o
+nome de um arquivo, ele será utilizado.
+
+.Invocando sem parâmetro: ler da entrada padrão
+....
+lingua-do-i 
+....
+
+.Invocando com parâmetro: ler do arquivo
+....
+lingua-do-i meu-arquivo-de-entrada.txt
+....
+
+
+IMPORTANT: Lembre-se que estamos construindo uma aplicação, embora
+estivemos implementando vários testes, aos poucos as funcionalidades
+do nosso programa estão sendo implementadas em `lingua-do-i-core.c`.
+Mais adiante iremos alterar `lingua-do-i.c` para invocar as funções do
+core.
 
 ==== Testes para especificar a entrada
 
-No código a serguir estão definidos 3 testes, que utilizando os
+No código a seguir estão definidos 3 testes, que utilizam os
 parâmetros passados pelo sistema operacional à função <<sec_main>>,
-tente compreender o significado deles:
+para determinar a entrada:
 
 [source,c]
 .Testes para determinar a entrada do programa
@@ -1775,10 +1793,12 @@ O compilador nos informou que a  função `determinaEntrada` ainda não
 existe, precisamos defini-la no cabeçalho e criá-la no core:
 
 [source,c]
-.Definindo determinaEntrada no cabeçalho
+.Adicionando determinaEntrada em lingua-do-i-core.h
 ----
 FILE* determinaEntrada(int argc, const char* argv[]);
 ----
+
+Em seguida precisamos criar a função no core:
 
 [source,c]
 .Implementando determinaEntrada no core
@@ -1788,7 +1808,8 @@ FILE* determinaEntrada(int argc, const char* argv[]){
 }
 ----
 
-Vamos invocar a compilação novamente:
+Vamos invocar a compilação novamente para ter uma sugestão do próximo
+passo:
 
 ....
 $ make clean && make && make test_all
@@ -1800,7 +1821,7 @@ lingua-do-i-test.c:56:2: aviso: implicit declaration of function ‘verificaEntr
 ...
 ....
 
-Desobrimos que o próximo passo é criar a função
+Descobrimos que o próximo passo é criar a função
 `verificaEntradaFoiEntradaPadrao`:
 
 [source,c]
@@ -1811,7 +1832,7 @@ void verificaEntradaFoiEntradaPadrao(FILE* entrada){
 }
 ----
 
-Compilando para descobrir o próximo passo:
+Compilando novamente para descobrir o próximo passo:
 
 ....
 $ make clean && make && make test_all
@@ -1831,10 +1852,9 @@ precisamos implementar a função `verificaEntradaFoiArquivoValido`:
 ----
 void verificaEntradaFoiArquivoValido(FILE* entrada){
 	assert(entrada != NULL && entrada!= stdin &&
-		"Entrada deveria ser um arquivo válido");
+		"Entrada deveria ser um arquivo válido");<1>
 }
 ----
-
 
 Mais uma vez, compilando para descobrir o próximo passo:
 
@@ -1858,7 +1878,8 @@ void verificaEntradaFoiInvalida(FILE* entrada){
 }
 ----
 
-.Compilando para descobrir o próximo passo
+Compilando para descobrir o próximo passo:
+
 ....
 $ make clean && make && make test_all
 rm -rf lingua-do-i lingua-do-i-test
@@ -1890,7 +1911,8 @@ int main(void) {
 }
 ----
 
-.Verificando o próximo teste falhando
+Verificando o próximo teste falhando:
+
 ....
 $ make clean && make && make test_all
 rm -rf lingua-do-i lingua-do-i-test
@@ -1919,7 +1941,8 @@ int main(void) {
 }
 --------
 
-.Tentando verificar o último teste falhando
+Tentando verificar o último teste falhando:
+
 ....
 $ make clean && make && make test_all
 rm -rf lingua-do-i lingua-do-i-test
