@@ -2161,12 +2161,12 @@ int main(int argc, const char* argv[]) {<2>
 <2> Atualizamos o cabeçalho do `main`, adicionando os parâmetros que
     serão atribuídos pelo sistema operacional ao invocar a aplicação.
 <3> Em C é comum a checagem de parâmetros desta forma, caso o
-    parâmetro seja diferente de zero ou `NULL`, então é um valor válido.
+    parâmetro seja diferente de zero ou `NULL`, então é o valor válido.
 <4> Ler conteúdo da entrada e traduz para língua do i
-<5> Salva a mensagem traduzida na saída padrão, o usuário poderá
+<5> Salva a mensagem traduzida na saída padrão. O usuário poderá
     redirecionar para um arquivo se desejar.
-<6> Caso o arquivo não exista, a aplicação finaliza com mensagem de
-    erro.
+<6> Caso o arquivo não exista, a aplicação finaliza com mensagem na
+    *saída de erro*.
 
 A seguir você pode conferir a compilação com sucesso da aplicação:
 
@@ -2208,7 +2208,7 @@ Problema ao abrir arquivo: arquivo-que-nao-existe.txt
 ....
 
 Nosso aplicativo foi capaz de ler de um arquivo, passado como
-parâmetro ou lendo direcionado pela entrada padrão, mas será que ele é
+parâmetro ou sendo direcionado pela entrada padrão. Mas será que ele é
 capaz de ler a partir da entrada padrão sem ser direcionado de um
 arquivo? Vamos fazer o teste!
 
@@ -2217,8 +2217,12 @@ Tentando ler da entrada padrão:
 $ cat musica-trecho.txt | ./lingua-do-i
 ....
 
+NOTE: O comando `cat` disponível no Linux ler o conteúdo de um arquivo
+e o imprime na saída padrão.
+
 O resultado esperado não foi satisfatório, ele deveria ser capaz de
 ler da entrada padrão, o que está errado com a nossa implementação?
+Vamos analisá-la na próxima etapa.
 
 ==== Código da etapa
 
