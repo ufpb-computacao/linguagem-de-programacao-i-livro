@@ -1251,7 +1251,7 @@ passo será atualizar a implementação para fazer o teste passar.
 ==== Atualizar a implementação para fazer o teste passar
 
 A diferença do teste adicionado é que ele adiciona uma vogal
-maiúscula, e outra vogal com acento: *``Oh! Deus, será''*.
+maiúscula(`O`), e outra vogal com acento(`á`): *Oh!* Deus, *será*...
 
 Vamos atualizar nossa implementação para possibilitar esta conversão
 também:
