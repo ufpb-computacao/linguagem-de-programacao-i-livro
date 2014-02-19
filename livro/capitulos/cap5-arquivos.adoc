@@ -113,6 +113,7 @@ como eles são elaborados.
 
 Decidimos começar os nossos testes tentando ler o conteúdo de um arquivo:
 
+[[src_primeiro_teste]]
 [source,c]
 .Elaborando o primeiro teste no arquivo lingua-do-i-test.c
 ----
@@ -1353,13 +1354,11 @@ Na etapa anterior percebemos que a utilização de acentos provocou
 falha no nosso teste.
 
 Para compreender o problema precisamos entender sobre
-*((codificação))* de arquivos.
-
-Enquanto caracteres ASCII são facilmente codificados, pois cada
-carácter possui um único byte (que corresponde ao tamanho de um
-`char`), outras codificações, como UTF-8, podem possuir carácteres com
-tamanhos diferentes. Além disso, pode existir mais de uma codificação
-para o mesmo carácter.
+*((codificação))* de arquivos. Enquanto caracteres ASCII são
+facilmente codificados, pois cada carácter possui um único byte (que
+corresponde ao tamanho de um `char`), outras codificações, como UTF-8,
+podem possuir carácteres com tamanhos diferentes. Além disso, pode
+existir mais de uma codificação para o mesmo carácter.
 
 Por enquanto nós iremos utilizar o ((Algorítimo do Avestruz)) para
 resolução de problemas: nós iremos ignorar o problema e continuar
@@ -1372,6 +1371,10 @@ http://pt.wikipedia.org/wiki/Algoritmo_do_avestruz.
 
 
 ==== Desfazer teste com acentos
+
+Para manter nossos testes passando vamos manter o carácter `á` no
+string `TRADUCAO_ESPERADA2`:
+
 [source,c]
 ----
 char* MENSAGEM_ORIGINAL2="Oh! Deus, será que o senhor se zangou";
@@ -1381,6 +1384,9 @@ char* TRADUCAO_ESPERADA2="Ih! Diis, sirá qii i sinhir si zingii";<1>
     tratar acentos. 
 
 ==== Desfazer implementação de core que tratava acentos
+
+Em seguida, precisamos remover de `traduzCaracterParaLinguaDoI` os
+`case` com carácteres acentuados:
 
 [source,c]
 ----
@@ -1422,9 +1428,12 @@ lingua-do-i-test
 ./lingua-do-i-test
 ....
 
-==== Criação de arquivo TODO
+Ótimo, como esperado, nossos testes estão passando novamente!
 
-Criamos um arquivo como nome `TODO.txt` que manterá registro de
+==== Mantendo registro de novas funcionalidades no TODO
+
+Para não esquecer que temos uma dendência no projeto, vamos criar
+um arquivo como nome `TODO.txt` que manterá registro de
 atividades que gostaríamos de realizar no futuro:
 
 .Código fonte
@@ -1436,27 +1445,9 @@ atividades que gostaríamos de realizar no futuro:
 include::{local}/{etapa}/TODO.txt[]
 ....
 
-A criação de um arquivo *TODO* possibilita comunicar para as demais
+TIP: A criação de um arquivo *TODO* possibilita comunicar para as demais
 pessoas (envolvidas ou que irão se envolver no projeto) onde elas
 podem contribuir para o projeto.
-
-===== Código do teste
-.Código fonte
-{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
-
-[source, c]
-----
-include::{local}/{etapa}/src/lingua-do-i-test.c[]
-----
-
-===== Código do core
-.Código fonte
-{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-core.c]
-
-[source, c]
-----
-include::{local}/{etapa}/src/lingua-do-i-core.c[]
-----
 
 ==== Código da etapa
 
@@ -1492,7 +1483,37 @@ para possibilitar o salvamento.
 ==== Adicionar teste de salvamento de conteúdo
 
 Mas uma vez, antes de iniciar a implementação da nossa funcionalidade
-iremos escrever um teste para ela.
+iremos escrever seu teste:
+
+[source,c]
+----
+char* CONTEUDO_QUALQUER = "abracadabra";
+void testSalvaConteudoEmArquivo(){
+  FILE * arquivoDestino = criaArquivoTemporario(); <1>
+  salvaConteudo(arquivoDestino, CONTEUDO_QUALQUER); <2>
+  verificaConteudoFoiSalvo(arquivoDestino, CONTEUDO_QUALQUER); <3>
+
+  fclose(arquivoDestino); <4>
+}
+----
+<1> Criação de um arquivo temporário para o teste, o conteúdo do teste
+    será escrito nele. Se estivéssemos utilizando um arquivo normal,
+    deveríamos nos certificar de que o arquivo não existia antes, em
+    decorrência de execuções anteriores. Arquivos temporários são bons
+    para os testes pois quando fechados são automaticamente excluídos.
+<2> Esta função será implementada no core, será responsável por salvar
+    um string em um `FILE`.
+<3> Função para verificar que o conteúdo escrito no arquivo
+    corresponde ao conteúdo passado como parâmetro
+    (`CONTEUDO_QUALQUER`).
+<4> Fechamento do arquivo temporário.
+
+Percebam que estamos definindo que a função `salvaConteudo` irá
+receber um `FILE*` ao invés de um `char*` que seria o nome do arquivo,
+diferente de como fizemos com a função `lerConteudoDoArquivo`
+(<<src_primeiro_teste>>). Isto foi intencional, pois pretendemos, no
+futuro, salvar o conteúdo também na saída padrão (que é do tipo
+`FILE*`).  
 
 [source, c]
 .Adicionando teste de salvamento de arquivo em lingua-do-i-test.c
@@ -1520,19 +1541,6 @@ void testSalvaConteudoEmArquivo(){
 <1> A função `lerConteudoDeArquivoArberto` foi implementada em
     `lingua-do-i-core.c`, mas ainda não está visível aqui,
     precisaremos adicioná-la ao cabeçalho mais adiante.
-<2> Criação de um arquivo temporário para o teste, o conteúdo do teste
-    será escrito nele. Se estivéssemos utilizando um arquivo normal,
-    deveríamos nos certificar de que o arquivo não existia antes, em
-    decorrência de execuções anteriores. Arquivos temporários são bons
-    para os testes pois quando fechados são automaticamente excluídos.
-<3> Esta função será implementada no core. Percebam que escrevemos a
-    função sem passar o nome do arquivo, mas um parâmetro do tipo
-    `File*`. Decidimos assim, pois pretendemos salvar o conteúdo
-    também na saída padrão (que é do tipo `File*`). 
-<4> Função para verificar que o conteúdo escrito no arquivo
-    corresponde ao conteúdo passado para a função `salvaConteudo`.
-<5> Fechamento do arquivo.
-
 
 ==== Atualização do arquivo de cabeçalho do core
 Sabemos que temos algumas alterações pendentes para serem realizadas
