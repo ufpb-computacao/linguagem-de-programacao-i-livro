@@ -163,11 +163,11 @@ include::{local}/{etapa}/gdb-execution.txt[]
     percebi a diferença.
 <8> Outra função que realiza comparação é a <<strncmp>>, que possui um
     último parâmetro para indicar o tamanho da comparação. Realizamos
-    diversas inspecções para identificar aonde os strings são
+    diversas inspeções para identificar aonde os strings são
     diferentes. Percebemos que os strings diferem no 23º carácter.
 <9> Imprimimos o 23º carácter dos dois strings. Neste momento
     percebemos que há algo de errado com o string `esperado`. O
-    programa lingua do i converte todas as vogais para *i*, não
+    programa língua do i converte todas as vogais para *i*, não
     deveria nenhuma outra vogal, inclusive o *u*. Em seguida
     percebemos que o erro estava na palavra `iqui`, na frase que
     utilizamos no teste como resultado esperado.

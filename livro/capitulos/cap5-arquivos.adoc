@@ -1158,20 +1158,6 @@ continuar, para conhecer o processo de depuração.
 A depuração do programa pode ser vista na <<sec_depuracao>> e a
 identificação do problema na <<sec_depuracao_resultado>>.
 
-==== Correção e verificação do teste passando
-
-Após a correção do código fonte, executamos o teste novamente:
-
-.Re-executando o teste após a correção
-....
-$ make clean && make && ./lingua-do-i-test 
-rm -rf lingua-do-i lingua-do-i-test
-gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
-gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
-....
-
-Nosso teste está passando novamente!
-
 [[sec_etapa8_codigo]]
 ==== Correção realizada
 
@@ -1186,6 +1172,18 @@ estava em nosso arquivo de teste:
 ----
 char* TRADUCAO_ESPERADA= "Minhis vigiis, tidi iqii.";
 ----
+
+Após a correção do código fonte, executamos o teste novamente:
+
+.Re-executando o teste após a correção
+....
+$ make clean && make && ./lingua-do-i-test 
+rm -rf lingua-do-i lingua-do-i-test
+gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
+gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
+....
+
+Nosso teste está passando novamente!
 
 ==== Código da etapa
 
