@@ -111,11 +111,12 @@ IMPORTANT: Ao decorrer do capítulo iremos escrever vários testes,
 este será o primeiro deles. Leia com bastante atenção para perceber
 como eles são elaborados.
 
-Decidimos começar os nossos testes tentando ler o conteúdo de um arquivo:
+Decidimos começar os nossos testes tentando ler o conteúdo de um
+arquivo, o código a seguir foi escrito em `lingua-do-i-test.c`:
 
 [[src_primeiro_teste]]
 [source,c]
-.Elaborando o primeiro teste no arquivo lingua-do-i-test.c
+.Primeiro teste
 ----
 #include "lingua-do-i-core.h"
 
@@ -1509,40 +1510,62 @@ void testSalvaConteudoEmArquivo(){
 <4> Fechamento do arquivo temporário.
 
 Percebam que estamos definindo que a função `salvaConteudo` irá
-receber um `FILE*` ao invés de um `char*` que seria o nome do arquivo,
-diferente de como fizemos com a função `lerConteudoDoArquivo`
-(<<src_primeiro_teste>>). Isto foi intencional, pois pretendemos, no
+receber um `FILE*` ao invés de um `char*`, correspondente ao nome do
+arquivo, diferente de como fizemos com a função `lerConteudoDoArquivo`
+(no <<src_primeiro_teste>>). Isto foi intencional, pois pretendemos, no
 futuro, salvar o conteúdo também na saída padrão (que é do tipo
 `FILE*`).  
 
+==== Função para criar arquivo temporário
+
+Precisamos criar a função responsável pela criação do arquivo
+temporário que foi definida no teste:
+
+[source,c]
+.Função para criar arquivos temporários
+----
+FILE * criaArquivoTemporario(){
+	return tmpfile(); <1>
+}
+----
+<1> Neste função apenas invocamos a função `tmpfile()`.
+
+Decidimos criar a função `criaArquivoTemporario` apenas para aumentar
+a legibilidade do código para os leitores em português. Na prática,
+não haveria a necessidade de criá-la.
+
+==== Verificando conteúdo salvo no arquivo
+
+A outra função, para verificar que o conteúdo salvo
+no arquivo corresponde ao que foi escrito nele, foi implementada
+como a seguir:
+
+
 [source, c]
-.Adicionando teste de salvamento de arquivo em lingua-do-i-test.c
+.Função para verificar conteúdo salvo em arquivo
 ----
 void verificaConteudoFoiSalvo( FILE* arquivo, 
     char* conteudo_esperado ){
   char* conteudo = lerConteudoDeArquivoArberto(arquivo); <1>
   assert( strcmp(conteudo, conteudo_esperado) == 0
-    && "Conteúdo do arquivo não corresponde ao esperado");
-}
-
-FILE * criaArquivoTemporario(){
-	return tmpfile();
-}
-
-char* CONTEUDO_QUALQUER = "abracadabra";
-void testSalvaConteudoEmArquivo(){
-  FILE * arquivoDestino = criaArquivoTemporario(); <2>
-  salvaConteudo(arquivoDestino, CONTEUDO_QUALQUER); <3>
-  verificaConteudoFoiSalvo(arquivoDestino, CONTEUDO_QUALQUER); <4>
-
-  fclose(arquivoDestino); <5>
+    && "Conteúdo do arquivo não corresponde ao esperado");<2>
 }
 ----
 <1> A função `lerConteudoDeArquivoArberto` foi implementada em
     `lingua-do-i-core.c`, mas ainda não está visível aqui,
     precisaremos adicioná-la ao cabeçalho mais adiante.
+<2> Código similar a `verificaConteudosSaoIguais`, mas com outra
+    mensagem.
+
+Percebam que na segunda linha, poderíamos ter invocado
+`verificaConteudosSaoIguais(conteudo, conteudo_esperado)`, mas quando
+esta função fosse falhar receberíamos a mesma mensagem das falhas
+anteriores, então optamos por exibir uma nova mensagem: ``Conteúdo do
+arquivo não corresponde ao esperado''.
+
 
 ==== Atualização do arquivo de cabeçalho do core
+
 Sabemos que temos algumas alterações pendentes para serem realizadas
 no arquivo de cabeçalho do core, vamos realizá-las agora:
 
@@ -1552,7 +1575,7 @@ no arquivo de cabeçalho do core, vamos realizá-las agora:
 void salvaConteudo(FILE* arquivoDestino, char* conteudo); <1>
 char* lerConteudoDeArquivoArberto(FILE* arquivo); <2>
 ----
-<1> Função que desejamos implementar
+<1> Principal função do teste, que desejamos implementar no core.
 <2> Declaração de função já implementada em core mas que não estava
     visível externamente ao arquivo.
 
@@ -1594,7 +1617,7 @@ conteúdo está vazia.
 Desta vez não há uma forma simples de fazer o teste passar, precisamos
 realmente escrever o conteúdo no arquivo para que o teste passe.
 
-Então implementamos a função `salvaConteudo` da seguinte forma:
+Implementamos a função `salvaConteudo` da seguinte forma:
 
 [source,c]
 .Implementação para escrever conteúdo no arquivo
@@ -1606,9 +1629,12 @@ void salvaConteudo(FILE* arquivoDestino, char* conteudo){
 
 TIP: A função <<fprintf>> é similar a <<printf>>, a única diferença é
 que `printf` escreve sempre na saída padrão, enquanto que `fprintf`
-recebe como parâmetro qual o arquivo onde será escrito o conteúdo.
+recebe como parâmetro qual o arquivo (`FILE*`) onde será escrito o
+conteúdo.
 
-.Execução do teste
+Após a implementação, vamos verificar os testes:
+
+.Execução dos testes
 ....
 $ make clean && make && ./lingua-do-i-test 
 rm -rf lingua-do-i lingua-do-i-test
