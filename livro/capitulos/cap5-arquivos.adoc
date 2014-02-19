@@ -1868,10 +1868,9 @@ lingua-do-i-test.c:80:2: aviso: implicit declaration of function ‘verificaEntr
 ...
 ....
 
-Novamente, precisamos implementar outra função:
+Novamente, precisamos implementar a função `verificaEntradaFoiInvalida`:
 
 [source,c]
-.Implementação da função
 ----
 void verificaEntradaFoiInvalida(FILE* entrada){
 	assert(entrada == NULL && "Entrada deve ser inválida");
@@ -1892,7 +1891,11 @@ make: *** [test_all] Abortado (arquivo core criado)
 ....
 
 Ótimo! O código já está compilando e nosso primeiro teste está
-falhando. Para verificar os outros testes falhando, basta comentar a
+falhando. 
+
+==== Certificando-se que todos os novos testes estão falhando
+
+Para verificar os outros testes falhando, basta comentar a
 linha de invocação do teste na função `main`:
 
 [source,c]
@@ -1986,6 +1989,9 @@ make: *** [test_all] Abortado (arquivo core criado)
 Após esta modificação todos os testes falham, estamos prontos para
 avançar para a próxima etapa.
 
+NOTE: Perceba que todas as mensagens de falha dos testes foram
+diferentes, para ficar evidente a causa da falha.
+
 ==== Código da etapa
 
 Você pode consultar o código final desta etapa nos seguintes
@@ -2015,7 +2021,7 @@ arquivos:
 
 ==== Fazendo os testes passarem
 
-Antes de fazer o teste passar, vamos verificar o teste falhando
+Antes de fazer o primeiro teste passar, vamos verificar o teste falhando
 novamente:
 
 .Verificando teste da entrada padrão falhando
@@ -2046,7 +2052,7 @@ FILE* determinaEntrada(int argc, const char* argv[]){
 <1> Quando `argc == 1`, então não há nenhum parâmetro e devemos
     retornar a entrada padrão. 
 
-Vamos executar os testes novamente:
+Após esta modificação, vamos executar os testes novamente:
 
 .Re-execução dos testes
 ....
@@ -2059,7 +2065,11 @@ make: *** [test_all] Abortado (arquivo core criado)
 ....
 
 Ótimo, nosso primeiro teste passou, e a falha do segundo foi
-apresentada. Próximo passo será fazer o segundo teste passar:
+apresentada. 
+
+O próximo passo será fazer o segundo teste passar. Este teste espera
+que caso seja passado o nome do arquivo como parâmetro, então a
+entrada deve utilizá-lo para leitura:
 
 [source,c]
 .Ajuste para fazer o segundo teste passar
@@ -2077,7 +2087,8 @@ FILE* determinaEntrada(int argc, const char* argv[]){
 <1> Utiliza <<fopen>> para abrir arquivo para leitura, utilizando o
     nome do arquivo passado como parâmetro.
 
-.Re-execução dos testes
+Após esta modificação vamos re-executar os testes:
+
 ....
 $ make clean && make lingua-do-i-test && make test_all
 rm -rf lingua-do-i lingua-do-i-test
@@ -2085,8 +2096,10 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 ./lingua-do-i-test
 ....
 
-Com esta última modificação todos os nossos testes estão passando! Na
-próxima etapa iremos unir a implementação de core no `main()`.
+Com esta última modificação todos os nossos testes estão passando! 
+
+Na próxima etapa iremos unir a implementação de core no `main()` para
+gerar o aplicativo capaz de traduzir para língua do i.
 
 ==== Código da etapa
 
