@@ -1219,18 +1219,23 @@ novos testes para garantir isso.
 
 [source,c]
 ----
-char* MENSAGEM_ORIGINAL2 = "Oh! Deus, será que o senhor se zangou";
-char* TRADUCAO_ESPERADA2= "Ih! Diis, sirí qii i sinhir si zingii";
+char* MENSAGEM_ORIGINAL="Minhas vogais, tudo aqui.";<1>
+char* TRADUCAO_ESPERADA="Minhis vigiis, tidi iqii.";<1>
+char* MENSAGEM_ORIGINAL2="Oh! Deus, será que o senhor se zangou";<2>
+char* TRADUCAO_ESPERADA2="Ih! Diis, sirí qii i sinhir si zingii";<2>
 void testTraducaoParaLinguaDoI(){
-	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);
-	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);
-	verificaConteudosSaoIguais(traduzParaLingaDoI(MENSAGEM_ORIGINAL2), TRADUCAO_ESPERADA2);
+	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);<1>
+	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);<1>
+	verificaConteudosSaoIguais(traduzParaLingaDoI(MENSAGEM_ORIGINAL2), TRADUCAO_ESPERADA2);<2>
 }
 ----
+<1> Techos já existiam no testes anteriormente.
+<2> Techos adicionados ao teste.
 
-==== Execução do teste
+Após adicionar mais uma mensagem para ser traduzida, re-executamos os
+testes:
 
-.Execução do teste
+.Execução dos testes
 ....
 $ make clean && make && ./lingua-do-i-test 
 rm -rf lingua-do-i lingua-do-i-test
@@ -1240,8 +1245,8 @@ lingua-do-i-test: lingua-do-i-test.c:11: verificaConteudosSaoIguais: Assertion `
 Abortado (imagem do núcleo gravada)
 ....
 
-Como a falha ocorreu devido a inclusão do novo teste, isto que dizer
-que precisamos atualizar a implementação para fazer o teste passar.
+Como a falha ocorreu devido a inclusão do novo teste, nosso próximo
+passo será atualizar a implementação para fazer o teste passar.
 
 ==== Atualizar a implementação para fazer o teste passar
 
@@ -1287,8 +1292,9 @@ char traduzCaracterParaLinguaDoI(char original){
 <1> Inclusão de conversão de letra maiúscula.
 <2> Conversão de caracteres com acentos.
 
-==== Execução dos testes após modificação
-.Execução dos testes após modificação
+Após estas modificações vamos compilar e executar os testes novamente:
+
+.Compilação e execução dos testes após modificações
 ....
 $ make clean && make && make test_all
 rm -rf lingua-do-i lingua-do-i-test
@@ -1296,28 +1302,14 @@ gcc -Wall -g -std=c1x lingua-do-i.c lingua-do-i-core.c -o lingua-do-i
 lingua-do-i-core.c: Na função ‘traduzCaracterParaLinguaDoI’:
 lingua-do-i-core.c:64:7: aviso: constante de caractere multi-caractere [-Wmultichar]
 lingua-do-i-core.c:64:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:65:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:65:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:66:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:66:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:67:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:67:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:68:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:68:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+...
 lingua-do-i-core.c:69:14: aviso: constante de caractere multi-caractere [-Wmultichar]
 lingua-do-i-core.c:69:3: aviso: overflow in implicit constant conversion [-Woverflow]
 gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 lingua-do-i-core.c: Na função ‘traduzCaracterParaLinguaDoI’:
 lingua-do-i-core.c:64:7: aviso: constante de caractere multi-caractere [-Wmultichar]
 lingua-do-i-core.c:64:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:65:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:65:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:66:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:66:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:67:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:67:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
-lingua-do-i-core.c:68:7: aviso: constante de caractere multi-caractere [-Wmultichar]
-lingua-do-i-core.c:68:2: aviso: case label value exceeds maximum value for type [habilitado por padrão]
+...
 lingua-do-i-core.c:69:14: aviso: constante de caractere multi-caractere [-Wmultichar]
 lingua-do-i-core.c:69:3: aviso: overflow in implicit constant conversion [-Woverflow]
 ./lingua-do-i-test
@@ -1326,7 +1318,8 @@ make: *** [test_all] Abortado (arquivo core criado)
 ....
 
 Quando executamos o teste, verificamos que o compilador apresentou
-vários avisos e o teste falhou.
+vários alertas e o teste falhou. A falha provavelmente está
+relacionada aos acentos, vamos compreender melhor na próxima etapa.
 
 ==== Código da etapa
 
@@ -1365,16 +1358,16 @@ Para compreender o problema precisamos entender sobre
 Enquanto caracteres ASCII são facilmente codificados, pois cada
 carácter possui um único byte (que corresponde ao tamanho de um
 `char`), outras codificações, como UTF-8, podem possuir carácteres com
-tamanhos diferentes. Alem disso, pode existir mais de uma codificação
+tamanhos diferentes. Além disso, pode existir mais de uma codificação
 para o mesmo carácter.
 
-Por enquanto nós iremos utilizar o ((Algorítmo do Avestruz)) para
+Por enquanto nós iremos utilizar o ((Algorítimo do Avestruz)) para
 resolução de problemas: nós iremos ignorar o problema e continuar
 nossa implementação ignorando o tratamento de acentos. Depois, quando
 tivermos conhecimento suficiente para tratar este problema poderemos
 voltar a ele.
 
-TIP: Você conhecer mais sobre o *Algorítmo do Avestruz* em
+TIP: Você conhecer mais sobre o *Algorítimo do Avestruz* em
 http://pt.wikipedia.org/wiki/Algoritmo_do_avestruz.
 
 
@@ -1416,7 +1409,8 @@ char traduzCaracterParaLinguaDoI(char original){
 	return resposta;
 }
 ----
-==== Re-execução dos testes
+
+Após atualizar a função, vamos re-executar os testes:
 
 .Re-execução dos testes após remoção de tratamento de acentos
 ....
@@ -1430,7 +1424,7 @@ lingua-do-i-test
 
 ==== Criação de arquivo TODO
 
-Criamos um arquivo entitulado `TODO.txt` que manterá registro de
+Criamos um arquivo como nome `TODO.txt` que manterá registro de
 atividades que gostaríamos de realizar no futuro:
 
 .Código fonte
