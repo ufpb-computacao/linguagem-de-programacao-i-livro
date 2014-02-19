@@ -769,7 +769,9 @@ solicitar a posição atual, que corresponde a quantidade de bytes que o
 arquivo possui. Caso o arquivo seja um fluxo (_stream_) talvez não
 seja possível ir *ao final do fluxo*.
 
+[[src_funcao_lerTamanhoDoArquivo]]
 [source,c]
+.Função lerTamanhoDoArquivo
 ----
 /* Efeito colateral: 
 Cabeçote de leitura vai para o início do arquivo.*/
@@ -2217,8 +2219,9 @@ Tentando ler da entrada padrão:
 $ cat musica-trecho.txt | ./lingua-do-i
 ....
 
-NOTE: O comando `cat` disponível no Linux ler o conteúdo de um arquivo
-e o imprime na saída padrão.
+NOTE: O comando `cat`, disponível no Linux, ler o conteúdo de um arquivo
+e o imprime na saída padrão. Ele é equivalente ao comando `type` no
+Windows.
 
 O resultado esperado não foi satisfatório, ele deveria ser capaz de
 ler da entrada padrão, o que está errado com a nossa implementação?
@@ -2252,12 +2255,22 @@ arquivos:
 
 :etapa: etapa15
 
+Nossa aplicação não foi capaz de traduzir uma mensagem ao recebê-la
+por um fluxo na entrada padrão.
+
+Nós sabemos que a <<src_funcao_lerTamanhoDoArquivo>> vai ao final do
+arquivo, depois retorna para o início. Mas isto não é possível quando
+estamos processando fluxos.
+
+Para possibilitar traduzir através de fluxos, vamos iniciar escrevendo
+um teste para isso.
+
 
 ==== Incluindo teste para tradução de fluxo
 
 Neste teste, estamos desejando implementar uma função
 `traduzFluxoDeEntradaNaSaida` que irá traduzir a mensagem de entrada e
-salvar a tradução na saída.  
+salvar sua tradução na saída.  
 
 [source,c]
 .Teste de tradução de fluxo
@@ -2265,7 +2278,6 @@ salvar a tradução na saída.
 char* MUSICA_COMPLETA = "musica-completa.txt";
 char* MUSICA_COMPLETA_TRAUDIZADA = "musica-completa-traduzida.txt";
 void testTraduzFluxoDeEntrada(){
-
 	FILE* entrada = fopen(MUSICA_COMPLETA,"r");
 	FILE* saida = tmpfile();
 	traduzFluxoDeEntradaNaSaida(entrada,saida);
@@ -2281,15 +2293,17 @@ void testTraduzFluxoDeEntrada(){
 Para garantir a tradução correta, criamos um arquivo temporário para
 servir como saída da função, em seguida,
 `verificaMusicaFoiTraduzidaCorretamenteNaSaida` irá ler o conteúdo
-escrito em `saida` e verificar o conteúdo do arquivo
-`MUSICA_COMPLETA_TRAUDIZADA`:
+escrito em `saida` e comparar com o conteúdo do arquivo
+`MUSICA_COMPLETA_TRAUDIZADA`.
+
+A função para verificar a tradução foi implementada da seguinte forma:
 
 [source,c]
 ----
 void verificaMusicaFoiTraduzidaCorretamenteNaSaida(
     FILE* fluxo, char* arquivoComTraducaoCorreta){
   
-  rewind(fluxo); // volta para ler do início da saída
+  rewind(fluxo); // volta para ler do início do fluxo
   char* conteudo=lerConteudoDeArquivoArberto(fluxo);
   char* traducao=lerConteudoDoArquivo(arquivoComTraducaoCorreta);
 
@@ -2299,6 +2313,9 @@ void verificaMusicaFoiTraduzidaCorretamenteNaSaida(
 ----
 
 ==== Salvando a letra da música e sua tradução
+
+Para execução do teste também é preciso criar os arquivos com a música
+e a tradução:
 
 .Música completa
 ....
@@ -2326,11 +2343,15 @@ Discilpi ii pidir piri icibir cim i infirni
 Qii simpri qiiimii i mii Ciirá
 ....
 
-NOTE: Ainda não estamos tratando vogais acentuadas.
+NOTE: Ainda não estamos tratando vogais acentuadas, portanto o arquivo
+traduzido ainda possui as vogais acentuadas.
 
 ==== Fazendo o teste falhar
 
-.Compilando o código
+Vamos invocar o compilador diversas vezes para descobrir os próximos
+passos até o teste falhar:
+
+.Invocando o compilador
 ....
 $ make clean && make lingua-do-i-test && make test_all 
 rm -rf lingua-do-i lingua-do-i-test
@@ -2347,19 +2368,19 @@ O compilador nos avisou que precisamos criar a função
 `traduzFluxoDeEntradaNaSaida`:
 
 [source,c]
-.Atualização do cabeçalho
+.Inclusão de traduzFluxoDeEntradaNaSaida no cabeçalho
 ----
 void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida);
 ----
 
 [source,c]
-.Criando função vazia no core
+.Criando função traduzFluxoDeEntradaNaSaida vazia no core
 ----
 void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
 }
 ----
 
-.Compilando e executando teste
+.Compilando e executando os testes
 ....
 $ make clean && make lingua-do-i-test && make test_all 
 rm -rf lingua-do-i lingua-do-i-test
@@ -2428,17 +2449,16 @@ void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
 A lógica da função `traduzFluxoDeEntradaNaSaida` consiste em ler a
 entrada por linhas. A função entra em loop enquanto não chegou ao
 final do arquivo: lendo uma linha da entrada por vez, traduz e em
-seguida salva a tradução na saída. A condicação de parada do loop
+seguida salva a tradução na saída. A condição de parada do loop
 só ocorre quando última linha foi traduzida e o final do arquivo foi
 atingido.
-
 
 A condição de parada é implementada através da variável
 `chegouNoFinalDoArquivo`, que inicia com valor `false` e só será
 modificada quando `tentouLerAposFinalDoArquivo` retornar verdadeiro.
 
 A função `lerLinhaDaEntrada` será responsável por ler do fluxo de
-entrada uma linha linhas. E `salvaConteudoNaSaida` será responsável
+entrada uma linha. E `salvaConteudoNaSaida` será responsável
 por salvar a tradução na saída.
 
 Estas três funções ainda não existem, precisaremos implementá-las a

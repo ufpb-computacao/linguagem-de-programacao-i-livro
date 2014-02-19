@@ -20,10 +20,8 @@ int lerTamanhoDoArquivo(FILE* arquivo) {
 
 char* lerConteudoDeArquivoArberto(FILE* arquivo) {
 	int tamanhoDoArquivo = lerTamanhoDoArquivo(arquivo);
-	// 7.22.3.2 The calloc function
 	char* conteudo = calloc(1, tamanhoDoArquivo+1);
 
-	// 7.21.8.1 The fread function
 	fread(conteudo, tamanhoDoArquivo, 1, arquivo);
 
 	return conteudo;
