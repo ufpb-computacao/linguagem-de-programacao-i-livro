@@ -8,14 +8,14 @@ int calculadora(int, int); // protótipo da função calculadora
 
 int main() {
   int sub=0; // declara/inicializa uma variável do tipo int
-  sub = calculadora(10, 7);
-  printf ("A subtração entre 10 e 7 é %d.\n“, sub);
-  system("pause");
-  return 0;
+  sub = calculadora(10, 7); //<1>
+  printf ("A subtração entre 10 e 7 é %d.\n", sub);
+  //system("pause");
+  return EXIT_SUCCESS;
 }
 
 // Corpo da função calculadora
 int calculadora(int x, int y){
-  return (x - y);
+  return (x - y); // retorno explícito
 }
 

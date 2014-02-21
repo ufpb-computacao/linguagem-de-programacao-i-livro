@@ -125,7 +125,7 @@ A declaração de um ponteiro segue o seguinte padrão:
  float *ptr; // Lê-se "ptr é um ponteiro para um float"
 
 Em que `float` especifica o tipo de elemento apontado pelo ponteiro, `ptr` é o 
-nome que está sendo dado ao ponteiro, ``*'' é o *((operador de indireção))* e é 
+nome que está sendo dado ao ponteiro, `*` é o *((operador de indireção))* e é 
 usado para se definir um ponteiro. 
 
 Como o ponteiro contém um endereço de memória, diz-se que ele aponta para 
@@ -273,6 +273,9 @@ mostrado à esquerda de cada célula/linha.
 .Ilustração da pilha de execução na memória RAM do computador.
 image::images/cap3/pilha_de_execucao.eps[scaledwidth="50%"]
 
+// FIXME: Atualizar imagem de pilha de execução #17
+
+
 Considere agora o código mostrado a seguir. Esse exemplo mostra um programa 
 que calcula a soma dos números pares entre 0 e 200. A etapa de cálculo da 
 soma é feita na função `f_soma`, a qual é chamada na linha 11 dentro da 
@@ -306,34 +309,39 @@ impresso o valor 200 e após o `while` da função `f_soma` será impresso o val
 
 // TODO fornecer link com resolução ou adicionar a exercícios resolvidos?
 
-Continuando o debate, será mostrada agora a _((pilha de execução))_ na memória do 
-programa em questão. Será utilizada a notação descrita na Fig. 3.4. 
-Resumidamente, a pilha de execução funciona da seguinte forma. Cada variável 
-local de uma função de uma função é colocada na pilha de execução. As 
-chamar uma função, os parâmetros da função são copiados para a pilha e 
-tratados como se fossem variáveis locais da função chamada. Quando a 
-execução da função é concluída, a parte da pilha correspondente àquela 
-função é liberada. Por isso, não se pode acessar as variáveis locais de 
-fora da função em que foram definidas. Perceba na Fig. 3.5a que quando o 
-programa inicia, a função `main` inicia com a pilha vazia. Seguindo na 
-execução do programa (linhas 7 a 10 do programa), a Fig. 3.5b mostra a 
-definição e inicialização das variáveis `soma` e `PAR` na pilha. Com a chamada 
-da função (linha 11), a Fig. 3.5c apresenta a variável `PAR` da função 
-`f_soma` na pilha de execução (observe que `PAR` inicia com valor 200). A Fig. 
-3.5d ilustra a criação/inicialização da variável local `s` dentro da 
-função `f_soma`. A Fig. 3.5e mostra a situação da pilha após o laço `while` 
-(linha 22), note que agora `PAR` possui valor 0 (zero) e `s` 10100.0 (que é a soma 
-dos números pares entre 0 e 200). Nesse caso, veja que a variável `PAR` dentro 
-da função `main` continua com seu valor inicial, ou seja, 200. A Fig. 3.5f 
-mostra a situação após o retorno da função (linha 23), ou seja, o valor 
-retornado pela função `f_soma` é armazenado na variável soma dentro da 
+Continuando o debate, será mostrada agora a _((pilha de execução))_ na
+memória do programa em questão. Será utilizada a notação descrita na
+Fig. 3.4.  Resumidamente, a pilha de execução funciona da seguinte
+forma. Cada variável local de uma função de uma função é colocada na
+pilha de execução. As chamar uma função, os parâmetros da função são
+copiados para a pilha e tratados como se fossem variáveis locais da
+função chamada. Quando a execução da função é concluída, a parte da
+pilha correspondente àquela função é liberada. Por isso, não se pode
+acessar as variáveis locais de fora da função em que foram definidas.
+Perceba na <<fig_pilha_executando>>(a) que quando o programa inicia, a
+função `main` inicia com a pilha vazia. Seguindo na execução do
+programa (linhas 7 a 10 do programa), a <<fig_pilha_executando>>(b)
+mostra a definição e inicialização das variáveis `soma` e `PAR` na
+pilha. Com a chamada da função (linha 11), a
+<<fig_pilha_executando>>(c) apresenta a variável `PAR` da função
+`f_soma` na pilha de execução (observe que `PAR` inicia com valor
+200). A  <<fig_pilha_executando>>(d) ilustra a criação/inicialização
+da variável local `s` dentro da função `f_soma`. A
+<<fig_pilha_executando>>(e) mostra a situação da pilha após o laço
+`while` (linha 22), note que agora `PAR` possui valor 0 (zero) e `s`
+10100.0 (que é a soma dos números pares entre 0 e 200). Nesse caso,
+veja que a variável `PAR` dentro da função `main` continua com seu
+valor inicial, ou seja, 200. A  <<fig_pilha_executando>>(f) mostra a
+situação após o retorno da função (linha 23), ou seja, o valor
+retornado pela função `f_soma` é armazenado na variável soma dentro da
 função `main` (linha 11).
 
-Fig. 3.5: Ilustração da pilha de execução na memória RAM de um programa em execução.
-
+[[fig_pilha_executando]]
+.Ilustração da pilha de execução na memória RAM de um programa em execução.
+image::images/cap3/pilha_de_execucao_em_execucao.eps[scaledwidth="80%"]
 
 [[sec_ponteiros_passagem_parametro]]
-==== 3.3.2 Passagem de parâmetros em funções: passagem por valor vs passagem por referência
+==== Passagem de parâmetros em funções: passagem por valor vs passagem por referência
 
 Na subseção anterior foi vista a pilha de execução de um programa com 
 funções em C e concluiu-se que não se pode modificar valores das variáveis 
@@ -343,11 +351,15 @@ Nesse caso, uma _cópia_ dos parâmetros da função é feita e passada
 para a função chamada e, portanto, as mudanças nessa _cópia_ não afetam o 
 valor original da variável chamadora. 
 
-TIP: A chamada por valor deverá ser usada sempre que não se desejar/precisar 
+[IMPORTANT]
+====
+Todas as chamadas em C são feitas por valor. Cabe ao programador 
+identificar as situações em que se deseja empregar a passagem por referência.
+
+A chamada por valor deverá ser usada sempre que não se desejar/precisar 
 modificar o valor da variável original que foi chamada.
 
-IMPORTANT: Todas as chamadas em C são feitas por valor. Cabe ao programador 
-identificar as situações em que se deseja empregar a passagem por referência.
+====
 
 Todavia, muitas funções exigem a necessidade de modificar uma ou mais 
 variáveis na função chamadora ou passar um ponteiro para um objeto com 
@@ -367,19 +379,21 @@ uso de ponteiros para esse fim.
 Para melhor entender esse debate, a seguir é dado um exemplo simples de um 
 programa para se calcular a soma e subtração de dois números inteiros. Vamos 
 iniciar com um programa que usa uma função para calcular a subtração de 
-dois números inteiros.
+dois números inteiros:
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/codigo-c.c[code/cap3/codigo-c.c]
+{gitrepo}/blob/master/livro/capitulos/code/cap3/subtracao-passagem-por-valor.c[code/cap3/subtracao-passagem-por-valor.c]
 
 [source, c]
 ----
-include::code/cap3/codigo-c.c[]
+include::code/cap3/subtracao-passagem-por-valor.c[]
 ----
 
+<1> Salvando na variável `sub` o retorno da função `calculadora`.
+
 Nesse exemplo não há um problema explícito, pois o resultado da subtração 
-é retornado pela função `calculadora` explicitamente (linha 15) e armazenado 
-na variável `sub` (linha 8). Um dos problemas da *((passagem de parâmetros por 
+é retornado pela função `calculadora` explicitamente e armazenado 
+na variável `sub`. Um dos problemas da *((passagem de parâmetros por 
 valor))* acontece quando se deseja retornar em uma função mais de um valor para 
 a função `chamadora`. Vamos supor que agora se deseje retornar o valor da soma 
 e subtração de dois números inteiros. Usando a ideia da passagem de 
@@ -387,13 +401,18 @@ parâmetros por valor uma forma incorreta de se implementar esse programa é
 mostrada a seguir.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/codigo-d.c[code/cap3/codigo-d.c]
+{gitrepo}/blob/master/livro/capitulos/code/cap3/passagem_incorreta.c[code/cap3/passagem_incorreta.c]
 
 [source, c]
 .Titulo do código
 ----
-include::code/cap3/codigo-d.c[]
+include::code/cap3/passagem_incorreta.c[]
 ----
+
+.Execução da aplicação
+....
+include::code/cap3/passagem_incorreta.out[]
+....
 
 Como se sabe e já foi alertado no texto, esse código não funciona. Serão 
 impressos na tela valores incorretos e que dependem da execução em cada 
@@ -412,40 +431,50 @@ possível resolver o problema do último exemplo. Isso é feito no código a
 seguir.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/codigo-e.c[code/cap3/codigo-e.c]
+{gitrepo}/blob/master/livro/capitulos/code/cap3/passagem_por_referencia.c[code/cap3/passagem_por_referencia.c]
 
 [source, c]
 ----
-include::code/cap3/codigo-e.c[]
+include::code/cap3/passagem_por_referencia.c[]
 ----
+<1> Protótipo da função cabeçalho definindo receber ponteiros como
+    parâmetros.
+<2> Chamada da função calculadora, similar ao programa anterior, mas
+    agora passa o endereço das variáveis.
+<3> Implementação da função com os ponteiros, similar ao cabeçalho.
+<4> Atualização das variáveis utilizando os ponteiros e o operador de
+    indireção `*`.
 
+.Execução da aplicação
+....
+include::code/cap3/passagem_por_referencia.out[]
+....
 
-A diferença entre esse exemplo (forma correta) e o anterior (forma incorreta) 
-está nas linhas 4, 8, 14, 15 e 16. 
+O (( protótipo da função )) `calculadora` é definido com duas
+variáveis do tipo inteiro e dois ponteiros para inteiros como
+parâmetros de entrada. Compare com o exemplo anterior (forma
+incorreta).
 
-Na linha 4, o ((protótipo da função)) `calculadora` é definido com duas 
-variáveis do tipo inteiro e dois ponteiros para inteiros como parâmetros de 
-entrada. Compare com a linha 5 do exemplo anterior (forma incorreta).
+A função `calculadora` continua sendo uma função sem retorno (como no
+código anterior).  Entretanto, são também passados como parâmetros de
+entrada os endereços de memória das variáveis `sub` e `soma` (i.e.,
+`&sub` e `&soma`). Compare esse trecho do código com o exemplo
+anterior (forma incorreta).
 
-Na linha 8, a função `calculadora` continua sendo uma função sem retorno. 
-Entretanto, são também passados como parâmetros de entrada os endereços de 
-memória das variáveis `sub` e `soma` (i.e., `&sub` e `&soma`). Compare esse trecho do 
-código com a linha 10 do exemplo anterior (forma incorreta).
-
-Na linha 14, o código da função `calculadora` começa a ser definido e com os 
-dois ponteiros para inteiros como parâmetros de entrada (i.e., `ptr1` e `ptr2`), 
-conforme foi definido no protótipo da função na linha 4. Nesse cenário, 
-quando a função `calculadora` é chamada na linha 8, os endereços de memória 
-das variáveis `sub` e `soma` (i.e., `&sub` e `&soma`) são armazenados nos ponteiros 
-`ptr1` e `ptr2`. A partir desse momento, é possível modificar o conteúdo das 
-variáveis `sub` e `soma` usando `ptr1` e `ptr2`. Isso é feito nas linhas 15 e 16 para 
-se calcular a subtração e soma, respectivamente, usando a funcionalidade do 
-// FIXME: seção abaixo
-operador de indireção `*` discutida na Seção 3.2. Execute esse código no seu 
-computador e veja que agora os valores da subtração e soma são calculados e 
-exibidos corretamente.
+A implementação da função `calculadora` utilizar dois inteiros (`x` e
+`y`) e dois ponteiros para inteiros como parâmetros de entrada (i.e.,
+`ptr1` e `ptr2`), conforme foi definido no protótipo da função. Nesse
+cenário, quando a função `calculadora` é chamada na linha, os
+endereços de memória das variáveis `sub` e `soma` (i.e., `&sub` e
+`&soma`) são armazenados nos ponteiros `ptr1` e `ptr2`. A partir desse
+momento, é possível atualizar o conteúdo das variáveis `sub` e `soma`
+usando `ptr1` e `ptr2`, utilizando o operador de indireção `*`
+(<<sec_ponteiros_definicao>>).
 
 Fig. 3.6: Ilustração da execução do programa para o cálculo da subtração e soma de dois números inteiros.
+
+//FIXME imagem
+
 
 A Fig. 3.6 ilustra a pilha de execução da forma correta do programa usando 
 ponteiros. Note que na Fig. 3.6c que os ponteiros `ptr1` e `ptr2` recebem os 
