@@ -471,26 +471,22 @@ momento, é possível atualizar o conteúdo das variáveis `sub` e `soma`
 usando `ptr1` e `ptr2`, utilizando o operador de indireção `*`
 (<<sec_ponteiros_definicao>>).
 
-Fig. 3.6: Ilustração da execução do programa para o cálculo da subtração e soma de dois números inteiros.
+[[fig_pilha_sub_soma_execucao]]
+.Ilustração da execução do programa para o cálculo da subtração e soma de dois números inteiros.
+image::images/cap3/pilha_sub_soma_execucao.eps[scaledwidth="80%"]
 
-//FIXME imagem
-
-
-A Fig. 3.6 ilustra a pilha de execução da forma correta do programa usando 
-ponteiros. Note que na Fig. 3.6c que os ponteiros `ptr1` e `ptr2` recebem os 
-endereços de memória das variáveis `sub` e `soma`, respectivamente. Com isso, 
-agora é possível alterar o conteúdo de `sub` e `soma` usando esses ponteiros, 
-mesmo dentro de uma função em que `sub` e `soma` não são definidas. Isso é 
-mostrado na Fig. 3.6d, observe que os ponteiros são utilizados para se 
-computar a subtração e soma. A Fig. 3.7e apresenta a situação da pilha 
-após a função `calculadora` ser executada. Veja que as variáveis 
-locais `x`, `y`, `*ptr1` e `*ptr2` são desempilhadas.
-
-
-
-
-
-
+A <<fig_pilha_sub_soma_execucao>> ilustra a pilha de execução da forma
+correta do programa usando ponteiros. Note que na
+<<fig_pilha_sub_soma_execucao>>(c) que os ponteiros `ptr1` e `ptr2`
+recebem os endereços de memória das variáveis `sub` e `soma`,
+respectivamente. Com isso, agora é possível alterar o conteúdo de
+`sub` e `soma` usando esses ponteiros, mesmo dentro de uma função em
+que `sub` e `soma` não são definidas. Isso é mostrado na
+<<fig_pilha_sub_soma_execucao>>(d), observe que os ponteiros são
+utilizados para se computar a subtração e soma. A
+<<fig_pilha_sub_soma_execucao>>(e) apresenta a situação da pilha após
+a função `calculadora` ser executada. Veja que as variáveis locais
+`x`, `y`, `*ptr1` e `*ptr2` são desempilhadas.
 
 // Sempre terminar o arquivo com uma nova linha.
 
