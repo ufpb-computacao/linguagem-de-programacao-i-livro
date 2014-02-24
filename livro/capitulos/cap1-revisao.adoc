@@ -539,15 +539,19 @@ repetição para acessar as dimensões do array. Para cada dimensão usa-se um c
 repetição que, em geral, é o comando `for`. O preenchimento de uma matriz de duas dimensões como 
 a da <<fig_matriz>> pode ser feito com um código como:
 
-[source,c]
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap1/matriz.c[code/cap1/matriz.c]
+
+[source, c]
+.Programa para demonstrar os tamanhos dos tipos
 ----
-for(i=0; i<3; i++){
-  for(j=0; j<4; i++){
-    printf("Digite o valor a ser preenchido em matriz[%d,%d].\n",i,j);
-    scanf("%lf", &matriz[i,j]); // grava na linha i coluna j
-  }
-}
+include::code/cap1/matriz.c[]
 ----
+
+.Exemplo da execução do código
+....
+include::code/cap1/matriz.out[]
+....
 
 A impressão dos valores armazenados pode ser feita com um código como:
 
