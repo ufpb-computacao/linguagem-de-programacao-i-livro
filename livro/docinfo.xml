@@ -3,16 +3,17 @@
   rudder-doc-docinfo.xml
   DocBook document information file for rudder-doc.txt.
 -->
-  <edition>v0.2.3</edition>
+  <edition>v0.3.0</edition>
 
   <revhistory>
 
     <revision>
-      <revnumber>v0.2.3</revnumber>
-      <date>X/Setembro/2013</date>
+      <revnumber>v0.3.0</revnumber>
+      <date>24/Fevereiro/2014</date>
       <authorinitials>Eduardo</authorinitials>
       <revremark>
        Inclusão de vídeo demonstrando como baixar os códigos no prefácio.
+       Inclusão dos capítulos 3 e 4, parcialmente revisados. Correção de erros no primeiro capítulo.
       </revremark>
     </revision>
 
