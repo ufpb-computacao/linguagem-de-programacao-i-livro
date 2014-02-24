@@ -189,7 +189,7 @@ ou 32 bits (ou 8*s na <<tab_tipo_de_dados>>).
 | signed int|-2^8s-1^  a +2^8s-1^ |%d|8*s
 | short int |-32.768 a +32.767|%hd|16
 | unsigned short int|0 a 65.535|%hu|16
-| signed short int|0 a 65.535|%hd|16
+| signed short int|-32.768 a +32.767|%hd|16
 | long int|-2.147.483.648 a +2.147.483.647|%ld|32
 | signed long int|-2.147.483.648 a +2.147.483.647|%lu|32
 | unsigned long int|0 a + 4.294.967.295|%lu|32
