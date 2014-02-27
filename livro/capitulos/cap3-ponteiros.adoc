@@ -1,4 +1,7 @@
-== Ponteiros e Alocação Dinâmica de Memória
+== Ponteiros
+
+:online: {gitrepo}/blob/master/livro/capitulos/code/cap3
+:local: code/cap3
 
 .Objetivos do capítulo
 ____
@@ -67,13 +70,13 @@ comentário indicado. Certamente, com a linha comentada, o valor impresso
 na tela será diferente em cada computador em que esse código for executado.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/variavel_nao_inicializada.c[code/cap3/variavel_nao_inicializada.c]
+{online}/variavel_nao_inicializada.c[{local}/variavel_nao_inicializada.c]
 
 [[variavel_nao_inicializada]]
 [source, c]
 .Programa para demonstrar valor de variável não inicializada
 ----
-include::code/cap3/variavel_nao_inicializada.c[]
+include::{local}/variavel_nao_inicializada.c[]
 ----
 
 
@@ -85,17 +88,17 @@ memória onde uma variável foi criada. Note que no `printf`, o `%p` foi utiliza
 como formato para endereço de memória.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/operador_de_endereco.c[code/cap3/operador_de_endereco.c]
+{online}/operador_de_endereco.c[{local}/operador_de_endereco.c]
 
 [source, c]
 .Programa para demonstrar uso do Operador de Endereço
 ----
-include::code/cap3/operador_de_endereco.c[]
+include::{local}/operador_de_endereco.c[]
 ----
 
 .Saída da execução do programa
 ....
-include::code/cap3/operador_de_endereco.data[]
+include::{local}/operador_de_endereco.data[]
 ....
 
 
@@ -200,12 +203,12 @@ para qual está apontando.  Execute esse programa no seu computador e
 faça modificações à vontade para você melhor absorver o conceito de ponteiros.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/usando_ponteiro.c[code/cap3/usando_ponteiro.c]
+{online}/usando_ponteiro.c[{local}/usando_ponteiro.c]
 
 [source, c]
 .Usado ponteiro para alterar variável
 ----
-include::code/cap3/usando_ponteiro.c[]
+include::{local}/usando_ponteiro.c[]
 ----
 
 <1> o ponteiro `pt` é criado
@@ -220,7 +223,7 @@ include::code/cap3/usando_ponteiro.c[]
 
 .Resultado da execução
 ....
-include::code/cap3/usando_ponteiro.out[]
+include::{local}/usando_ponteiro.out[]
 ....
 
 Finalmente, recapitulando, note que há dois operadores que são utilizados 
@@ -292,11 +295,11 @@ representa a `PAR` dentro da função main; o fato delas terem o mesmo nome é
 indiferente.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/f_soma.c[code/cap3/f_soma.c]
+{online}/f_soma.c[{local}/f_soma.c]
 
 [source, c]
 ----
-include::code/cap3/f_soma.c[]
+include::{local}/f_soma.c[]
 ----
 
 
@@ -382,11 +385,11 @@ iniciar com um programa que usa uma função para calcular a subtração de
 dois números inteiros:
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/subtracao-passagem-por-valor.c[code/cap3/subtracao-passagem-por-valor.c]
+{online}/subtracao-passagem-por-valor.c[{local}/subtracao-passagem-por-valor.c]
 
 [source, c]
 ----
-include::code/cap3/subtracao-passagem-por-valor.c[]
+include::{local}/subtracao-passagem-por-valor.c[]
 ----
 
 <1> Salvando na variável `sub` o retorno da função `calculadora`.
@@ -401,17 +404,17 @@ parâmetros por valor uma forma incorreta de se implementar esse programa é
 mostrada a seguir.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/passagem_incorreta.c[code/cap3/passagem_incorreta.c]
+{online}/passagem_incorreta.c[{local}/passagem_incorreta.c]
 
 [source, c]
 .Titulo do código
 ----
-include::code/cap3/passagem_incorreta.c[]
+include::{local}/passagem_incorreta.c[]
 ----
 
 .Execução da aplicação
 ....
-include::code/cap3/passagem_incorreta.out[]
+include::{local}/passagem_incorreta.out[]
 ....
 
 Como se sabe e já foi alertado no texto, esse código não funciona. Serão 
@@ -431,11 +434,11 @@ possível resolver o problema do último exemplo. Isso é feito no código a
 seguir.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap3/passagem_por_referencia.c[code/cap3/passagem_por_referencia.c]
+{online}/passagem_por_referencia.c[{local}/passagem_por_referencia.c]
 
 [source, c]
 ----
-include::code/cap3/passagem_por_referencia.c[]
+include::{local}/passagem_por_referencia.c[]
 ----
 <1> Protótipo da função cabeçalho definindo receber ponteiros como
     parâmetros.
@@ -447,7 +450,7 @@ include::code/cap3/passagem_por_referencia.c[]
 
 .Execução da aplicação
 ....
-include::code/cap3/passagem_por_referencia.out[]
+include::{local}/passagem_por_referencia.out[]
 ....
 
 O (( protótipo da função )) `calculadora` é definido com duas
