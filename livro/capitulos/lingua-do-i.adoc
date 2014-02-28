@@ -8,36 +8,13 @@ ____
 
 Ao final deste capítulo você deverá ser capaz de:
 
-* Entender o conceito de arquivos e seus tipos;
-* Aprofundar o conhecimento sobre armazenamento e manipulação de dados
-  no computador por meio do uso de arquivos;
-* Fazer manipulação de dados em arquivos por meio de operações como
-  leitura, escrita, dentre outras.  
-
+* Desenvolver um projeto em C;
+* Utilizar testes para guiar a elaboração do projeto;
+* Desenvolver uma aplicação que leia e escreva em arquivos;
 ____
 
 
-Até agora foi visto como é possível gravar e acessar informações/dados
-na memória primária/principal do computador (também chamada memória
-RAM). Para isso, foi visto que o uso de ponteiros é fundamental. O
-problema dessa abordagem é que as informações/dados de um programa em
-C gravadas na memória RAM são perdidas após o término da execução
-desse programa. Ou seja, não se pode mais acessá-las ou recuperá-las.
-Como fazer para, após a execução de um programa em C, ter acesso a
-dados/informações manipuladas nesse programa? Uma solução é gravar
-esses dados/informações em um arquivo na memória secundária do
-computador (também chamado de Disco Rígido – Hard Disk drive). Nesse
-caso, após a execução do programa em C, esses dados/informações
-estarão disponíveis no arquivo gravado no disco rígido da máquina.
-
-Nesse capítulo serão abordados conceitos básicos sobre arquivos e
-formas de manipulação de dados no disco rígido na linguagem C, como
-por exemplo, estratégias para salvar e recuperar dados/informações em
-arquivos.
-
-=== Lingua do i
-
-Nós vamos aprender a manipular arquivos em C através da construção de
+Nós vamos aprender a manipular arquivos em C, através da construção de
 um pequeno aplicativo que possa ler de um arquivo o texto em português
 e convertê-lo para a Língua do i.
 
@@ -47,12 +24,19 @@ escrever palavras trocando todas as vogais por ``i'':
  Ela ama banana. (em português)
  Ili imi binini. (na língua do i)
 
+O projeto será desenvolvido em diversas etapas, ao final de cada etapa
+você poderá consultar o estado final dos arquivos.
+
+Na primeira etapa iremos criar a estrutura inicial do projeto, o
+primeiro teste da aplicação e o Makefile para compilar o projeto.
+
+
 === Etapa 1: Estrutura inicial do projeto
 
 :etapa: etapa1
 
-Vamos começar montando uma estrutura inicial do nosso projeto, que
-consistirá em:
+Vamos começar nosso projeto criando uma estrutura inicial do nosso
+projeto, que consistirá em:
 
 .Lista de arquivos do projeto
 `lingua-do-i.c`:: Conterá o `main` da aplicação.
