@@ -1,3 +1,4 @@
+[appendix]
 == Bibliotecas
 
 :online: {gitrepo}/blob/master/livro/capitulos/code/biblioteca
