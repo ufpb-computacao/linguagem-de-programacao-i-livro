@@ -1,0 +1,4 @@
+Arquivo para manter registro de atividades que gostaríamos de realizar no futuro:
+
+- Conversão de vogais com acento para seus correspondentes na lingua do i (FEITO!)
+	Exemplos: á -> í, õ -> ĩ, à -> ì etc.
