@@ -25,11 +25,9 @@ escrever palavras trocando todas as vogais por ``i'':
  Ili imi binini. (na língua do i)
 
 O projeto será desenvolvido em diversas etapas, ao final de cada etapa
-você poderá consultar o estado final dos arquivos.
-
-Na primeira etapa iremos criar a estrutura inicial do projeto, o
-primeiro teste da aplicação e o Makefile para compilar o projeto.
-
+você poderá consultar o estado final dos arquivos. Na primeira etapa
+iremos criar a estrutura inicial do projeto, o primeiro teste da
+aplicação e o Makefile para compilar o projeto.
 
 === Etapa 1: Estrutura inicial do projeto
 
