@@ -1,7 +1,7 @@
 == Arquivos
 
-:online: {gitrepo}/blob/master/livro/capitulos/code/cap5
-:local: code/cap5
+:online: {gitrepo}/blob/master/livro/capitulos/code/lingua-do-i
+:local: code/lingua-do-i
 
 .Objetivos do capítulo
 ____
@@ -258,9 +258,9 @@ lingua-do-i-test.c:7:2: aviso: implicit declaration of function ‘lerConteudoDo
 lingua-do-i-test.c:7:19: aviso: initialization makes pointer from integer without a cast [habilitado por padrão]
 lingua-do-i-test.c:8:2: aviso: implicit declaration of function ‘verificaConteudosSaoIguais’ [-Wimplicit-function-declaration]
 /tmp/ccEcEbRI.o: In function `testLerConteudoDoArquivo':
-/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa1/src/lingua-do-i-test.c:7:
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/lingua-do-i/etapa1/src/lingua-do-i-test.c:7:
 undefined reference to `lerConteudoDoArquivo' <1>
-/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa1/src/lingua-do-i-test.c:8:
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/lingua-do-i/etapa1/src/lingua-do-i-test.c:8:
 undefined reference to `verificaConteudosSaoIguais' <1>
 collect2: ld returned 1 exit status
 make: ** [lingua-do-i-test] Erro 1
@@ -331,7 +331,7 @@ lingua-do-i-test.c:18:2: aviso: implicit declaration of function
 lingua-do-i-test.c:18:19: aviso: initialization makes pointer from
 integer without a cast [habilitado por padrão]
 /tmp/ccqV7RJy.o: In function `testLerConteudoDoArquivo':
-/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa1/src/lingua-do-i-test.c:18:
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/lingua-do-i/etapa1/src/lingua-do-i-test.c:18:
 undefined reference to `lerConteudoDoArquivo'
 collect2: ld returned 1 exit status
 make: ** [lingua-do-i-test] Erro 1
@@ -875,7 +875,7 @@ lingua-do-i-test.c: Na função ‘testTraducaoParaLinguaDoI’:
 lingua-do-i-test.c:24:2: aviso: implicit declaration of function ‘traduzParaLingaDoI’ [-Wimplicit-function-declaration]
 lingua-do-i-test.c:24:28: aviso: initialization makes pointer from integer without a cast [habilitado por padrão]
 /tmp/ccsT5OZs.o: In function `testTraducaoParaLinguaDoI':
-/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa5/src/lingua-do-i-test.c:24: undefined reference to `traduzParaLingaDoI'
+/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/lingua-do-i/etapa5/src/lingua-do-i-test.c:24: undefined reference to `traduzParaLingaDoI'
 collect2: ld returned 1 exit status
 make: ** [lingua-do-i-test] Erro 1
 ....
@@ -2359,7 +2359,7 @@ gcc -Wall -g -std=c1x lingua-do-i-test.c lingua-do-i-core.c -o lingua-do-i-test
 lingua-do-i-test.c: Na função ‘testTraduzFluxoDeEntrada’:
 lingua-do-i-test.c:107:2: aviso: implicit declaration of function ‘traduzFluxoDeEntradaNaSaida’ [-Wimplicit-function-declaration]
 /tmp/ccPNDB7P.o: In function `testTraduzFluxoDeEntrada':
-/home/santana/livro/capitulos/code/cap5/etapa15/src/lingua-do-i-test.c:107: undefined reference to `traduzFluxoDeEntradaNaSaida'
+/home/santana/livro/capitulos/code/lingua-do-i/etapa15/src/lingua-do-i-test.c:107: undefined reference to `traduzFluxoDeEntradaNaSaida'
 collect2: ld returned 1 exit status
 make: ** [lingua-do-i-test] Erro 1
 ....
@@ -2520,7 +2520,7 @@ indicando que não houve nenhum conteúdo lido.
 
 [[fig_fgets]]
 .Ilustração de leitura com fgets
-image::images/cap5/fgets.eps[scaledwidth="80%"]
+image::images/lingua-do-i/fgets.eps[scaledwidth="80%"]
 
 ===== Condição de parada tentouLerAposFinalDoArquivo
 
@@ -3171,251 +3171,6 @@ arquivos:
 
 .Código fonte
 {online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
-
-
-
-=== XXX
-* Escrever uma função que seja responsável por ler o conteúdo de um
-  arquivo e retornar o conteúdo lido como um string (`char *`).
-* Esta função se chamará `lerConteudoDoArquivo` e terá como parâmetro
-  o nome do arquivo que desejamos ler (`char* nomeDoArquivo`).
-* Esta função será definida no arquivo de cabeçalho
-  (`lingua-do-i-core.h`) e implementada no arquivo fonte
-  (`lingua-do-i-core.c`).
-* Para 
-
-
-=== Exemplos e diferenças entre Arquivos e Streams
-
-|====
-| Exemplo | Tipo | Origem
-| Documento do Word | Arquivo | Disco
-| Música MP3 | Arquivo | Disco
-| Música em rádio on-line | Stream | Placa de Rede
-| Vídeo on-line | Stream | Placa de Rede
-| Comandos de voz | Stream | Microfone
-| Comandos de texto | Stream | Teclado
-| Imagem JPG | Arquivo | Discofootnote:[Se a imagem teve origem numa
-câmera, você provavelmente copiou a imagem do cartão de memória (que é
-um disco).]
-| Vídeo de Segurança | Stream | Webcam
-|====
-
-Em C Arquivos e Streams (fluxos) são representados da mesma forma,
-possuindo uma interface única para processar os dados. No entanto,
-eles possuem características diferentes:
-
-|====
-| Recurso | Arquivo | Stream/Fluxo
-| Podemos ler/escrever bytes/caracteres | Sim | Sim
-| Sabemos o seu tamanho antecipadamente | Sim | Não
-| São finitos | Sim | Não 
-| Seu tamanho pode ser maior do que a RAM do computador | Sim | Sim
-| Podemos retroceder ou avançar para ler outra parte | Sim | Não
-| A leitura/escrita podem ser realizadas por partes | Sim | Sim
-| Origem mais comum | Disco | Dispositivos
-|====
-
-=== Pensando sobre a implementação da Língua do i
-
-Vamos pensar um pouco no nosso programa que irá codificar um texto na
-Língua do i. 
-
-Qual será a fonte a dados que o programa irá processar?
-
-* Teclado?
-* Arquivo pre-fixado como `portugues.txt`?
-* Qualquer arquivo solicitado pelo usuário?
-
-[NOTE]
-====
-A leitura através do *teclado* geralmente consiste em escrever uma
-mensagem na tela solicitando o usuário digitar o texto e em seguida
-ler o que foi digitado e processar. 
-
-* Digitar um texto grande pode ser tedioso. 
-* Como interajo com o programa para informar que ele deve ser finalizado?
-  Quando eu digitar a palavra 'Sair' numa linha vazia? Quando não
-  digitar nada numa linha vazia?
-
-A leitura através de um *arquivo pré-fixado* pode ser mais simples de
-ser implementado, pois provavelmente não há tratamento de configuração
-para descobrir qual o arquivo. No entanto, é chato ter sempre que
-atualizar um arquivo único para funcionar.
-
-A leitura de qualquer arquivo pode facilitar caso o usuário possua
-vários arquivos com conteúdos longos que precisam ser traduzidos.
-Provavelmente iremos precisar tratar qual o arquivo será utilizado no
-processamento.
-====
-
-Como a entrada será processada?
-
-* Ler o conteúdo inteiro e depois processa?
-* Ler uma linha por vês e processa?
-* Ler um carácter por vez e processa?
-
-[NOTE]
-====
-Ler o conteúdo inteiro geralmente parece ser a opção mais fácil quando
-estamos processando arquivos. No entanto, esta solução pode
-inviabilizar o processamento quando a entrada for um fluxo sem fim, ou
-até mesmo quando o conteúdo for maior do que a memória do computador.
-
-Ler uma linha por vez pode ser uma solução fácil de implementar, pois
-os arquivos de texto são naturalmente divididos em linhas.
-
-Como a tradução para a Língua do i pode ser realizada um carácter por
-vez, ela solução também parece viável.
-====
-
-Aonde o resultado será apresentado?
-
-* Na tela?
-* Em um arquivo fixo como `texto-na-lingua-do-i.txt`?
-* Em qualquer arquivo configurado pelo usuário?
-
-[NOTE]
-====
-A apresentação na tela pode ser uma solução viável caso os conteúdos
-a serem traduzidos sejam possuam poucas linhas, caso contrário é
-melhor salvar o resultado num arquivo.
-
-Salvar o resultado em um arquivo fixo geralmente não é uma boa
-solução, pois não poderíamos processar dois arquivos ao mesmo tempo,
-correndo o risco do resultado de um processamento ser sobrescrito pelo
-outro.
-====
-
-Aonde as mensagens de erros serão apresentadas?
-
-* Na tela?
-* Em um arquivo fixo como `erros.txt`?
-
-
-[NOTE]
-====
-A primeira vista apresentar os erros na tela parece ser uma boa
-solução, no entanto, caso o seu programa esteja rodando em um serviço
-num servidor as vezes é mais fácil acessar um arquivo contendo os
-erros, pois a ``tela'' do processo talvez esteja indisponível.
-====
-
-=== Entrada padrão, saída padrão e saída de erros
-
-Todo programa em C possui automaticamente definido um arquivo para a
-entrada padrão, um arquivo para a saída padrão e outro arquivo para
-onde a emissão de mensages de erro será direcionada.
-
-Quando vamos executar um programa podemos redirecionar a entrada e as
-saídas para outros lugares, no entanto, se não houve nenhuma
-configuração o sistema operacional irá configurá-las da seguinte
-forma:
-
-.Configuração padrão para as saídas e entradas
-|====
-| Entrada Padrão | Teclado
-| Saída Padrão | Tela
-| Saída de Erros | Tela
-|====
-
-(((Redirecionar, Entrada Padrão)))
-
-Para redirecinar a Entrada Padrão para um arquivo qualquer basta
-executar o programa informando o nome do arquivo da seguinte forma:
-
- meu-programa < nome-do-arquivo-de-entrada
-
-Para testar a mudança da entrada padrão recomendo a utilização do
-aplicativo `sort` (disponível no Linux, OSx e Windows), que realiza
-ordenação a partir da entrada padrão.
-
-.caminho do arquivo frutas
-....
-include::code/cap5/frutas.txt[]
-....
-
- sort < frutas.txt
-
-.Resultado da execução do comando
-....
-include::code/cap5/frutas-ordenadas.txt[]
-....
-
-Além de redirecionar a entrada, nós também podemos redirecionar a
-saída para um arquivo da seguinte forma:
-
- sort < frutas.txt > frutas-ordenadas.txt
-
-Desta forma, o arquivo `frutas-ordenadas.txt` será criado
-contendo o mesmo resultado da execução anterior. 
-
-Para demonstrar o redirecionamento da saída de erro vamos utilizar o
-comando `mkdir` para tentar criar um diretório que já existe.
-
- mkdir meudir
- mkdir meudir
- mkdir meudir 2> erros.txt
-
-Na primeira invocação do mkdir o diretório `meu-dir` será criado. Na
-segunda invocação, você verá na tela a mensagem de erro relativo a
-impossibilidade de criar um diretório que já existe. Na última
-execução, as mensagens de erros serão redirecionadas para um arquivo
-`erros.txt` que será criado após a execução.
-
-IMPORTANT: Quando os programas vão escrever mensagens devem escolher
-cuidadosamente quais as saídas utilizar.
-
-TIP: Para conhecer um pouco mais sobre redirecionamentos consulte:
-http://edusantana.github.io/dev/redirecionamentos.html.
-
-=== Decisões sobre a implementação: entrada e saída 
-
-O nosso aplicativo irá *ler o texto da entrada padrão e escrever a
-mensagem traduzida na saída padrão*. Caso o usuário deseja traduzir um
-arquivo bastará executar a aplicação passando o arquivo pela entrada
-padrão. De forma similar, também podemos redirecionar o resultado para
-um arquivo se desejar-mos.
-
-.Questões em aberto
-* Como a entrada será processada?
-** Ler o conteúdo inteiro e depois processa?
-** Ler uma linha por vês e processa?
-** Ler um carácter por vez e processa?
-
-Para aprender todas as formas de processar a entrada vamos implementar
-todas as opções.
-
-=== Lendo o conteúdo inteiro
-Ler o conteúdo inteiro antes de processar poderá causa erro de
-execução caso o arquivo de entrada seja grande demais.
-
-Durante a implementação precisaremos consultar o tamanho total do
-arquivo para poder alocar espaço suficiente para o arquivo. Em
-seguida, iremos criar um string contendo todos os caracteres do texto.
-
-Com o string em memória, poderemos processar os caracteres na ordem
-que aparecem e trocar as vogais por `i`, imprimindo juntamente os
-caracteres restantes que não forem vogais no saída padrão.
-
-=== Lendo uma linha por vez
-Para ler uma linha por vez precisamos alocar um espaço suficiente para
-salvar uma linha, em seguida preenchê-lo com os caracteres lidos até
-encontrar o carácter final de linha, representado por `\n`.
-
-NOTE: Não há problemas em alocar espaço maior do que for utilizado,
-contanto que o espaço restante seja inicializado com `\0`, pois a
-primeira ocorrência indicará o final de um string, o restante será
-ignorado.
-
-=== Lendo um carácter por vez
-Ler um carácter por vez não envolve necessidade de alocar espaço na
-memória para leitura dos dados.
-
-NOTE: Talvez teremos problemas com codificação do arquivo. Pois
-caracteres especiais ocupam mais de um byte quando codificados em
-*UTF-8* por exemplo. 
-
 
 ////
 Terminando arquivo com linha em branco

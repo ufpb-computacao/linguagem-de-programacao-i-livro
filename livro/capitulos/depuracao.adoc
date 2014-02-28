@@ -1,8 +1,8 @@
 [[cap_depuracao]]
 == Depuração
 
-:online: {gitrepo}/blob/master/livro/capitulos/code/cap5
-:local: code/cap5
+:online: {gitrepo}/blob/master/livro/capitulos/code/lingua-do-i
+:local: code/lingua-do-i
 
 .Objetivos do capítulo
 ____
