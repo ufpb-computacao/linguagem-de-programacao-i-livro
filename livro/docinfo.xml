@@ -3,9 +3,23 @@
   rudder-doc-docinfo.xml
   DocBook document information file for rudder-doc.txt.
 -->
-  <edition>v0.3.1</edition>
+  <edition>v0.3.2</edition>
 
   <revhistory>
+
+    <revision>
+      <revnumber>v0.3.2</revnumber>
+      <date>27/Fevereiro/2014</date>
+      <authorinitials>Eduardo</authorinitials>
+      <revremark>
+* Inclusão do capítulo de Alocação Dinâmica (Falta revisão);
+* Inclusão de capítulo de Arquivo (Falta conteúdo);
+* Inclusão de Projeto Lingua do i;
+* Inclusão do capítulo Depuração;
+* Inclusão do capítulo Biblioteca;
+      </revremark>
+    </revision>
+
 
     <revision>
       <revnumber>v0.3.1</revnumber>
