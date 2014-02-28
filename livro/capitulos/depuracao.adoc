@@ -1,19 +1,9 @@
+[appendix]
 [[cap_depuracao]]
 == Depuração
 
 :online: {gitrepo}/blob/master/livro/capitulos/code/lingua-do-i
 :local: code/lingua-do-i
-
-.Objetivos do capítulo
-____
-
-Ao final deste capítulo você deverá ser capaz de:
-
-* Saber os requisitos para depuração de um programa;
-* Depurar programas utilizando o `gdb`;
-____
-
-=== O que é depuração?
 
 A *((Depuração))* de um programa consiste em acompanhar a execução do
 programa, parando em pontos específicos do código fonte e verificando
