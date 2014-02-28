@@ -1,4 +1,4 @@
-== Arquivos: Teoria
+== Arquivos
 
 :online: {gitrepo}/blob/master/livro/capitulos/code/cap6
 :local: code/cap6
