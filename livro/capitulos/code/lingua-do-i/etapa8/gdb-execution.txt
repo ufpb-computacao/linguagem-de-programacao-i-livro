@@ -8,11 +8,11 @@ and "show warranty" for details.
 This GDB was configured as "i686-linux-gnu".
 For bug reporting instructions, please see:
 <http://bugs.launchpad.net/gdb-linaro/>...
-Lendo símbolos de /home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa7/src/lingua-do-i-test...concluído.
+Lendo símbolos de /home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/lingua-do-i/etapa7/src/lingua-do-i-test...concluído.
 (gdb) break 24 <1>
 Ponto de parada 1 at 0x80485f2: file lingua-do-i-test.c, line 24.
 (gdb) run <2>
-Starting program: /home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/cap5/etapa7/src/lingua-do-i-test 
+Starting program: /home/santana/asciibook/linguagem-de-programacao-i-livro/livro/capitulos/code/lingua-do-i/etapa7/src/lingua-do-i-test 
 
 Breakpoint 1, testTraducaoParaLinguaDoI () at lingua-do-i-test.c:24
 24		char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);

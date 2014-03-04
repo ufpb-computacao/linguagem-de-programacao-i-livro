@@ -18,18 +18,159 @@ Ao final deste capítulo você deverá ser capaz de:
 ____
 
 
-=== Biblioteca e Padrão da Linguagem C
+Até agora foi visto como é possível gravar e acessar informações/dados
+na memória primária/principal do computador (também chamada memória
+RAM). Para isso, foi visto que o uso de ponteiros é fundamental. O
+problema dessa abordagem é que as informações/dados de um programa em
+C gravadas na memória RAM são perdidas após o término da execução
+desse programa. Ou seja, não se pode mais acessá-las ou recuperá-las.
+Como fazer para, após a execução de um programa em C, ter acesso a
+dados/informações manipuladas nesse programa? Uma solução é gravar
+esses dados/informações em um arquivo na memória secundária do
+computador (também chamado de Disco Rígido – Hard Disk drive). Nesse
+caso, após a execução do programa em C, esses dados/informações
+estarão disponíveis no arquivo gravado no disco rígido da máquina.
 
-O último padrão adotado para a Linguagem C foi publicado pela ISO em
-12/8/2011 no documento: ISO/IEC 9899:2011. Este padrão é conhecido
-como C11 ou C1X, você pode consultar gratuitamente a última versão
-pública do documento em:
-http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf.
+Nesse capítulo serão abordados conceitos básicos sobre arquivos e
+formas de manipulação de dados no disco rígido na linguagem C, como
+por exemplo, estratégias para salvar e recuperar dados/informações em
+arquivos.
 
-Neste capítulo nós iremos direcioná-lo a consultar este documento para
-conhecer a descrição das bibliotecas e funções que iremos utilizar.
+NOTE: Neste capítulo nós iremos direcioná-lo a consultar o padrão
+<<c1x>> de C para conhecer a descrição das bibliotecas e funções que
+iremos utilizar.
 
 
+=== Os tipos de arquivos
+
+Para compreender a utilização de arquivos em C precisamos conhecer os
+diferentes tipos de arquivos que existem:
+
+Arquivos somente-texto:: Estes arquivos possuem somente carácteres
+de texto, exemplos deles são arquivos TXT, XML, HTML entre outros.
+Alguns aplicativos aceitam entradas no formato somente-texto, causando
+erro de execução caso encontre carácteres binários.
+
+Arquivos binários:: Este arquivos possuem bytes que não representam
+carácteres textuais, exemplos deles arquivos MP3, JPEG, ZIP etc.
+
+Arquivos especiais:: São arquivos que não armazenam conteúdo, veremos
+este tipo nas próximas seções.
+
+==== Arquivos especiais que representam dispositivos
+
+Alguns arquivos podem representar dispositivos, de tal forma que
+escrever ou ler nesses arquivos corresponde a enviar ou ler dados no
+dispositivo.
+
+Existem arquivos que representam os discos, partições, impressoras,
+placa de rede, placa de som, microfone entre outros dispositivos.
+
+Como exemplo da utilização deste tipo de arquivo especial, temos o
+seguinte comando no Linux, que cria uma imagem de um CD ao ler do
+arquivo `` que representa o CD-ROM:
+
+.Utilização do comando dd para criar uma imagem de cd
+....
+$ dd if=/dev/cdrom of=~/cdrom_image.iso
+....
+
+Neste comando, `if` (_input file_) especifica o arquivo de entrada,
+neste caso é um arquivo especial que representa o CD-ROM:
+`/dev/cdrom`.  Enquanto que `of` (_output file_) especifica o arquivo
+de saída que será criado pela execução do comando `dd`:
+`~/cdrom_image.iso`.
+
+==== Arquivos especiais que criam um Pipe em memória
+
+Um _Pipe_ é um recurso que possibilita dois processos transmitirem
+dados entre eles. Enquanto um processo _produz_ bytes o segundo
+_consome_ os bytes produzidos.
+
+Você pode imaginar que o sistema operacional utiliza o arquivo para
+criar meio de comunicação entre os dois processos, os bytes que forem
+escritos no arquivo pelo primeiro processo estarão disponíveis para
+leitura no segundo processo. O arquivo continua existindo antes e
+depois da execução dos processos, no entanto ele não possui conteúdo
+salvo no disco, diferente de um arquivo regular (não especial).
+
+Em <<cap_mkfifo>> demonstramos a criação e utilização deste tipo de
+arquivo no Linux.
+
+
+==== Arquivos especiais devido ao conteúdo
+
+Alguns arquivos são especiais devido ao conteúdo que apresentam
+durante sua leitura.
+
+No Linux, quando lemos o arquivo `/proc/uptime` o sistema retorna
+quanto tempo (em segundos) o sistema está ligado:
+
+.Exibindo o conteúdo do arquivo /proc/uptime
+....
+$ cat /proc/uptime 
+9913.84 38485.65
+....
+
+Neste caso podemos ver que o computador permaneceu ligado por
+`9913.84` segundos, que equivale a aproximadamente  2,7
+horas.footnote:[O segundo número é a soma da quantidade de segundos
+que os _cores_ permaneceram ociosos.]
+
+
+////
+Também pensei em utilizar o seguinte exemplo, mas fiquei na dúvida se
+/dev/urandom era especial por ser dispositivo ou pelo conteúdo:
+
+Leitura de números aleatórios através de /dev/urandom
+
+dd if=/dev/urandom of=saida.bin bs=1 count=4
+od -t d1 saida.bin
+
+////
+
+=== Operações em arquivos
+
+Independente do tipo de arquivo, as operações básicas que são
+realizadas neles são:
+
+- Abrir arquivo para leitura
+- Escrever conteúdo no arquivo
+- Ler conteúdo do arquivo 
+- Fechar arquivo
+
+
+
+// Documentação sobbre /proc/uptime
+// https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-proc-uptime.html
+
+
+vamos vapresentar dois exemplos:
+
+Arquivo que representa quanto tempo o computador está ligado::
+No linux, temos o arquivo `/proc/
+
+
+Alguns arquivos especiais podem representar
+dispositivos, por exemplo o arquivo `/dev/sda2` representa a segunda
+partição de um Disco Rídigo no sistema. Outros arquivos especiais
+podem criam um _Pipe_ em memória, que pode ser utilizado por dois
+processos, onde o primeiro escreve na memória, enquanto o segundo ler
+a partir da memória. 
+
+O arquivo 
+
+
+, enquanto o arquivo `/dev/sda1` representa 
+exemplos desses arquivos podem ser encontrados o
+diretório `/dev/` no Linux. 
+e outros podem representar um _Pipe_ em memória onde dois
+processos transmitem dados. Exemplo 
+
+considerados tex
+(contém carácteres que não são considerados
+  textuais)
+- Arquivos especiais (não armazenam conteúdos)
 
 ["graphviz", scaledwidth="70%"]
 ----
@@ -37,6 +178,63 @@ include::../images/cap5/string.dot[]
 ----
 
 === Gravação de dados no disco rígido
+
+A persistência de dados nos discos rígidos é realizada através de
+arquivos, que são organizados em diretórios (ou pastas) e apresentados
+através de um ((Sistema de Arquivo)).  
+
+A noção geral que temos de arquivo é que podemos salvar um conteúdo
+em um arquivo e depois ler o conteúdo salvo. Com esta noção podemos
+realizar atividades como: 
+
+- Salvar um documento de texto em um arquivo, enviar para outra pessoa
+  por e-mail.;
+- Tocar um arquivo de música MP3 que foi gravado em algum estúdio;
+- Assistir um vídeo que foi gravado por uma câmera;
+
+No entanto, os arquivos também são utilizados como abstrações de
+dispositivos em alguns sistemas de arquivos. Nestes 
+
+Alguns sistemas operacionais existem arquivos especiais que são
+utilizados como abstração de dispositivos. Escrever ou ler nesses
+arquivos corresponde a enviar ou receber dados do dispositivo. 
+
+
+ação de escrita no arquivo equivale a enviar bytes
+para aquele dispositivo. 
+
+
+Mas arquivos também podem representar dispositivos como Teclado,
+Mouse, ou entradas USB, Serial, Paralela etc.
+
+|====
+| Recurso | Sistema de arquivo no Unix/Liux | Sistema de arquivos no Windows (NTFS)
+| Nome de arquivo | Diferencia maiúsculo de minúsculo | Não diferencia
+maiúsculo de minúsculo.
+| Separador de arquivo | `/` | '\\'
+| Diretório raiz | `/` | As raízes são organizados por discos: `C:\`, `E:\', etc.
+| Permissões por usuário e grupos |  É possível restringuir acesso dos
+usuários | É possível restringuir acesso dos usuários
+| Dispositivos | São tratados como arquivos | Não são tratados como
+arquivos.
+|====
+
+
+
+
+é possível ao salvar
+conteúdos em arquivos.  
+
+O disco rígido possibilita registrar informações através de arquivos
+para consultas posteriores.
+
+Os disco rígid
+
+- gravação de conteúdo
+- música, texto, imagens, vídeos, mídias
+- transmissão de aúdio/vídeo on-line
+
+
 TODO.
 
 === Funções básicas para abrir e fechar arquivos na linguagem C
