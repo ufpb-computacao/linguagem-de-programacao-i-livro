@@ -1,0 +1,218 @@
+[appendix]
+[[cap_mkfifo]]
+== Demonstração de arquivo especial com mkfifo
+
+=== Imprimindo na saída padrão
+
+Para imprimir na saída padrão, vamos utilizar o comando
+`cat` para ler linhas da entrada padrão e envia-las
+para a saída padrão. Para sair, pressionamos `CTRL+D`
+numa linha em branco. Para facilitar a identificação
+das linhas iremos invocar o comando com o parâmetro `-n`,
+que irá numerar as linhas na saída:
+
+.Invocando comando cat
+....
+$ cat -n
+As linhas serão impressas na saída padrão,
+     1	As linhas serão impressas na saída padrão,
+que neste caso é a tela.
+     2	que neste caso é a tela.
+CTRL+D numa linha em branco para sair.
+     3	CTRL+D numa linha em branco para sair.
+
+....
+
+Para direcionar a saída padrão para um arquivo, basta invocar
+o comando `cat` direcionando a saída:
+
+.Redirecionando saída padrão para um arquivo
+....
+$cat -n > saida.txt 
+Com a saída padrão direcionada para um arquivo
+as linhas deixaram de serem impressas na tela.
+Para encerrar a entrada pressionamos CTRL+D em nova linha
+$cat saida.txt 
+     1	Com a saída padrão direcionada para um arquivo
+     2	as linhas deixaram de serem impressas na tela.
+     3	Para encerrar a entrada pressionamos CTRL+D em nova linha
+....
+
+A invocação `cat saida.txt` imprime o conteúdo do arquivo `saida.txt`
+na saída padrão, que neste caso era a tela.
+
+=== Criando arquivo especial com mkfifo
+
+O comando `mkfifo` cria um arquivo do tipo especial (_Named Piped_).
+Todo o conteúdo que for escrito nele será mantido em um buffer na
+memória até que outro processo leia do arquivo.
+
+.Criando um arquivo especial com o mkfifo
+....
+$mkfifo arquivo-especial.fifo
+....
+
+=== Listando os arquivos
+
+Até o momento criamos dois arquivos: `saida.txt` e
+`arquivo-especial.fifo`, vamos listá-los:
+
+.Listando os arquivos
+....
+$ls -l
+prw-rw-r-- 1 santana santana   0 Mar 10 10:06 arquivo-especial.fifo
+-rw-rw-r-- 1 santana santana 175 Mar 10 10:11 saida.txt
+....
+
+Percebam que o arquivo `saida.txt` ocupa 175 bytes, enquanto
+`arquivo-especial.fifo` ocupa 0 byte. 
+
+
+=== Planejando a execução do experimento
+
+Neste experimento vamos criar um arquivo especial, e manipulá-lo da
+seguinte forma:
+
+. Manter um terminal aberto com o comando cat, direcionando a saída
+  para o arquivo especial. Desta forma, todas as linhas que forem
+  digitadas serão enviadas para o arquivo especial
+. Digitaremos duas linhas, que serão enviadas para o buffer em memória
+  do arquivo especial.
+. Após a segunda linha digitada, vamos executar em outro terminal o
+  comando `cat < arquivo-especial.fifo` para ler o conteúdo do arquivo
+  especial e imprimir na tela.  
++
+  Como o arquivo especial não possui tamanho definido, é esperado que
+  o `cat` seja capaz de ler e imprimir o que foi escrito no buffer e
+  depois fique aguardando novos bytes até que o final da entrada seja
+  identificado. Enquanto o final do arquivo não seja encontrado, ele
+  ficará lendo e imprimindo todas a linhas que serão digitadas no
+  outro terminal.
+. Após verificar a impressão das duas linhas digitas, vamos digitar
+  mais uma linha no primeiro terminal. Desta vez perceberemos que a
+  aplicação no segundo terminal já recebeu e imprimiu a linha digita.
+  Neste momento percebemos que o buffer não existe mais, a saída e
+  entrada das aplicações já estou _conectadas_.
+. Digitamos a quarta linha apenas para verificar a conexão entre as
+  duas aplicações e depois encerramos a entrada com `CRTL+D`.
+
+.Primeiro terminal, enviando duas linhas para o buffer em memória
+....
+$cat -n > arquivo-especial.fifo 
+Primeira linha digitada
+Segunda linha digitada
+
+....
+
+Percebam que caso houvesse algum erro no envio da primeira linha para
+a saída, o `cat` encerraria e não seria possível digitar a segunda
+linha.
+
+Este terminal permanece aberto, aguardando que novas linhas sejam
+digitadas.
+
+.Segundo terminal, utilizando o cat para ler do arquivo
+....
+$ cat arquivo-especial.fifo 
+     1	Primeira linha digitada
+     2	Segunda linha digitada
+
+....
+
+Verificamos que no segundo terminal o `cat` foi capaz de ler as linhas
+que foram digitadas e salvas num buffer, antes de sua execução.
+
+O aplicativo permanece aberto, aguardando que novas linhas sejam
+disponibilizadas.
+
+.Primeiro terminal: digitando terceira linha
+....
+$cat -n > arquivo-especial.fifo 
+Primeira linha digitada
+Segunda linha digitada
+Terceira linha digitada
+
+....
+
+Após digitar a terceira linha, vamos verificar o segundo terminal:
+
+.Segundo terminal: recebendo a terceira linha
+....
+$cat arquivo-especial.fifo 
+     1	Primeira linha digitada
+     2	Segunda linha digitada
+     3	Terceira linha digitada
+
+....
+
+A aplicação `cat` executando no segundo terminal recebeu imediatamente
+a terceira linha digitada.
+
+.Primeiro terminal: digitando a quarta linha
+....
+$cat -n > arquivo-especial.fifo 
+Primeira linha digitada
+Segunda linha digitada
+Terceira linha digitada
+Quarta linha digitada
+
+....
+
+Apenas para verificar novamente, vamos verificar se o segundo terminal
+também recebeu a quarta linha:
+
+.Segundo terminal: recebendo a quarta linha
+....
+$cat arquivo-especial.fifo 
+     1	Primeira linha digitada
+     2	Segunda linha digitada
+     3	Terceira linha digitada
+     4	Quarta linha digitada
+
+....
+
+O segundo terminal recebeu a quarta linha e permaneceu aguardando
+envio de mais linhas.
+
+Para finalizar a entrada, vamos pressionar `CTRL+D` no primeiro
+terminal. Verificamos que após finalizar a entrada, o primeiro
+terminal finaliza sua aplicação:
+
+.Primeiro terminal: finalizando a entrada
+....
+$cat -n > arquivo-especial.fifo 
+Primeira linha digitada
+Segunda linha digitada
+Terceira linha digitada
+Quarta linha digitada
+$
+....
+
+
+Vamos ver como ficou o segundo terminal:
+
+.Segundo terminal: finaliza após encontrar final da entrada
+....
+$cat arquivo-especial.fifo 
+     1	Primeira linha digitada
+     2	Segunda linha digitada
+     3	Terceira linha digitada
+     4	Quarta linha digitada
+$
+....
+
+Percebemos que o segundo terminal também encerrou, após ler todo o
+conteúdo que estave disponível através através do arquivo especial.
+
+[NOTE]
+====
+Caso o segundo terminal tivesse sido interrompido (pressionando
+`CTRL+C`), após o recebimento da terceira linha, a conexão que o
+sistema operacional montou entre as duas aplicações seria encerrada. A
+quarta linha não seria enviada e o primeiro terminal também
+encerraria, pois não haveria nenhum buffer na saída para escrita.
+
+====
+
+// linha em branco
+
