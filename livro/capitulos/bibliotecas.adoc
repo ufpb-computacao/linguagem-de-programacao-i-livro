@@ -46,7 +46,6 @@ Esta função costuma ser utilizado
 
 [[TIP]]
 ====
-Exemplo(s): <<exemplo_assert>>
 Ajuda online:
 http://www.cplusplus.com/reference/cassert/assert/
 

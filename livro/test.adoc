@@ -16,9 +16,10 @@
 
 //include::capitulos/projetos.adoc[]
 include::capitulos/cap5-arquivos.adoc[]
-include::capitulos/lingua-do-i.adoc[]
-include::capitulos/depuracao.adoc[]
+//include::capitulos/lingua-do-i.adoc[]
+//include::capitulos/depuracao.adoc[]
 include::capitulos/bibliotecas.adoc[]
+include::capitulos/mkfifo.adoc[]
 
 ////
 == Graficos
