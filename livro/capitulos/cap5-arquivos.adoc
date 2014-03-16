@@ -45,13 +45,19 @@ iremos utilizar.
 Para compreender a utilização de arquivos em C precisamos conhecer os
 diferentes tipos de arquivos que existem:
 
-Arquivos somente-texto:: Estes arquivos possuem somente carácteres
-de texto, exemplos deles são arquivos TXT, XML, HTML entre outros.
-Alguns aplicativos aceitam entradas no formato somente-texto, causando
-erro de execução caso encontre carácteres binários.
+Arquivos somente-texto:: Estes arquivos possuem somente carácteres de
+texto, exemplos deles são arquivos TXT, XML, HTML entre outros.  Outra
+característica importante é que seu conteúdo costuma ser separado por
+_quebras de linha_. Além disso, os sistemas operacionais codificam a
+quebra de linha de forma diferente. Alguns aplicativos aceitam
+entradas no formato somente-texto, causando erro de execução caso
+encontre carácteres binários.
 
 Arquivos binários:: Este arquivos possuem bytes que não representam
 carácteres textuais, exemplos deles arquivos MP3, JPEG, ZIP etc.
+O sistema operacional Windows requer que as funções de escrita e
+leitura dos arquivos se comporte de forma diferente, de acordo com o
+tipo de arquivo.
 
 Arquivos especiais:: São arquivos que não armazenam conteúdo, veremos
 este tipo nas próximas seções.
@@ -66,18 +72,19 @@ Existem arquivos que representam os discos, partições, impressoras,
 placa de rede, placa de som, microfone entre outros dispositivos.
 
 Como exemplo da utilização deste tipo de arquivo especial, temos o
-seguinte comando no Linux, que cria uma imagem de um CD ao ler do
-arquivo `` que representa o CD-ROM:
+seguinte comando no Linux, que o ler do arquivo `/dev/cdrom` (que
+representa o CD-ROM) e salva a imagem do CD-ROM no arquivo
+`cdrom_image.iso`:
 
 .Utilização do comando dd para criar uma imagem de cd
 ....
 $ dd if=/dev/cdrom of=~/cdrom_image.iso
 ....
 
-Neste comando, `if` (_input file_) especifica o arquivo de entrada,
-neste caso é um arquivo especial que representa o CD-ROM:
-`/dev/cdrom`.  Enquanto que `of` (_output file_) especifica o arquivo
-de saída que será criado pela execução do comando `dd`:
+Neste comando o parâmetro `if` (_input file_) especifica o arquivo de
+entrada, que neste caso é um arquivo especial que representa o CD-ROM
+(`/dev/cdrom`).  Enquanto que `of` (_output file_) especifica o
+arquivo de saída que será criado pela execução do comando `dd`:
 `~/cdrom_image.iso`.
 
 ==== Arquivos especiais que criam um Pipe em memória
@@ -93,9 +100,9 @@ leitura no segundo processo. O arquivo continua existindo antes e
 depois da execução dos processos, no entanto ele não possui conteúdo
 salvo no disco, diferente de um arquivo regular (não especial).
 
-Em <<cap_mkfifo>> demonstramos a criação e utilização deste tipo de
-arquivo no Linux.
-
+TIP: No <<cap_mkfifo>> demonstramos a criação e utilização deste tipo de
+arquivo no Linux. Recomendamos esta leitura para conhecer a utilização
+deste tipo de arquivo.
 
 ==== Arquivos especiais devido ao conteúdo
 
@@ -104,6 +111,9 @@ durante sua leitura.
 
 No Linux, quando lemos o arquivo `/proc/uptime` o sistema retorna
 quanto tempo (em segundos) o sistema está ligado:
+
+// Documentação sobbre /proc/uptime
+// https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-proc-uptime.html
 
 .Exibindo o conteúdo do arquivo /proc/uptime
 ....
@@ -128,136 +138,58 @@ od -t d1 saida.bin
 
 ////
 
-=== Operações em arquivos
+=== Fluxo de dados
 
-Independente do tipo de arquivo, as operações básicas que são
-realizadas neles são:
+Para facilitar o aprendizado na utilização de arquivos em C precisamos
+conhecer o conceito de fluxo de dados (_data stream_).
 
-- Abrir arquivo para leitura
-- Escrever conteúdo no arquivo
-- Ler conteúdo do arquivo 
-- Fechar arquivo
+O áudio que escutamos numa rádio é exemplo de um _fluxo de dados_. 
+As estações de rádio transmitem o fluxo e seu aparelho toca todos os
+trechos que recebe. Uma vez sintonizado no fluxo, não há como pausar,
+retroceder ou avançar nele, só é possível tocar o que está sendo
+recebido.
 
+O sistema de televisão também transmite as imagens através de fluxo,
+no entanto, existes aparelhos que possibilitam pausar a programação. 
+Neste caso o aparelho passa a gravar todo o conteúdo que continua
+sendo recebido pelo fluxo em um Buffer, geralmente um disco interno.
+Quando o usuário remove o pause, a programação é exibida a partir do
+conteúdo salvo. Também é possível avançar no vídeo, mas somente até o
+final do Buffer, quando atinge o ponto de recepção do fluxo novamente.
 
+IMPORTANT: O fluxo diferencia de arquivo pois, no fluxo, não podemos
+avançar ou retroceder na leitura. A leitura do fluxo costuma ser
+sequencial, realizando o processamento dos dados logo após a leitura.
+Como os arquivos possuem início e fim é possível determinar o seu
+tamanho. Já os fluxos possuem início, mas nem todos possuem fim.
 
-// Documentação sobbre /proc/uptime
-// https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-proc-uptime.html
+=== Arquivos
 
+O principal propósito dos arquivos é salvar um conteúdo para ser
+acessado futuramente. Para isso os arquivos possuem nomes e são
+organizados em diretórios (ou pastas), para facilitar sua identificação. 
 
-vamos vapresentar dois exemplos:
+A organização dos nomes dos arquivos não é a mesma em todos os
+sistemas operacionais. No Windows, por exemplo, existe um diretório
+raiz por disco (`C:\`, `D:\` etc.) e os diretórios são separados pela
+carácter `\`. Já no Unix, existe um único diretório raiz `/` onde
+todos os demais diretórios são _descendentes_ dele, o carácter
+separador de diretório é o `/`, diferente do Windows.
 
-Arquivo que representa quanto tempo o computador está ligado::
-No linux, temos o arquivo `/proc/
+Os arquivos somente texto também são diferentes, enquanto no Windows o
+final de linha é codificado com dois carácteres, o Linux utiliza
+apenas um.
 
+=== Arquivos em C
 
-Alguns arquivos especiais podem representar
-dispositivos, por exemplo o arquivo `/dev/sda2` representa a segunda
-partição de um Disco Rídigo no sistema. Outros arquivos especiais
-podem criam um _Pipe_ em memória, que pode ser utilizado por dois
-processos, onde o primeiro escreve na memória, enquanto o segundo ler
-a partir da memória. 
+IMPORTANT: A principal noção que precisamos ter em mente quando trabalhamos com
+arquivos em C é que *fluxos e arquivos são manipulados com uma
+interface única em C*.
 
-O arquivo 
-
-
-, enquanto o arquivo `/dev/sda1` representa 
-exemplos desses arquivos podem ser encontrados o
-diretório `/dev/` no Linux. 
-e outros podem representar um _Pipe_ em memória onde dois
-processos transmitem dados. Exemplo 
-
-considerados tex
-(contém carácteres que não são considerados
-  textuais)
-- Arquivos especiais (não armazenam conteúdos)
-
-=== Os tipos de arquivos
-
-Para compreender a utilização de arquivos em C precisamos conhecer os
-diferentes tipos de arquivos que existem:
-
-Arquivos somente-texto:: Estes arquivos possuem somente carácteres
-de texto, exemplos deles são arquivos TXT, XML, HTML entre outros.
-Alguns aplicativos aceitam entradas no formato somente-texto, causando
-erro de execução caso encontre carácteres binários.
-
-Arquivos binários:: Este arquivos possuem bytes que não representam
-carácteres textuais, exemplos deles arquivos MP3, JPEG, ZIP etc.
-
-Arquivos especiais:: São arquivos que não armazenam conteúdo, veremos
-este tipo nas próximas seções.
-
-==== Arquivos especiais que representam dispositivos
-
-Alguns arquivos podem representar dispositivos, de tal forma que
-escrever ou ler nesses arquivos corresponde a enviar ou ler dados no
-dispositivo.
-
-Existem arquivos que representam os discos, partições, impressoras,
-placa de rede, placa de som, microfone entre outros dispositivos.
-
-Como exemplo da utilização deste tipo de arquivo especial, temos o
-seguinte comando no Linux, que cria uma imagem de um CD ao ler do
-arquivo `` que representa o CD-ROM:
-
-.Utilização do comando dd para criar uma imagem de cd
-....
-$ dd if=/dev/cdrom of=~/cdrom_image.iso
-....
-
-Neste comando, `if` (_input file_) especifica o arquivo de entrada,
-neste caso é um arquivo especial que representa o CD-ROM:
-`/dev/cdrom`.  Enquanto que `of` (_output file_) especifica o arquivo
-de saída que será criado pela execução do comando `dd`:
-`~/cdrom_image.iso`.
-
-==== Arquivos especiais que criam um Pipe em memória
-
-Um _Pipe_ é um recurso que possibilita dois processos transmitirem
-dados entre eles. Enquanto um processo _produz_ bytes o segundo
-_consome_ os bytes produzidos.
-
-Você pode imaginar que o sistema operacional utiliza o arquivo para
-criar meio de comunicação entre os dois processos, os bytes que forem
-escritos no arquivo pelo primeiro processo estarão disponíveis para
-leitura no segundo processo. O arquivo continua existindo antes e
-depois da execução dos processos, no entanto ele não possui conteúdo
-salvo no disco, diferente de um arquivo regular (não especial).
-
-Em <<cap_mkfifo>> demonstramos a criação e utilização deste tipo de
-arquivo no Linux.
+O tipo de dado para manipular Arquivos e Streams é o `FILE`, definido
+no cabeçalho <<stdio_h>>.
 
 
-==== Arquivos especiais devido ao conteúdo
-
-Alguns arquivos são especiais devido ao conteúdo que apresentam
-durante sua leitura.
-
-No Linux, quando lemos o arquivo `/proc/uptime` o sistema retorna
-quanto tempo (em segundos) o sistema está ligado:
-
-.Exibindo o conteúdo do arquivo /proc/uptime
-....
-$ cat /proc/uptime 
-9913.84 38485.65
-....
-
-Neste caso podemos ver que o computador permaneceu ligado por
-`9913.84` segundos, que equivale a aproximadamente  2,7
-horas.footnote:[O segundo número é a soma da quantidade de segundos
-que os _cores_ permaneceram ociosos.]
-
-
-////
-Também pensei em utilizar o seguinte exemplo, mas fiquei na dúvida se
-/dev/urandom era especial por ser dispositivo ou pelo conteúdo:
-
-Leitura de números aleatórios através de /dev/urandom
-
-dd if=/dev/urandom of=saida.bin bs=1 count=4
-od -t d1 saida.bin
-
-////
 
 === Operações em arquivos
 
@@ -271,36 +203,6 @@ realizadas neles são:
 
 
 
-// Documentação sobbre /proc/uptime
-// https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-proc-uptime.html
-
-
-vamos vapresentar dois exemplos:
-
-Arquivo que representa quanto tempo o computador está ligado::
-No linux, temos o arquivo `/proc/
-
-
-Alguns arquivos especiais podem representar
-dispositivos, por exemplo o arquivo `/dev/sda2` representa a segunda
-partição de um Disco Rídigo no sistema. Outros arquivos especiais
-podem criam um _Pipe_ em memória, que pode ser utilizado por dois
-processos, onde o primeiro escreve na memória, enquanto o segundo ler
-a partir da memória. 
-
-O arquivo 
-
-
-, enquanto o arquivo `/dev/sda1` representa 
-exemplos desses arquivos podem ser encontrados o
-diretório `/dev/` no Linux. 
-e outros podem representar um _Pipe_ em memória onde dois
-processos transmitem dados. Exemplo 
-
-considerados tex
-(contém carácteres que não são considerados
-  textuais)
-- Arquivos especiais (não armazenam conteúdos)
 
 ["graphviz", scaledwidth="70%"]
 ----
@@ -309,7 +211,7 @@ include::../images/cap5/string.dot[]
 
 === Gravação de dados no disco rígido
 
-A persistência de dados nos discos rígidos é realizada através de
+A persistência de dados no disco é realizada através de
 arquivos, que são organizados em diretórios (ou pastas) e apresentados
 através de um ((Sistema de Arquivo)).  
 
@@ -329,43 +231,6 @@ Alguns sistemas operacionais existem arquivos especiais que são
 utilizados como abstração de dispositivos. Escrever ou ler nesses
 arquivos corresponde a enviar ou receber dados do dispositivo. 
 
-
-ação de escrita no arquivo equivale a enviar bytes
-para aquele dispositivo. 
-
-
-Mas arquivos também podem representar dispositivos como Teclado,
-Mouse, ou entradas USB, Serial, Paralela etc.
-
-|====
-| Recurso | Sistema de arquivo no Unix/Liux | Sistema de arquivos no Windows (NTFS)
-| Nome de arquivo | Diferencia maiúsculo de minúsculo | Não diferencia
-maiúsculo de minúsculo.
-| Separador de arquivo | `/` | '\\'
-| Diretório raiz | `/` | As raízes são organizados por discos: `C:\`, `E:\', etc.
-| Permissões por usuário e grupos |  É possível restringuir acesso dos
-usuários | É possível restringuir acesso dos usuários
-| Dispositivos | São tratados como arquivos | Não são tratados como
-arquivos.
-|====
-
-
-
-
-é possível ao salvar
-conteúdos em arquivos.  
-
-O disco rígido possibilita registrar informações através de arquivos
-para consultas posteriores.
-
-Os disco rígid
-
-- gravação de conteúdo
-- música, texto, imagens, vídeos, mídias
-- transmissão de aúdio/vídeo on-line
-
-
-TODO.
 
 === Funções básicas para abrir e fechar arquivos na linguagem C
 TODO.
