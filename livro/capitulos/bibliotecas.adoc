@@ -165,6 +165,15 @@ TODO
 ==== putchar()
 Ver <<fputc>>.
 
+[id="fgets", reftext="fgets()"]
+==== fgets
+TODO.
+
+[id="fputs", reftext="fputs()"]
+==== fputs
+TODO.
+Ver <<fgets>>.
+
 [id="fread", reftext="fread()"]
 ==== fread()
 TODO
@@ -190,10 +199,6 @@ TODO.
 ==== frewind
 TODO.
 
-[[fgets]]
-[id="fgets", reftext="fgets()"]
-==== fgets
-TODO.
 
 [id="feof", reftext="feof()"]
 ==== feof

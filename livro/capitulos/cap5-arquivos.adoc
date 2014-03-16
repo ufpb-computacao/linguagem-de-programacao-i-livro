@@ -306,7 +306,10 @@ Um retorno diferente de zero indica que o final do arquivo foi
 atingido.
 
 
-=== Lendo e escrevendo um carácter
+=== Lendo e escrevendo um carácter por vez
+
+Nesta seção vamos apresentar como ler e escrever no arquivo um
+carácter por vez.
 
 ==== Lendo um carácter com fgetc ou getc
 
@@ -336,7 +339,7 @@ de leitura de carácter retorna ao atingir o final do arquivo.
 
 ==== Escrevendo um carácter com fputc e putc
 
-A função `fputc` escreve um carácter (convertido para `unsigned char`)
+A função <<fputc>> escreve um carácter (convertido para `unsigned char`)
 na posição atual do arquivo:
 
 ----
@@ -371,6 +374,83 @@ include::{local}/lendo_e_escrevendo_char.c[]
 <3> Ler e escreve um carácter.
 <4> Verifica se atingiu o final do arquivo.
 <5> Fecha os arquivos abertos.
+
+
+=== Lendo e escrevendo uma linha por vez
+
+Nesta seção vamos apresentar como ler e escrever no arquivo uma
+linha por vez.
+
+==== Lendo uma linha com fgets
+
+A função <<fgets>> ler uma linha do arquivo e salva o conteúdo lido no
+`buffer` passado como parâmetro. O final de linha é retido e retornando
+junto com a linha lida. A função copia carácteres do arquivo até
+encontrar o final da linha, ou chegou ao final do arquivo ou leu `n-1`
+carácteres. O carácter `\0` é escrito após o último carácter lido,
+transformando `buffer` em um string terminado em zero, compatível com
+as funções <<string_h>>. 
+
+----
+char *fgets(char * restrict buffer, int n, FILE * restrict arquivo);
+----
+
+A função retorna `buffer`, contendo a linha lida, ou `NULL` se houve
+algum erro durante a leitura.
+
+
+[NOTE]
+====
+Para entender o funcionamento da função <<fgets>> é importante
+perceber como o computador funciona. Inicialmente alguém poderia
+desejar que esta função retornasse um string contendo a linha lida.
+Mas pense bem: Se se o arquivo lido for enorme e não possuir quebra de
+linhas, a operação de leitura de uma linha poderia retornar um string
+que não coubesse na memória. 
+
+Como evitar que isto aconteça? Passando um parâmetro `n`, indicando a
+quantidade máxima de carácteres que deve ser lido na procura do final
+de linha.
+
+Além disso, para evitar erros de alocação de memória, é solicitado que
+o usuário forneça previamente o Buffer onde será copiado os carácteres
+da linha lida.
+
+====
+
+
+==== Escrevendo uma linha com fputs
+
+A função <<fputs>> escreve um buffer (string terminado com o carácter
+zero) no arquivo.
+
+----
+int fputs(const char * restrict buffer, FILE * restrict arquivo);
+----
+
+A função retorna `EOF` em caso de erro.
+
+NOTE: Perceba que não há necessidade de especificar o tamanho na
+escrita, ela termina quando encontra o carácter nulo (`\0`). Outro
+fato importante é que *esta função não deve ser utilizado para escrita
+binária, pois ela não escreve o carácter nulo*.
+
+==== Exemplo completo de leitura e escrita
+
+O seguinte código é um exemplo completo utilizando as funções de
+leitura e escrita com linha:
+
+.Código fonte
+{online}/lendo_e_escrevendo_linha.c[{local}/lendo_e_escrevendo_linha.c]
+
+[source, c]
+.Lendo e escrevendo linhas
+----
+include::{local}/lendo_e_escrevendo_linha.c[]
+----
+<1> Ler uma linha da entrada.
+<2> Escreve linha na saída.
+
 
 
 ["graphviz", scaledwidth="70%"]
