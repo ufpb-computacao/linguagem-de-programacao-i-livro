@@ -119,7 +119,6 @@ valor `0`.
 NOTE: A documentação sobre as funções de leitura de arquivo estão contidas
 na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
 
-[[fopen]]
 [id="fopen", reftext="fopen()"]
 ==== fopen()
 A função `fopen` retorna um ponteiro para `FILE` se conseguir abrir o
@@ -134,7 +133,7 @@ FILE *fopen(const char * restrict nomeDoArquivo,
 nomeDoArquvo:: nome do arquivo que será aberto
 
 mode::
-
+Modo de abertura do arquivo.
 r::: abre arquivo de texto para leitura
 w::: abre arquivo de texto para escrita
 wx::: cria arquivo de texto para escrita
@@ -146,32 +145,42 @@ ab::: abre arquivo binário para escrita, no final do arquivo
 
 
 
-[[fclose]]
 [id="fclose", reftext="fclose()"]
 ==== fclose()
 TODO
 
-[[fread]]
+[id="fgetc", reftext="fgetc()"]
+==== fgetc()
+TODO
+
+[id="getchar", reftext="getchar()"]
+==== getchar()
+Ver <<fgetc>>.
+
+[id="fputc", reftext="fputc()"]
+==== fputc()
+TODO
+
+[id="putchar", reftext="putchar()"]
+==== putchar()
+Ver <<fputc>>.
+
 [id="fread", reftext="fread()"]
 ==== fread()
 TODO
 
-[[fseek]]
 [id="fseek", reftext="fseek()"]
 ==== fseek()
 TODO.
 
-[[ftell]]
 [id="ftell", reftext="ftell()"]
 ==== ftell()
 TODO.
 
-[[printf]]
 [id="printf", reftext="printf()"]
 ==== printf()
-TODO.
+Ver <<fprintf>>.
 
-[[fprintf]]
 [id="fprintf", reftext="fprintf()"]
 ==== fprintf
 TODO.
@@ -186,7 +195,6 @@ TODO.
 ==== fgets
 TODO.
 
-[[feof]]
 [id="feof", reftext="feof()"]
 ==== feof
 TODO.

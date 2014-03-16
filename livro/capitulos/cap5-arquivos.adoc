@@ -255,10 +255,9 @@ include::{local}/abrindo_arquivo_binario_para_escrita.c[]
 ==== Fechando um arquivo
 
 Independente do modo utilizado para abrir o arquivo, todo arquivo
-aberto deve ser fechado após sua utilização.
-
-Para fecha um arquivo utilizamos a função <<fclose>>, passando como
-parâmetro o ponteiro `FILE*` retornado na abertura do arquivo:
+aberto deve ser fechado após sua utilização. Para fechar um arquivo
+utilizamos a função <<fclose>>, passando como parâmetro o ponteiro
+`FILE*` retornado na abertura do arquivo:
 
 .Código fonte
 {online}/abrindo_arquivo_de_texto.c[{local}/fechando_arquivo.c]
@@ -272,18 +271,89 @@ include::{local}/fechando_arquivo.c[]
     foi aberto com sucesso.
 
 
+=== Indicadores de erro e final de arquivo
+
+Na próximas seções serão apresentadas várias funções para ler e
+escrever em arquivos. Todas todas as funções que serão apresentadas
+registram eventos de erro e final de arquivo em indicadores na
+estrutura `FILE` que poderão ser consultado através das funções que
+serão apresentadas nesta seção.
+
+==== Erro na leitura/escrita
+
+Toda vez que um erro ocorreu nas operações de escrita ou leitura, a
+função que estava realizando a operação registra o ocorrido num
+indicador de erro em `FILE`, você poderá consultar o erro invocando a
+seguinte função:
+
+----
+int ferror(FILE *stream);
+----
+
+Haverá ocorrido erro caso o valor retornado for *diferente de zero*.
+
+==== Atingiu o final do arquivo
+
+Quando uma função atingiu o final do arquivo ela registra o ocorrido
+no indicador de final de arquivo, que pode ser consultado através da
+seguinte função:
+
+----
+int feof(FILE *stream);
+----
+
+Um retorno diferente de zero indica que o final do arquivo foi
+atingido.
 
 
-=== Operações em arquivos
+=== Lendo e escrevendo um carácter
 
-Independente do tipo de arquivo, as operações básicas que são
-realizadas neles são:
+==== Lendo um carácter com fgetc ou getc
 
-- Abrir arquivo para leitura
-- Escrever conteúdo no arquivo
-- Ler conteúdo do arquivo 
-- Fechar arquivo
+A função <<fgetc>> ler um carácter do arquivo, converte-o para `int` e
+retorna-o. Caso não haja mais carácteres disponível, devido ao final do
+arquivo, retorna a constante `EOF` (do inglês, _End of File_, que
+indica o final do arquivo):
 
+----
+int fgetc(FILE *stream);
+----
+
+Após a leitura do carácter o indicador de posição de leitura do
+arquivo é incrementado em uma posição.
+
+A função <<getchar>> realiza a mesma operação, mas não requer parâmetro,
+utilizando a entrada padrão (`stdin`) como arquivo de entrada:
+
+----
+int getchar(void);
+----
+
+NOTE: Perceba a função de ler um carácter não retorna um *`char`*,
+retorna um *`int`*. Isto porque a `EOF` não é um carácter que indica o
+final final do arquivo, mas uma constante do tipo `int` que a função
+de leitura de carácter retorna ao atingir o final do arquivo.
+
+==== Escrevendo um carácter com fputc e putc
+
+A função `fputc` escreve um carácter (convertido para `unsigned char`)
+na posição atual do arquivo:
+
+----
+int fputc(int caracter, FILE *stream);
+----
+
+A função retorna o carácter escrito ou `EOF` se houve erro durante a
+escrita.
+
+A função <<putchar>> realiza a mesma função que <<fputc>> para opera
+somente na saída padrão (`stdout`):
+
+----
+int putchar(int caracter);
+----
+
+==== Exemplo completo de leitura e escrita
 
 
 
@@ -291,28 +361,6 @@ realizadas neles são:
 ----
 include::../images/cap5/string.dot[]
 ----
-
-=== Gravação de dados no disco rígido
-
-A persistência de dados no disco é realizada através de
-arquivos, que são organizados em diretórios (ou pastas) e apresentados
-através de um ((Sistema de Arquivo)).  
-
-A noção geral que temos de arquivo é que podemos salvar um conteúdo
-em um arquivo e depois ler o conteúdo salvo. Com esta noção podemos
-realizar atividades como: 
-
-- Salvar um documento de texto em um arquivo, enviar para outra pessoa
-  por e-mail.;
-- Tocar um arquivo de música MP3 que foi gravado em algum estúdio;
-- Assistir um vídeo que foi gravado por uma câmera;
-
-No entanto, os arquivos também são utilizados como abstrações de
-dispositivos em alguns sistemas de arquivos. Nestes 
-
-Alguns sistemas operacionais existem arquivos especiais que são
-utilizados como abstração de dispositivos. Escrever ou ler nesses
-arquivos corresponde a enviar ou receber dados do dispositivo. 
 
 
 === Funções básicas para abrir e fechar arquivos na linguagem C
