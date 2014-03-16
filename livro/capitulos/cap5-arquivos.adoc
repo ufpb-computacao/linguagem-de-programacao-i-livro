@@ -230,9 +230,8 @@ rb:: abre arquivo binário para leitura
 wb:: abre arquivo binário para escrita
 ab:: abre arquivo binário para escrita, no final do arquivo
 
-Os códigos a seguir demonstram a abertura de arquivo para leitura de
-um arquivo de texto e a abertura de um arquivo para escrita no formato
-binário.
+Os códigos a seguir demonstram a abertura de arquivo para _leitura no
+modo texto_ e outro para _escrita no modo binário_.
 
 .Código fonte
 {online}/abrindo_arquivo_de_texto.c[{local}/abrindo_arquivo_de_texto.c]
@@ -252,6 +251,26 @@ include::{local}/abrindo_arquivo_de_texto.c[]
 ----
 include::{local}/abrindo_arquivo_binario_para_escrita.c[]
 ----
+
+==== Fechando um arquivo
+
+Independente do modo utilizado para abrir o arquivo, todo arquivo
+aberto deve ser fechado após sua utilização.
+
+Para fecha um arquivo utilizamos a função <<fclose>>, passando como
+parâmetro o ponteiro `FILE*` retornado na abertura do arquivo:
+
+.Código fonte
+{online}/abrindo_arquivo_de_texto.c[{local}/fechando_arquivo.c]
+
+[source, c]
+.Abrindo um arquivo binário para escrita
+----
+include::{local}/fechando_arquivo.c[]
+----
+<1> A função para fechar o arquivo só deve ser invocada caso o arquivo
+    foi aberto com sucesso.
+
 
 
 
