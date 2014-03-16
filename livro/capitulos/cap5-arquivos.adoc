@@ -355,6 +355,22 @@ int putchar(int caracter);
 
 ==== Exemplo completo de leitura e escrita
 
+O seguinte código é um exemplo completo utilizando as funções de
+leitura e escrita com carácteres:
+
+.Código fonte
+{online}/lendo_e_escrevendo_char.c[{local}/lendo_e_escrevendo_char.c]
+
+[source, c]
+.Lendo e escrevendo carácteres
+----
+include::{local}/lendo_e_escrevendo_char.c[]
+----
+<1> Abertura dos arquivos para leitura e escrita respectivamente.
+<2> Verificando se os arquivos foram abertos com sucesso.
+<3> Ler e escreve um carácter.
+<4> Verifica se atingiu o final do arquivo.
+<5> Fecha os arquivos abertos.
 
 
 ["graphviz", scaledwidth="70%"]
