@@ -123,7 +123,28 @@ na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
 [id="fopen", reftext="fopen()"]
 ==== fopen()
 A função `fopen` retorna um ponteiro para `FILE` se conseguir abrir o
-arquivo, caso contrário retorna `NULL`. 
+arquivo, caso contrário retorna `NULL`.
+
+----
+#include <stdio.h>
+FILE *fopen(const char * restrict nomeDoArquivo,
+    const char * restrict modo);
+----
+
+nomeDoArquvo:: nome do arquivo que será aberto
+
+mode::
+
+r::: abre arquivo de texto para leitura
+w::: abre arquivo de texto para escrita
+wx::: cria arquivo de texto para escrita
+a::: adiciona ao final; o indicador de posição de arquivo é
+posicionado no final do arquivo
+rb::: abre arquivo binário para leitura
+wb::: abre arquivo binário para escrita
+ab::: abre arquivo binário para escrita, no final do arquivo
+
+
 
 [[fclose]]
 [id="fclose", reftext="fclose()"]

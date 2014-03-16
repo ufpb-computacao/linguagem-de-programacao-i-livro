@@ -1,7 +1,7 @@
 == Arquivos
 
-:online: {gitrepo}/blob/master/livro/capitulos/code/cap6
-:local: code/cap6
+:online: {gitrepo}/blob/master/livro/capitulos/code/cap5
+:local: code/cap5
 
 .Objetivos do capítulo
 ____
@@ -172,9 +172,10 @@ organizados em diretórios (ou pastas), para facilitar sua identificação.
 A organização dos nomes dos arquivos não é a mesma em todos os
 sistemas operacionais. No Windows, por exemplo, existe um diretório
 raiz por disco (`C:\`, `D:\` etc.) e os diretórios são separados pela
-carácter `\`. Já no Unix, existe um único diretório raiz `/` onde
-todos os demais diretórios são _descendentes_ dele, o carácter
-separador de diretório é o `/`, diferente do Windows.
+carácter ``\'' (_Contra barra_). Já no Unix, existe um único diretório
+raiz `/` onde todos os demais diretórios são _descendentes_ dele, o
+carácter separador de diretório é o ``/'' (_Barra_), diferente do
+Windows.
 
 Os arquivos somente texto também são diferentes, enquanto no Windows o
 final de linha é codificado com dois carácteres, o Linux utiliza
@@ -188,6 +189,69 @@ interface única em C*.
 
 O tipo de dado para manipular Arquivos e Streams é o `FILE`, definido
 no cabeçalho <<stdio_h>>.
+
+Na estrutura `FILE` são registradas todas as informações necessárias
+para sua manipulação:
+
+* Um indicador da posição no arquivo.
+* Um ponteiro para seu Buffer (caso exista).
+* Um indicador de erro, que registra caso houve algum erro de
+  leitura/escrita.
+* Um indicativo de _final de arquivo_, onde é registrado se o final do
+  arquivo foi atingido.  
+
+NOTE: Perceba que a estrutura `FILE` não possui registro do nome do
+arquivo que está sendo manipulado.
+
+=== Abrindo e Fechando arquivos em C
+
+Toda vez que desejamos ler ou escrever num arquivo precisamos abrir o
+arquivo indicando esta intenção.
+
+==== Abrindo um arquivo
+
+A abertura de arquivos em C é realizada através da função <<fopen>>,
+que retorna um ponteiro `*FILE` caso a operação foi realizada com
+sucesso ou `NULL` caso houve erro na abertura:
+
+----
+FILE* arquivo = fopen(nomeDoArquivo, modo); 
+----
+
+A intenção da abertura do arquivo deve ser especificada no parâmetro
+`modo`:
+
+r:: abre arquivo de texto para leitura
+w:: abre arquivo de texto para escrita
+wx:: cria arquivo de texto para escrita
+a:: adiciona ao final; o indicador de posição de arquivo é
+posicionado no final do arquivo
+rb:: abre arquivo binário para leitura
+wb:: abre arquivo binário para escrita
+ab:: abre arquivo binário para escrita, no final do arquivo
+
+Os códigos a seguir demonstram a abertura de arquivo para leitura de
+um arquivo de texto e a abertura de um arquivo para escrita no formato
+binário.
+
+.Código fonte
+{online}/abrindo_arquivo_de_texto.c[{local}/abrindo_arquivo_de_texto.c]
+
+[source, c]
+.Abrindo um arquivo de texto para leitura
+----
+include::{local}/abrindo_arquivo_de_texto.c[]
+----
+
+
+.Código fonte
+{online}/abrindo_arquivo_de_texto.c[{local}/abrindo_arquivo_binario_para_escrita.c]
+
+[source, c]
+.Abrindo um arquivo binário para escrita
+----
+include::{local}/abrindo_arquivo_binario_para_escrita.c[]
+----
 
 
 
