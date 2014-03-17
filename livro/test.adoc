@@ -9,17 +9,17 @@
 
 //include::capitulos/cap3-ponteiros.adoc[]
 //include::capitulos/atividades-3.adoc[]
-//include::capitulos/cap4-alocacao-dinamica.adoc[]
-//include::capitulos/atividades-4.adoc[]
+include::capitulos/cap4-alocacao-dinamica.adoc[]
+include::capitulos/atividades-4.adoc[]
 
 //include::capitulos/bases-legais.adoc[]
 
 //include::capitulos/projetos.adoc[]
-include::capitulos/cap5-arquivos.adoc[]
+//include::capitulos/cap5-arquivos.adoc[]
 //include::capitulos/lingua-do-i.adoc[]
 //include::capitulos/depuracao.adoc[]
 include::capitulos/bibliotecas.adoc[]
-include::capitulos/mkfifo.adoc[]
+//include::capitulos/mkfifo.adoc[]
 
 ////
 == Graficos

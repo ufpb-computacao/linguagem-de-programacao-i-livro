@@ -54,28 +54,32 @@ http://www.cplusplus.com/reference/cassert/assert/
 [id="stdlib_h",reftext="stdlib.h"]
 === stdlib.h
 
+
+[id="EXIT_SUCCESS",reftext="EXIT_SUCCESS"]
 ==== EXIT_SUCCESS
 Constante para indicar que não houve erro.
 
+[id="EXIT_FAILURE",reftext="EXIT_FAILURE"]
 ==== EXIT_FAILURE
 Constante para indicar que houve erro na execução do arquivo.
 
 
-[[f_exit]]
+[id="exit",reftext="exit()"]
 ==== exit()
 
   void exit( int codigoDeErro )
 
-Termina o programa indicando o código de erro.
+Termina o programa indicando o código de erro. Ver os códigos de erro
+<<EXIT_SUCCESS>> e <<EXIT_FAILURE>>.
 
 ==== Gerência de memória
 
-[[malloc]]
-===== malloc
+[id="malloc", reftext="malloc()"]
+===== malloc()
 TODO
 
-[[calloc]]
-===== calloc
+[id="calloc", reftext="calloc()"]
+===== calloc()
 
 A função `calloc`, além de alocar espaço na memória, inicializa todo o
 espaço alocado com `0` (zeros). 
@@ -84,9 +88,17 @@ espaço alocado com `0` (zeros).
 void *calloc(size_t quantidade, size_t tamanho);
 ----
 
-[[free]]
-===== free
+[id="free", reftext="free()"]
+===== free()
 TODO
+
+[id="realloc", reftext="realloc()"]
+===== realloc()
+
+----
+void *realloc (void *ptr, tamanho);
+----
+
 
 
 [id="string_h", reftext="string.h"]
@@ -108,12 +120,12 @@ Compara dois strings até uma posição específica.
 
 
 [id="strcpy", reftext="strcpy()"]
-==== strcpy
+==== strcpy()
+TODO.
 
-----
-char *strncpy(char * restrict destino, 
-    const char * restrict origem, size_t quantidade);
-----
+[id="strncpy", reftext="strncpy()"]
+==== strncpy()
+TODO.
 
 [id="stdbool_h", reftext="stdbool.h"]
 === stdbool.h
