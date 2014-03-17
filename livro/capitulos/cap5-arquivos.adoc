@@ -230,7 +230,7 @@ utilização:
 Toda vez que desejamos ler ou escrever num arquivo precisamos abrir o
 arquivo indicando esta intenção.
 
-==== Abrindo um arquivo
+==== Abrindo um arquivo com fopen
 
 (((Arquivo, abrindo))) (((fopen)))
 
@@ -289,7 +289,7 @@ include::../images/cap5/string.dot[]
 
 ====
 
-==== Entradas e saídas padrões
+==== Entrada e saídas padrões
 
 (((stdin))) (((stdout))) (((stderr)))
 
@@ -297,9 +297,9 @@ include::../images/cap5/string.dot[]
 O cabeçalho <<stdio_h>> também define os seguintes arquivos como
 entradas e saídas padrões, que dispensam a operação de abertura:
 
-`FILE* stdin`:: arquivo que representa a entrada padrão.
-`FILE* stdout`:: arquivo que representa a saída padrão.
-`FILE* stderr`:: arquivo que representa a saída de erro padrão.
+`FILE* stdin`:: Arquivo que representa a entrada padrão.
+`FILE* stdout`:: Arquivo que representa a saída padrão.
+`FILE* stderr`:: Arquivo que representa a saída de erro padrão.
 
 ==== Fechando um arquivo
 
@@ -653,14 +653,14 @@ Como foi apresentado anteriormente, o *((indicador de posição))*
 mantém o registro da posição atual do arquivo.
 
 Em alguns casos podemos ter a necessidade de avançar ou retroceder o
-ponto de leitura ou escrita do arquivo, as seguintes funções servem a
-este propósito:
+ponto de leitura ou escrita do arquivo, as seguintes funções a seguir
+servem a este propósito.
 
 ==== Retrocede para o início do arquivo com rewind
 
 (((rewind)))
 
-O seguinte função retrocede o indicador de posição para o início do
+A seguinte função retrocede o indicador de posição para o início do
 arquivo:
 
 ----
@@ -681,7 +681,8 @@ long int ftell(FILE *arquivo);
 
 (((fseek)))
 
-Para ir para o final do arquivo invocamos:
+Para ir para o final do arquivo invocamos podemo utilizar a função
+`fseek` da seguinte forma:
 
 ----
 fseek(arquivo, 0, SEEK_END);
@@ -704,9 +705,6 @@ escrita e leitura de arquivos binários necessitam do tamanho do tipo
 de dado, a quantidade de dados que seriam processados e um buffer para
 realização das operações. Por último, vimos como alterar e consultar o
 indicador de posição do arquivo.
-
-
-
 
 ////
 Terminando arquivo com linha em branco

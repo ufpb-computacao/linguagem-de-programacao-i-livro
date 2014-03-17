@@ -1,0 +1,8 @@
+#include <stdio.h>
+int main(void) {
+    char* nomeDoArquivo = "arquivo-binario.bin";
+    FILE* arquivo = fopen(nomeDoArquivo, "wb");
+    if (arquivo != NULL) {
+    } else {
+    }
+}

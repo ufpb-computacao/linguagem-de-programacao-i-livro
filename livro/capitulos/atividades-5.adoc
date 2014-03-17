@@ -1,0 +1,120 @@
+=== Atividades
+
+. Quais os tipos de arquivos que existem?
+
+. Quais as semelhanças e diferenças entre fluxo de dados e arquivos?
+
+. Faça um programa que leia um arquivo e conte quantas
+  vezes a letra `b` está presente no arquivo.
+
+. Faça um progama semelhante ao anterior, mas que leia o conteúdo da
+  entrada padrão.
+
+. Faça um programa que leia um arquivo e conte quantas linhas ele possui.
+
+. Alguns jogos possuem configurações padrões e permite que o
+  usuário sobrescreva as configurações do usuário. Quando o jogo
+  é iniciada o arquivo de configuração padrão é lido primeiro, em
+  seguida o arquivo de configuração do usuário é lido, sobrepondo as
+  configurações. Faça um programa que leia dois arquivos de
+  configurações e imprima a configuração resultante deles:
++
+--
+
+.Arquivo configuracao-padrao.txt
+....
+volume=100
+dificuldade=3
+musica=1
+efeitos=1
+....
+
+.Arquivo configuracao-usuario.txt
+....
+dificuldade=2
+musica=0
+....
+
+--
+
+. Utilizando as mesma lógica dos arquivos de configurações da questão
+  anterior, faça um programa que leia o nome de um parametro e o seu
+  valor, em seguida altere somente o parâmetro fornecido no arquivo de
+  configuração do usuário. Caso o parâmetro não exista, ele é criado
+  no mesmo arquivo.
++
+--
+
+Por exemplo, ao ler os valores `musica 1`, o arquivo de configuração
+do usuário seria modificado para:
+
+.Arquivo configuracao-usuario.txt resultante da modificação
+....
+dificuldade=2
+musica=1
+....
+
+Para os valores `volume 70`, o arquivo resultante seria:
+
+.Arquivo configuracao-usuario.txt resultante da modificação
+....
+dificuldade=2
+musica=0
+volume=70
+....
+
+--
+
+. A linguagem de programação C possi dois tipos de comentários:
+  comentário de linha e comentário em bloco. Faça um programa que leia
+  um arquivo de código fonte e imprima o código sem os comentários. As
+  linhas em branco _podem_ ser suprimidas.
++
+--
+
+.Exemplo de arquivo com comentários
+[source,c]
+----
+include::{local}/codigo_com_comentarios.txt[]
+----
+
+
+.Impressão do arquivo sem os comentários
+[source,c]
+----
+include::{local}/codigo_sem_comentarios.txt[]
+----
+
+--
+
+
+. Em bancos de dados os conteúdos são armazenados em tabelas, cada
+  linha é chamada de registro da tabela. Faça um programa que salve,
+  no formato binário, a quantidade de habitantes de uma cidade, e sua
+  posição geográfica. Para realização desta utilize o seguinte registro:
++
+--
+
+.Registro Cidade
+[source,c]
+----
+include::{local}/cidade.c[]
+----
+
+Salve no mínimo 3 registros.
+
+
+NOTE: Ao realizar esta atividade você irá compreender a semelhança
+entre os conceitos de Registros em C e nos banco de dados.
+
+--
+
+. Faça um programa que adicione novos registros ao final do arquivo do
+  exercício anterior. Dica: utilize o modo `ab` para abrir o arquivo.
+
+. Faça um programa que leia o arquivo gerado na questão anterior e
+  imprima somente as cidades com a quantidade de habitantes maior do
+  que um valor que será solicitado ao usuário.
+
+// Sempre terminar o arquivo com uma nova linha.
+
