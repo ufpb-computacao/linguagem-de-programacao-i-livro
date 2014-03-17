@@ -253,6 +253,19 @@ include::{local}/abrindo_arquivo_de_texto.c[]
 include::{local}/abrindo_arquivo_binario_para_escrita.c[]
 ----
 
+[TIP]
+====
+
+A especificação dos nomes dos arquivos requer que recordemos como os
+strings são escritos e representados em C:
+
+["graphviz", scaledwidth="70%"]
+----
+include::../images/cap5/string.dot[]
+----
+
+====
+
 ==== Fechando um arquivo
 
 Independente do modo utilizado para abrir o arquivo, todo arquivo
@@ -338,7 +351,7 @@ retorna um *`int`*. Isto porque a `EOF` não é um carácter que indica o
 final final do arquivo, mas uma constante do tipo `int` que a função
 de leitura de carácter retorna ao atingir o final do arquivo.
 
-==== Escrevendo um carácter com fputc e putc
+==== Escrevendo um carácter por vez com fputc e putchar
 
 A função <<fputc>> escreve um carácter (convertido para `unsigned char`)
 na posição atual do arquivo:
@@ -377,7 +390,7 @@ include::{local}/lendo_e_escrevendo_char.c[]
 <5> Fecha os arquivos abertos.
 
 
-=== Lendo e escrevendo uma linha por vez
+=== Lendo e escrevendo uma linha por vez com fgets e fputs
 
 Nesta seção vamos apresentar como ler e escrever no arquivo uma
 linha por vez.
@@ -569,12 +582,38 @@ int fflush(FILE *stream);
 A função retorna `EOF` caso houver erro na escrita do arquivo, caso
 contrário retorna zero.
 
+=== Movendo o indicador de posição
 
-=== Especificando nomes dos arquivos
+Como foi apresentado anteriormente, o *((indicador de posição))*
+mantém o registro da posição atual do arquivo.
 
-["graphviz", scaledwidth="70%"]
+Em alguns casos podemos ter a necessidade de avançar ou retroceder o
+ponto de leitura ou escrita do arquivo, as seguintes funções servem a
+este propósito:
+
+==== Retrocede para o início do arquivo com rewind
+
+O seguinte função retrocede o indicador de posição para o início do
+arquivo:
+
 ----
-include::../images/cap5/string.dot[]
+void rewind(FILE *arquivo);
+----
+
+==== Lendo a posição atual
+
+A seguinte função retorna a posição atual no arquivo:
+
+----
+long int ftell(FILE *arquivo);
+----
+
+==== Indo para a final do arquivo
+
+Para ir para o final do arquivo invocamos:
+
+----
+fseek(arquivo, 0, SEEK_END);
 ----
 
 
