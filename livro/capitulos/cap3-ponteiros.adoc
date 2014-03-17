@@ -375,8 +375,9 @@ chamadora. Quando se deseja retornar mais de um valor, o esquema de passagem
 por valor não poder ser utilizado. Para resolver esses problemas, usa-se em 
 Cfootnote:[Outras linguagens com Lua e Ruby permitem funções retornar 
 vários valores, que podem ser atribuídos a mais de uma variável.]
-a passagem de *((parâmetros por referência))* para as funções e é necessário o 
-uso de ponteiros para esse fim. 
+a passagem de (((parâmetros por referência))) *parâmetros por
+referência* para as funções e é necessário o uso de ponteiros para
+esse fim. 
 
 
 Para melhor entender esse debate, a seguir é dado um exemplo simples de um 
@@ -394,10 +395,12 @@ include::{local}/subtracao-passagem-por-valor.c[]
 
 <1> Salvando na variável `sub` o retorno da função `calculadora`.
 
+(((passagem de parâmetros por valor)))
+
 Nesse exemplo não há um problema explícito, pois o resultado da subtração 
 é retornado pela função `calculadora` explicitamente e armazenado 
-na variável `sub`. Um dos problemas da *((passagem de parâmetros por 
-valor))* acontece quando se deseja retornar em uma função mais de um valor para 
+na variável `sub`. Um dos problemas da *passagem de parâmetros por 
+valor* acontece quando se deseja retornar em uma função mais de um valor para 
 a função `chamadora`. Vamos supor que agora se deseje retornar o valor da soma 
 e subtração de dois números inteiros. Usando a ideia da passagem de 
 parâmetros por valor uma forma incorreta de se implementar esse programa é 
@@ -423,8 +426,10 @@ computador, os valores das variáveis `sub` e `soma` calculados na função
 `calculadora` não possuem relação com as variáveis `sub` e `soma` impressos na 
 função chamadora (nesse caso a função `main`) na linha 10. 
 
-Para resolver esse problema é preciso usar a *((passagem de valores por 
-referência))*, ou seja, passar ponteiros para a função. Como já se sabe, com o 
+(((passagem de valores por referência)))
+
+Para resolver esse problema é preciso usar a *passagem de valores por 
+referência*, ou seja, passar ponteiros para a função. Como já se sabe, com o 
 uso de ((ponteiros)) é possível alterar indiretamente valores de variáveis. 
 Dessa forma, se for passado para uma função os valores dos endereços de 
 memória em que suas variáveis estão armazenadas (i.e., os ponteiros que 
@@ -453,7 +458,9 @@ include::{local}/passagem_por_referencia.c[]
 include::{local}/passagem_por_referencia.out[]
 ....
 
-O (( protótipo da função )) `calculadora` é definido com duas
+(((protótipo da função)))
+
+O *protótipo da função* `calculadora` é definido com duas
 variáveis do tipo inteiro e dois ponteiros para inteiros como
 parâmetros de entrada. Compare com o exemplo anterior (forma
 incorreta).

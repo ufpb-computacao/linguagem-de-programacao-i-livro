@@ -36,11 +36,9 @@ formas de manipulação de dados no disco rígido na linguagem C, como
 por exemplo, estratégias para salvar e recuperar dados/informações em
 arquivos.
 
-NOTE: Neste capítulo nós iremos direcioná-lo a consultar o padrão
-<<c1x>> de C para conhecer a descrição das bibliotecas e funções que
-iremos utilizar.
-
 === Os tipos de arquivos
+
+(((Arquivo, somente texto)))
 
 Para compreender a utilização de arquivos em C precisamos conhecer os
 diferentes tipos de arquivos que existem:
@@ -53,11 +51,15 @@ quebra de linha de forma diferente. Alguns aplicativos aceitam
 entradas no formato somente-texto, causando erro de execução caso
 encontre carácteres binários.
 
+(((Arquivo, binário)))
+
 Arquivos binários:: Este arquivos possuem bytes que não representam
 carácteres textuais, exemplos deles arquivos MP3, JPEG, ZIP etc.
 O sistema operacional Windows requer que as funções de escrita e
 leitura dos arquivos se comporte de forma diferente, de acordo com o
 tipo de arquivo.
+
+(((Arquivo, especial)))
 
 Arquivos especiais:: São arquivos que não armazenam conteúdo, veremos
 este tipo nas próximas seções.
@@ -78,16 +80,17 @@ representa o CD-ROM) e salva a imagem do CD-ROM no arquivo
 
 .Utilização do comando dd para criar uma imagem de cd
 ....
-$ dd if=/dev/cdrom of=~/cdrom_image.iso
+$ dd if=/dev/cdrom of=cdrom_image.iso
 ....
 
 Neste comando o parâmetro `if` (_input file_) especifica o arquivo de
 entrada, que neste caso é um arquivo especial que representa o CD-ROM
 (`/dev/cdrom`).  Enquanto que `of` (_output file_) especifica o
-arquivo de saída que será criado pela execução do comando `dd`:
-`~/cdrom_image.iso`.
+arquivo de saída que será criado: `cdrom_image.iso`.
 
 ==== Arquivos especiais que criam um Pipe em memória
+
+(((Pipe)))
 
 Um _Pipe_ é um recurso que possibilita dois processos transmitirem
 dados entre eles. Enquanto um processo _produz_ bytes o segundo
@@ -139,7 +142,13 @@ od -t d1 saida.bin
 ////
 
 === Arquivos e fluxos
+
+Nesta seção vamos apresentar as carácteristicas de fluxo de dados e
+arquivos e suas similaridades importantes para linguagem C.
+
 ==== Fluxo de dados
+
+(((Fluxo de dados)))
 
 Para facilitar o aprendizado na utilização de arquivos em C precisamos
 conhecer o conceito de fluxo de dados (_data stream_).
@@ -166,6 +175,8 @@ tamanho. Já os fluxos possuem início, mas nem todos possuem fim.
 
 ==== Arquivos
 
+(((Arquivo)))
+
 O principal propósito dos arquivos é salvar um conteúdo para ser
 acessado futuramente. Para isso os arquivos possuem nomes e são
 organizados em diretórios (ou pastas), para facilitar sua identificação. 
@@ -184,9 +195,9 @@ apenas um.
 
 ==== Arquivos em C
 
-IMPORTANT: A principal noção que precisamos ter em mente quando trabalhamos com
-arquivos em C é que *fluxos e arquivos são manipulados com uma
-interface única em C*.
+IMPORTANT: A principal noção que precisamos ter em mente quando
+trabalhamos com arquivos em C é que *fluxos e arquivos são manipulados
+com uma interface única em C*.
 
 O tipo de dado para manipular Arquivos e Streams é o `FILE`, definido
 no cabeçalho <<stdio_h>>.
@@ -204,12 +215,24 @@ para sua manipulação:
 NOTE: Perceba que a estrutura `FILE` não possui registro do nome do
 arquivo que está sendo manipulado.
 
+=== Cabeçalho stdio.h
+
+Todas as funções que serão apresentadas neste capítulo estão definidas
+no cabeçalho `stdio.h`, requerendo a inclusão deste arquivo para sua
+utilização:
+
+----
+#include <stdio.h>
+----
+
 === Abrindo e Fechando arquivos em C
 
 Toda vez que desejamos ler ou escrever num arquivo precisamos abrir o
 arquivo indicando esta intenção.
 
 ==== Abrindo um arquivo
+
+(((Arquivo, abrindo))) (((fopen)))
 
 A abertura de arquivos em C é realizada através da função <<fopen>>,
 que retorna um ponteiro `*FILE` caso a operação foi realizada com
@@ -257,7 +280,7 @@ include::{local}/abrindo_arquivo_binario_para_escrita.c[]
 ====
 
 A especificação dos nomes dos arquivos requer que recordemos como os
-strings são escritos e representados em C:
+strings são escritos e representados na linguagem C:
 
 ["graphviz", scaledwidth="70%"]
 ----
@@ -266,7 +289,21 @@ include::../images/cap5/string.dot[]
 
 ====
 
+==== Entradas e saídas padrões
+
+(((stdin))) (((stdout))) (((stderr)))
+
+
+O cabeçalho <<stdio_h>> também define os seguintes arquivos como
+entradas e saídas padrões, que dispensam a operação de abertura:
+
+`FILE* stdin`:: arquivo que representa a entrada padrão.
+`FILE* stdout`:: arquivo que representa a saída padrão.
+`FILE* stderr`:: arquivo que representa a saída de erro padrão.
+
 ==== Fechando um arquivo
+
+(((Arquivo, fechando))) (((fclose)))
 
 Independente do modo utilizado para abrir o arquivo, todo arquivo
 aberto deve ser fechado após sua utilização. Para fechar um arquivo
@@ -284,8 +321,9 @@ include::{local}/fechando_arquivo.c[]
 <1> A função para fechar o arquivo só deve ser invocada caso o arquivo
     foi aberto com sucesso.
 
-
 === Indicadores de erro e final de arquivo
+
+(((Arquivo, indicadores)))
 
 Na próximas seções serão apresentadas várias funções para ler e
 escrever em arquivos. Todas todas as funções que serão apresentadas
@@ -294,6 +332,8 @@ estrutura `FILE` que poderão ser consultado através das funções que
 serão apresentadas nesta seção.
 
 ==== Erro na leitura/escrita
+
+(((Arquivo, indicador de erro)))
 
 Toda vez que um erro ocorreu nas operações de escrita ou leitura, a
 função que estava realizando a operação registra o ocorrido num
@@ -307,6 +347,8 @@ int ferror(FILE *stream);
 Haverá ocorrido erro caso o valor retornado for *diferente de zero*.
 
 ==== Atingiu o final do arquivo
+
+(((Arquivo, indicador final de arquivo)))
 
 Quando uma função atingiu o final do arquivo ela registra o ocorrido
 no indicador de final de arquivo, que pode ser consultado através da
@@ -327,6 +369,8 @@ carácter por vez.
 
 ==== Lendo um carácter com fgetc ou getc
 
+(((fgetc)))
+
 A função <<fgetc>> ler um carácter do arquivo, converte-o para `int` e
 retorna-o. Caso não haja mais carácteres disponível, devido ao final do
 arquivo, retorna a constante `EOF` (do inglês, _End of File_, que
@@ -338,6 +382,8 @@ int fgetc(FILE *stream);
 
 Após a leitura do carácter o indicador de posição de leitura do
 arquivo é incrementado em uma posição.
+
+(((getchar)))
 
 A função <<getchar>> realiza a mesma operação, mas não requer parâmetro,
 utilizando a entrada padrão (`stdin`) como arquivo de entrada:
@@ -353,6 +399,8 @@ de leitura de carácter retorna ao atingir o final do arquivo.
 
 ==== Escrevendo um carácter por vez com fputc e putchar
 
+(((fputc)))
+
 A função <<fputc>> escreve um carácter (convertido para `unsigned char`)
 na posição atual do arquivo:
 
@@ -362,6 +410,8 @@ int fputc(int caracter, FILE *stream);
 
 A função retorna o carácter escrito ou `EOF` se houve erro durante a
 escrita.
+
+(((putchar)))
 
 A função <<putchar>> realiza a mesma função que <<fputc>> para opera
 somente na saída padrão (`stdout`):
@@ -396,6 +446,8 @@ Nesta seção vamos apresentar como ler e escrever no arquivo uma
 linha por vez.
 
 ==== Lendo uma linha com fgets
+
+(((fgets)))
 
 A função <<fgets>> ler uma linha do arquivo e salva o conteúdo lido no
 `buffer` passado como parâmetro. O final de linha é retido e retornando
@@ -435,6 +487,8 @@ da linha lida.
 
 ==== Escrevendo um string com fputs
 
+(((fputs)))
+
 A função <<fputs>> escreve um string, terminado com o carácter
 zero, no arquivo.
 
@@ -468,8 +522,12 @@ include::{local}/lendo_e_escrevendo_linha.c[]
 
 === Lendo e escrevendo dados binários
 
+As funções de leitura e escrita de dados binários diferem dos arquivos
+de textos devido a ao conteúdo que será salvo e lido.
 
 ==== Lendo uma sequencia de elementos de um arquivo com fread
+
+(((fread)))
 
 A função <<fread>> ler uma sequência de elementos de um arquivo. Na
 função são passados como parâmetro o `buffer` onde será salvo a
@@ -487,8 +545,9 @@ do que `quantidade`, caso o final do arquivo foi encontrado ou houve
 algum erro durante a leitura. Se `quantidade` ou `tamanho` for zero,
 então `buffer` permanece inalterado e a função retorna zero.
 
-
 ==== Escrevendo uma sequencia de elementos de um arquivo com fwrite
+
+(((fwrite)))
 
 A função <<fwrite>> escreve uma sequência de elementos num arquivo.
 Na função são passados como parâmetro o `buffer` que é um ponteiro
@@ -547,6 +606,8 @@ funções provavelmente lhe são familiares.
 
 ==== Ler dados formatos
 
+(((fscanf)))(((scanf)))
+
 Para ler dados formatados você pode utilizar a função <<fscanf>>, que é
 similar a função <<scanf>>, a única diferença é que `scanf` trabalha
 apenas com a entrada padrão, enquanto `sscanf` especifica o arquivo de
@@ -559,6 +620,8 @@ int fscanf(FILE * restrict arquivo,
 
 ==== Escrever dados formatados
 
+(((fprintf)))(((printf)))
+
 A escrita de dados formatos é feita através da função <<fprintf>>, que
 é similar a <<printf>> (que trabalha somente na saída padrão), a única
 diferença é que `fprintf` permite especificar o arquivo de saída:
@@ -569,6 +632,8 @@ int fprintf(FILE * restrict arquivo,
 ----
 
 === Descarregando o buffer com fflush
+
+(((fflush)))
 
 Alguns arquivos são abertos com buffers para escrita, isto implica que
 as operações de escritas no arquivo não são persistidas no arquivo até
@@ -593,6 +658,8 @@ este propósito:
 
 ==== Retrocede para o início do arquivo com rewind
 
+(((rewind)))
+
 O seguinte função retrocede o indicador de posição para o início do
 arquivo:
 
@@ -602,6 +669,8 @@ void rewind(FILE *arquivo);
 
 ==== Lendo a posição atual
 
+(((ftell)))
+
 A seguinte função retorna a posição atual no arquivo:
 
 ----
@@ -610,13 +679,17 @@ long int ftell(FILE *arquivo);
 
 ==== Indo para a final do arquivo
 
+(((fseek)))
+
 Para ir para o final do arquivo invocamos:
 
 ----
 fseek(arquivo, 0, SEEK_END);
 ----
 
+=== Recapitulando
 
+Neste capítulo foi apresentado 
 
 ////
 Terminando arquivo com linha em branco
