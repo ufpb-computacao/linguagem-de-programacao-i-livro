@@ -194,6 +194,18 @@ TODO
 ==== fwrite()
 TODO
 
+[id="fscanf", reftext="fscanf()"]
+==== fscanf()
+TODO
+
+[id="scanf", reftext="scanf()"]
+==== scanf()
+Ver <<fscanf>>.
+
+[id="fflush", reftext="fflush()"]
+==== fflush()
+TODO.
+
 [id="fseek", reftext="fseek()"]
 ==== fseek()
 TODO.

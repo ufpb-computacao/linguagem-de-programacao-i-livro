@@ -138,7 +138,8 @@ od -t d1 saida.bin
 
 ////
 
-=== Fluxo de dados
+=== Arquivos e fluxos
+==== Fluxo de dados
 
 Para facilitar o aprendizado na utilização de arquivos em C precisamos
 conhecer o conceito de fluxo de dados (_data stream_).
@@ -163,7 +164,7 @@ sequencial, realizando o processamento dos dados logo após a leitura.
 Como os arquivos possuem início e fim é possível determinar o seu
 tamanho. Já os fluxos possuem início, mas nem todos possuem fim.
 
-=== Arquivos
+==== Arquivos
 
 O principal propósito dos arquivos é salvar um conteúdo para ser
 acessado futuramente. Para isso os arquivos possuem nomes e são
@@ -181,7 +182,7 @@ Os arquivos somente texto também são diferentes, enquanto no Windows o
 final de linha é codificado com dois carácteres, o Linux utiliza
 apenas um.
 
-=== Arquivos em C
+==== Arquivos em C
 
 IMPORTANT: A principal noção que precisamos ter em mente quando trabalhamos com
 arquivos em C é que *fluxos e arquivos são manipulados com uma
@@ -526,45 +527,55 @@ Bido 25
 Chico Bento 0
 ....
 
+=== Escrevendo e lendo dados formatados
+
+Finalizando as seções de escrita e leitura de dados, vamos conhecer
+funções provavelmente lhe são familiares.
+
+==== Ler dados formatos
+
+Para ler dados formatados você pode utilizar a função <<fscanf>>, que é
+similar a função <<scanf>>, a única diferença é que `scanf` trabalha
+apenas com a entrada padrão, enquanto `sscanf` especifica o arquivo de
+entrada:
+
+----
+int fscanf(FILE * restrict arquivo, 
+    const char * restrict formato, ...);
+----
+
+==== Escrever dados formatados
+
+A escrita de dados formatos é feita através da função <<fprintf>>, que
+é similar a <<printf>> (que trabalha somente na saída padrão), a única
+diferença é que `fprintf` permite especificar o arquivo de saída:
+
+----
+int fprintf(FILE * restrict arquivo, 
+    const char * restrict formato, ...);
+----
+
+=== Descarregando o buffer com fflush
+
+Alguns arquivos são abertos com buffers para escrita, isto implica que
+as operações de escritas no arquivo não são persistidas no arquivo até
+que o buffer esteja cheio. Para determinar que o conteúdo do buffer
+seja escrito no arquivo utilizamos a função <<fflush>>:
+
+----
+int fflush(FILE *stream);
+----
+
+A função retorna `EOF` caso houver erro na escrita do arquivo, caso
+contrário retorna zero.
+
+
 === Especificando nomes dos arquivos
 
 ["graphviz", scaledwidth="70%"]
 ----
 include::../images/cap5/string.dot[]
 ----
-
-
-=== Funções básicas para abrir e fechar arquivos na linguagem C
-TODO.
-
-
-=== Arquivos em modo texto
-TODO.
-==== Funções para leitura de dados em arquivos
-TODO.
-
-
-==== Funções para escrita de dados em arquivos
-TODO.
-
-
-==== Funções para manipulação de dados em arquivos texto
-TODO.
-
-
-=== Arquivos em modo binário
-TODO.
-==== Funções para leitura de dados em arquivos binários
-TODO.
-
-==== Funções para escrita de dados em arquivos binários
-TODO.
-
-==== Funções para manipulação de dados em arquivos binários
-TODO.
-
-=== Comparação entre arquivo em modo texto e binário
-TODO.
 
 
 
