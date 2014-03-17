@@ -54,6 +54,14 @@ http://www.cplusplus.com/reference/cassert/assert/
 [id="stdlib_h",reftext="stdlib.h"]
 === stdlib.h
 
+[id="exit",reftext="exit()"]
+==== exit()
+
+  void exit( int codigoDeErro )
+
+Termina o programa indicando o código de erro. Ver os códigos de erro
+<<EXIT_SUCCESS>> e <<EXIT_FAILURE>>.
+
 
 [id="EXIT_SUCCESS",reftext="EXIT_SUCCESS"]
 ==== EXIT_SUCCESS
@@ -63,14 +71,6 @@ Constante para indicar que não houve erro.
 ==== EXIT_FAILURE
 Constante para indicar que houve erro na execução do arquivo.
 
-
-[id="exit",reftext="exit()"]
-==== exit()
-
-  void exit( int codigoDeErro )
-
-Termina o programa indicando o código de erro. Ver os códigos de erro
-<<EXIT_SUCCESS>> e <<EXIT_FAILURE>>.
 
 ==== Gerência de memória
 
@@ -90,13 +90,26 @@ void *calloc(size_t quantidade, size_t tamanho);
 
 [id="free", reftext="free()"]
 ===== free()
-TODO
+
+A função `free` causa a desalocação do ponteiro. Se `ponteiro` for
+`NULL` nada acontece. Se `ponteiro` não for um ponteiro válido ou já
+foi desalocado anteriormente, o comportamento não é definido.
+
+.Sintaxe
+----
+void free(void *ponteiro);
+----
+
+
 
 [id="realloc", reftext="realloc()"]
 ===== realloc()
 
+Desaloca `ponteiro` e aloca um novo espaço com o tamanha especificado
+por `tamanho`.
+
 ----
-void *realloc (void *ptr, tamanho);
+void *realloc(void *ponteiro, size_t tamanho);
 ----
 
 
@@ -108,29 +121,67 @@ TODO: funçõe de string.
 
 [id="strlen", reftext="strlen()"]
 ====  strlen()
+
+Computa o tamanho de um string.
+
+----
+size_t strlen(const char *string);
+----
+
 Retorna tamanho do string, até encontrar o carácter `\0`.
 
 [id="strcmp", reftext="strcmp()"]
 ==== strcmp()
+
 Compara dois strings.
+
+----
+int strcmp(const char *primeiroString, const char *segundoString);
+----
+
+Retorna um valor maior do que zero se `primeiroString >
+segundoString`, zero se `primeiroString==segundoString` e um valor
+negativo de `primeiroString<segundoString`.
+
 
 [id="strncmp", reftext="strncmp()"]
 ==== strncmp()
-Compara dois strings até uma posição específica.
 
+Compara dois strings até `n` posições.
+
+----
+int strncmp(const char *primeiroString, 
+    const char *segundoString, size_t n);
+----
 
 [id="strcpy", reftext="strcpy()"]
 ==== strcpy()
-TODO.
+
+Copia o conteúdo de um string para outro.
+
+----
+char *strcpy(char * restrict destino, const char * restrict origem);
+----
+
+A função retorna `destino`.
+
 
 [id="strncpy", reftext="strncpy()"]
 ==== strncpy()
-TODO.
+
+Copia o conteúdo de `origem` para `destino` até no máximo `n`
+carácteres.
+
+----
+char *strcpy(char * restrict destino, const char * restrict origem,
+    size_t n);
+----
+
+A função retorna `origem`.
+
 
 [id="stdbool_h", reftext="stdbool.h"]
 === stdbool.h
-
-TODO: atualizar.
 
 Inclusão da biblioteca <<stdbool_h>>, que define o tipo `bool`. Este
 tipo pode ser utilizado como retorno de expressões lógicas. Além disso
@@ -158,24 +209,37 @@ nomeDoArquvo:: nome do arquivo que será aberto
 
 mode::
 Modo de abertura do arquivo.
-r::: abre arquivo de texto para leitura
-w::: abre arquivo de texto para escrita
-wx::: cria arquivo de texto para escrita
-a::: adiciona ao final; o indicador de posição de arquivo é
+`r`::: abre arquivo de texto para leitura
+`w`::: abre arquivo de texto para escrita
+`wx`::: cria arquivo de texto para escrita
+`a`::: adiciona ao final; o indicador de posição de arquivo é
 posicionado no final do arquivo
-rb::: abre arquivo binário para leitura
-wb::: abre arquivo binário para escrita
-ab::: abre arquivo binário para escrita, no final do arquivo
-
-
+`rb`::: abre arquivo binário para leitura
+`wb`::: abre arquivo binário para escrita
+`ab`::: abre arquivo binário para escrita, no final do arquivo
 
 [id="fclose", reftext="fclose()"]
 ==== fclose()
-TODO
+
+Uma chamada realizada com sucesso invoca o <<fflush>> e fecha o arquivo.
+
+----
+int fclose(FILE *arquivo);
+----
+
+A função retorna zero caso o string foi fechado com sucesso, ou `EOF`
+caso houve erro no fechamento.
 
 [id="fgetc", reftext="fgetc()"]
 ==== fgetc()
-TODO
+
+Ler um carácter do arquivo.
+
+----
+int fgetc(FILE *arquivo);
+----
+
+Caso em caso de erro ou não houver mais carácteres, retorna `EOF`.
 
 [id="getchar", reftext="getchar()"]
 ==== getchar()
