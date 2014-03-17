@@ -689,7 +689,24 @@ fseek(arquivo, 0, SEEK_END);
 
 === Recapitulando
 
-Neste capítulo foi apresentado 
+Neste capítulo foi apresentado os tipos de arquivos que existem, as
+similaridades entre fluxos e arquivos e como a linguagem abstrai os
+arquivos como fluxos. Em seguida aprendemos como abrir os arquivos
+antes de realizar operações neles, e como fechar para finalizar a
+operação. As operações para ler e escrever carácteres no arquivo
+possuiam um exemplo demonstrando sua utilização. Aprendemos que os
+arquivos possuem indicadores de erro, final de arquivo e de posição
+que são alterados durante as execuções das funções e leitura e
+escrita, e como consultar o estado destes indicadores. Vimos que
+existem funções próprias para trabalhar com arquivos de texto, que
+processam o arquivo por linhas e como utilizá-las. As funções de
+escrita e leitura de arquivos binários necessitam do tamanho do tipo
+de dado, a quantidade de dados que seriam processados e um buffer para
+realização das operações. Por último, vimos como alterar e consultar o
+indicador de posição do arquivo.
+
+
+
 
 ////
 Terminando arquivo com linha em branco
