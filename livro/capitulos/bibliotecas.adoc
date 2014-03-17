@@ -80,6 +80,9 @@ TODO
 A função `calloc`, além de alocar espaço na memória, inicializa todo o
 espaço alocado com `0` (zeros). 
 
+----
+void *calloc(size_t quantidade, size_t tamanho);
+----
 
 [[free]]
 ===== free
@@ -102,6 +105,15 @@ Compara dois strings.
 [id="strncmp", reftext="strncmp()"]
 ==== strncmp()
 Compara dois strings até uma posição específica.
+
+
+[id="strcpy", reftext="strcpy()"]
+==== strcpy
+
+----
+char *strncpy(char * restrict destino, 
+    const char * restrict origem, size_t quantidade);
+----
 
 [id="stdbool_h", reftext="stdbool.h"]
 === stdbool.h
@@ -176,6 +188,10 @@ Ver <<fgets>>.
 
 [id="fread", reftext="fread()"]
 ==== fread()
+TODO
+
+[id="fwrite", reftext="fwrite()"]
+==== fwrite()
 TODO
 
 [id="fseek", reftext="fseek()"]

@@ -419,13 +419,13 @@ da linha lida.
 ====
 
 
-==== Escrevendo uma linha com fputs
+==== Escrevendo um string com fputs
 
-A função <<fputs>> escreve um buffer (string terminado com o carácter
-zero) no arquivo.
+A função <<fputs>> escreve um string, terminado com o carácter
+zero, no arquivo.
 
 ----
-int fputs(const char * restrict buffer, FILE * restrict arquivo);
+int fputs(const char * restrict string, FILE * restrict arquivo);
 ----
 
 A função retorna `EOF` em caso de erro.
@@ -449,9 +449,84 @@ leitura e escrita com linha:
 include::{local}/lendo_e_escrevendo_linha.c[]
 ----
 <1> Ler uma linha da entrada.
-<2> Escreve linha na saída.
+<2> Escreve o string lido na saída.
 
 
+=== Lendo e escrevendo dados binários
+
+
+==== Lendo uma sequencia de elementos de um arquivo com fread
+
+A função <<fread>> ler uma sequência de elementos de um arquivo. Na
+função são passados como parâmetro o `buffer` onde será salvo a
+sequência lida, o `tamanho` do tipo de dado que será lido, a
+`quantidade` de elementos que serão lidos e o `arquivo` de onde será
+lido os dados.
+
+----
+size_t fread(void * restrict buffer, size_t tamanho, 
+    size_t quantidade, FILE * restrict arquivo);
+----
+
+A função retorna a quantidade de elementos lidos, que pode ser menor
+do que `quantidade`, caso o final do arquivo foi encontrado ou houve
+algum erro durante a leitura. Se `quantidade` ou `tamanho` for zero,
+então `buffer` permanece inalterado e a função retorna zero.
+
+
+==== Escrevendo uma sequencia de elementos de um arquivo com fwrite
+
+A função <<fwrite>> escreve uma sequência de elementos num arquivo.
+Na função são passados como parâmetro o `buffer` que é um ponteiro
+para o início da sequência de dados que se deseja escrever, o
+`tamanho` do tipo de elemento, a `quantidade` de elementos que se
+deseja escreve e o `arquivo` onde o conteúdo será escrito.
+
+----
+size_t fwrite(const void * restrict buffer, size_t tamanho, 
+    size_t quantidade, FILE * restrict arquivo);
+----
+
+A função retorna o número de elementos que foram escritos, que pode
+ser menor do que `quantidade` somente se houve erro durante a escrita.
+Caso `quantidade` ou `tamanho` seja zero então o arquivo permanece
+inalterado e a função retorna zero.
+
+==== Exemplo completo de leitura e escrita
+
+O seguinte código é um exemplo completo utilizando as funções de
+leitura e escrita apresentadas nesta seção.
+
+Alguns jogos mantém uma lista de recordistas, que salva o nome do
+jogador e pontuação obtida. Neste código criamos uma lista contendo a
+pontuação inicial de três jogadores fictícios e salvamos num arquivo.
+Em seguida, demonstramos a leitura do arquivo e finalmente imprimimos
+os recordes lidos.
+
+.Código fonte
+{online}/escrevendo_e_lendo_binario.[{local}/escrevendo_e_lendo_binario.c]
+
+[source, c]
+.Escrevendo e lendo elementos em binário
+----
+include::{local}/escrevendo_e_lendo_binario.c[]
+----
+<1> Declaração do tipo `Jogador`, com dois dados: seu nome e sua
+    pontuação.
+<2> Inicialização de um array de recordistas iniciais que serão salvos
+    mais adiante.
+<3> Salva os três recordistas no arquivo.
+<4> Ler os três recordistas do arquivo e salva no buffer `jogadores`.
+<5> Imprime os recordistas.
+
+.Resultado da execução da aplicação
+....
+Anjinho 50
+Bido 25
+Chico Bento 0
+....
+
+=== Especificando nomes dos arquivos
 
 ["graphviz", scaledwidth="70%"]
 ----
