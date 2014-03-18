@@ -40,7 +40,10 @@ http://www.cplusplus.com/reference/cassert/assert/.
 [id="assert", reftext="assert()"]
 ==== assert()
 
- void assert ( int expressao )
+[source,c]
+----
+void assert ( int expressao )
+----
 
 Esta função costuma ser utilizado
 
@@ -57,7 +60,10 @@ http://www.cplusplus.com/reference/cassert/assert/
 [id="exit",reftext="exit()"]
 ==== exit()
 
-  void exit( int codigoDeErro )
+[source,c]
+----
+void exit( int codigoDeErro )
+----
 
 Termina o programa indicando o código de erro. Ver os códigos de erro
 <<EXIT_SUCCESS>> e <<EXIT_FAILURE>>.
@@ -76,43 +82,63 @@ Constante para indicar que houve erro na execução do arquivo.
 
 [id="malloc", reftext="malloc()"]
 ===== malloc()
-TODO
+
+[source,c]
+----
+#include <stdlib.h>
+void *malloc(size_t tamanho);
+----
+
+////
+
+The malloc function allocates space for an object whose size is specified by size and
+whose value is indeterminate.
+
+The malloc function returns either a null pointer or a pointer to the allocated space.
+////
+
+Aloca um espaço de `tamanho` bytes, o conteúdo do espaço alocado é
+indefinido.
+
+Retorna `NULL` se houve erro na alocação ou um ponteiro para o espaço
+alocado.
+
 
 [id="calloc", reftext="calloc()"]
 ===== calloc()
 
-A função `calloc`, além de alocar espaço na memória, inicializa todo o
-espaço alocado com `0` (zeros). 
-
+[source,c]
 ----
 void *calloc(size_t quantidade, size_t tamanho);
 ----
 
+A função `calloc`, além de alocar espaço na memória, inicializa todo o
+espaço alocado com `0` (zeros). 
+
 [id="free", reftext="free()"]
 ===== free()
+
+[source,c]
+----
+void free(void *ponteiro);
+----
 
 A função `free` causa a desalocação do ponteiro. Se `ponteiro` for
 `NULL` nada acontece. Se `ponteiro` não for um ponteiro válido ou já
 foi desalocado anteriormente, o comportamento não é definido.
-
-.Sintaxe
-----
-void free(void *ponteiro);
-----
 
 
 
 [id="realloc", reftext="realloc()"]
 ===== realloc()
 
-Desaloca `ponteiro` e aloca um novo espaço com o tamanha especificado
-por `tamanho`.
-
+[source,c]
 ----
 void *realloc(void *ponteiro, size_t tamanho);
 ----
 
-
+Desaloca `ponteiro` e aloca um novo espaço com o tamanha especificado
+por `tamanho`.
 
 [id="string_h", reftext="string.h"]
 === string.h
@@ -122,22 +148,24 @@ TODO: funçõe de string.
 [id="strlen", reftext="strlen()"]
 ====  strlen()
 
-Computa o tamanho de um string.
-
+[source,c]
 ----
 size_t strlen(const char *string);
 ----
+
+Computa o tamanho de um string.
 
 Retorna tamanho do string, até encontrar o carácter `\0`.
 
 [id="strcmp", reftext="strcmp()"]
 ==== strcmp()
 
-Compara dois strings.
-
+[source,c]
 ----
 int strcmp(const char *primeiroString, const char *segundoString);
 ----
+
+Compara dois strings.
 
 Retorna um valor maior do que zero se `primeiroString >
 segundoString`, zero se `primeiroString==segundoString` e um valor
@@ -147,21 +175,23 @@ negativo de `primeiroString<segundoString`.
 [id="strncmp", reftext="strncmp()"]
 ==== strncmp()
 
-Compara dois strings até `n` posições.
-
+[source,c]
 ----
 int strncmp(const char *primeiroString, 
     const char *segundoString, size_t n);
 ----
 
+Compara dois strings até `n` posições.
+
 [id="strcpy", reftext="strcpy()"]
 ==== strcpy()
 
-Copia o conteúdo de um string para outro.
-
+[source,c]
 ----
 char *strcpy(char * restrict destino, const char * restrict origem);
 ----
+
+Copia o conteúdo de um string para outro.
 
 A função retorna `destino`.
 
@@ -169,13 +199,14 @@ A função retorna `destino`.
 [id="strncpy", reftext="strncpy()"]
 ==== strncpy()
 
-Copia o conteúdo de `origem` para `destino` até no máximo `n`
-carácteres.
-
+[source,c]
 ----
 char *strcpy(char * restrict destino, const char * restrict origem,
     size_t n);
 ----
+
+Copia o conteúdo de `origem` para `destino` até no máximo `n`
+carácteres.
 
 A função retorna `origem`.
 
@@ -191,19 +222,21 @@ valor `0`.
 [id="stdio_h", reftext="stdio.h"]
 === stdio.h
 
-NOTE: A documentação sobre as funções de leitura de arquivo estão contidas
-na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
+NOTE: A documentação sobre as funções de leitura de arquivo estão 
+contidas na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
 
 [id="fopen", reftext="fopen()"]
 ==== fopen()
-A função `fopen` retorna um ponteiro para `FILE` se conseguir abrir o
-arquivo, caso contrário retorna `NULL`.
 
+[source,c]
 ----
 #include <stdio.h>
 FILE *fopen(const char * restrict nomeDoArquivo,
     const char * restrict modo);
 ----
+
+A função `fopen` retorna um ponteiro para `FILE` se conseguir abrir o
+arquivo, caso contrário retorna `NULL`.
 
 nomeDoArquvo:: nome do arquivo que será aberto
 
@@ -221,11 +254,12 @@ posicionado no final do arquivo
 [id="fclose", reftext="fclose()"]
 ==== fclose()
 
-Uma chamada realizada com sucesso invoca o <<fflush>> e fecha o arquivo.
-
+[source,c]
 ----
 int fclose(FILE *arquivo);
 ----
+
+Uma chamada realizada com sucesso invoca o <<fflush>> e fecha o arquivo.
 
 A função retorna zero caso o string foi fechado com sucesso, ou `EOF`
 caso houve erro no fechamento.
@@ -233,62 +267,263 @@ caso houve erro no fechamento.
 [id="fgetc", reftext="fgetc()"]
 ==== fgetc()
 
-Ler um carácter do arquivo.
-
+[source,c]
 ----
 int fgetc(FILE *arquivo);
 ----
+
+Ler um carácter do arquivo.
 
 Caso em caso de erro ou não houver mais carácteres, retorna `EOF`.
 
 [id="getchar", reftext="getchar()"]
 ==== getchar()
+
+[source,c]
+----
+#include <stdio.h>
+int getchar(void);
+----
+
+Ler um carácter da entrada padrão, equivale a `fgetc(stdin)`:
+
 Ver <<fgetc>>.
 
 [id="fputc", reftext="fputc()"]
 ==== fputc()
-TODO
+
+[source,c]
+----
+#include <stdio.h>
+int fputc(int caracter, FILE *arquivo);
+----
+
+Escreve um carácter no arquivo.
+
+Retorna o carácter escrito. Se houve erro, o indicador de erro é
+setado e retorna `EOF`.
+
+
 
 [id="putchar", reftext="putchar()"]
 ==== putchar()
-Ver <<fputc>>.
+
+[source,c]
+----
+#include <stdio.h>
+int putchar(int caracter);
+----
+
+Escreve um carácter na saída padrão.
+
+Retorna o carácter escrito. Se houve erro, o indicador de erro é
+setado e retorna `EOF`.
+
+- Ver <<fputc>>.
 
 [id="fgets", reftext="fgets()"]
 ==== fgets
-TODO.
+
+[source,c]
+----
+#include <stdio.h>
+char *fgets(char * restrict string, int n, FILE * restrict arquivo);
+----
+
+Ler um string de `arquivo` e salva o conteúdo em `string`.
+
+Retorna `string` se realizado com sucesso. Se o final do arquivo foi
+encontrado e não leu nenhum carácter então `string` não é alterado e
+`NULL` é retornado. Se ocorreu algum erro o valor de `string` é
+indeterminado e retorna `NULL`.
+
+////
+The fgets function returns s if successful. If end-of-file is encountered and no
+characters have been read into the array, the contents of the array remain unchanged and a
+null pointer is returned. If a read error occurs during the operation, the array contents are
+indeterminate and a null pointer is returned.
+////
 
 [id="fputs", reftext="fputs()"]
 ==== fputs
-TODO.
+
+[source,c]
+----
+#include <stdio.h>
+int fputs(const char * restrict string, FILE * restrict arquivo);
+----
+
+////
+The fputs function writes the string pointed to by s to the stream pointed to by
+stream. The terminating null character is not written.
+
+The fputs function returns EOF if a write error occurs; otherwise it returns a
+nonnegative value.
+////
+
+Escreve `string` na posição atual de `arquivo`. O carácter nulo de
+término não é escrito.
+
+Retorna `EOF` se houve erro na escrita; caso contrário retorna um
+valor maior ou igual a zero.
+
 Ver <<fgets>>.
 
 [id="fread", reftext="fread()"]
 ==== fread()
-TODO
+
+[source,c]
+----
+#include <stdio.h>
+size_t fread(void * restrict ponteiro, size_t tamanho, size_t
+    quantidade, FILE * restrict arquivo);
+----
+
+////
+The fread function reads, into the array pointed to by ptr, up to nmemb elements
+whose size is specified by size, from the stream pointed to by stream. For each
+object, size calls are made to the fgetc function and the results stored, in the order
+read, in an array of unsigned char exactly overlaying the object. The file position
+indicator for the stream (if defined) is advanced by the number of characters successfully
+read. If an error occurs, the resulting value of the file position indicator for the stream is
+indeterminate. If a partial element is read, its value is indeterminate.
+
+The fread function returns the number of elements successfully read, which may be
+less than nmemb if a read error or end-of-file is encountered. If size or nmemb is zero,
+fread returns zero and the contents of the array and the state of the stream remain
+unchanged.
+////
+
+A função ler para o buffer `ponteiro` até quantidade `quantidade` de elementos,
+de tamanho `tamanho` do arquivo `arquivo`. O indicador de posição é
+avançado de acordo com a quantidade de carácteres lidos.
+
+A função retorna o número de elementos lidos, que pode ser menor do
+que `quantidade` caso encontrou o final do arquivo ou houve erro. Se
+`quantidade` ou `tamanho` for zero, o conteúdo de `ponteiro` não é
+alterado.
 
 [id="fwrite", reftext="fwrite()"]
 ==== fwrite()
-TODO
+
+[source,c]
+----
+#include <stdio.h>
+size_t fwrite(const void * restrict ponteiro, size_t tamanho, size_t
+    quantidade, FILE * restrict arquivo);
+----
+
+////
+The fwrite function writes, from the array pointed to by ptr, up to nmemb elements
+whose size is specified by size, to the stream pointed to by stream. For each object,
+size calls are made to the fputc function, taking the values (in order) from an array of
+unsigned char exactly overlaying the object. The file position indicator for the
+stream (if defined) is advanced by the number of characters successfully written. If an
+error occurs, the resulting value of the file position indicator for the stream is
+indeterminate.
+
+The fwrite function returns the number of elements successfully written, which will be
+less than nmemb only if a write error is encountered. If size or nmemb is zero,
+fwrite returns zero and the state of the stream remains unchanged.
+////
+
+A função escreve na posição apontada por `ponteiro`, até a quantidade
+`quantidade` de elementos do tamanho `tamanho` no arquivo `arquivo`.
+O indicador de posição é incrementado de acordo com a quantidade de
+bytes escritos.
+
+A função retorna o número de elementos escritos, que pode ser menor do
+que `quantidade` caso houve erro. Se `quantidade` ou `tamanho` for
+zero, nada é escrito no arquivo.
+
+[id="fflush", reftext="fflush()"]
+==== fflush()
+
+[source,c]
+----
+#include <stdio.h>
+int fflush(FILE *arquivo);
+----
+
+////
+If stream points to an output stream or an update stream in which the
+most recent operation was not input, the fflush function causes any
+unwritten data for that stream to be delivered to the host environment
+to be written to the file; otherwise, the behavior is undefined.
+
+If stream is a null pointer, the fflush function performs this
+flushing action on all streams for which the behavior is defined
+above.
+
+The fflush function sets the error indicator for the stream and
+returns EOF if a write error occurs, otherwise it returns zero.
+////
+
+Causa a escrita de qualquer dado que ainda não foi escrito no arquivo.
+
+Retorna `EOF` se houve erro na escrita ou zero se a escrita foi
+realizada com sucesso.
+
+[id="fseek", reftext="fseek()"]
+==== fseek()
+
+Move o indicador de posição do arquivo.
+
+[source,c]
+----
+#include <stdio.h>
+int fseek(FILE *arquivo, long int deslocamento, int whence);
+----
+
+Ver http://www.cplusplus.com/reference/cstdio/fseek/.
+
+[id="ftell", reftext="ftell()"]
+==== ftell()
+
+Retorna a posição atual no arquivo.
+
+[source,c]
+----
+#include <stdio.h>
+long int ftell(FILE *arquivo);
+----
+
+Ver http://www.cplusplus.com/reference/cstdio/ftell/, <<fseek>>.
+
+[[frewind]]
+[id="frewind", reftext="frewind()"]
+==== frewind
+
+[source,c]
+----
+#include <stdio.h>
+void rewind(FILE *stream);
+----
+
+Retroce o indicador de posição para o início do arquivo. É equivalente
+a:
+
+[source,c]
+----
+(void)fseek(arquivo, 0L, SEEK_SET)
+----
 
 [id="fscanf", reftext="fscanf()"]
 ==== fscanf()
+
+[source,c]
+----
+#include <stdio.h>
+int fscanf(FILE * restrict arquivo, 
+  const char * restrict formato, ...);
+----
+
 TODO
 
 [id="scanf", reftext="scanf()"]
 ==== scanf()
 Ver <<fscanf>>.
 
-[id="fflush", reftext="fflush()"]
-==== fflush()
-TODO.
-
-[id="fseek", reftext="fseek()"]
-==== fseek()
-TODO.
-
-[id="ftell", reftext="ftell()"]
-==== ftell()
-TODO.
 
 [id="printf", reftext="printf()"]
 ==== printf()
@@ -296,18 +531,36 @@ Ver <<fprintf>>.
 
 [id="fprintf", reftext="fprintf()"]
 ==== fprintf
-TODO.
 
-[[frewind]]
-[id="frewind", reftext="frewind()"]
-==== frewind
+[source,c]
+----
+#include <stdio.h>
+int fprintf(FILE * restrict arquivo, 
+    const char * restrict formato, ...);
+----
+
 TODO.
 
 
 [id="feof", reftext="feof()"]
 ==== feof
-TODO.
 
+[source,c]
+----
+#include <stdio.h>
+int feof(FILE *arquivo);
+----
+
+////
+The feof function tests the end-of-file indicator for the stream pointed to by stream.
+
+The feof function returns nonzero if and only if the end-of-file indicator is set for
+stream.
+////
+
+Testa se o indicador do final de arquivo de `arquivo`.
+
+Retorna um valor não zero se o indicador de final de arquivo foi setado em `arquivo`.
 
 ////
 Terminando arquivo com linha em branco
