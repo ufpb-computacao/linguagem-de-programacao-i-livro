@@ -1,14 +1,14 @@
 #include <stdio.h>
 
 typedef struct  {
-	char nome[256];
-	long long cpf;
+  char nome[256];
+  long long cpf;
 } Cliente;
 
 typedef struct {
-	long    numero_da_conta;
-	long    cpf_do_cliente;
-	double  saldo;
+  long    numero_da_conta;
+  long long cpf_do_cliente;
+  double  saldo;
 } Conta;
 
 #define QUANTIDADE_DE_CLIENTES 3
