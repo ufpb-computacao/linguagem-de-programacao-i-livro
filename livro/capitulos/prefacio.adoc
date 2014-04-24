@@ -2,16 +2,37 @@
 [preface]
 == Prefácio
 
-TODO.
+Este livro é destinado a alunos de cursos como Ciência da Computação, Sistemas de Informação, Engenharia da Computação e, sobretudo, Licenciatura em Computação. Ele tem o objetivo de continuar o estudo da Linguagem C, iniciado em disciplina anterior de Introdução a Programação.
+
+
+A primeira parte deste livro contém:
+
+_Capítulo 1_:: Será realizada uma revisão dos conteúdos introdutórios da Linguaguem C, que são pré-requisitos para os demais capítulos do livro.
+_Capítulo 2_:: Será apresentado o conceito de Registro e como utilizá-lo na Linguagem C.
+_Capítulo 3_:: Veremos a utilização de Ponteiros e os tipos de passagem de parâmetros.
+_Capítulo 4_:: Aprenderemos o que é Alocação Dinâmica de Memória e como realizá-la.
+_Capítulo 5_:: Conheceremos os diferentes tipos de Arquivos e aprenderemos como manipulá-los em C.
+
+A segunda parte deste livro contém:
+
+_Capítulo 6_:: Apresentação de todas as etapas do desenvolvimento do projeto _lingua do i_, demonstrando a utilização de arquivos e testes para guiar o desenvolvimento.
+Apêndice A:: Demonstração da depuração de uma aplicação com o `gdb`.
+Apêndice B:: Experimento com `mkfifo` para demonstrar a existência de arquivos especias.
+Apêndice C:: Documentação das bibliotecas em C, utilizadas no livro.
+Apêndice D:: Contém respostas de algumas atividades.
+
+
+
 
 === Público alvo
 
-O público alvo desse livro são os alunos de Licenciatura em Computação, na
-modalidade à distância footnote::[Embora ele tenha sido feito para atender aos alunos
-da Universidade Federal da Paraíba, o seu uso não se restringe a esta 
-universidade, podendo ser adotado por outras universidades do sistema UAB.].
-Ele foi concebido para ser utilizado numa disciplina de 'Linguagem de Programação I',
-no segundo semestre do curso.
+O público alvo desse livro são os alunos de Licenciatura em
+Computação, na modalidade à distância footnote::[Embora ele tenha sido
+feito para atender aos alunos da Universidade Federal da Paraíba, o
+seu uso não se restringe a esta universidade, podendo ser adotado por
+outras universidades do sistema UAB.].  Ele foi concebido para ser
+utilizado numa disciplina de 'Linguagem de Programação I', no segundo
+semestre do curso.
 
 [[como_estudar]]
 === Como você deve estudar cada capítulo
@@ -22,7 +43,8 @@ no segundo semestre do curso.
 * Verifique se você atingiu os objetivos do capítulo
 
 .Na sala de aula do curso
-* Tire dúvidas e discuta sobre as atividades do livro com outros integrantes do curso
+* Tire dúvidas e discuta sobre as atividades do livro com outros
+  integrantes do curso
 * Leia materiais complementares eventualmente disponibilizados
 * Realize as atividades propostas pelo professor da disciplina
 
@@ -80,10 +102,11 @@ endif::livro-html[]
 
 [NOTE]
 ==================
-Na *versão impressa* irá aparecer uma imagem quadriculada. Isto é o 
-qrcode (http://pt.wikipedia.org/wiki/C%C3%B3digo_QR) contendo o link do vídeo. 
-Caso você tenha um celular com acesso a internet poderá acionar um programa 
-de leitura de qrcode para acessar o vídeo.
+Na *versão impressa* irá aparecer uma imagem quadriculada. Isto é o
+qrcode (http://pt.wikipedia.org/wiki/C%C3%B3digo_QR) contendo o link
+do vídeo. Caso você tenha um celular com acesso a internet poderá
+acionar um programafootnote:[Busque na loja virtual do seu celular por
+``qrcode''.] de leitura de qrcode para acessar o vídeo.
 
 Na *versão digital* você poderá assistir o vídeo clicando diretamente
 sobre o link ou acionando o play (na versão em HTML).
@@ -110,9 +133,10 @@ Os códigos ou comandos são apresentados com a seguinte formação:
 
  cc -S helloworld.c
 
-No exemplo a seguir, temos outra apresentação de código fonte. Desta vez de um 
-arquivo `helloworld.c`, que se encontra dentro do diretório `livro/capitulos/code/cap1`. 
-O diretório `cap1` indica o capítulo onde o código será apresentado.
+No exemplo a seguir, temos outra apresentação de código fonte. Desta
+vez de um arquivo `helloworld.c`, que se encontra dentro do diretório
+`livro/capitulos/code/cap1`.  O diretório `cap1` indica o capítulo
+onde o código será apresentado.
 
 .Código fonte
 {gitrepo}/blob/master/livro/capitulos/code/cap1/helloworld.c[code/cap1/helloworld.c]
@@ -169,12 +193,9 @@ nova do livro (em produção). É possível que eles sejam diferentes da versão
 do livro que você esteja lendo. Para baixar os códigos de uma versão específica
 troque a palavra `master` no link para uma versão desejada, exemplo: `v0.2.0`.
 
-TIP: Para manter os códigos atualizados em sua máquina, clone o repositório e em
-seguida utilize o mando `git pull` para baixar as atualizações do repositório.
-
 ==== Compilando e executando os arquivos
 
-A forma mais simples e compilar e executar os arquivos do livro, é entrando
+A forma mais simples de compilar e executar os arquivos do livro é entrando
 no diretório do capítulo e digitando o seguinte comando `make`:
 
 .Comandos para compilar os programas do capítulo
@@ -252,5 +273,7 @@ Todas as versões deste livro encontram-se disponíveis para download.
 
 TIP: Acesse {gitrepo}/releases para baixar a versão mais nova deste livro.
 
-// Sempre manter uma linha em branco no final
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

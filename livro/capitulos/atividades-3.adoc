@@ -74,5 +74,7 @@ void calc_esfera(float r, float *area, float *volume).
 Em seguida, monte um programa que peça o raio da esfera ao usuário e calcule os valores da área e volume da esfera. Dica: a área e volume da esfera são calculados como area=4.π.r2, volume=(4.π.r3)/3.
 
 
-// Sempre terminar o arquivo com uma nova linha.
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

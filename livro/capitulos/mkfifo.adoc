@@ -219,5 +219,7 @@ até encontrar o final da fluxo (`EOF`). Na linguagem C os arquivos
 (`FILE`) possuem esta mesma abstração.
 
 
-// linha em branco
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

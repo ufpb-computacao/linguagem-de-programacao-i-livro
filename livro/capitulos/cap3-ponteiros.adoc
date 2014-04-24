@@ -498,5 +498,7 @@ utilizados para se computar a subtração e soma. A
 a função `calculadora` ser executada. Veja que as variáveis locais
 `x`, `y`, `*ptr1` e `*ptr2` são desempilhadas.
 
-// Sempre terminar o arquivo com uma nova linha.
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

@@ -400,4 +400,7 @@ Desenhar gráficos? Usar o `dot` ou outra ferramenta para desenho?
 
 Google API?
 
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

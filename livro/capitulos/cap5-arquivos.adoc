@@ -197,7 +197,7 @@ apenas um.
 
 IMPORTANT: A principal noção que precisamos ter em mente quando
 trabalhamos com arquivos em C é que *fluxos e arquivos são manipulados
-com uma interface única em C*.
+através de uma interface única*.
 
 O tipo de dado para manipular Arquivos e Streams é o `FILE`, definido
 no cabeçalho <<stdio_h>>.
@@ -221,14 +221,15 @@ Todas as funções que serão apresentadas neste capítulo estão definidas
 no cabeçalho `stdio.h`, requerendo a inclusão deste arquivo para sua
 utilização:
 
+[source,c]
 ----
 #include <stdio.h>
 ----
 
 === Abrindo e Fechando arquivos em C
 
-Toda vez que desejamos ler ou escrever num arquivo precisamos abrir o
-arquivo indicando esta intenção.
+Toda vez que desejamos ler ou escrever em um arquivo precisamos *abrir o
+arquivo* indicando esta intenção.
 
 ==== Abrindo um arquivo com fopen
 
@@ -238,6 +239,7 @@ A abertura de arquivos em C é realizada através da função <<fopen>>,
 que retorna um ponteiro `*FILE` caso a operação foi realizada com
 sucesso ou `NULL` caso houve erro na abertura:
 
+[source,c]
 ----
 FILE* arquivo = fopen(nomeDoArquivo, modo); 
 ----
@@ -340,6 +342,7 @@ função que estava realizando a operação registra o ocorrido num
 indicador de erro em `FILE`, você poderá consultar o erro invocando a
 seguinte função:
 
+[source,c]
 ----
 int ferror(FILE *stream);
 ----
@@ -354,6 +357,7 @@ Quando uma função atingiu o final do arquivo ela registra o ocorrido
 no indicador de final de arquivo, que pode ser consultado através da
 seguinte função:
 
+[source,c]
 ----
 int feof(FILE *stream);
 ----
@@ -376,8 +380,9 @@ retorna-o. Caso não haja mais carácteres disponível, devido ao final do
 arquivo, retorna a constante `EOF` (do inglês, _End of File_, que
 indica o final do arquivo):
 
+[source,c]
 ----
-int fgetc(FILE *stream);
+int fgetc(FILE *arquivo);
 ----
 
 Após a leitura do carácter o indicador de posição de leitura do
@@ -388,6 +393,7 @@ arquivo é incrementado em uma posição.
 A função <<getchar>> realiza a mesma operação, mas não requer parâmetro,
 utilizando a entrada padrão (`stdin`) como arquivo de entrada:
 
+[source,c]
 ----
 int getchar(void);
 ----
@@ -404,6 +410,7 @@ de leitura de carácter retorna ao atingir o final do arquivo.
 A função <<fputc>> escreve um carácter (convertido para `unsigned char`)
 na posição atual do arquivo:
 
+[source,c]
 ----
 int fputc(int caracter, FILE *stream);
 ----
@@ -416,6 +423,7 @@ escrita.
 A função <<putchar>> realiza a mesma função que <<fputc>> para opera
 somente na saída padrão (`stdout`):
 
+[source,c]
 ----
 int putchar(int caracter);
 ----
@@ -457,6 +465,7 @@ carácteres. O carácter `\0` é escrito após o último carácter lido,
 transformando `buffer` em um string terminado em zero, compatível com
 as funções <<string_h>>. 
 
+[source,c]
 ----
 char *fgets(char * restrict buffer, int n, FILE * restrict arquivo);
 ----
@@ -492,6 +501,7 @@ da linha lida.
 A função <<fputs>> escreve um string, terminado com o carácter
 zero, no arquivo.
 
+[source,c]
 ----
 int fputs(const char * restrict string, FILE * restrict arquivo);
 ----
@@ -535,6 +545,7 @@ sequência lida, o `tamanho` do tipo de dado que será lido, a
 `quantidade` de elementos que serão lidos e o `arquivo` de onde será
 lido os dados.
 
+[source,c]
 ----
 size_t fread(void * restrict buffer, size_t tamanho, 
     size_t quantidade, FILE * restrict arquivo);
@@ -555,6 +566,7 @@ para o início da sequência de dados que se deseja escrever, o
 `tamanho` do tipo de elemento, a `quantidade` de elementos que se
 deseja escreve e o `arquivo` onde o conteúdo será escrito.
 
+[source,c]
 ----
 size_t fwrite(const void * restrict buffer, size_t tamanho, 
     size_t quantidade, FILE * restrict arquivo);
@@ -613,6 +625,7 @@ similar a função <<scanf>>, a única diferença é que `scanf` trabalha
 apenas com a entrada padrão, enquanto `sscanf` especifica o arquivo de
 entrada:
 
+[source,c]
 ----
 int fscanf(FILE * restrict arquivo, 
     const char * restrict formato, ...);
@@ -626,6 +639,7 @@ A escrita de dados formatos é feita através da função <<fprintf>>, que
 é similar a <<printf>> (que trabalha somente na saída padrão), a única
 diferença é que `fprintf` permite especificar o arquivo de saída:
 
+[source,c]
 ----
 int fprintf(FILE * restrict arquivo, 
     const char * restrict formato, ...);
@@ -640,6 +654,7 @@ as operações de escritas no arquivo não são persistidas no arquivo até
 que o buffer esteja cheio. Para determinar que o conteúdo do buffer
 seja escrito no arquivo utilizamos a função <<fflush>>:
 
+[source,c]
 ----
 int fflush(FILE *stream);
 ----
@@ -663,6 +678,7 @@ servem a este propósito.
 A seguinte função retrocede o indicador de posição para o início do
 arquivo:
 
+[source,c]
 ----
 void rewind(FILE *arquivo);
 ----
@@ -673,6 +689,7 @@ void rewind(FILE *arquivo);
 
 A seguinte função retorna a posição atual no arquivo:
 
+[source,c]
 ----
 long int ftell(FILE *arquivo);
 ----
@@ -684,6 +701,7 @@ long int ftell(FILE *arquivo);
 Para ir para o final do arquivo invocamos podemo utilizar a função
 `fseek` da seguinte forma:
 
+[source,c]
 ----
 fseek(arquivo, 0, SEEK_END);
 ----

@@ -131,6 +131,7 @@ Como exemplo, considere o caso que deseja alocar dinamicamente um
 vetor com 20 elementos do tipo `float`. Nesse caso, os comandos 
 em linguagem C seriam
 
+[source,c]
 ----
 float *ptr;
 ptr = (float*) malloc (20*sizeof(float));
@@ -192,6 +193,7 @@ ponteiro que indica o início do bloco de memória a ser liberada. No
 exemplo em questão, seria o ponteiro `prt`. Dessa forma, para liberar 
 o espaço de memória do vetor de 20 elementos `float` usa-se o comando:
 
+[source,c]
 ----
 free(ptr);
 ----
@@ -269,6 +271,7 @@ Por fim, é possível fazer uma realocação de um espaço de
 memória que foi alocado dinamicamente. Isso é feito usando a 
 função <<realloc>>. O protótipo da função é: 
 
+[source,c]
 ----
 void *realloc (void *ptr, tamanho do espaço a ser realocado);
 ----
@@ -304,6 +307,7 @@ utilização de vetores dentro de funções.
 
 Para alocar dinamicamente um vetor, pode-se usar o seguinte comando:
 
+[source,c]
 ----
 float *ptr;
 ptr = (float*) malloc(n*sizeof(float));
@@ -553,6 +557,7 @@ a notação de vetor. A notação de ponteiro foi demonstrada na linha 30.
 include::{local}/registro_dinamico.c[]
 ----
 
-
-// Sempre terminar o arquivo com uma nova linha.
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

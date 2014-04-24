@@ -23,10 +23,15 @@ recomendamos a consulta da documentação original (em inglês).
 
 [id="sec_main",reftext="main()"]
 === main()
+
+(((main)))
+
 TODO: Explicar os parâmetros da função `main`.
 
 [id="assert_h",reftext="assert.h"]
 === assert.h
+
+(((assert.h)))
 
 TIP: Mais informações sobre esta função pode ser consultada na seção
 ``7.2 Diagnostics <assert.h>'' no padrão C1X da linguagem C. Os
@@ -39,6 +44,8 @@ http://www.cplusplus.com/reference/cassert/assert/.
 
 [id="assert", reftext="assert()"]
 ==== assert()
+
+(((assert)))
 
 [source,c]
 ----
@@ -57,8 +64,12 @@ http://www.cplusplus.com/reference/cassert/assert/
 [id="stdlib_h",reftext="stdlib.h"]
 === stdlib.h
 
+(((stdlib.h)))
+
 [id="exit",reftext="exit()"]
 ==== exit()
+
+(((exit)))
 
 [source,c]
 ----
@@ -71,10 +82,16 @@ Termina o programa indicando o código de erro. Ver os códigos de erro
 
 [id="EXIT_SUCCESS",reftext="EXIT_SUCCESS"]
 ==== EXIT_SUCCESS
+
+(((EXIT_SUCCESS)))
+
 Constante para indicar que não houve erro.
 
 [id="EXIT_FAILURE",reftext="EXIT_FAILURE"]
 ==== EXIT_FAILURE
+
+(((EXIT_FAILURE)))
+
 Constante para indicar que houve erro na execução do arquivo.
 
 
@@ -82,6 +99,8 @@ Constante para indicar que houve erro na execução do arquivo.
 
 [id="malloc", reftext="malloc()"]
 ===== malloc()
+
+(((malloc)))
 
 [source,c]
 ----
@@ -107,6 +126,8 @@ alocado.
 [id="calloc", reftext="calloc()"]
 ===== calloc()
 
+(((calloc)))
+
 [source,c]
 ----
 void *calloc(size_t quantidade, size_t tamanho);
@@ -117,6 +138,8 @@ espaço alocado com `0` (zeros).
 
 [id="free", reftext="free()"]
 ===== free()
+
+(((free)))
 
 [source,c]
 ----
@@ -132,6 +155,8 @@ foi desalocado anteriormente, o comportamento não é definido.
 [id="realloc", reftext="realloc()"]
 ===== realloc()
 
+(((realloc)))
+
 [source,c]
 ----
 void *realloc(void *ponteiro, size_t tamanho);
@@ -143,10 +168,14 @@ por `tamanho`.
 [id="string_h", reftext="string.h"]
 === string.h
 
-TODO: funçõe de string.
+(((string.h)))
+
+// TODO: funçõe de string.
 
 [id="strlen", reftext="strlen()"]
-====  strlen()
+==== strlen()
+
+(((strlen)))
 
 [source,c]
 ----
@@ -159,6 +188,8 @@ Retorna tamanho do string, até encontrar o carácter `\0`.
 
 [id="strcmp", reftext="strcmp()"]
 ==== strcmp()
+
+(((strcmp)))
 
 [source,c]
 ----
@@ -175,6 +206,8 @@ negativo de `primeiroString<segundoString`.
 [id="strncmp", reftext="strncmp()"]
 ==== strncmp()
 
+(((strncmp)))
+
 [source,c]
 ----
 int strncmp(const char *primeiroString, 
@@ -185,6 +218,8 @@ Compara dois strings até `n` posições.
 
 [id="strcpy", reftext="strcpy()"]
 ==== strcpy()
+
+(((strcpy)))
 
 [source,c]
 ----
@@ -198,6 +233,8 @@ A função retorna `destino`.
 
 [id="strncpy", reftext="strncpy()"]
 ==== strncpy()
+
+(((strncpy)))
 
 [source,c]
 ----
@@ -214,6 +251,8 @@ A função retorna `origem`.
 [id="stdbool_h", reftext="stdbool.h"]
 === stdbool.h
 
+(((stdbool.h)))
+
 Inclusão da biblioteca <<stdbool_h>>, que define o tipo `bool`. Este
 tipo pode ser utilizado como retorno de expressões lógicas. Além disso
 também estão definidos macro `true` com o valor `1` e `false` com o
@@ -222,11 +261,15 @@ valor `0`.
 [id="stdio_h", reftext="stdio.h"]
 === stdio.h
 
+(((stdio.h)))
+
 NOTE: A documentação sobre as funções de leitura de arquivo estão 
 contidas na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
 
 [id="fopen", reftext="fopen()"]
 ==== fopen()
+
+(((fopen)))
 
 [source,c]
 ----
@@ -254,6 +297,8 @@ posicionado no final do arquivo
 [id="fclose", reftext="fclose()"]
 ==== fclose()
 
+(((fclose)))
+
 [source,c]
 ----
 int fclose(FILE *arquivo);
@@ -267,6 +312,8 @@ caso houve erro no fechamento.
 [id="fgetc", reftext="fgetc()"]
 ==== fgetc()
 
+(((fgetc)))
+
 [source,c]
 ----
 int fgetc(FILE *arquivo);
@@ -278,6 +325,8 @@ Caso em caso de erro ou não houver mais carácteres, retorna `EOF`.
 
 [id="getchar", reftext="getchar()"]
 ==== getchar()
+
+(((getchar)))
 
 [source,c]
 ----
@@ -291,6 +340,8 @@ Ver <<fgetc>>.
 
 [id="fputc", reftext="fputc()"]
 ==== fputc()
+
+(((fputc)))
 
 [source,c]
 ----
@@ -308,6 +359,8 @@ setado e retorna `EOF`.
 [id="putchar", reftext="putchar()"]
 ==== putchar()
 
+(((putchar)))
+
 [source,c]
 ----
 #include <stdio.h>
@@ -323,6 +376,8 @@ setado e retorna `EOF`.
 
 [id="fgets", reftext="fgets()"]
 ==== fgets
+
+(((fgets)))
 
 [source,c]
 ----
@@ -346,6 +401,8 @@ indeterminate and a null pointer is returned.
 
 [id="fputs", reftext="fputs()"]
 ==== fputs
+
+(((fputs)))
 
 [source,c]
 ----
@@ -371,6 +428,8 @@ Ver <<fgets>>.
 
 [id="fread", reftext="fread()"]
 ==== fread()
+
+(((fread)))
 
 [source,c]
 ----
@@ -406,6 +465,8 @@ alterado.
 [id="fwrite", reftext="fwrite()"]
 ==== fwrite()
 
+(((fwrite)))
+
 [source,c]
 ----
 #include <stdio.h>
@@ -439,6 +500,8 @@ zero, nada é escrito no arquivo.
 [id="fflush", reftext="fflush()"]
 ==== fflush()
 
+(((fflush)))
+
 [source,c]
 ----
 #include <stdio.h>
@@ -467,6 +530,8 @@ realizada com sucesso.
 [id="fseek", reftext="fseek()"]
 ==== fseek()
 
+(((fseek)))
+
 Move o indicador de posição do arquivo.
 
 [source,c]
@@ -479,6 +544,8 @@ Ver http://www.cplusplus.com/reference/cstdio/fseek/.
 
 [id="ftell", reftext="ftell()"]
 ==== ftell()
+
+(((ftell)))
 
 Retorna a posição atual no arquivo.
 
@@ -493,6 +560,8 @@ Ver http://www.cplusplus.com/reference/cstdio/ftell/, <<fseek>>.
 [[frewind]]
 [id="frewind", reftext="frewind()"]
 ==== frewind
+
+(((frewind)))
 
 [source,c]
 ----
@@ -511,6 +580,8 @@ a:
 [id="fscanf", reftext="fscanf()"]
 ==== fscanf()
 
+(((fscanf)))
+
 [source,c]
 ----
 #include <stdio.h>
@@ -518,19 +589,27 @@ int fscanf(FILE * restrict arquivo,
   const char * restrict formato, ...);
 ----
 
-TODO
+// TODO fscanf
 
 [id="scanf", reftext="scanf()"]
 ==== scanf()
+
+(((scanf)))
+
 Ver <<fscanf>>.
 
 
 [id="printf", reftext="printf()"]
 ==== printf()
+
+(((printf)))
+
 Ver <<fprintf>>.
 
 [id="fprintf", reftext="fprintf()"]
 ==== fprintf
+
+(((fprintf)))
 
 [source,c]
 ----
@@ -539,11 +618,13 @@ int fprintf(FILE * restrict arquivo,
     const char * restrict formato, ...);
 ----
 
-TODO.
+// TODO fprintf
 
 
 [id="feof", reftext="feof()"]
 ==== feof
+
+(((feof)))
 
 [source,c]
 ----

@@ -203,5 +203,7 @@ clientes consultados. A leitura de clientes pelo algoritmo terminará quando o c
 digitado for menor ou igual a `0` (zero).
 --
 
-// Sempre terminar o arquivo com uma nova linha.
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

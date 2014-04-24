@@ -116,5 +116,7 @@ entre os conceitos de Registros em C e nos banco de dados.
   imprima somente as cidades com a quantidade de habitantes maior do
   que um valor que será solicitado ao usuário.
 
-// Sempre terminar o arquivo com uma nova linha.
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

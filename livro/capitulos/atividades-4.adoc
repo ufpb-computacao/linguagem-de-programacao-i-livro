@@ -76,5 +76,7 @@ Série A. Faça o mesmo para a parte da impressão na tela.
   dimensões, é possível representar matrizes com três dimensões?
   Justifique a sua resposta.
 
-// Sempre terminar o arquivo com uma nova linha.
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

@@ -1,7 +1,5 @@
 === Atividades
 
-// Registros
-
 TIP: Na sala de aula, nos fóruns e mensagens recomendamos a utilização do site https://gist.github.com para compartilhar códigos e tirar dúvidas sobre eles.
 
 1. *Entendo a necessidade dos registros.* Nós poderíamos escrever os programas
@@ -125,5 +123,7 @@ palavras e possibilitar alguma forma de navegação. Consulte um dicionário rea
 para verificar que além do significado da palavra, outras informações diferentes
 também são cadastradas.
 
-// Sempre terminar o arquivo com uma nova linha.
+////
+Sempre terminar o arquivo com uma nova linha.
+////
 

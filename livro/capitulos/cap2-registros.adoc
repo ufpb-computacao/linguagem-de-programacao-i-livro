@@ -906,10 +906,10 @@ Por fim, aprendemos como um registro pode ser inicializado
 (<<sec_registro_comparacao>>) e aprendemos como criar um registro através da 
 composição de outro (<<sec_registro_composicao>>).
 
-// No próximo capítulo aprenderemos como reaproveitar código, criando
-// nossas próprias funções.
+// No próximo capítulo aprenderemos como reaproveitar código, criando nossas próprias funções.
 
 
-
-// Sempre termine os arquivos com uma linha em branco.
+////
+Sempre termine os arquivos com uma linha em branco.
+////
 

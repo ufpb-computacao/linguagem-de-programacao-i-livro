@@ -10,8 +10,7 @@ sua equipe docente. Para incentivar a realização das avaliações
 Carlos planeja distribuir premiações para os educadores com melhores
 indicativos de avaliação.
 
-// TODO: Você concorda com esta política? Como você implementaria a
-// sua?
+// TODO: Você concorda com esta política? Como você implementaria a sua?
 
 A demanda do coordenador foi encaminhada a Jair, Professor de Linguagem de
 Programação I, que planeja trabalhar com seus alunos através da

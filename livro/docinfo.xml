@@ -3,7 +3,7 @@
   rudder-doc-docinfo.xml
   DocBook document information file for rudder-doc.txt.
 -->
-  <edition>v0.5.0</edition>
+  <edition>{edition}</edition>
 
   <revhistory>
 
