@@ -331,7 +331,7 @@ include::{local}/soma_vetores.c[]
 
 .Saída da execução
 ....
-include::{local}/reutilizando_ponteiro.out[]
+include::{local}/soma_vetores.out[]
 ....
 
 Note que há outras maneiras de se resolver o problema da soma de 
