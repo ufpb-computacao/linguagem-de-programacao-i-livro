@@ -496,7 +496,7 @@ posição do vetor tem-se armazenado os campos definidos na estrutura
 image::{img}/vetor_de_registros.eps[scaledwidth="50%"]
 
 Primeiramente, será mostrado como definir um vetor de estruturas 
-para, se seguida apresentar como é feita a alocação dinâmica de 
+para, em seguida apresentar como é feita a alocação dinâmica de 
 um vetor de estruturas. Considerando a estrutura `jogador`, definida no 
 início da seção, um vetor de estruturas pode ser definido da 
 seguinte forma:
@@ -512,7 +512,7 @@ tipo de registro que se pretende criar o vetor e `Treze` é o nome do
 vetor que acabou de ser criado. Observe que foi criado um vetor de 
 estruturas com 22 posições.
 
-O exemplo a seguir mostra um código para preenchimento de um de 
+O exemplo a seguir mostra um código para preenchimento de um  
 vetor de estruturas com 22 posições ilustrando o cadastramento de 
 uma equipe de futebol com 22 jogadores. Note nas linhas 16 a 19 e 22 
 que o operador ponto ``.'' é utilizado para acessar os campos 
