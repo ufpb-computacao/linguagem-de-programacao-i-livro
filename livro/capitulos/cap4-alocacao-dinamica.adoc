@@ -297,7 +297,7 @@ Na maioria das vezes reserva-se o uso de alocação dinâmica para os
 casos em que a dimensão do vetor é desconhecida. 
 
 [TIP]
-Quando se sabe a dimenção de um vertpr, é preferível usar vetores
+Quando se sabe a dimenção de um vetor, é preferível usar vetores
 alocados estaticamente, visto que do ponto de vista de tempo de
 execução do programa, esse tipo de alocação de vetores é mais rápida.
 Um ponto importante é que caso o vetor seja definido dentro do escopo
