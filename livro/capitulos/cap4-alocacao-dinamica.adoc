@@ -551,11 +551,14 @@ a notação de vetor. A notação de ponteiro foi demonstrada na linha 30.
 .Código fonte
 {online}/registro_dinamico.c[{local}/registro_dinamico.c]
 
+[[code_regitro_dinamico]]
 [source, c]
 .Utilização de registros alocados dinamicamente
 ----
 include::{local}/registro_dinamico.c[]
 ----
+
+
 
 ////
 Sempre terminar o arquivo com uma nova linha.

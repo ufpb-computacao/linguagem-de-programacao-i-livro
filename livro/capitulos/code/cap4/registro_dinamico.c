@@ -11,7 +11,7 @@ typedef struct jogador_ {
 int main() {
   int QUANTIDADE_DE_JOGADORES = 22;
   jogador* jogadores;
-  jogadores = calloc(QUANTIDADE_DE_JOGADORES, sizeof(jogador));
+  jogadores = malloc(QUANTIDADE_DE_JOGADORES * sizeof(jogador));
   for (int i=0; i<QUANTIDADE_DE_JOGADORES; i++) {
     printf("Digite o nome, salario e gols do jogador %d: \n", i+1);
     scanf("%s", &jogadores[i].nome);

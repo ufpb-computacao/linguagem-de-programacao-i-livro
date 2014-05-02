@@ -8,9 +8,14 @@
   esquemas de alocação.
 
 . Explique, dando exemplos, como funciona as funções `malloc()`,
-  `realloc()` e `free()` são utilizadas em conjunto. Faça uma pesquisa
-  em livros, internet, etc., e explique como funciona o comando
-  calloc().
+  `realloc()` e `free()` são utilizadas em conjunto. 
+  
+.  A função <<calloc>> também costuma ser utilizada na alocação de
+   memória, seu diferencial é que todo o espaço alocado é inicializado
+   com zeros. Para conhecer a utilização desta função, recomendamos
+   que o reescreva o código do arquivo
+   <<"code_regitro_dinamico","code/cap4/registro_dinamico.c">>
+   invocando a função `calloc` no lugar de `malloc`.
 
 . Um professor de uma disciplina deseja montar um programa em
   linguagem C que seja capaz de receber as médias dos alunos de uma
