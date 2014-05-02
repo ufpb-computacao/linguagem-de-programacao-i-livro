@@ -485,13 +485,17 @@ ao vetor e, dentro dos colchetes, a quantidade de posições do vetor. A
 preciso também definir o tipo de dado que o vetor irá armazenar
 (`float`, `double`, `int`, etc.). Neste exemplo foi definido um vetor
 de `float` com nome `vet` e com tamanho de oito posições, é dado
-também um exemplo de preenchimento do vetor. Serão então alocados na
-memória RAM um espaço com `8*sizeof(float)` bytes para armazenamento
-deste vetor.
+também um exemplo de um vetor preenchido na <<fig_vetor_inicializado>>. 
+Serão então alocados na memória RAM um espaço com `8*sizeof(float)`
+bytes para armazenamento deste vetor.
 
 [[fig_vetor]]
-.Exemplo de definição de um vetor
-image::images/cap1-revisao/vertor8.png[scaledwidth="60%"]
+.Vetor de float com tamanho 8, durante sua definição. Seu conteúdo é indeterminado e cada posição ocupa o tamanho de um float.
+image::images/cap1-revisao/vetor-declarado.pdf[scaledwidth="60%"]
+
+[[fig_vetor_inicializado]]
+.Exemplo do mesmo vetor preenchido com alguns valores.
+image::images/cap1-revisao/vetor-inicializado.pdf[scaledwidth="60%"]
 
 As operações básicas que se pode fazer com vetores são: atribuir
 valores a posições dos vetores, preencher por completo o vetor e
