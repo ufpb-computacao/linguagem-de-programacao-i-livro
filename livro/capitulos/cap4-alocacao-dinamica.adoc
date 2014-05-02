@@ -372,7 +372,7 @@ a matriz `mtr[l][c]`. Para a correspondência entre a matriz e o vetor
 seja atendida, um elemento a~ij~ da matriz é mapeado no elemento
 `k=i*c+j`, em que `c` é o número de colunas da matriz, como foi definido no 
 início desse parágrafo. Essa relação é utilizada para se 
-encontra um elemento `k` do vetor `vet[l*c]`, ou seja, o elemento
+encontrar um elemento `k` do vetor `vet[l*c]`, ou seja, o elemento
 `vet[i*c+j]`. A <<fig_matriz_no_vetor>> mostra uma ilustração desse mapeamento de matriz 
 em vetor. 
 
