@@ -243,9 +243,34 @@ include::code/cap1/tamando_dos_tipos.out[]
 As estruturas sequenciais são as mais simples e se caracterizam por
 serem sequências ordenadas de comandos que são executados da maneira
 como aparecem e sem desvios de execução, a não ser que exista algum
-comando específico que cause um desvio de execução. O Quadro 1.1
-<<sintaxe_estrutura_controle_sequencial>> ilustra a sintaxe geral de
-estruturas sequenciais.
+comando específico que cause um desvio de execução. O
+<<ex_estrutura_sequencial>> ilustra a sintaxe geral de estruturas
+sequenciais.
+
+[[ex_estrutura_sequencial]]
+.Sintaxe geral da estrutura de controle sequencial
+====
+
+.Estrutura de controle sequencial:
+....
+// comando1;
+// comando2;
+// comando3;
+....
+
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap1/sequencial.c[code/cap1/sequencial.c]
+
+[source,c]
+----
+    float nota1 = 6;
+    float nota2 = 8;
+    float media = (nota1 + nota2)/2;
+    printf("Media = %f\n", media);
+----
+
+
+====
 
 Dependendo do problema em análise, talvez seja preciso seguir caminhos
 diferentes dependendo do teste de uma condição. As estruturas de
@@ -253,100 +278,162 @@ seleção ou decisão permitem que um grupo de comandos seja executado de
 acordo com a aceitação ou não de certas condições. Uma condição lógica
 (boolena) é testada e, dependendo do resultado (*verdadeiro* ou
 *falso*), um determinado caminho é seguido dentro do programa. Pode-se
-ter dois tipos de estrutura de decisão, a saber, decisão simples e
-decisão múltipla. O Quadro 1.2
-<<sintaxe_estrutura_controle_selecao_simples>> apresenta a sintaxe
-geral da estrutura de controle de seleção simples. Na opção 1, tem-se
-o teste da 'condição' e, caso seja *verdadeira*, o bloco de comando 1
-é executado. Caso seja *falsa*, serão executados os comandos após o
-fechamento da chave. Na opção 2, tem-se o teste da 'condição' e, caso
-seja *verdadeira*, o bloco de comando 1 é executado, caso contrário, o
-bloco de comando 2 é executado. Note que os blocos de comandos são
-separados por chaves.
+ter três tipos de estrutura de decisão, a saber, *decisão simples,
+composta e múltipla*. O <<ex_decisao_simples>> apresenta a sintaxe
+geral da estrutura de controle de seleção simples. Caso `condição`
+seja *verdadeira*, o bloco de comandos 1 é executado. Caso seja
+*falsa*, serão executados os comandos após o fechamento da chave. 
 
+[[ex_decisao_simples]]
+.Estrutura de decisão simples
+====
 
-
-
-[[sintaxe_estrutura_controle_sequencial]]
-.Sintaxe geral da estrutura de controle sequencial
-****
- Comando1;
- Comando2;
- Comando3;
- ...
-****
-
-[[sintaxe_estrutura_controle_selecao_simples]]
-.Sintaxe geral da estrutura de controle de seleção simples
-****
-Opção 1:
-
+.Sintaxe geral da estrutura de controle de decisão simples
 [source, c]
 ----
  if (condição){
-    // bloco de comandos 1;
- }
+      // bloco de comandos 1;
+ }// fechamento da chave
 ----
 
-Opção 2:
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap1/decisao_simples.c[code/cap1/decisao_simples.c]
 
-[source, c]
+[source,c]
 ----
- if (condição){
-    // bloco de comandos 1;
- } 
- else {
-    // bloco de comandos 2;
- }
+    printf("Digite duas notas não negativas de um(a) aluno(a): ");
+    scanf("%f %f", &nota1, &nota2);
+    
+    if (nota1 < 0 || nota2 < 0){
+      // Bloco de decisão simples
+      printf("Notas não podem ser negativas.\n");
+      exit(EXIT_FAILURE);
+    }
 ----
-
-****
-
-Há problemas em que é preciso testar várias condições (como pode ser
-visto em <<bloco_sintaxe_geral>>). O funcionamento da estrutura
-composta é simular ao da seleção simples. Caso a _condição 1_ seja
-verdadeira, executa-se o *bloco de comandos 1*; *senão* (`else`) a
-_condição 2_ é testada e, se for verdadeira, executa-se o *bloco de
-comandos 2*; e assim por diante, até ser testada a última condição.
+====
 
 IMPORTANT: Sempre que você precisar executar um bloco de instruções,
 utilize as chaves para delimitar o início e o fim deste bloco.
 
+Há problemas em que é preciso testar várias condições (como pode ser
+visto no <<ex_decisao_composta>>). O funcionamento da estrutura
+composta é simular ao da seleção simples. Caso `condição1` seja
+verdadeira, executa-se o *bloco de comandos 1*; *senão* (`else`) a
+`condição 2` é testada e, se for verdadeira, executa-se o *bloco de
+comandos 2*; e assim por diante, até ser testada a última condição.
 
-[[bloco_sintaxe_geral]]
-.Sintaxe geral da estrutura de seleção composta
-****
-[source, c]
+[[ex_decisao_composta]]
+.Estrutura de decisão composta
+====
+
+.Sintaxe geral da estrutura de decisão composta
+[source,c]
 ----
- if (condição1) {
+ // Seleção composta com apenas um else
+ if (condição1){
     // bloco de comandos 1;
- } 
- else if (condição2) {
+ } else {
     // bloco de comandos 2;
  }
- else if (condição3) {
+
+ // seleção composta com else if
+ if (condição1) {
+    // bloco de comandos 1;
+ } else if (condição2) {
+    // bloco de comandos 2;
+ }  else if (condição3) {
     // bloco de comandos 3;
- }
-
- // ...
-
- else if (condiçãoN) {
+ } else if (condiçãoN) {
     // bloco de comandos N;
- }
-
- else {
+ } else {
    // bloco de comando default;
  }
-
 ----
 
-****
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap1/decisao_composta.c[code/cap1/decisao_composta.c]
 
-IMPORTANT: O bloco de comandos `default` pode ser utilizado para dar
-uma mensagem de alerta ao usuário dizendo que todas as condições foram
-testadas e nenhuma delas foi *verdadeira*.
+[source,c]
+----
+  // decisão composta
+  if (nota1 < 0 || nota1 >10 || nota2 < 0 || nota2 >10){//condição1
+    // bloco de comandos 1
+    printf("Alguma nota foi inválida: %f, %f\n", nota1, nota2);
+    exit(EXIT_FAILURE);
+  } else if (media>=7.0 && media<=10){//condição2
+    // bloco de comandos 2
+    printf("Situação do aluno(a): APROVADO(A)\n");
+  } else if (media>=4 && media<7){//condição3
+    // bloco de comandos 3
+    printf("Situação do aluno(a): PRECISA FAZER PROVA FINAL\n");
+  } else {
+    // bloco de comandos default
+    printf("Situação do aluno(a): REPROVADO(A)\n");
+  }
+----
+====
 
+A estrutura de decisão múltipla permite realizar múltiplas comparações
+de valores de uma variável, através do comando `switch`, como pode ser
+visto no <<ex_decisao_composta>>. Neste caso, `variável` é comparada
+com `VALOR1`, se forem iguais as instruções 1 e 2 são executadas. Em
+seguida `variável` é comparada com `VALOR2`, se forem iguais então as
+instruções 3 e 4 são executadas. Por fim, caso `variável` não foi
+igual a nenhum dos valores, então as instruções em `default` são
+executadas.
 
+[[ex_decisao_multipla]]
+.Estrutura de decisão múltipla
+====
+
+.Sintaxe geral da estrutura de decisão múltipla
+----
+switch (variável) {
+  case VALOR1:
+    instruçao1;
+    instrução2;
+    break;
+  case VALOR2:
+    instruçao3;
+    instrução4;
+    break;
+  default:
+    instruçao5;
+    instrução6;
+    break;
+}
+----
+
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap1/decisao_multipla.c[code/cap1/decisao_multipla.c]
+
+[source,c]
+----
+switch (caracter) {
+  case 'a':
+  case 'e':
+  case 'i':
+  case 'o':
+  case 'u':
+      printf("Você digitou uma vogal minúscula\n");
+      break;
+  case 'A':
+  case 'E':
+  case 'I':
+  case 'O':
+  case 'U':
+      printf("Você digitou uma vogal MAIÚSCULA\n");
+      break;
+  default:
+      printf("Você não digitou uma vogal\n");
+}
+----
+====
+
+IMPORTANT: O bloco de comandos `default` é opcional, pode ser
+utilizado, por exemplo, para dar uma mensagem de alerta ao usuário
+dizendo que todas as condições foram testadas e nenhuma delas foi
+*verdadeira*.
 
 ==== Estruturas de repetição
 
