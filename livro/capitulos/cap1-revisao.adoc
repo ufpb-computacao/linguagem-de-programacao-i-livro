@@ -147,7 +147,7 @@ Programas em C têm estrutura flexível. É possível escrever programas
 desorganizados que funcionam, porém, esses programas são ilegíveis e
 de difícil correção. Por esse motivo, é fundamental aprender e
 utilizar os conceitos e potencialidades da programação estruturada que
-serão abordados nesta disciplina e na disciplina 'Introdução à
+são abordados nesta disciplina e na disciplina 'Introdução à
 Programação'.
 
 === Estruturas de dados e estruturas de controle
