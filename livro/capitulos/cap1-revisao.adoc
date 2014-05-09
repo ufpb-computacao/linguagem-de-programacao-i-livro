@@ -159,7 +159,7 @@ As ((estruturas de dados)) podem ser entendidas como estruturas que
 são utilizadas para armazenar e/ou representar as informações (dados)
 que são úteis para a resolução ou entendimento do problema e serão
 utilizados nos programas e algoritmos. Basicamente, há dois tipos de
-estruturas de dados, a saber, estática e dinâmica:
+estruturas de dados:
 
 Estrutura de dados estática::
 São estrutura que utilizam *((alocação estática)) de memória*,
