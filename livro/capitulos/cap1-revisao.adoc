@@ -193,11 +193,12 @@ ii) `signed` ou `unsigned`, que se referem ao tipo definido com ou sem sinal, re
 
 // FIXME A Tabela está em bits e parágrafo em bytes.
 
-A <<tab_tipo_de_dados>> mostra os tipos de dados com suas variantes, a
-faixa de valores numéricos que pode representar, o formato para uso
-nos comandos `printf` e `scanf`, e o tamanho em bytes usado para
+A <<tab_tipo_de_dados>> mostra os *Tipos de dados* com suas variantes, a
+*Faixa de valores* numéricos que pode representar, o *Formato* para uso
+nas funções `printf` e `scanf` (utilizadas para impressão e leitura de
+dados respectivamente), e o *Tamanho em bits* necessário para
 armazenamento na memória. Os bytes são armazenados de forma contínua
-na memória. O código a seguir ajuda a calcular os 's' bytes usados
+na memória. O código a seguir ajuda a calcular os 's' bits usados
 como tamanho das variáveis que cada computador utiliza para armazenar
 na memória. Para o inteiro, por exemplo, dependendo do computador
 pode-se usar 16 ou 32 bits (ou 8*s na <<tab_tipo_de_dados>>).
