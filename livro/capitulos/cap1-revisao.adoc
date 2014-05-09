@@ -204,10 +204,10 @@ na memória. Para o inteiro, por exemplo, dependendo do computador
 pode-se usar 16 ou 32 bits (ou 8*s na <<tab_tipo_de_dados>>).
 
 [[tab_tipo_de_dados]]
-.Tipos de dados em C.
+.Tipos de dados em C
 [width="100%",cols="^2m,^2,^1m,^1",frame="topbot",options="header"]
 |====
-| Tipo|Faixa de valores|Formatofootnote:[Para uso nos comandos printf e scanf.]|Tamanho em bits (aproximado)
+| Tipo|Faixa de valores|Formato|Tamanho em bits (aproximado)
 | char|-128 a +127|%c|8
 | unsigned char|0 a +255|%c|8
 | signed char|-128 a + 127|%c|8
