@@ -159,24 +159,34 @@ As ((estruturas de dados)) podem ser entendidas como estruturas que
 são utilizadas para armazenar e/ou representar as informações (dados)
 que são úteis para a resolução ou entendimento do problema e serão
 utilizados nos programas e algoritmos. Basicamente, há dois tipos de
-estruturas de dados, a saber, estática e dinâmica. Pode-se entender
-como estruturas de dados estáticas: variáveis, 'arrays'
+estruturas de dados, a saber, estática e dinâmica:
+
+Estrutura de dados estática::
+São estrutura que utilizam *((alocação estática)) de memória*,
+o _espaço de memória_ necessário para armazenar a estrutura do dado é
+sempre o mesmo, e é conhecido no momento da sua declaração.
+Exemplos de estruturas estáticas são: variáveis, 'arrays'
 unidimensionais (também conhecidos como vetores), 'arrays'
 multidimensionais (também conhecidos como matrizes de duas, três ou
 mais dimensões), registros (também conhecidos como estruturas ou tipos
-estruturados) e arquivos. São classificadas como estruturas de dados
-dinâmicas: filas, pilhas, listas encadeadas, árvores e tabelas de
-dispersão. As estruturas de dados estáticas são abordadas neste livro,
+estruturados) e arquivos.
+
+Estrutura de dados dinâmica:: 
+São estrutura que utilizam *((alocação dinâmica)) de memória*,
+o _espaço de memória_ necessário para armazenar a estrutura do dado
+não é constante, podendo aumentar ou diminuir sempre que um novo dado é
+adicionado ou removido da estrutura. Exemplos de estruturas dinâmicas 
+são: filas, pilhas, listas encadeadas, árvores e tabelas de
+dispersão. 
+
+NOTE: As estruturas de dados estáticas são abordadas neste livro,
 enquanto que as estruturas de dados dinâmicas serão abordadas na
 disciplina 'Estrutura de Dados'.
 
-As estruturas de controle são utilizadas para manipular e controlar as
-estruturas de dados vistas no parágrafo anterior, ou seja, controlar o
-fluxo de informação, e também para controlar as tomadas de decisão
-dentro de um programa ou algoritmo. Podem ser divididas em três tipos:
-estruturas sequenciais, estruturas de seleção ou condicionais, e
-estruturas de repetição.
-
+As *((estruturas de controle))* são utilizadas para manipular e
+controlar as estruturas de dados, ou seja, controlar o fluxo de
+informação, e também para controlar as tomadas de decisão dentro de um
+programa ou algoritmo. 
 
 ==== Declaração de variáveis em C
 
