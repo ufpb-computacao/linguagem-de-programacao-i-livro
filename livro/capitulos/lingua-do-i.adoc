@@ -489,7 +489,7 @@ arquivos:
 Certifique-se de ter compreendido esta etapa antes de prosseguir para
 a próxima.
 
-=== Etapa 2: Utilizando assert em vez de exit
+=== Etapa 2: Utilizando `assert` em vez de `exit`
 
 :etapa: etapa2
 
@@ -507,7 +507,7 @@ indicando, através de uma mensagem, a linha do código fonte onde a
 falha está ocorrendo. 
 
 [[exemplo_assert]]
-==== Utilizando assert no teste 
+==== Utilizando `assert` no teste 
 Neste passo incluímos a biblioteca <<assert_h>> e atualizamos a função
 `verificaConteudosSaoIguais` para chamar a função `assert`, incluindo
 uma mensagem para descrever o erro:
@@ -2111,7 +2111,7 @@ arquivos:
 === Etapa 14: Implementando aplicaçaõ da lingua-do-i
 :etapa: etapa14
 
-==== Construindo o main
+==== Construindo o `main`
 
 Agora que já possuímos várias funções implementadas vamos
 incorporá-las ao `main` da aplicação.
@@ -2446,7 +2446,7 @@ por salvar a tradução na saída.
 Estas três funções ainda não existem, precisaremos implementá-las a
 seguir.
 
-===== Lendo conteúdo da entrada com fgets
+===== Lendo conteúdo da entrada com `fgets`
 
 Vamos iniciar a implementação com a função `lerLinhaDaEntrada`,
 responsável por ler uma linha da entrada:
@@ -2474,7 +2474,7 @@ até:
 `TAMANHO_MAXIMO_DA_LINHA`.
 
 [[sec_fgets_feof]]
-===== Sobre as funções fgets e feof
+===== Sobre as funções `fgets` e `feof`
 
 O propósito da função <<feof>> é indicar se em leituras anteriores o
 final do arquivo foi _atingido_. Para que isto ocorra, as funções de
@@ -2528,7 +2528,7 @@ processados. A próxima chamada iria ler os caracteres restante até o
 final da linha. 
 ////
 
-===== Salvando o conteúdo com a função fwrite
+===== Salvando o conteúdo com a função `fwrite`
 
 Finalmente, precisamos salvar o conteúdo traduzido na saída:
 

@@ -454,7 +454,7 @@ repetições pode ser um número fixo ou estar relacionado a uma condição
 definida pelo programador. Dessa maneira, há três tipos de estruturas
 de repetição que podem ser utilizadas para cada situação.
 
-===== Estrutura de repetição para um número definido de repetições (estrutura 'for')
+===== Estrutura de repetição para um número definido de repetições (estrutura `for`)
 
 É utilizada quando se sabe o número de vezes que um trecho do programa
 deve ser repetido. Esta estrutura é chamada em linguagem C de `for`. A
@@ -493,7 +493,7 @@ repete até que o valor do contador `j` se torne maior ou igual a `10`,
 fazendo com que a condição `j<10` assuma o valor *falso*. Perceba que
 nesse exemplo o 'bloco de comandos' será executado 10 vezes.
 
-===== Estrutura de repetição para um número indefinido de repetições (estrutura 'while')
+===== Estrutura de repetição para um número indefinido de repetições (estrutura `while`)
 
 A estrutura de repetição `while` é utilizada principalmente quando o
 número de repetições não é conhecido pelo programador. O Quadro 1.3
@@ -530,7 +530,7 @@ IMPORTANT: Note que o incremento do contador (`z++`) do exemplo
 anterior é último comando do `while`.
 
 
-===== Estrutura de repetição para um número indefinido de repetições e teste no final da estrutura (estrutura 'do-while')
+===== Estrutura de repetição para um número indefinido de repetições e teste no final da estrutura (estrutura `do-while`)
 
 Assim como a estrutura `while`, a estrutura `do-while` é utilizada
 principalmente quando o número de repetições não é conhecido pelo

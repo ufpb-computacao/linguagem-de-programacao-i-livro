@@ -311,7 +311,7 @@ para sua manipulação:
 NOTE: Perceba que a estrutura `FILE` não possui registro do nome do
 arquivo que está sendo manipulado.
 
-=== Cabeçalho stdio.h
+=== Cabeçalho `stdio.h`
 
 Todas as funções que serão apresentadas neste capítulo estão definidas
 no cabeçalho `stdio.h`, requerendo a inclusão deste arquivo para sua
@@ -327,7 +327,7 @@ utilização:
 Toda vez que desejamos ler ou escrever em um arquivo precisamos *abrir o
 arquivo* indicando esta intenção.
 
-==== Abrindo um arquivo com fopen
+==== Abrindo um arquivo com `fopen`
 
 (((Arquivo, abrindo))) (((fopen)))
 
@@ -467,7 +467,7 @@ atingido.
 Nesta seção vamos apresentar como ler e escrever no arquivo um
 carácter por vez.
 
-==== Lendo um carácter com fgetc ou getc
+==== Lendo um carácter com `fgetc` ou `getc`
 
 (((fgetc)))
 
@@ -499,7 +499,7 @@ retorna um *`int`*. Isto porque a `EOF` não é um carácter que indica o
 final final do arquivo, mas uma constante do tipo `int` que a função
 de leitura de carácter retorna ao atingir o final do arquivo.
 
-==== Escrevendo um carácter por vez com fputc e putchar
+==== Escrevendo um carácter por vez com `fputc` e `putchar`
 
 (((fputc)))
 
@@ -544,12 +544,12 @@ include::{local}/lendo_e_escrevendo_char.c[]
 <5> Fecha os arquivos abertos.
 
 
-=== Lendo e escrevendo uma linha por vez com fgets e fputs
+=== Lendo e escrevendo uma linha por vez com `fgets` e `fputs`
 
 Nesta seção vamos apresentar como ler e escrever no arquivo uma
 linha por vez.
 
-==== Lendo uma linha com fgets
+==== Lendo uma linha com `fgets`
 
 (((fgets)))
 
@@ -590,7 +590,7 @@ da linha lida.
 ====
 
 
-==== Escrevendo um string com fputs
+==== Escrevendo um string com `fputs`
 
 (((fputs)))
 
@@ -631,7 +631,7 @@ include::{local}/lendo_e_escrevendo_linha.c[]
 As funções de leitura e escrita de dados binários diferem dos arquivos
 de textos devido a ao conteúdo que será salvo e lido.
 
-==== Lendo uma sequencia de elementos de um arquivo com fread
+==== Lendo uma sequencia de elementos de um arquivo com `fread`
 
 (((fread)))
 
@@ -652,7 +652,7 @@ do que `quantidade`, caso o final do arquivo foi encontrado ou houve
 algum erro durante a leitura. Se `quantidade` ou `tamanho` for zero,
 então `buffer` permanece inalterado e a função retorna zero.
 
-==== Escrevendo uma sequencia de elementos de um arquivo com fwrite
+==== Escrevendo uma sequencia de elementos de um arquivo com `fwrite`
 
 (((fwrite)))
 
@@ -741,7 +741,7 @@ int fprintf(FILE * restrict arquivo,
     const char * restrict formato, ...);
 ----
 
-=== Descarregando o buffer com fflush
+=== Descarregando o buffer com `fflush`
 
 (((fflush)))
 
@@ -767,7 +767,7 @@ Em alguns casos podemos ter a necessidade de avançar ou retroceder o
 ponto de leitura ou escrita do arquivo, as seguintes funções a seguir
 servem a este propósito.
 
-==== Retrocede para o início do arquivo com rewind
+==== Retrocede para o início do arquivo com `rewind`
 
 (((rewind)))
 
