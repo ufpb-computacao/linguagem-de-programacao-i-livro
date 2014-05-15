@@ -496,53 +496,51 @@ nesse exemplo o 'bloco de comandos' será executado 10 vezes.
 ===== Estrutura de repetição para um número indefinido de repetições (estrutura `while`)
 
 A estrutura de repetição `while` é utilizada principalmente quando o
-número de repetições não é conhecido pelo programador. O Quadro 1.3
-<<sintaxe_estrutura_repeticao_while>> mostra a sua sintaxe geral.
-Nessa estrutura, o 'bloco de comando' é repetido enquanto a 'condição'
-for verdadeira e a 'condição de parada' é testada logo no início do
-comando `while`, assim, caso ela seja falsa, o bloco de comandos não é
-executado. O `while` pode também ser utilizado em situações em que se
-conhece o número de repetições.
+número de repetições não é conhecido pelo programador. A sintaxe
+geral da estrutura `while` é apresentada a seguir:
 
-[[sintaxe_estrutura_repeticao_while]]
 [source,c]
-.Sintaxe geral da estrutura de repetição 'while'
+.Sintaxe geral da estrutura de repetição `while`
 ----
 while(condição){
     // bloco de comandos;
 }
 ----
 
+Nessa estrutura, o 'bloco de comando' é repetido enquanto a 'condição'
+for verdadeira e a 'condição de parada' é testada logo no início do
+comando `while`, assim, caso ela seja falsa, o bloco de comandos não é
+executado. O `while` pode também ser utilizado em situações em que se
+conhece o número de repetições, como demonstrado no <<ex_uso_while>>.
+
+[[ex_uso_while]]
+.Uso do `while`
+====
 .Código fonte
 {gitrepo}/blob/master/livro/capitulos/code/cap1/while_exemplo.c[code/cap1/while_exemplo.c]
 
 [source,c]
-.Uso do 'while'
 ----
 int z=0;
 while (z<=3) {
 	printf("Continuo repetindo o comando.\n");
-	z++;
+	z++; <1>
 }
 ----
 
-IMPORTANT: Note que o incremento do contador (`z++`) do exemplo
-anterior é último comando do `while`.
+<1> O incremento do contador (`z++`) é último comando a ser executado
+    no `while`.
 
+====
 
 ===== Estrutura de repetição para um número indefinido de repetições e teste no final da estrutura (estrutura `do-while`)
 
 Assim como a estrutura `while`, a estrutura `do-while` é utilizada
 principalmente quando o número de repetições não é conhecido pelo
 programador, a diferença é que a 'condição de parada' é testada no
-final da estrutura, portanto, o bloco de comandos 3 no Quadro 1.4
-<<sintaxe_estrutura_repeticao_dowhile>> é executado pelo menos uma
-vez. Assim, o menu é exibido na tela a primeira vez e, caso o usuário
-digite uma opção diferente de 1, 2 ou 3, o comando é repetido. Perceba
-que nesse caso o `do-while` terminará somente quando o usuário
-escolher uma das opções 1, 2 ou 3.
+final da estrutura, portanto o _bloco de comandos_ é executado
+pelo menos uma vez, confira a sintaxe geral a seguir: 
 
-[[sintaxe_estrutura_repeticao_dowhile]]
 [source, c]
 .Sintaxe geral da estrutura de repetição `do-while`
 ----
@@ -550,6 +548,16 @@ do {
     // bloco de comandos
 } while (condição);
 ----
+
+O <<ex_uso_do_while>> demonstra o uso da estrutura `do-while`. Nele, 
+o menu é exibido na tela a primeira vez e, caso o usuário
+digite uma opção diferente de 1, 2 ou 3, o comando é repetido. Perceba
+que nesse caso o `do-while` terminará somente quando o usuário
+escolher uma das opções 1, 2 ou 3.
+
+[[ex_uso_do_while]]
+.Uso do `do-while`
+====
 
 .Código fonte
 {gitrepo}/blob/master/livro/capitulos/code/cap1/do_while_exemplo.c[code/cap1/do_while_exemplo.c]
@@ -565,6 +573,8 @@ do{
     scanf("%d", &i);
 } while ((i<1) || (i>3));
 ----
+
+====
 
 ==== Arrays em C
 
