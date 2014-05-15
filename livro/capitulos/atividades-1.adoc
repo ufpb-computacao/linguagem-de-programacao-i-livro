@@ -1,54 +1,11 @@
 === Atividades
 
-1. Faça um programa em C que receba o ano de nascimento de uma pessoa e o ano atual, calcule e 
-mostre: (a) a idade da pessoa; e (b) quantos anos ela terá em 2045. O programa deve ser capaz de 
-receber somente valores positivos e maiores do que zero para a idade da pessoa.
-
-
-2. Um supermercado deseja reajustar os preços de seus produtos usando o seguinte critério: o 
-produto poderá ter seu preço aumentado ou diminuído. Para o preço ser alterado (ou seja, ser 
-aumentado ou diminuído), o produto deve atender *PELO MENOS* uma das linhas da tabela a seguir:
-+
---
-[cols="^3,^2,^1,^1",frame="topbot",options="header"]
-|====
-| Venda média mensal (unidades vendidas)|Preço atual (R$)|% de aumento|% de diminuição
-| Menor que 500 | < R$ 30,00|10 %| -
-| Entre 500 (inclusive) e 1200| > = R$ 30,00 e < R$ 80,00| 15 %| -
-| Igual ou maior que 1200| > = R$ 80,00|- | 20 %
-|====
-
-Faça um programa em C que receba o preço atual e a venda média mensal do produto, calcule e 
-mostre o novo preço.
---
-
-3. Faça um algoritmo que receba um número positivo e maior que zero, calcule e mostre: o número 
+. Faça um algoritmo que receba um número positivo e maior que zero, calcule e mostre: o número 
 digitado ao quadrado, o número digitado ao cubo e a raiz quadrada do número digitado.
 
-
-
-4. João Papo-de-Pescador está organizando uma corrida de automóveis e precisa de um método para 
-computar os tempos das voltas no circuito. Faça um programa em C que tenha como entrada: i) o número 
-de pilotos que disputarão a corrida; ii)  os seus respectivos nomes; iii) o número de voltas da 
-corrida; iv) e o tempo de todas as voltas para cada piloto. O programa deve imprimir no final o 
-tempo médio da volta para cada piloto e o tempo da volta mais rápida da corrida (ou seja, a volta 
-que foi feita no menor tempo) e qual foi o piloto que a fez.
-
-
-
-5. Em uma competição de ginástica olímpica, a nota é determinada por um painel de seis juízes. 
-Cada um dos juízes atribui uma nota entre zero e dez para o desempenho do atleta. Para calcular a 
-nota final, a nota mais alta e a nota mais baixa são descartadas e é calculada a média das 
-quatro notas restantes. Escreva um programa que leia seis notas que devem estar entre zero e dez e, 
-em seguida, calcule a média após o descarte da maior e da menor nota. Faça duas versões desse 
-programa em C: i) usando somente estruturas de seleção e de repetição e sem o uso de vetores; ii) com o uso de vetores e estruturas de seleção e repetição.
-
-
-
-
-
-6. Analise o algoritmo abaixo e explique o que ele faz. Quais são os valores de LUCROMAX, PREÇOMAX 
-e INGRESSOSMAX que serão impressos no final da execução do algoritmo?
+. Analise o algoritmo abaixo e explique o que ele faz. Quais são os
+  valores de `LUCROMAX`, `PREÇOMAX` e `INGRESSOSMAX` que serão
+  impressos no final da execução do algoritmo?
 +
 [source,c,numbered]
 ----
@@ -80,69 +37,8 @@ fim algoritmo
 
 ----
 
-7. Uma empresa decidiu dar uma gratificação de Natal a seus funcionários baseada no número de 
-horas extras e no número de horas que o funcionário faltou ao trabalho. Faça um programa em C 
-que calcule o valor da gratificação de Natal. O valor do prêmio é obtido pela consulta à 
-tabela que se segue, na qual a variável SH é calculada da seguinte forma: SH = número de horas 
-extras – 0,5*(número de horas faltadas).
-+
---
-[width="80%",cols="^2,^1",frame="topbot",options="header"]
-|====
-| SH (em minutos)|Gratificação (em R$)
-| Maior ou igual a 2200|600,00
-| Entre 1700 (inclusive) e 2200|500,00
-| Entre 1000 (inclusive) e 1700|400,00
-| Entre 500 (inclusive) e 1000|300,00
-| Menor que 500|200,00
-|====
---
 
-
-8. Analise o código abaixo e diga qual é o valor que a variável `E` terá ao final da 
-execução do programa.
-+
-[source,c]
-----
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(void) {
-  double fat, E;
-  int i, j, n;
-  n = 4;
-  for(i=1; i<=n; i++){
-    fat=1;
-    for(j=1; j<=n; j++){
-      fat=fat*j;
-    }
-    E=E+(1/fat);
-  }
-  printf ("O valor da variável E é %lf ", E);
-  return 0;
-}
-----
-
-
-9. Faça um programa em C que receba o salário de um funcionário e, usando a tabela a seguir, 
-calcule e mostre o seu novo salário. O programa deve aceitar somente valores positivos e maiores 
-do que zero para o salário do funcionário.
-+
---
-[width="80%",cols="^2,^1",frame="topbot",options="header"]
-|====
-| Faixa Salarial|% de aumento
-| Até R$ 500,00|55 %
-| Entre R$ 500,00 e 700,00 (inclusive)|45 %
-| Entre R$ 700,00 e 900,00 (inclusive)|35 %
-| Entre R$ 900,00 e 1100,00 (inclusive)|25 %
-| Entre R$ 1100,00 e 1300,00 (inclusive)|15%
-| Acima de R$ 1300,00|5%
-|====
---
-
-
-10. Analise o código abaixo e diga qual é o valor que a variável `S` terá ao final da 
+. Analise o código abaixo e diga qual é o valor que a variável `S` terá ao final da 
 execução do algoritmo.
 +
 ----
@@ -182,7 +78,113 @@ Algoritmo
 fim algoritmo
 ----
 
-11. Uma agência bancária possui vários clientes que podem fazer investimentos com rendimentos 
+
+
+. Faça um programa em C que receba o ano de nascimento de uma pessoa e o ano atual, calcule e 
+mostre: (a) a idade da pessoa; e (b) quantos anos ela terá em 2045. O programa deve ser capaz de 
+receber somente valores positivos e maiores do que zero para a idade da pessoa.
+
+
+. Um supermercado deseja reajustar os preços de seus produtos usando o seguinte critério: o 
+produto poderá ter seu preço aumentado ou diminuído. Para o preço ser alterado (ou seja, ser 
+aumentado ou diminuído), o produto deve atender *PELO MENOS* uma das linhas da tabela a seguir:
++
+--
+[cols="^3,^2,^1,^1",frame="topbot",options="header"]
+|====
+| Venda média mensal (unidades vendidas)|Preço atual (R$)|% de aumento|% de diminuição
+| Menor que 500 | < R$ 30,00|10 %| -
+| Entre 500 (inclusive) e 1200| > = R$ 30,00 e < R$ 80,00| 15 %| -
+| Igual ou maior que 1200| > = R$ 80,00|- | 20 %
+|====
+
+Faça um programa em C que receba o preço atual e a venda média mensal do produto, calcule e 
+mostre o novo preço.
+--
+
+
+. João Papo-de-Pescador está organizando uma corrida de automóveis e precisa de um método para 
+computar os tempos das voltas no circuito. Faça um programa em C que tenha como entrada: i) o número 
+de pilotos que disputarão a corrida; ii)  os seus respectivos nomes; iii) o número de voltas da 
+corrida; iv) e o tempo de todas as voltas para cada piloto. O programa deve imprimir no final o 
+tempo médio da volta para cada piloto e o tempo da volta mais rápida da corrida (ou seja, a volta 
+que foi feita no menor tempo) e qual foi o piloto que a fez.
+
+
+
+. Em uma competição de ginástica olímpica, a nota é determinada por um painel de seis juízes. 
+Cada um dos juízes atribui uma nota entre zero e dez para o desempenho do atleta. Para calcular a 
+nota final, a nota mais alta e a nota mais baixa são descartadas e é calculada a média das 
+quatro notas restantes. Escreva um programa que leia seis notas que devem estar entre zero e dez e, 
+em seguida, calcule a média após o descarte da maior e da menor nota. Faça duas versões desse 
+programa em C: i) usando somente estruturas de seleção e de repetição e sem o uso de vetores; ii) com o uso de vetores e estruturas de seleção e repetição.
+
+
+
+
+
+. Uma empresa decidiu dar uma gratificação de Natal a seus funcionários baseada no número de 
+horas extras e no número de horas que o funcionário faltou ao trabalho. Faça um programa em C 
+que calcule o valor da gratificação de Natal. O valor do prêmio é obtido pela consulta à 
+tabela que se segue, na qual a variável SH é calculada da seguinte forma: SH = número de horas 
+extras – 0,5*(número de horas faltadas).
++
+--
+[width="80%",cols="^2,^1",frame="topbot",options="header"]
+|====
+| SH (em minutos)|Gratificação (em R$)
+| Maior ou igual a 2200|600,00
+| Entre 1700 (inclusive) e 2200|500,00
+| Entre 1000 (inclusive) e 1700|400,00
+| Entre 500 (inclusive) e 1000|300,00
+| Menor que 500|200,00
+|====
+--
+
+
+. Analise o código abaixo e diga qual é o valor que a variável `E` terá ao final da 
+execução do programa.
++
+[source,c]
+----
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  double fat, E;
+  int i, j, n;
+  n = 4;
+  for(i=1; i<=n; i++){
+    fat=1;
+    for(j=1; j<=n; j++){
+      fat=fat*j;
+    }
+    E=E+(1/fat);
+  }
+  printf ("O valor da variável E é %lf ", E);
+  return 0;
+}
+----
+
+
+. Faça um programa em C que receba o salário de um funcionário e, usando a tabela a seguir, 
+calcule e mostre o seu novo salário. O programa deve aceitar somente valores positivos e maiores 
+do que zero para o salário do funcionário.
++
+--
+[width="80%",cols="^2,^1",frame="topbot",options="header"]
+|====
+| Faixa Salarial|% de aumento
+| Até R$ 500,00|55 %
+| Entre R$ 500,00 e 700,00 (inclusive)|45 %
+| Entre R$ 700,00 e 900,00 (inclusive)|35 %
+| Entre R$ 900,00 e 1100,00 (inclusive)|25 %
+| Entre R$ 1100,00 e 1300,00 (inclusive)|15%
+| Acima de R$ 1300,00|5%
+|====
+--
+
+. Uma agência bancária possui vários clientes que podem fazer investimentos com rendimentos 
 mensais conforme a tabela a seguir:
 +
 --
@@ -196,10 +198,10 @@ mensais conforme a tabela a seguir:
 |====
 
 Faça um programa em C que tenha como dados de entrada o código do cliente, o código do tipo de 
-investimento e o valor investido. O algoritmo deve calcular e imprimir o rendimento mensal de 
-acordo com o tipo de investimento do cliente. No final, o algoritmo deverá imprimir o total 
+investimento e o valor investido. O programa deve calcular e imprimir o rendimento mensal de 
+acordo com o tipo de investimento do cliente. No final, deverá imprimir o total 
 investido por todos os clientes consultados e o somatório do rendimento mensal pago a todos os 
-clientes consultados. A leitura de clientes pelo algoritmo terminará quando o código do cliente 
+clientes consultados. A leitura de clientes pelo programa terminará quando o código do cliente 
 digitado for menor ou igual a `0` (zero).
 --
 
