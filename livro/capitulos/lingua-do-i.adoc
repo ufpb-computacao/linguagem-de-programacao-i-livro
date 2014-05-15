@@ -489,7 +489,7 @@ arquivos:
 Certifique-se de ter compreendido esta etapa antes de prosseguir para
 a próxima.
 
-=== Etapa 2: Utilizando assert ao invés de exit
+=== Etapa 2: Utilizando assert em vez de exit
 
 :etapa: etapa2
 
@@ -497,7 +497,7 @@ a próxima.
 
 Na final da etapa anterior vimos que nosso teste não apresentava um
 mensagem de erro amigável (informando qual a razão da falha).  Nesta
-etapa vamos apenas utilizar a função `assert` ao invés de
+etapa vamos apenas utilizar a função `assert` em vez de
 `exit(EXIT_FAILURE)`, para mudar isso.
 
 A função `assert`, definida em <<assert_h>>, costuma ser utilizada para
@@ -1494,7 +1494,7 @@ void testSalvaConteudoEmArquivo(){
 <4> Fechamento do arquivo temporário.
 
 Percebam que estamos definindo que a função `salvaConteudo` irá
-receber um `FILE*` ao invés de um `char*`, correspondente ao nome do
+receber um `FILE*` em vez de um `char*`, correspondente ao nome do
 arquivo, diferente de como fizemos com a função `lerConteudoDoArquivo`
 (no <<src_primeiro_teste>>). Isto foi intencional, pois pretendemos, no
 futuro, salvar o conteúdo também na saída padrão (que é do tipo
