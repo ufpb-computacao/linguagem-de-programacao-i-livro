@@ -104,7 +104,7 @@ endif::livro-html[]
 ==================
 Na *versão impressa* irá aparecer uma imagem quadriculada. Isto é o
 qrcode (http://pt.wikipedia.org/wiki/C%C3%B3digo_QR) contendo o link
-do vídeo. Caso você tenha um celular com acesso a internet poderá
+do vídeo. Caso você tenha um celular com acesso a Internet poderá
 acionar um programafootnote:[Busque na loja virtual do seu celular por
 ``qrcode''.] de leitura de qrcode para acessar o vídeo.
 
@@ -150,7 +150,7 @@ include::code/cap1/helloworld.c[]
 
 TIP: Nas *versões digitais* do livro você poderá clicar no nome do arquivo
 indicado em *Código fonte* para acessar a versão mais nova do arquivo, através
-da internet. Na seção <<codigo_fonte>> é apresentado como baixar os códigos
+da Internet. Na seção <<codigo_fonte>> é apresentado como baixar os códigos
 do livro.
 
 
