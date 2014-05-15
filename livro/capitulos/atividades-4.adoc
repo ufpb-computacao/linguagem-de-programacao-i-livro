@@ -13,8 +13,7 @@
 .  A função <<calloc>> também costuma ser utilizada na alocação de
    memória, seu diferencial é que todo o espaço alocado é inicializado
    com zeros. Para conhecer a utilização desta função, recomendamos
-   que o reescreva o código do arquivo
-   <<"code_regitro_dinamico","code/cap4/registro_dinamico.c">>
+   que o reescreva o código do <<ex_registro_dinamico>>
    invocando a função `calloc` no lugar de `malloc`.
 
 . Um professor de uma disciplina deseja montar um programa em

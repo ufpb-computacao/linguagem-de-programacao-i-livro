@@ -58,40 +58,51 @@ preenchido quando um valor é atribuído a variável, como por exemplo, o valor 
 image::images/cap3/declaracao-atribuicao-memoria.eps[scaledwidth="70%"]
 
 Um cuidado importante que todo programador deve ter é inicializar as 
-variáveis antes do seu uso. Veja no código a seguir que, quando não se 
+variáveis antes do seu uso. Veja no <<ex_variavel_nao_inicializada>> que, quando não se 
 inicializa uma variável, o valor que ela assume é aleatório e depende do 
 ``lixo'' no espaço de memória onde foi criada. No momento em que esse 
-código foi criado, compilado e executado o valor de `conta` foi 624.756.000,00! 
+código foi criado, compilado e executado o valor de `conta` 
+foi 624.756.000,00!footnote:[Você iria trabalhar a vida inteira para 
+pagar essa conta de luz!]
 Ou seja, um valor totalmente aleatório e que muda a cada vez que a memória 
-RAM do computador é inicializada. Você iria trabalhar a vida inteira para 
-pagar essa conta de luz! O correto é inicializar a variável antes de 
+RAM do computador é inicializada. O correto é inicializar a variável antes de 
 utilizá-la. Como exercício, compile e execute o código a seguir com e sem o 
 comentário indicado. Certamente, com a linha comentada, o valor impresso 
 na tela será diferente em cada computador em que esse código for executado.
 
+[[ex_variavel_nao_inicializada]]
+.Programa para demonstrar valor de variável não inicializada
+====
+
 .Código fonte
 {online}/variavel_nao_inicializada.c[{local}/variavel_nao_inicializada.c]
 
-[[variavel_nao_inicializada]]
 [source, c]
-.Programa para demonstrar valor de variável não inicializada
 ----
 include::{local}/variavel_nao_inicializada.c[]
 ----
 
+.Saída do programa
+....
+include::{local}/variavel_nao_inicializada.out[]
+....
+
+====
 
 Dessa forma, todo nome de variável está associado a um endereço na memória. 
 O *((operador de endereço))* `&` pode ser usado para obter a localização de uma 
-variável na memória, ou seja, o endereço de memória. O código a seguir 
+variável na memória, ou seja, o endereço de memória. O <<ex_uso_operador_endereco>> 
 mostra como esse operador pode ser utilizado para se obter o endereço de 
 memória onde uma variável foi criada. Note que no `printf`, o `%p` foi utilizado 
 como formato para endereço de memória.
 
+[[ex_uso_operador_endereco]]
+.Programa para demonstrar uso do Operador de Endereço
+====
 .Código fonte
 {online}/operador_de_endereco.c[{local}/operador_de_endereco.c]
 
 [source, c]
-.Programa para demonstrar uso do Operador de Endereço
 ----
 include::{local}/operador_de_endereco.c[]
 ----
@@ -100,6 +111,7 @@ include::{local}/operador_de_endereco.c[]
 ....
 include::{local}/operador_de_endereco.data[]
 ....
+====
 
 
 [[sec_ponteiros_definicao]]
@@ -197,16 +209,18 @@ Cuidado com declarações múltiplas.
  char *p1, *p2;  // p1 e p2 são ponteiros para char
 ====
 
-Com o intuito de sedimentar o conceito de ponteiros, o código a seguir mostra 
-um exemplo de como um ponteiro é usado para manipular o conteúdo da variável 
-para qual está apontando.  Execute esse programa no seu computador e
+Com o intuito de sedimentar o conceito de ponteiros, o <<ex_uso_ponteiro>> 
+mostra como um ponteiro é usado para manipular o conteúdo da variável 
+para qual está apontando. Execute esse programa no seu computador e
 faça modificações à vontade para você melhor absorver o conceito de ponteiros.
 
+[[ex_uso_ponteiro]]
+.Usando ponteiro para alterar variável
+====
 .Código fonte
 {online}/usando_ponteiro.c[{local}/usando_ponteiro.c]
 
 [source, c]
-.Usado ponteiro para alterar variável
 ----
 include::{local}/usando_ponteiro.c[]
 ----
@@ -225,6 +239,7 @@ include::{local}/usando_ponteiro.c[]
 ....
 include::{local}/usando_ponteiro.out[]
 ....
+====
 
 Finalmente, recapitulando, note que há dois operadores que são utilizados 
 para a manipulação e/ou definição de ponteiros, a saber, o operador `&`, 
@@ -279,9 +294,9 @@ image::images/cap3/pilha_de_execucao.eps[scaledwidth="50%"]
 // FIXME: Atualizar imagem de pilha de execução #17
 
 
-Considere agora o código mostrado a seguir. Esse exemplo mostra um programa 
+O <<ex_fsoma_pares>> mostra um programa 
 que calcula a soma dos números pares entre 0 e 200. A etapa de cálculo da 
-soma é feita na função `f_soma`, a qual é chamada na linha 11 dentro da 
+soma é feita na função `f_soma`, a qual é chamada na linha 10 dentro da 
 _função principal_ (função `main` ou função chamadora). Como dito 
 anteriormente, quando uma função é executada, as suas _((variáveis locais))_ são 
 criadas, e após a sua execução, essas variáveis locais deixam de existir. 
@@ -294,14 +309,17 @@ passado na chamada da função. Sendo assim, `PAR` dentro da função `f_soma` n
 representa a `PAR` dentro da função main; o fato delas terem o mesmo nome é 
 indiferente.
 
+[[ex_fsoma_pares]]
+.Calcula soma dos números pares entre 0 e 200
+====
 .Código fonte
 {online}/f_soma.c[{local}/f_soma.c]
 
-[source, c]
+[source, c, numbered]
 ----
 include::{local}/f_soma.c[]
 ----
-
+====
 
 [TIP]
 Como exercício para casa e para visualizar o que foi dito, inclua, usando o 
@@ -323,21 +341,21 @@ pilha correspondente àquela função é liberada. Por isso, não se pode
 acessar as variáveis locais de fora da função em que foram definidas.
 Perceba na <<fig_pilha_executando>>(a) que quando o programa inicia, a
 função `main` inicia com a pilha vazia. Seguindo na execução do
-programa (linhas 7 a 10 do programa), a <<fig_pilha_executando>>(b)
+programa (linhas 6 a 9 do programa), a <<fig_pilha_executando>>(b)
 mostra a definição e inicialização das variáveis `soma` e `PAR` na
-pilha. Com a chamada da função (linha 11), a
+pilha. Com a chamada da função (linha 10), a
 <<fig_pilha_executando>>(c) apresenta a variável `PAR` da função
 `f_soma` na pilha de execução (observe que `PAR` inicia com valor
 200). A  <<fig_pilha_executando>>(d) ilustra a criação/inicialização
 da variável local `s` dentro da função `f_soma`. A
 <<fig_pilha_executando>>(e) mostra a situação da pilha após o laço
 `while` (linha 22), note que agora `PAR` possui valor 0 (zero) e `s`
-10100.0 (que é a soma dos números pares entre 0 e 200). Nesse caso,
+`10100.0` (que é a soma dos números pares entre 0 e 200). Nesse caso,
 veja que a variável `PAR` dentro da função `main` continua com seu
 valor inicial, ou seja, 200. A  <<fig_pilha_executando>>(f) mostra a
 situação após o retorno da função (linha 23), ou seja, o valor
 retornado pela função `f_soma` é armazenado na variável soma dentro da
-função `main` (linha 11).
+função `main` (linha 10).
 
 [[fig_pilha_executando]]
 .Ilustração da pilha de execução na memória RAM de um programa em execução.
@@ -380,11 +398,14 @@ referência* para as funções e é necessário o uso de ponteiros para
 esse fim. 
 
 
-Para melhor entender esse debate, a seguir é dado um exemplo simples de um 
+Para melhor entender esse debate, o <<ex_calcular_soma_e_subtracao>> mostra um 
 programa para se calcular a soma e subtração de dois números inteiros. Vamos 
 iniciar com um programa que usa uma função para calcular a subtração de 
 dois números inteiros:
 
+[[ex_calcular_soma_e_subtracao]]
+.Calcular a soma e subtração de dois números inteiros
+====
 .Código fonte
 {online}/subtracao-passagem-por-valor.c[{local}/subtracao-passagem-por-valor.c]
 
@@ -395,6 +416,8 @@ include::{local}/subtracao-passagem-por-valor.c[]
 
 <1> Salvando na variável `sub` o retorno da função `calculadora`.
 
+====
+
 (((passagem de parâmetros por valor)))
 
 Nesse exemplo não há um problema explícito, pois o resultado da subtração 
@@ -404,8 +427,11 @@ valor* acontece quando se deseja retornar em uma função mais de um valor para
 a função `chamadora`. Vamos supor que agora se deseje retornar o valor da soma 
 e subtração de dois números inteiros. Usando a ideia da passagem de 
 parâmetros por valor uma forma incorreta de se implementar esse programa é 
-mostrada a seguir.
+mostrada no <<ex_passagem_incorreta>>.
 
+[[ex_passagem_incorreta]]
+.Implementação incorreta de passagem de parâmetros
+====
 .Código fonte
 {online}/passagem_incorreta.c[{local}/passagem_incorreta.c]
 
@@ -420,7 +446,9 @@ include::{local}/passagem_incorreta.c[]
 include::{local}/passagem_incorreta.out[]
 ....
 
-Como se sabe e já foi alertado no texto, esse código não funciona. Serão 
+====
+
+Como se sabe, e já foi alertado no texto, _esse código não funciona_. Serão 
 impressos na tela valores incorretos e que dependem da execução em cada 
 computador, os valores das variáveis `sub` e `soma` calculados na função 
 `calculadora` não possuem relação com as variáveis `sub` e `soma` impressos na 
@@ -435,9 +463,12 @@ Dessa forma, se for passado para uma função os valores dos endereços de
 memória em que suas variáveis estão armazenadas (i.e., os ponteiros que 
 apontam para essas variáveis), essa função pode alterar _indiretamente_ os 
 valores das variáveis na função chamadora. Usando-se essa estratégia, é 
-possível resolver o problema do último exemplo. Isso é feito no código a 
-seguir.
+possível resolver o problema do <<ex_passagem_incorreta>>. Isso é feito no 
+código do <<ex_passagem_por_referencia>>.
 
+[[ex_passagem_por_referencia]]
+.Passagem de valores por referência
+====
 .Código fonte
 {online}/passagem_por_referencia.c[{local}/passagem_por_referencia.c]
 
@@ -457,6 +488,7 @@ include::{local}/passagem_por_referencia.c[]
 ....
 include::{local}/passagem_por_referencia.out[]
 ....
+====
 
 (((protótipo da função)))
 

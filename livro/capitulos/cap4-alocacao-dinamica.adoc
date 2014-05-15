@@ -239,7 +239,7 @@ free(soma); // comando incorreto
 ----
 =====
 
-O código a seguir mostra que um ponteiro pode ser utilizado várias 
+O <<ex_reutilizando_ponteiro>> mostra que um ponteiro pode ser utilizado várias 
 vezes para se alocar memória dinamicamente. O cuidado que o 
 programador deve ter é liberar o espaço de memória alocado 
 dinamicamente antes de fazer uma nova alocação usando o mesmo 
@@ -250,11 +250,14 @@ memória alocado dinamicamente (linha 16), o sistema operacional pode
 reutilizá-lo para outros fins, que nesse caso foi uma nova 
 alocação dinâmica de memória (linha 19).
 
+[[ex_reutilizando_ponteiro]]
+.Reutilizando um ponteiro
+====
+
 .Código fonte
 {online}/reutilizando_ponteiro.c[{local}/reutilizando_ponteiro.c]
 
 [source, c, numbered]
-.Reunitizando um ponteiro
 ----
 include::{local}/reutilizando_ponteiro.c[]
 ----
@@ -263,7 +266,7 @@ include::{local}/reutilizando_ponteiro.c[]
 ....
 include::{local}/reutilizando_ponteiro.out[]
 ....
-
+====
 
 // FIXME Remover referências aos números das linhas
 
@@ -280,6 +283,8 @@ No exemplo a seguir é feita uma realocação em que o espaço alocado
 passa de 20 para 25 tipos `float`. E depois de 25 para 12 tipos
 `floats`.
 
+.Realocação de espaço
+====
 [source,c]
 ----
 float *ptr = (float* ) malloc (20*sizeof(float));
@@ -288,6 +293,7 @@ ptr = (float* ) realloc (ptr, 25*sizeof(float));
 // ... (sequência de comandos)
 ptr = (float* ) realloc (ptr, 12*sizeof(float));
 ----
+====
 
 === Arrays dinâmicos
 
@@ -316,15 +322,16 @@ ptr = (float*) malloc(n*sizeof(float));
 Em que `ptr` é um ponteiro que irá armazenar o valor retornado pela 
 função `malloc`, note que `ptr` é um ponteiro para um tipo `float` já 
 que se trata de alocação de um vetor de tipos `float`, e `n` representa a 
-dimensão do vetor. A seguir é dado um exemplo de como se utilizar 
-um vetor dinâmico em um programa em C que calcula a soma de dois 
-vetores.
+dimensão do vetor. O <<ex_soma_vetores>> mostra como se utilizar 
+um vetor dinâmico que calcula a soma de dois vetores.
 
+[[ex_soma_vetores]]
+.Programa que realiza soma de dois vetores
+====
 .Código fonte
 {online}/soma_vetores.c[{local}/soma_vetores.c]
 
 [source, c, numbered]
-.Programa que realiza soma de dois vetores
 ----
 include::{local}/soma_vetores.c[]
 ----
@@ -333,6 +340,7 @@ include::{local}/soma_vetores.c[]
 ....
 include::{local}/soma_vetores.out[]
 ....
+====
 
 Note que há outras maneiras de se resolver o problema da soma de 
 dois vetores. Esse exemplo foi dado somente para ilustrar o uso de 
@@ -396,14 +404,16 @@ float *mtr;
 mtr = (float*) malloc(l*c*sizeof(float)); 
 ----
 
-O exemplo a seguir mostra o uso dessa estratégia para uma matriz com 
+O <<ex_vetor_matriz>> mostra o uso dessa estratégia para uma matriz com 
 4 linhas e 3 colunas.
 
+[[ex_vetor_matriz]]
+.Utilização de vetor para alocação de uma matriz
+====
 .Código fonte
 {online}/vetor_matriz.c[{local}/vetor_matriz.c]
 
 [source, c]
-.Utilizando vetor e matriz
 ----
 include::{local}/vetor_matriz.c[]
 ----
@@ -412,6 +422,7 @@ include::{local}/vetor_matriz.c[]
 ....
 include::{local}/vetor_matriz.out[]
 ....
+====
 
 Como comentário final, existem outras maneiras de se alocar 
 dinamicamente uma matriz, todavia, em geral, é preciso utilizar um 
@@ -460,20 +471,22 @@ comando `sizeof(jogador)`.
 
 Um ponto importante a ser observado é que o operador para acessar os 
 campos de um registro alocado dinamicamente é o `->` e não o 
-operador ponto (``.''). O código a seguir ilustra a alocação dinâmica 
-de registro e o preenchimento de seus campos. Perceba na linhas 12 e 
-13 que a alocação dinâmica do registro é feita, o preenchimento 
-de seus campos é feitos nas linhas 16 a 18 e nas linhas 20 e 21 os 
+operador ponto (``.''). O <<ex_aloca_registro_dinamicamente>> ilustra a alocação dinâmica 
+de registro e o preenchimento de seus campos. Perceba a alocação dinâmica do registro é feita
+na linha 14, o preenchimento 
+de seus campos é feitos nas linhas 16 a 18 e na linhas 20 os 
 valores gravados são impressos. Note que o operador `->` foi 
 utilizado para acessar os campos do registro, tanto no preenchimento 
-quanto na impressão. Na linha 22 a memória alocada é liberada 
+quanto na impressão. Na linha 21 a memória alocada é liberada 
 usando o comando `free(ptr)`.
 
+[[ex_aloca_registro_dinamicamente]]
+.Programa que demonstra aloção de registro dinamicamente
+====
 .Código fonte
 {online}/aloca_registro_dinamicamente.c[{local}/aloca_registro_dinamicamente.c]
 
-[source, c]
-.Programa que demonstra aloção de registro dinamicamente
+[source, c, numbered]
 ----
 include::{local}/aloca_registro_dinamicamente.c[]
 ----
@@ -482,6 +495,7 @@ include::{local}/aloca_registro_dinamicamente.c[]
 ....
 include::{local}/aloca_registro_dinamicamente.out[]
 ....
+====
 
 É possível também definir vetores de registros, i.e., vetores 
 cujos elementos são registros. Em outras palavras, em cada posição 
@@ -512,20 +526,23 @@ tipo de registro que se pretende criar o vetor e `Treze` é o nome do
 vetor que acabou de ser criado. Observe que foi criado um vetor de 
 estruturas com 22 posições.
 
-O exemplo a seguir mostra um código para preenchimento de um  
+O <<ex_reutilizando_ponteiro>> mostra um código para preenchimento de um  
 vetor de estruturas com 22 posições ilustrando o cadastramento de 
-uma equipe de futebol com 22 jogadores. Note nas linhas 16 a 19 e 22 
+uma equipe de futebol com 22 jogadores. Note nas linhas 17 a 19, 22 e 23
 que o operador ponto ``.'' é utilizado para acessar os campos 
 do registro.
 
+[[ex_registros_estaticos]]
+.Utilização de registros estáticos
+====
 .Código fonte
 {online}/registros_estaticos.c[{local}/registros_estaticos.c]
 
-[source, c]
-.Utilização de registros estáticos
+[source, c, numbered]
 ----
 include::{local}/registros_estaticos.c[]
 ----
+====
 
 A alocação de um vetor de registros dinamicamente segue a mesma 
 lógica que já foi vista para um vetor de outros tipos (`int`, `float`, 
@@ -541,23 +558,27 @@ jogador *jogadores;
 jogadores = (jogador*) malloc(22*sizeof(jogador));
 ----
 
-O exemplo a seguir temos um código semelhante ao anterior só que 
+No <<ex_registro_dinamico>> temos um código semelhante ao anterior só que 
 nesse caso o vetor de registros foi alocado dinamicamente. Note que 
 na linha 32 o ponteiro `jogadores` é liberado. Um detalhe de 
 implementação é que o operador ponto ``.'' foi utilizado para 
 acessar os campos do vetor de registros pois a notação `jogadores[i]` é 
-a notação de vetor. A notação de ponteiro foi demonstrada na linha 30.
+a notação de vetor. A notação de ponteiro é demonstrada na linha 30.
+
+
+[[ex_registro_dinamico]]
+.Utilização de registros alocados dinamicamente
+====
 
 .Código fonte
 {online}/registro_dinamico.c[{local}/registro_dinamico.c]
 
-[[code_regitro_dinamico]]
-[source, c]
-.Utilização de registros alocados dinamicamente
+[source, c, numbered]
 ----
 include::{local}/registro_dinamico.c[]
 ----
 
+====
 
 
 ////
