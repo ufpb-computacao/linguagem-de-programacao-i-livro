@@ -53,7 +53,7 @@ leitura de arquivo.
 `Makefile`:: Makefile para compilar o projeto e
 executar os testes.
 
-==== Criando um main estúpido
+==== Criando um main inocente
 
 Embora não iremos nos preocupar com o main da aplicação ainda, nosso
 primeiro passo será criar o main da aplicação `lingua-do-i` apenas
@@ -63,19 +63,19 @@ registrar didaticamente o propósito que este arquivo terá.
 {online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/src/lingua-do-i.c]
 
 [source, c]
-.Código que contém o main do aplicativo, com implementação estúpida
+.Código que contém o main do aplicativo, com implementação inocente
 ----
 include::{local}/{etapa}/src/lingua-do-i.c[]
 ----
 
-<1> *Implementação estúpida* para o main da aplicação.
+<1> *Implementação inocente* para o main da aplicação.
 <2> Retorna `EXIT_SUCCESS` indicando que a aplicação saiu sem erros.
 
 NOTE: `EXIT_SUCCESS` é definido em <<stdlib_h>>, junto com
 `EXIT_FAILURE` que tem o propósito inverso: indicar que houve erro na
 execução da aplicação.
 
-TIP: O termo técnico *((implementação estúpida))* provém do inglês:
+TIP: O termo técnico *((implementação inocente))* provém do inglês:
 *dummy implementation*. Geralmente utilizado quando desejamos aguardar
 o momento oportuno para realizar a implementação apropriada, também
 costuma ter o propósito de fazer o código compilar ou apenas preencher
@@ -322,9 +322,9 @@ make: ** [lingua-do-i-test] Erro 1
 Ótimo, agora só estamos com um erro, devido a ausência da
 implementação de `lerConteudoDoArquivo`.
 
-==== Implementando estúpida de lerConteudoDoArquivo
+==== Implementando inocente de lerConteudoDoArquivo
 
-Vamos adicionar uma implementação estúpida de `lerConteudoDoArquivo`
+Vamos adicionar uma implementação inocente de `lerConteudoDoArquivo`
 somente para conseguir compilar o código.
 
 .Código fonte
@@ -337,7 +337,7 @@ include::{local}/{etapa}/src/lingua-do-i-core.c[]
 ----
 <1> Inclusão do arquivo de cabeçalho, onde estarão definidas as funções
     públicas. 
-<2> Implementação estúpida da função que desejamos implementar.
+<2> Implementação inocente da função que desejamos implementar.
 
 Com esta função implementada, vamos tentar compilar novamente:
 
@@ -456,7 +456,7 @@ make: ** [test_all] Erro 1
 ....
 
 Como esperado, nosso teste está falhando. Lembra que nossa função
-`lerConteudoDoArquivo` possui uma implementação estúpida? Não há como
+`lerConteudoDoArquivo` possui uma implementação inocente? Não há como
 passar com uma implementação daquela.
 
 Apesar do erro esperado, a mensagem de erro do teste não foi muito
@@ -875,10 +875,10 @@ Primeiro precisaremos atualizar o cabeçalho do core:
 char* traduzParaLingaDoI(char* mensagemOriginal);
 ----
 
-Em seguida, vamos criar a função com uma implementação estúpida:
+Em seguida, vamos criar a função com uma implementação inocente:
 
 [source,c]
-.Implementação estúpida de traduzParaLingaDoI em lingua-do-i-core.c
+.Implementação inocente de traduzParaLingaDoI em lingua-do-i-core.c
 ----
 char* traduzParaLingaDoI(char* mensagemOriginal){
 	return NULL;
