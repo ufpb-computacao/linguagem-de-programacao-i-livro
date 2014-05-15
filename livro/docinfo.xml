@@ -1,9 +1,5 @@
-
-<!--
-  rudder-doc-docinfo.xml
-  DocBook document information file for rudder-doc.txt.
--->
-  <edition>{edition}</edition>
+<subtitle>Programação Estruturada usando C</subtitle>
+<edition>{edition}</edition>
 
   <revhistory>
 
