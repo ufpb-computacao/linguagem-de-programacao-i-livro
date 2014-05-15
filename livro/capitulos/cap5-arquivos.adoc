@@ -10,11 +10,24 @@ ____
 Ao final deste capítulo você deverá ser capaz de:
 
 * Entender o conceito de arquivos e seus tipos;
-* Aprofundar o conhecimento sobre armazenamento e manipulação de dados
-  no computador por meio do uso de arquivos;
-* Fazer manipulação de dados em arquivos por meio de operações como
-  leitura, escrita, dentre outras.  
-
+* Identificar os arquivos especiais no Windows e Linux;
+* Compreender porque não é possível criar uma pasta com o nome
+  `con` no Windows;
+* Conhecer as semelhanças e diferenças entre Arquivos e Fluxos;
+* Escrever programas em C para manipular arquivos somente texto e
+  binário;
+* Escrever programas em C que leiam e escrevam corretamente na entrada
+  padrão, na saída padrão e na saída de erros;
+* Verificar se houve erro durante as operações de leitura e escrita ou
+  se chegou ao final do arquivo;
+* Utilizar as funções `fgetc` ou `getc` para ler carácteres 
+  e `fputc` ou `putchar` para escrever carácteres em arquivos;
+* Utilizar as funções `fgets` e `fputs` para ler e escrever linhas em
+  arquivos somente texto.
+* Utilizar as funções `fread` e `fwrite` para ler e escrever em
+  arquivos binários.
+* Compreender o que é o _indicador de posição_ de arquivos e
+  identificar as funções que o manipula.
 ____
 
 
@@ -124,22 +137,22 @@ Windows Administration at the Command Line for Windows Vista, Windows 2003
 Para testar os arquivos especiais no Windows, abra o *Prompt de
 Comando do MS-DOS* e digite os comandos informados a seguir.
 
-Neste primeiro teste vamos comparar a escrita num arquivo normal e a
-escrita no arquivo `NUL`, no Windows:
+Neste primeiro teste vamos comparar a escrita em arquivo normal e a
+escrita no arquivo especial `NUL`, no Windows:
 
 ....
-> echo "oi" > arquivo.txt <1>
-> type arquivo.txt <2>
+> echo "oi" > saida.txt <1>
+> type saida.txt <2>
 oi <3>
 > echo "oi" > nul <4>
 > type nul <4>
 <5>
 ....
 <1> Invoca o comando `echo` para escrever a mensagem `oi` e
-    redireciona a saída ao arquivo `arquivo.txt` que será criado ou
+    redireciona a saída ao arquivo `saida.txt` que será criado ou
     sobrescrito, caso exista.
 <2> Utiliza o comando `type` para ler o conteúdo do arquivo.
-<3> O conteúdo do arquivo lido.
+<3> Exibição do conteúdo do arquivo lido.
 <4> Faz o mesmo, mas redireciona o conteúdo para o arquivo especial
     `NUL`.
 <5> Nada é exibido, pois tudo que foi enviado para `NUL` foi
@@ -162,8 +175,11 @@ O nome de pasta é inválido <3>
 
 *Como desafio, deixamos um último teste para você*. O que iria acontecer
 se utilizássemos o comando `TYPE` para ler o conteúdo do arquivo
-`CON`? Reflita um pouco sobre o resultado esperado depois teste: `type
-con`.
+`CON`? Reflita um pouco sobre o resultado esperado depois execute: 
+
+....
+> TYPE CON
+....
 
 ====
 
@@ -220,12 +236,13 @@ od -t d1 saida.bin
 
 ////
 
-NOTE: Este tipo de arquivo especial não existe no Windows, todos os
-arquivos especiais neste sistema estão relacionados aos dispositivos.
+NOTE: O tipo de arquivo _especial devido ao conteúdo_ não existe no
+Windows, todos os arquivos especiais neste sistema estão relacionados
+aos dispositivos.
 
 === Arquivos e fluxos
 
-Nesta seção vamos apresentar as carácteristicas de fluxo de dados e
+Nesta seção vamos apresentar as características de fluxo de dados e
 arquivos e suas similaridades importantes para linguagem C.
 
 ==== Fluxo de dados
@@ -757,7 +774,7 @@ servem a este propósito.
 
 (((rewind)))
 
-A seguinte função retrocede o indicador de posição para o início do
+A função <<rewind>> retrocede o indicador de posição para o início do
 arquivo:
 
 [source,c]
@@ -769,7 +786,7 @@ void rewind(FILE *arquivo);
 
 (((ftell)))
 
-A seguinte função retorna a posição atual no arquivo:
+A função <<ftell>> retorna a posição atual no arquivo:
 
 [source,c]
 ----
@@ -781,11 +798,11 @@ long int ftell(FILE *arquivo);
 (((fseek)))
 
 Para ir para o final do arquivo invocamos podemo utilizar a função
-`fseek` da seguinte forma:
+<<fseek>> da seguinte forma:
 
 [source,c]
 ----
-fseek(arquivo, 0, SEEK_END);
+long fseek(arquivo, 0, SEEK_END);
 ----
 
 === Recapitulando

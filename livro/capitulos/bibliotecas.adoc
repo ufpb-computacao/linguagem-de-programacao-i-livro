@@ -557,11 +557,11 @@ long int ftell(FILE *arquivo);
 
 Ver http://www.cplusplus.com/reference/cstdio/ftell/, <<fseek>>.
 
-[[frewind]]
-[id="frewind", reftext="frewind()"]
-==== frewind
+[[rewind]]
+[id="rewind", reftext="rewind()"]
+==== rewind()
 
-(((frewind)))
+(((rewind)))
 
 [source,c]
 ----
