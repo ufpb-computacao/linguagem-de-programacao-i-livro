@@ -73,6 +73,8 @@ dispositivo.
 Existem arquivos que representam os discos, partições, impressoras,
 placa de rede, placa de som, microfone entre outros dispositivos.
 
+===== No Linux
+
 Como exemplo da utilização deste tipo de arquivo especial, temos o
 seguinte comando no Linux, que o ler do arquivo `/dev/cdrom` (que
 representa o CD-ROM) e salva a imagem do CD-ROM no arquivo
@@ -87,6 +89,83 @@ Neste comando o parâmetro `if` (_input file_) especifica o arquivo de
 entrada, que neste caso é um arquivo especial que representa o CD-ROM
 (`/dev/cdrom`).  Enquanto que `of` (_output file_) especifica o
 arquivo de saída que será criado: `cdrom_image.iso`.
+
+===== No Windows
+
+No Windows os seguintes arquivos representam dispositivos:
+
+`CON`:: O console do sistema. É uma combinação do teclado (quando
+utilizado como leitura) e a tela (durante a escrita). 
+
+`PRN`:: Representa a impressora padrão.
+
+`LPT1` à `LPT4`:: Representa as portas paralelas. Os computadores
+modernos não costumam mais possuir esta entrada.
+
+`COM1` à `COM4`:: Representa as portas seriais.
+
+`NUL` :: Tudo que for enviado para este arquivo é descartado.
+
+`CLOCK$`:: Representa o dispositivo do relógio do sistema. Este
+arquivo não funciona nos sistemas modernos.
+
+
+
+////
+http://wiki.xdroop.com/space/Windows/File+Naming+Rules
+http://books.google.com.br/books?id=Ua819DVKQPwC&pg=PA27&lpg=PA27&dq=read+clock%24+file+windows&source=bl&ots=MlBXjE4rAq&sig=ex2BCxzzqS3_wTG4vgfout9afI8&hl=pt-BR&sa=X&ei=XU90U7eFFdTNsQSvpYHgDA&redir_esc=y#v=onepage&q=read%20clock%24%20file%20windows&f=false
+Windows Administration at the Command Line for Windows Vista, Windows 2003
+////
+
+[TIP]
+.Testando arquivos de dispositivos no Windows
+====
+
+Para testar os arquivos especiais no Windows, abra o *Prompt de
+Comando do MS-DOS* e digite os comandos informados a seguir.
+
+Neste primeiro teste vamos comparar a escrita num arquivo normal e a
+escrita no arquivo `NUL`, no Windows:
+
+....
+> echo "oi" > arquivo.txt <1>
+> type arquivo.txt <2>
+oi <3>
+> echo "oi" > nul <4>
+> type nul <4>
+<5>
+....
+<1> Invoca o comando `echo` para escrever a mensagem `oi` e
+    redireciona a saída ao arquivo `arquivo.txt` que será criado ou
+    sobrescrito, caso exista.
+<2> Utiliza o comando `type` para ler o conteúdo do arquivo.
+<3> O conteúdo do arquivo lido.
+<4> Faz o mesmo, mas redireciona o conteúdo para o arquivo especial
+    `NUL`.
+<5> Nada é exibido, pois tudo que foi enviado para `NUL` foi
+    descartado.
+
+Neste segundo teste, vamos comparar a criação de um diretório com a tentativa
+de criar um novo diretório com um nome de arquivo reservado
+(especial):
+
+....
+> mkdir novodir <1>
+> mkdir con <2>
+O nome de pasta é inválido <3>
+....
+<1> Utiliza o comando `mkdir` para criar um diretório chamado
+    `novodir`. O diretório é criado com sucesso.
+<2> Tenta criar um diretório utilizando o nome de um arquivo especial:
+    `con`.
+<3> Mensagem de erro ao tentar criar diretório com o nome reservado.
+
+*Como desafio, deixamos um último teste para você*. O que iria acontecer
+se utilizássemos o comando `TYPE` para ler o conteúdo do arquivo
+`CON`? Reflita um pouco sobre o resultado esperado depois teste: `type
+con`.
+
+====
 
 ==== Arquivos especiais que criam um Pipe em memória
 
@@ -140,6 +219,9 @@ dd if=/dev/urandom of=saida.bin bs=1 count=4
 od -t d1 saida.bin
 
 ////
+
+NOTE: Este tipo de arquivo especial não existe no Windows, todos os
+arquivos especiais neste sistema estão relacionados aos dispositivos.
 
 === Arquivos e fluxos
 
