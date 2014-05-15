@@ -8,6 +8,30 @@
   <revhistory>
 
     <revision>
+      <revnumber>v0.5.1</revnumber>
+      <date>15/Maio/2014</date>
+      <authorinitials>Eduardo, Daniele, Iguatemi</authorinitials>
+      <revremark>
+- Documentação de funções no apêndice #23. 
+- Padronizar cpf com o tipo long long #25 
+- Correção da saída de soma_vetores.c #35. 
+- Uso de função calloc() no lugar de malloc() em registro_dinamico.c #40. 
+- Ilustrar separadamente Declaração e Inicliação de Vetor #41.  
+- Informar que o vetor inicia com índice "0" #42. 
+- Adicionar exemplo de código para estrutura condicional #43. 
+- Evidenciar estrutura geral dos Arrays multidimensionais #57. 
+- Evidenciar propósito das funções printf e scanf na seção 1.3.1 #44. 
+- Explicar o que é estrutura estática e dinâmica #45. 
+- Deixar ainda mais clara a figura 1.2 #58. 
+- Atualização dos objetivos do capítulo de Arquivos #63. 
+- Utilizando Inocente em vez de Estúpido #32. 
+- Explicando arquivos especiais no Windows #63. 
+- Correções ortográficas: #33, #30, #36, #37, #38, #39 e #46.
+      </revremark>
+    </revision>
+
+
+    <revision>
       <revnumber>v0.5.0</revnumber>
       <date>17/Março/2014</date>
       <authorinitials>Eduardo</authorinitials>
@@ -25,11 +49,11 @@
       <date>27/Fevereiro/2014</date>
       <authorinitials>Eduardo</authorinitials>
       <revremark>
-* Inclusão do capítulo de Alocação Dinâmica (Falta revisão);
-* Inclusão de capítulo de Arquivo (Falta conteúdo);
-* Inclusão de Projeto Lingua do i;
-* Inclusão do capítulo Depuração;
-* Inclusão do capítulo Biblioteca;
+- Inclusão do capítulo de Alocação Dinâmica (Falta revisão);
+- Inclusão de capítulo de Arquivo (Falta conteúdo);
+- Inclusão de Projeto Lingua do i;
+- Inclusão do capítulo Depuração;
+- Inclusão do capítulo Biblioteca;
       </revremark>
     </revision>
 
