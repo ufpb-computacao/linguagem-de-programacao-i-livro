@@ -726,9 +726,6 @@ Observe que nos códigos do preenchimento e impressão da matriz
 `matriz` foram utilizados dois comandos de repetição, já que ela é
 bidimensional.
 
-
-NOTE: Registros ou estruturas em C e arquivos serão abordados no <<cap_registros>>.
-
 === Estrutura geral de um programa em C
 
 Um programa em C pode ter uma estrutura geral como aparece a seguir:
