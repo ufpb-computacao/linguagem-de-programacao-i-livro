@@ -6,7 +6,6 @@
 .Objetivos do capítulo
 ____
 
-// FIXME atualizar objetivos
 Ao final deste capítulo você deverá ser capaz de:
 
 * Entender o conceito de arquivos e seus tipos;
@@ -14,8 +13,6 @@ Ao final deste capítulo você deverá ser capaz de:
 * Compreender porque não é possível criar uma pasta com o nome
   `con` no Windows;
 * Conhecer as semelhanças e diferenças entre Arquivos e Fluxos;
-* Escrever programas em C para manipular arquivos somente texto e
-  binário;
 * Escrever programas em C que leiam e escrevam corretamente na entrada
   padrão, na saída padrão e na saída de erros;
 * Verificar se houve erro durante as operações de leitura e escrita ou
