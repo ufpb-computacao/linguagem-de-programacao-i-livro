@@ -366,6 +366,12 @@ modo binário_ (<<ex_abrindo_arquivo_binario_para_escrita>>).
 ----
 include::{local}/abrindo_arquivo_de_texto.c[]
 ----
+
+.Saída da execução
+....
+include::{local}/abrindo_arquivo_de_texto.out[]
+....
+
 ====
 
 [[ex_abrindo_arquivo_binario_para_escrita]]
@@ -378,6 +384,12 @@ include::{local}/abrindo_arquivo_de_texto.c[]
 ----
 include::{local}/abrindo_arquivo_binario_para_escrita.c[]
 ----
+
+.Saída da execução
+....
+include::{local}/abrindo_arquivo_binario_para_escrita.out[]
+....
+
 ====
 
 [TIP]
@@ -405,6 +417,10 @@ entradas e saídas padrões, que dispensam a operação de abertura:
 `FILE* stdout`:: Arquivo que representa a saída padrão.
 `FILE* stderr`:: Arquivo que representa a saída de erro padrão.
 
+NOTE: Perceba que nos exemplos <<ex_abrindo_arquivo_binario_para_escrita>> e
+<<ex_abrindo_arquivo_de_texto>> a impressão das mensagens de erro são
+escritas da saída de erro `stderr`.
+
 ==== Fechando um arquivo
 
 (((Arquivo, fechando))) (((fclose)))
@@ -426,6 +442,13 @@ include::{local}/fechando_arquivo.c[]
 ----
 <1> A função para fechar o arquivo só deve ser invocada caso o arquivo
     foi aberto com sucesso.
+
+.Saída da execução
+....
+include::{local}/fechando_arquivo.out[]
+....
+
+
 ====
 
 === Indicadores de erro e final de arquivo
@@ -558,6 +581,11 @@ include::{local}/lendo_e_escrevendo_char.c[]
 A execução deste programa irá criar um arquivo `saida.txt`,
 com o conteúdo identico a `entrada.txt`.
 
+.Saída da execução
+....
+include::{local}/lendo_e_escrevendo_char.out[]
+....
+
 ====
 
 
@@ -645,7 +673,6 @@ include::{local}/lendo_e_escrevendo_linha.c[]
 
 .Saída da execução
 ....
-
 include::{local}/lendo_e_escrevendo_linha.out[]
 ....
 ====
@@ -732,6 +759,24 @@ include::{local}/escrevendo_e_lendo_binario.out[]
 ....
 ====
 
+=== Descarregando o buffer com `fflush`
+
+(((fflush)))
+
+Alguns arquivos são abertos com buffers para escrita, isto implica que
+as operações de escritas no arquivo não são persistidas no arquivo até
+que o buffer esteja cheio ou o arquivo seja fechado. Para determinar
+que o conteúdo do buffer seja escrito no arquivo utilizamos a função
+<<fflush>>:
+
+[source,c]
+----
+int fflush(FILE *stream);
+----
+
+A função retorna `EOF` caso houver erro na escrita do arquivo, caso
+contrário retorna zero.
+
 === Escrevendo e lendo dados formatados
 
 Finalizando as seções de escrita e leitura de dados, vamos conhecer
@@ -766,31 +811,18 @@ int fprintf(FILE * restrict arquivo,
     const char * restrict formato, ...);
 ----
 
-=== Descarregando o buffer com `fflush`
-
-(((fflush)))
-
-Alguns arquivos são abertos com buffers para escrita, isto implica que
-as operações de escritas no arquivo não são persistidas no arquivo até
-que o buffer esteja cheio. Para determinar que o conteúdo do buffer
-seja escrito no arquivo utilizamos a função <<fflush>>:
-
-[source,c]
-----
-int fflush(FILE *stream);
-----
-
-A função retorna `EOF` caso houver erro na escrita do arquivo, caso
-contrário retorna zero.
-
 === Movendo o indicador de posição
 
 Como foi apresentado anteriormente, o *((indicador de posição))*
 mantém o registro da posição atual do arquivo.
 
 Em alguns casos podemos ter a necessidade de avançar ou retroceder o
-ponto de leitura ou escrita do arquivo, as seguintes funções a seguir
+ponto de leitura ou escrita do arquivo, as funções a seguir
 servem a este propósito.
+
+IMPORTANT: As funções `rewind`, `ftell` e `fseek` serão utilizadas no
+<<cap_lingua_do_i>>. Por enquanto é importante apenas que você
+reconheça a sua existência.
 
 ==== Retrocede para o início do arquivo com `rewind`
 

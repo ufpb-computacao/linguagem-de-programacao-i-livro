@@ -12,12 +12,12 @@ int main(void) {
     char* nomeDoArquivo = "entrada.txt";
     FILE* arquivo = fopen(nomeDoArquivo, "r");
     if (arquivo != NULL) {
-      printf("O arquivo 'entrada.txt' foi aberto com sucesso...\n");
-      // inicia leitura do arquivo
+      printf("Arquivo '%s' foi aberto com sucesso.\n", nomeDoArquivo);
+      // inicia leitura de arquivo texto
 
       // fecha arquivo
     } else {
-      // exibe mensagem de erro
+      // exibe mensagem de erro na saída padrão de erro
       fprintf(stderr, "Erro na abertura de '%s'.\n", nomeDoArquivo);
     }
 }

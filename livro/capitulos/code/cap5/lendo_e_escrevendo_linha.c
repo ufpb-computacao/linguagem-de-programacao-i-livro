@@ -38,6 +38,7 @@ int main(void) {
     
     fclose(entrada); // fechando arquivoParaLeitura
   } else {
+    // exibe mensagem de erro na saída padrão de erro
     fprintf(stderr, "Erro na abertura de '%s'.\n",arquivoParaLeitura);
   }
 }

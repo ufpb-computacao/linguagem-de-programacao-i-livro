@@ -12,11 +12,12 @@ int main(void) {
     char* nomeDoArquivo = "arquivo-binario.bin";
     FILE* arquivo = fopen(nomeDoArquivo, "wb");
     if (arquivo != NULL) {
-      // arquivo aberto com sucesso...
-      // inicia escrita no arquivo
+      printf("Arquivo '%s' foi aberto com sucesso.\n", nomeDoArquivo);
+      // inicia escrita binária do arquivo
 
       // fecha arquivo
     } else {
+      // exibe mensagem de erro na saída padrão de erro
       fprintf(stderr, "Erro na abertura de '%s'.\n", nomeDoArquivo);
     }
 }
