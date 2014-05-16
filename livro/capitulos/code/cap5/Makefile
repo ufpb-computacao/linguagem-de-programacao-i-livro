@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS=-Wall -g -std=c1x
 
-all: abrindo_arquivo_de_texto abrindo_arquivo_binario_para_escrita fechando_arquivo lendo_e_escrevendo_char lendo_e_escrevendo_linha escrevendo_e_lendo_binario
+all: abrindo_arquivo_de_texto abrindo_arquivo_binario_para_escrita fechando_arquivo lendo_e_escrevendo_char lendo_e_escrevendo_linha escrevendo_e_lendo_binario cria_arquivo_binario
 
 clean:
-	rm -rf abrindo_arquivo_de_texto abrindo_arquivo_binario_para_escrita fechando_arquivo lendo_e_escrevendo_char lendo_e_escrevendo_linha escrevendo_e_lendo_binario saida.txt pontuacao.data
+	rm -rf abrindo_arquivo_de_texto abrindo_arquivo_binario_para_escrita fechando_arquivo lendo_e_escrevendo_char lendo_e_escrevendo_linha escrevendo_e_lendo_binario saida.txt pontuacao.data cria_arquivo_binario
 

@@ -1,6 +1,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/* O propósito deste programa é demonstrar a criação e leitura
+ * de arquivos no formato binário.
+ * Ele simula a criação de um arquivo 'pontuacao.data' que mantém
+ * os recordes de jogadores de um jogo. Foi optado por salvar o
+ * arquivo no formato binário para evitar que alguém edite a pontução
+ * com um editor de texto.
+ * A função 'criaArquivoDeRecordistasIniciais' irá criar o arquivo
+ * no formato binário, e 'lerArquivoDeRecordistas' irá ler o conteúdo
+ * do arquivo. Por fim, a função 'imprimeRecordistas' irá imprir os
+ * dados lidos do arquivo, convertendo-os para carácteres, através da
+ * função 'printf'.
+ */
+
 typedef struct Jogador_{
     int pontuacao;
     char nome[32];
@@ -12,7 +25,7 @@ Jogador recordistasIniciais[]={ //<2>
     { .nome = "Chico Bento", .pontuacao = 0 }
 };
 
-int QUANTIDADE_DA_LISTA = 3;
+int QUANTIDADE_DA_LISTA = 3; // Anjinho,Bido,Chico 
 char* nomeDoArquivoDePontuacao = "pontuacao.data";
 
 void criaArquivoDeRecordistasIniciais(){
@@ -22,7 +35,9 @@ void criaArquivoDeRecordistasIniciais(){
           QUANTIDADE_DA_LISTA, arquivo); 
       fclose(arquivo);
     } else {
-      // exibe mensagem de erro
+      // mensagem de erro
+      fprintf(stderr, "Não foi possível abrir o arquivo: %s\n",
+         nomeDoArquivoDePontuacao);
     }
 }
 
@@ -35,12 +50,15 @@ Jogador* lerArquivoDeRecordistas(){
           arquivo);
       fclose(arquivo);
     } else {
-      // exibe mensagem de erro
+      // mensagem de erro
+      fprintf(stderr, "Não foi possível abrir o arquivo: %s\n",
+         nomeDoArquivoDePontuacao);
     }
     return jogadores;
 }
 
 void imprimeRecordistas(Jogador* jogadores){//<5>
+    printf("Os seguintes valores foram lidos do arquivo binário:\n");
     for(int i=0; i<QUANTIDADE_DA_LISTA; i++){
         printf("%s %d\n", jogadores[i].nome, jogadores[i].pontuacao);
     }

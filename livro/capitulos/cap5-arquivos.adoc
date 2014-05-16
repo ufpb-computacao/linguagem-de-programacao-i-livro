@@ -353,26 +353,32 @@ wb:: abre arquivo binário para escrita
 ab:: abre arquivo binário para escrita, no final do arquivo
 
 Os códigos a seguir demonstram a abertura de arquivo para _leitura no
-modo texto_ e outro para _escrita no modo binário_.
+modo texto_ (<<ex_abrindo_arquivo_de_texto>>) e outro para _escrita no
+modo binário_ (<<ex_abrindo_arquivo_binario_para_escrita>>).
 
+[[ex_abrindo_arquivo_de_texto]]
+.Abrindo um arquivo de texto para leitura
+====
 .Código fonte
 {online}/abrindo_arquivo_de_texto.c[{local}/abrindo_arquivo_de_texto.c]
 
 [source, c]
-.Abrindo um arquivo de texto para leitura
 ----
 include::{local}/abrindo_arquivo_de_texto.c[]
 ----
+====
 
-
+[[ex_abrindo_arquivo_binario_para_escrita]]
+.Abrindo um arquivo binário para escrita
+====
 .Código fonte
 {online}/abrindo_arquivo_de_texto.c[{local}/abrindo_arquivo_binario_para_escrita.c]
 
 [source, c]
-.Abrindo um arquivo binário para escrita
 ----
 include::{local}/abrindo_arquivo_binario_para_escrita.c[]
 ----
+====
 
 [TIP]
 ====
@@ -408,16 +414,19 @@ aberto deve ser fechado após sua utilização. Para fechar um arquivo
 utilizamos a função <<fclose>>, passando como parâmetro o ponteiro
 `FILE*` retornado na abertura do arquivo:
 
+[[ex_fechando_arquivo]]
+.Abrindo um arquivo binário para escrita
+====
 .Código fonte
 {online}/abrindo_arquivo_de_texto.c[{local}/fechando_arquivo.c]
 
 [source, c]
-.Abrindo um arquivo binário para escrita
 ----
 include::{local}/fechando_arquivo.c[]
 ----
 <1> A função para fechar o arquivo só deve ser invocada caso o arquivo
     foi aberto com sucesso.
+====
 
 === Indicadores de erro e final de arquivo
 
@@ -526,22 +535,30 @@ int putchar(int caracter);
 
 ==== Exemplo completo de leitura e escrita
 
-O seguinte código é um exemplo completo utilizando as funções de
-leitura e escrita com carácteres:
+O <<ex_lendo_e_escrevendo_linha>> demonstra um a utilização das
+funções de leitura e escrita com carácteres:
+
+[[ex_lendo_e_escrevendo_linha]]
+.Lendo e escrevendo carácteres
+====
 
 .Código fonte
 {online}/lendo_e_escrevendo_char.c[{local}/lendo_e_escrevendo_char.c]
 
 [source, c]
-.Lendo e escrevendo carácteres
 ----
 include::{local}/lendo_e_escrevendo_char.c[]
 ----
 <1> Abertura dos arquivos para leitura e escrita respectivamente.
 <2> Verificando se os arquivos foram abertos com sucesso.
-<3> Ler e escreve um carácter.
+<3> Ler um carácter da entrada e escreve o carácter lido na saída.
 <4> Verifica se atingiu o final do arquivo.
 <5> Fecha os arquivos abertos.
+
+A execução deste programa irá criar um arquivo `saida.txt`,
+com o conteúdo identico a `entrada.txt`.
+
+====
 
 
 === Lendo e escrevendo uma linha por vez com `fgets` e `fputs`
@@ -614,17 +631,24 @@ binária, pois ela não escreve o carácter nulo*.
 O seguinte código é um exemplo completo utilizando as funções de
 leitura e escrita com linha:
 
+.Lendo e escrevendo linhas
+====
 .Código fonte
 {online}/lendo_e_escrevendo_linha.c[{local}/lendo_e_escrevendo_linha.c]
 
 [source, c]
-.Lendo e escrevendo linhas
 ----
 include::{local}/lendo_e_escrevendo_linha.c[]
 ----
 <1> Ler uma linha da entrada.
 <2> Escreve o string lido na saída.
 
+.Saída da execução
+....
+
+include::{local}/lendo_e_escrevendo_linha.out[]
+....
+====
 
 === Lendo e escrevendo dados binários
 
@@ -673,7 +697,7 @@ ser menor do que `quantidade` somente se houve erro durante a escrita.
 Caso `quantidade` ou `tamanho` seja zero então o arquivo permanece
 inalterado e a função retorna zero.
 
-==== Exemplo completo de leitura e escrita
+==== Exemplo completo de leitura e escrita binária
 
 O seguinte código é um exemplo completo utilizando as funções de
 leitura e escrita apresentadas nesta seção.
@@ -684,11 +708,13 @@ pontuação inicial de três jogadores fictícios e salvamos num arquivo.
 Em seguida, demonstramos a leitura do arquivo e finalmente imprimimos
 os recordes lidos.
 
+.Escrevendo e lendo elementos em binário
+====
+
 .Código fonte
 {online}/escrevendo_e_lendo_binario.[{local}/escrevendo_e_lendo_binario.c]
 
 [source, c]
-.Escrevendo e lendo elementos em binário
 ----
 include::{local}/escrevendo_e_lendo_binario.c[]
 ----
@@ -700,12 +726,11 @@ include::{local}/escrevendo_e_lendo_binario.c[]
 <4> Ler os três recordistas do arquivo e salva no buffer `jogadores`.
 <5> Imprime os recordistas.
 
-.Resultado da execução da aplicação
+.Saída da execução
 ....
-Anjinho 50
-Bido 25
-Chico Bento 0
+include::{local}/escrevendo_e_lendo_binario.out[]
 ....
+====
 
 === Escrevendo e lendo dados formatados
 
