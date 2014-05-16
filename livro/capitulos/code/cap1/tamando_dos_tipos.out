@@ -1,3 +1,0 @@
-sizeof (unsigned int) = 4
-sizeof (signed int) = 4
-sizeof (short int) = 2

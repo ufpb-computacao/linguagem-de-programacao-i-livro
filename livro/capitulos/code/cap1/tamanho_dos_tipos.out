@@ -1,0 +1,4 @@
+sizeof (unsigned int) = 32 bits
+sizeof (signed int) = 32 bits
+sizeof (short int) = 16 bits
+sizeof (short int) = 64 bits

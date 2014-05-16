@@ -235,19 +235,21 @@ pode-se usar 16 ou 32 bits (ou 8*s na <<tab_tipo_de_dados>>).
 | long double|3,4E-4932 a 3,4E+4932|%lf|80
 |====
 
+.Programa para demonstrar os tamanhos dos tipos em bits
+====
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/tamando_dos_tipos.c[code/cap1/tamando_dos_tipos.c]
+{gitrepo}/blob/master/livro/capitulos/code/cap1/tamanho_dos_tipos.c[code/cap1/tamanho_dos_tipos.c]
 
 [source, c]
-.Programa para demonstrar os tamanhos dos tipos
 ----
-include::code/cap1/tamando_dos_tipos.c[]
+include::code/cap1/tamanho_dos_tipos.c[]
 ----
 
 .Saída da execução do programa
 ....
-include::code/cap1/tamando_dos_tipos.out[]
+include::code/cap1/tamanho_dos_tipos.out[]
 ....
+====
 
 ==== Estruturas de controle sequenciais e de decisão
 
