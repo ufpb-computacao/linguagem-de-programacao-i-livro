@@ -608,7 +608,7 @@ as funções <<string_h>>.
 
 [source,c]
 ----
-char *fgets(char * restrict buffer, int n, FILE * restrict arquivo);
+char *fgets(char * buffer, int n, FILE * arquivo);
 ----
 
 A função retorna `buffer`, contendo a linha lida, ou `NULL` se houve
@@ -644,7 +644,7 @@ zero, no arquivo.
 
 [source,c]
 ----
-int fputs(const char * restrict string, FILE * restrict arquivo);
+int fputs(const char * string, FILE * arquivo);
 ----
 
 A função retorna `EOF` em caso de erro.
@@ -694,8 +694,8 @@ lido os dados.
 
 [source,c]
 ----
-size_t fread(void * restrict buffer, size_t tamanho, 
-    size_t quantidade, FILE * restrict arquivo);
+size_t fread(void * buffer, size_t tamanho, 
+    size_t quantidade, FILE * arquivo);
 ----
 
 A função retorna a quantidade de elementos lidos, que pode ser menor
@@ -715,8 +715,8 @@ deseja escreve e o `arquivo` onde o conteúdo será escrito.
 
 [source,c]
 ----
-size_t fwrite(const void * restrict buffer, size_t tamanho, 
-    size_t quantidade, FILE * restrict arquivo);
+size_t fwrite(const void * buffer, size_t tamanho, 
+    size_t quantidade, FILE * arquivo);
 ----
 
 A função retorna o número de elementos que foram escritos, que pode
@@ -793,8 +793,8 @@ entrada:
 
 [source,c]
 ----
-int fscanf(FILE * restrict arquivo, 
-    const char * restrict formato, ...);
+int fscanf(FILE * arquivo, 
+    const char * formato, ...);
 ----
 
 ==== Escrever dados formatados
@@ -807,8 +807,8 @@ diferença é que `fprintf` permite especificar o arquivo de saída:
 
 [source,c]
 ----
-int fprintf(FILE * restrict arquivo, 
-    const char * restrict formato, ...);
+int fprintf(FILE * arquivo, 
+    const char * formato, ...);
 ----
 
 === Movendo o indicador de posição

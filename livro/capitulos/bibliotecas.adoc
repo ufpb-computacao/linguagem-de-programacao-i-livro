@@ -223,7 +223,7 @@ Compara dois strings até `n` posições.
 
 [source,c]
 ----
-char *strcpy(char * restrict destino, const char * restrict origem);
+char *strcpy(char * destino, const char * origem);
 ----
 
 Copia o conteúdo de um string para outro.
@@ -238,7 +238,7 @@ A função retorna `destino`.
 
 [source,c]
 ----
-char *strcpy(char * restrict destino, const char * restrict origem,
+char *strcpy(char * destino, const char * origem,
     size_t n);
 ----
 
@@ -274,8 +274,8 @@ contidas na seção ``7.21 Input/output <stdio.h>'' do padrão C1X.
 [source,c]
 ----
 #include <stdio.h>
-FILE *fopen(const char * restrict nomeDoArquivo,
-    const char * restrict modo);
+FILE *fopen(const char * nomeDoArquivo,
+    const char * modo);
 ----
 
 A função `fopen` retorna um ponteiro para `FILE` se conseguir abrir o
@@ -382,7 +382,7 @@ setado e retorna `EOF`.
 [source,c]
 ----
 #include <stdio.h>
-char *fgets(char * restrict string, int n, FILE * restrict arquivo);
+char *fgets(char * string, int n, FILE * arquivo);
 ----
 
 Ler um string de `arquivo` e salva o conteúdo em `string`.
@@ -407,7 +407,7 @@ indeterminate and a null pointer is returned.
 [source,c]
 ----
 #include <stdio.h>
-int fputs(const char * restrict string, FILE * restrict arquivo);
+int fputs(const char * string, FILE * arquivo);
 ----
 
 ////
@@ -434,8 +434,8 @@ Ver <<fgets>>.
 [source,c]
 ----
 #include <stdio.h>
-size_t fread(void * restrict ponteiro, size_t tamanho, size_t
-    quantidade, FILE * restrict arquivo);
+size_t fread(void * ponteiro, size_t tamanho, size_t
+    quantidade, FILE * arquivo);
 ----
 
 ////
@@ -470,8 +470,8 @@ alterado.
 [source,c]
 ----
 #include <stdio.h>
-size_t fwrite(const void * restrict ponteiro, size_t tamanho, size_t
-    quantidade, FILE * restrict arquivo);
+size_t fwrite(const void * ponteiro, size_t tamanho, size_t
+    quantidade, FILE * arquivo);
 ----
 
 ////
@@ -585,8 +585,8 @@ a:
 [source,c]
 ----
 #include <stdio.h>
-int fscanf(FILE * restrict arquivo, 
-  const char * restrict formato, ...);
+int fscanf(FILE * arquivo, 
+  const char * formato, ...);
 ----
 
 // TODO fscanf
@@ -614,8 +614,8 @@ Ver <<fprintf>>.
 [source,c]
 ----
 #include <stdio.h>
-int fprintf(FILE * restrict arquivo, 
-    const char * restrict formato, ...);
+int fprintf(FILE * arquivo, 
+    const char * formato, ...);
 ----
 
 // TODO fprintf
