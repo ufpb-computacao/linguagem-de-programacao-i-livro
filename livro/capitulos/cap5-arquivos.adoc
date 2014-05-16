@@ -782,7 +782,7 @@ contrário retorna zero.
 Finalizando as seções de escrita e leitura de dados, vamos conhecer
 funções provavelmente lhe são familiares.
 
-==== Ler dados formatos
+==== Ler dados formatados
 
 (((fscanf)))(((scanf)))
 
@@ -801,7 +801,7 @@ int fscanf(FILE * restrict arquivo,
 
 (((fprintf)))(((printf)))
 
-A escrita de dados formatos é feita através da função <<fprintf>>, que
+A escrita de dados formatados é feita através da função <<fprintf>>, que
 é similar a <<printf>> (que trabalha somente na saída padrão), a única
 diferença é que `fprintf` permite especificar o arquivo de saída:
 
