@@ -705,14 +705,16 @@ matriz[2][3]= 104;
 O preenchimento ou impressão completa de um array é sempre feito
 usando-se comandos de repetição para acessar as dimensões do array.
 Para cada dimensão usa-se um comando de repetição que, em geral, é o
-comando `for`. O preenchimento de uma matriz de duas dimensões como a
-da <<fig_matriz>> pode ser feito com um código como:
+comando `for`. O preenchimento de uma matriz de duas dimensões, como a
+da <<fig_matriz>>, pode ser feito como no <<ex_matriz>>.
 
+[[ex_matriz]]
+.Preenchimento de uma matriz de duas dimensões
+====
 .Código fonte
 {gitrepo}/blob/master/livro/capitulos/code/cap1/matriz.c[code/cap1/matriz.c]
 
 [source, c]
-.Programa para demonstrar os tamanhos dos tipos
 ----
 include::code/cap1/matriz.c[]
 ----
@@ -721,6 +723,7 @@ include::code/cap1/matriz.c[]
 ....
 include::code/cap1/matriz.out[]
 ....
+====
 
 Observe que nos códigos do preenchimento e impressão da matriz
 `matriz` foram utilizados dois comandos de repetição, já que ela é
