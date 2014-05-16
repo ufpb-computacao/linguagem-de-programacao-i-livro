@@ -763,7 +763,27 @@ utilizada pelo estudante ou programador iniciante para não esquecer
 partes fundamentais que um programa em C deve conter.  Pode-se
 acrescentar ainda no início do programa (linha 1) um comentário geral
 explicando o que ele faz, qual seu objetivo, que tipo de entrada
-precisa, que tipo de saída irá gerar, etc.
+precisa, que tipo de saída irá gerar, como pode ser visto no
+<<ex_programa_completo>>.
+
+[[ex_programa_completo]]
+.Programa com estrutura completa em C
+====
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap1/programa_completo.c[code/cap1/programa_completo.c]
+
+[source, c]
+----
+include::code/cap1/programa_completo.c[]
+----
+
+.Saída da execução
+....
+include::code/cap1/programa_completo.out[]
+....
+====
+
+
 
 ////
 Sempre terminar o arquivo com uma nova linha.
