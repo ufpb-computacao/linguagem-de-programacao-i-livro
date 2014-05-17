@@ -6,16 +6,36 @@ Nesta capítulo apresentamos as respostas de algumas atividades.
 
 NOTE: Você pode contribuir para elaboração desta seção enviando suas respostas.
 
-TIP: Na sala de aula, nos fóruns e mensagens recomendamos a utilização do site https://gist.github.com para compartilhar códigos e tirar dúvidas sobre eles.
+TIP: Na sala de aula, nos fóruns e mensagens recomendamos a utilização
+do site https://gist.github.com para compartilhar códigos e tirar
+dúvidas sobre eles.
 
 === Capítulo 1
 
-Sem respostas.
+
+4:: O programa precisa ler um CPF, salvá-lo numa variável do tipo
+`long long` e em seguida imprimir seu conteúdo.
++
+--
+.Código fonte
+{gitrepo}/blob/master/livro/capitulos/code/cap1/cpf_formatado.c[code/cap1/cpf_formatado.c]
+
+[source, c]
+----
+include::code/cap1/cpf_formatado.c[]
+----
+
+.Saída da execução
+....
+include::code/cap1/cpf_formatado.out[]
+....
+
+--
 
 === Capítulo 2
 
 
-3d. Não existe resposta única. Nesta resposta optamos por criar dois
+3d:: Não existe resposta única. Nesta resposta optamos por criar dois
 registros, um para organizar o *Agendamento* e outro para agrupar os campos do *Horário*. As tabelas a seguir mostram o resultado da análise.
 
 [width="80%",cols="1,2,1m",frame="topbot",options="header"]

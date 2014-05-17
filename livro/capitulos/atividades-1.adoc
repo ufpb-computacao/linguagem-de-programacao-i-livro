@@ -1,9 +1,9 @@
 === Atividades
 
-. Faça um algoritmo que receba um número positivo e maior que zero, calcule e mostre: o número 
+1. Faça um algoritmo que receba um número positivo e maior que zero, calcule e mostre: o número 
 digitado ao quadrado, o número digitado ao cubo e a raiz quadrada do número digitado.
 
-. Analise o algoritmo abaixo e explique o que ele faz. Quais são os
+2. Analise o algoritmo abaixo e explique o que ele faz. Quais são os
   valores de `LUCROMAX`, `PREÇOMAX` e `INGRESSOSMAX` que serão
   impressos no final da execução do algoritmo?
 +
@@ -38,7 +38,7 @@ fim algoritmo
 ----
 
 
-. Analise o código abaixo e diga qual é o valor que a variável `S` terá ao final da 
+3. Analise o código abaixo e diga qual é o valor que a variável `S` terá ao final da 
 execução do algoritmo.
 +
 ----
@@ -78,14 +78,15 @@ Algoritmo
 fim algoritmo
 ----
 
+4. Faça um programa que leia um CPF, salve-o numa variável do tipo
+  `long long` e em seguida imprima o CPF lido. {resposta}
 
-
-. Faça um programa em C que receba o ano de nascimento de uma pessoa e o ano atual, calcule e 
+5. Faça um programa em C que receba o ano de nascimento de uma pessoa e o ano atual, calcule e 
 mostre: (a) a idade da pessoa; e (b) quantos anos ela terá em 2045. O programa deve ser capaz de 
 receber somente valores positivos e maiores do que zero para a idade da pessoa.
 
 
-. Um supermercado deseja reajustar os preços de seus produtos usando o seguinte critério: o 
+6. Um supermercado deseja reajustar os preços de seus produtos usando o seguinte critério: o 
 produto poderá ter seu preço aumentado ou diminuído. Para o preço ser alterado (ou seja, ser 
 aumentado ou diminuído), o produto deve atender *PELO MENOS* uma das linhas da tabela a seguir:
 +
@@ -103,7 +104,7 @@ mostre o novo preço.
 --
 
 
-. João Papo-de-Pescador está organizando uma corrida de automóveis e precisa de um método para 
+7. João Papo-de-Pescador está organizando uma corrida de automóveis e precisa de um método para 
 computar os tempos das voltas no circuito. Faça um programa em C que tenha como entrada: i) o número 
 de pilotos que disputarão a corrida; ii)  os seus respectivos nomes; iii) o número de voltas da 
 corrida; iv) e o tempo de todas as voltas para cada piloto. O programa deve imprimir no final o 
@@ -112,7 +113,7 @@ que foi feita no menor tempo) e qual foi o piloto que a fez.
 
 
 
-. Em uma competição de ginástica olímpica, a nota é determinada por um painel de seis juízes. 
+8. Em uma competição de ginástica olímpica, a nota é determinada por um painel de seis juízes. 
 Cada um dos juízes atribui uma nota entre zero e dez para o desempenho do atleta. Para calcular a 
 nota final, a nota mais alta e a nota mais baixa são descartadas e é calculada a média das 
 quatro notas restantes. Escreva um programa que leia seis notas que devem estar entre zero e dez e, 
@@ -123,7 +124,7 @@ programa em C: i) usando somente estruturas de seleção e de repetição e sem 
 
 
 
-. Uma empresa decidiu dar uma gratificação de Natal a seus funcionários baseada no número de 
+9. Uma empresa decidiu dar uma gratificação de Natal a seus funcionários baseada no número de 
 horas extras e no número de horas que o funcionário faltou ao trabalho. Faça um programa em C 
 que calcule o valor da gratificação de Natal. O valor do prêmio é obtido pela consulta à 
 tabela que se segue, na qual a variável SH é calculada da seguinte forma: SH = número de horas 
@@ -142,7 +143,7 @@ extras – 0,5*(número de horas faltadas).
 --
 
 
-. Analise o código abaixo e diga qual é o valor que a variável `E` terá ao final da 
+10. Analise o código abaixo e diga qual é o valor que a variável `E` terá ao final da 
 execução do programa.
 +
 [source,c]
@@ -167,7 +168,7 @@ int main(void) {
 ----
 
 
-. Faça um programa em C que receba o salário de um funcionário e, usando a tabela a seguir, 
+11. Faça um programa em C que receba o salário de um funcionário e, usando a tabela a seguir, 
 calcule e mostre o seu novo salário. O programa deve aceitar somente valores positivos e maiores 
 do que zero para o salário do funcionário.
 +
@@ -184,7 +185,7 @@ do que zero para o salário do funcionário.
 |====
 --
 
-. Uma agência bancária possui vários clientes que podem fazer investimentos com rendimentos 
+12. Uma agência bancária possui vários clientes que podem fazer investimentos com rendimentos 
 mensais conforme a tabela a seguir:
 +
 --
