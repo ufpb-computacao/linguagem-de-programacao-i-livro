@@ -7,10 +7,11 @@
 ____
 Ao final deste capítulo você deverá ser capaz de:
 
-* Entender o conceito de ponteiros e utilizá-los em funções, vetores, 
-registros ou estruturas, dentre outras;
-* Aprofundar o conhecimento sobre armazenamento e manipulação de dados no 
-computador;
+* Entender o conceito de ponteiros e utilizá-los em funções, vetores,
+  registros ou estruturas, dentre outras;
+* Aprofundar o conhecimento sobre armazenamento e manipulação de dados
+  no computador;
+
 ____
 
 No início do capitulo anterior, foi discutido que o conhecimento de linguagens 

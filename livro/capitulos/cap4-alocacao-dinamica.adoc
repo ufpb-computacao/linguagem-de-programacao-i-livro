@@ -8,9 +8,10 @@
 ____
 Ao final deste capítulo você deverá ser capaz de:
 
-* Fazer alocação dinâmica de memória em programas em linguagem C 
-e entender as suas vantagens com relação à alocação estática de 
-memória.
+* Fazer alocação dinâmica de memória em programas em linguagem C e
+  entender as suas vantagens com relação à alocação estática de
+  memória;
+
 ____
 
 Até agora foi visto que ponteiros podem ser usados para guardar 

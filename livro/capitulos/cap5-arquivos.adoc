@@ -10,21 +10,22 @@ Ao final deste capítulo você deverá ser capaz de:
 
 * Entender o conceito de arquivos e seus tipos;
 * Identificar os arquivos especiais no Windows e Linux;
-* Compreender porque não é possível criar uma pasta com o nome
-  `con` no Windows;
+* Compreender porque não é possível criar uma pasta com o nome `con`
+  no Windows;
 * Conhecer as semelhanças e diferenças entre Arquivos e Fluxos;
 * Escrever programas em C que leiam e escrevam corretamente na entrada
   padrão, na saída padrão e na saída de erros;
 * Verificar se houve erro durante as operações de leitura e escrita ou
   se chegou ao final do arquivo;
-* Utilizar as funções `fgetc` ou `getc` para ler carácteres 
-  e `fputc` ou `putchar` para escrever carácteres em arquivos;
+* Utilizar as funções `fgetc` ou `getc` para ler carácteres e `fputc`
+  ou `putchar` para escrever carácteres em arquivos;
 * Utilizar as funções `fgets` e `fputs` para ler e escrever linhas em
-  arquivos somente texto.
+  arquivos somente texto;
 * Utilizar as funções `fread` e `fwrite` para ler e escrever em
-  arquivos binários.
+  arquivos binários;
 * Compreender o que é o _indicador de posição_ de arquivos e
-  identificar as funções que o manipula.
+  identificar as funções que o manipula;
+
 ____
 
 

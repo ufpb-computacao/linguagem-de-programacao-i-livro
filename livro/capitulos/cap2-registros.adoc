@@ -5,11 +5,12 @@
 ____________________
 Ao final deste capítulo você deverá ser capaz de:
 
-* Criar registros em C
-* Analisar problemas e reconhecer os campos necessários para utilizar nos
-registros
-* Reconhecer campos identificadores de registros
-* Criar e manipular listas de registros
+* Criar registros em C;
+* Analisar problemas e reconhecer os campos necessários para utilizar
+  nos registros;
+* Reconhecer campos identificadores de registros;
+* Criar e manipular listas de registros;
+
 ____________________
 
 Neste capítulos nós iremos estudar sobre Registros. Vamos conhecer a sua
@@ -569,11 +570,12 @@ no `scanf`.
 ==== Pontos
 Exemplo de utilização do registro Ponto com Arranjo.
 
+.Exemplo de utilização do Registro Ponto
+====
 .Código fonte
 {gitrepo}/blob/master/livro/capitulos/code/cap2/reg_ponto_exemplo.c[code/cap2/reg_ponto_exemplo.c]
 
 [source, c]
-.Exemplo de utilização do Registro Ponto
 ----
 include::code/cap2/reg_ponto_exemplo.c[]
 ----
@@ -588,7 +590,7 @@ sintaxe: `[índice]`.
 ----
 include::code/cap2/reg_ponto_exemplo_simulacao.txt[]
 ----
-
+====
 
 
 [[sec_registro_programas]]

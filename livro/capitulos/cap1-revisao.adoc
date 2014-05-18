@@ -11,8 +11,9 @@ Ao final deste capítulo você deverá ser capaz de:
   controle (estruturas de seleção ou decisão, estruturas de
   repetição);
 
-* Ser capaz de elaborar programas em linguagem C que utilizem arrays (vetores, matrizes, etc.) e 
-funções ou sub-rotinas.
+* Ser capaz de elaborar programas em linguagem C que utilizem arrays
+  (vetores, matrizes, etc.) e funções ou sub-rotinas.
+
 ____
 
 

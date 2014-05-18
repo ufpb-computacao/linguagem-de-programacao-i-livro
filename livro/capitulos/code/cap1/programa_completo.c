@@ -1,5 +1,5 @@
 /* O propósito deste programa é demonstrar a estrutura geral 
-* de um program na linguagem C.
+* de um programa na linguagem C.
 * Ele possui uma variável global 'NUMERO_DE_ITERACOES', que determina
 * quantas vezes serão invocadas a função 'imprime_mensagem'.
 */
