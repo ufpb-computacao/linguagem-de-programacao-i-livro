@@ -258,7 +258,7 @@ As estruturas sequenciais são as mais simples e se caracterizam por
 serem sequências ordenadas de comandos que são executados da maneira
 como aparecem e sem desvios de execução, a não ser que exista algum
 comando específico que cause um desvio de execução. O
-<<ex_estrutura_sequencial>> ilustra a sintaxe geral de estruturas
+<<ex_estrutura_sequencial>> apresenta a sintaxe geral de estruturas
 sequenciais.
 
 [[ex_estrutura_sequencial]]
@@ -286,7 +286,7 @@ sequenciais.
 
 ====
 
-Dependendo do problema em análise, talvez seja preciso seguir caminhos
+De acordo com o problema em análise, talvez seja preciso seguir caminhos
 diferentes dependendo do teste de uma condição. As estruturas de
 seleção ou decisão permitem que um grupo de comandos seja executado de
 acordo com a aceitação ou não de certas condições. Uma condição lógica
@@ -459,9 +459,10 @@ de repetição que podem ser utilizadas para cada situação.
 
 ===== Estrutura de repetição para um número definido de repetições (estrutura `for`)
 
-É utilizada quando se sabe o número de vezes que um trecho do programa
-deve ser repetido. Esta estrutura é chamada em linguagem C de `for`. A
-sintaxe geral do comando `for` pode ser vista a seguir:
+Esta estrutura é utilizada quando se sabe o número de vezes que um
+trecho do programa deve ser repetido. Esta estrutura é chamada em
+linguagem C de `for`. A sintaxe geral do comando `for` pode ser vista
+a seguir:
 
 [source, c]
 .Sintaxe geral da estrutura de repetição for
@@ -680,7 +681,7 @@ Em que:
 
 `[dimensãoD]`:: é o tamanho da D-ésima dimensão da matriz;
 
-Em geral usam-se matrizes com duas dimensões, as quais recebem os
+Em geral, usam-se matrizes com duas dimensões, as quais recebem os
 nomes de linhas e colunas da matriz. A <<fig_matriz>> mostra um
 exemplo de como definir uma matriz com 3 linhas e 4 colunas para
 armazenar números do tipo `double`.
@@ -747,6 +748,8 @@ int main() {
   comandos contidos na função main; // comentários
   return 0;
 } // fim da função main
+
+Implementação das funções ou sub-rotinas usadas no programa
 ----
 
 

@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="vetor-declarado.pdf"
+   sodipodi:docname="vetor-declarado.svg"
    inkscape:export-filename="/home/santana/asciibook/linguagem-de-programacao-i-livro/livro/images/cap1-revisao/vertor8.png"
    inkscape:export-xdpi="40"
    inkscape:export-ydpi="40">
@@ -75,8 +75,8 @@
      showgrid="false"
      inkscape:window-width="1301"
      inkscape:window-height="744"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
+     inkscape:window-x="1505"
+     inkscape:window-y="156"
      inkscape:window-maximized="1"
      fit-margin-top="5"
      fit-margin-right="5"
@@ -90,7 +90,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -276,7 +276,7 @@
          sodipodi:role="line"
          id="tspan3047"
          x="49.581581"
-         y="358.21494">float vetor[8];</tspan></text>
+         y="358.21494">float vet[8];</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:17.76469803px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier New;-inkscape-font-specification:Sans Bold"

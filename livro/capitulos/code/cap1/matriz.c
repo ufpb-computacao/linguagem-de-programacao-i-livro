@@ -17,7 +17,7 @@ int main(void) {
   printf("Os valores armazenados em matriz são: \n");
   for (int i=0;i<3;i++){
     for (int j=0;j<4;j++){
-      printf ("\t%lf",matriz[i][j]);
+      printf ("%lf  ",matriz[i][j]);
     }
     printf ("\n");
   }

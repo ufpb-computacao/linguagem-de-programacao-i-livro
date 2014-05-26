@@ -870,7 +870,7 @@ Para finalizar nossos estudos sobre Registro, na seção seguinte vamos compará
 com Arranjo.
 
 [[sec_registro_comparacao]]
-=== Comparação entre Arranjo e Registro
+=== Comparação entre Array e Registro
 
 A tabela a seguir mostra uma comparação entre Arranjos e Registros.
 

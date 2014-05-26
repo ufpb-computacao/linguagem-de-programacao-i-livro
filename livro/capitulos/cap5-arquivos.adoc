@@ -848,7 +848,7 @@ A função <<ftell>> retorna a posição atual no arquivo:
 long int ftell(FILE *arquivo);
 ----
 
-==== Indo para a final do arquivo
+==== Indo para o final do arquivo
 
 (((fseek)))
 

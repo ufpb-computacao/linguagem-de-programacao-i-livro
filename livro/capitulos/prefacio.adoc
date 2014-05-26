@@ -86,7 +86,7 @@ conforme as intenções dos autores.
 
 Os vídeos são apresentados da seguinte forma:
 
-.Como baixar os códigos fontes: http://youtu.be/Od90rVXJV78
+.Como baixar os códigos fontes: http://youtu.be/Od90rVXJV78.
 ifdef::livro-pdf[]
 ["qrcode", size=10, scaledwidth="30%"]
 -------------------------
@@ -168,7 +168,7 @@ inteiro, que contém todos os códigos mencionados no livro. Existem duas formas
 de baixar o código inteiro, através de um arquivo zip ou clonando o repositório.
 
 Arquivo zip;; {gitrepo}/archive/master.zip. Depois de baixar o arquivo, descompacte-o. 
-Clonando o repositório;; Use o comando: git clone {gitrepo}
+Clonando o repositório;; No terminal, use o comando: git clone {gitrepo}
 
 .Como baixar os códigos fontes: http://youtu.be/Od90rVXJV78
 ifdef::livro-pdf[]
@@ -217,11 +217,12 @@ make clean
 
 === Contribuindo com o livro
 
-Você pode contribuir com a atualização e correção deste livro. A tabela a seguir
-resume os métodos de contribuições disponíveis:
+Você pode contribuir com a atualização e correção deste livro. A
+<<tab_metodos_contribuicao_livro>> resume os métodos de contribuições
+disponíveis:
 
 [[tab_metodos_contribuicao_livro]]
-.Métodos para contribuição do livro
+.Métodos para contribuição do livro.
 [width="100%",cols="1.^,2.^a,4.^",frame="topbot",options="header"]
 |======================
 |Método de contribuição | Habilidades necessárias | Descrição
@@ -252,7 +253,7 @@ Contribuição através do Issue track:: Para contribuir com um erro, sugestão 
 crítica através de um envio de uma mensagem acesse: {gitrepo}/issues/new 
 +
 [[fig_issue_contribuicao]]
-.Exemplo de contribuição através do 'Issue track'
+.Exemplo de contribuição através do 'Issue track'.
 image::images/prefacio/issue.png[scaledwidth="70%"]
 
 === Atividades
@@ -261,7 +262,7 @@ No final de cada capítulo há uma seção *Atividades* com exercícios para ser
 
 O significado dos ícones relativos aos exercícios são:
 
-Resposta disponível {resposta}:: a reposta do exercício se encontra disponível no <<cap_respostas>>.
+Resposta disponível {resposta}:: a resposta do exercício se encontra disponível no <<cap_respostas>>.
 Resolução disponível {solucao}:: a resolução do exercício se encontra disponível.
 
 NOTE: Você pode contribuir enviando respostas ou soluções dos exercícios.

@@ -15,7 +15,7 @@ Para depurar um programa é necessário que o programa seja compilado
 com instruções para depuração. No `gcc` isto é possível através do
 parâmetro `-g`.
 
-=== Depurando o programa ligua do i
+=== Depurando o programa lingua do i
 
 Como exemplo de depuração nós vamos utilizar o programa que estava
 sendo desenvolvido na <<sec_etapa8>>.

@@ -323,7 +323,7 @@ make: ** [lingua-do-i-test] Erro 1
 Ótimo, agora só estamos com um erro, devido a ausência da
 implementação de `lerConteudoDoArquivo`.
 
-==== Implementando inocente de lerConteudoDoArquivo
+==== Implementação inocente de lerConteudoDoArquivo
 
 Vamos adicionar uma implementação inocente de `lerConteudoDoArquivo`
 somente para conseguir compilar o código.
@@ -2109,7 +2109,7 @@ arquivos:
 .Código fonte
 {online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
 
-=== Etapa 14: Implementando aplicaçaõ da lingua-do-i
+=== Etapa 14: Implementando aplicação da lingua-do-i
 :etapa: etapa14
 
 ==== Construindo o `main`
