@@ -2,7 +2,9 @@
 
 Este repositório contém um livro de uma disciplina.
 
-Para conhecer o seu processo de produção consulte 
+Você pode baixar o livro em PDF no seguinte link: https://github.com/edusantana/linguagem-de-programacao-i-livro/releases/latest
+
+Para conhecer o processo de produção consulte 
 https://github.com/edusantana/producao-computacao-ead-ufpb.
 
 
