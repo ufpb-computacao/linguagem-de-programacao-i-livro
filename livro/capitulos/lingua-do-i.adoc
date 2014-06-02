@@ -832,8 +832,8 @@ tradução, que consistirá em traduzir as vogais para a letra i:
 char* MENSAGEM_ORIGINAL="Minhas vogais, tudo aqui.";<1>
 char* TRADUCAO_ESPERADA="Minhis vigiis, tidi iqui.";<2>
 void testTraducaoParaLinguaDoI(){
-	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);<3>
-	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);<4>
+  char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);<3>
+  verificaConteudosSaoIguais(mensagemTraduzida,TRADUCAO_ESPERADA);<4>
 }
 ----
 <1> Mensagem original que será traduzida.
@@ -1211,9 +1211,9 @@ char* TRADUCAO_ESPERADA="Minhis vigiis, tidi iqii.";<1>
 char* MENSAGEM_ORIGINAL2="Oh! Deus, será que o senhor se zangou";<2>
 char* TRADUCAO_ESPERADA2="Ih! Diis, sirí qii i sinhir si zingii";<2>
 void testTraducaoParaLinguaDoI(){
-	char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);<1>
-	verificaConteudosSaoIguais(mensagemTraduzida, TRADUCAO_ESPERADA);<1>
-	verificaConteudosSaoIguais(traduzParaLingaDoI(MENSAGEM_ORIGINAL2), TRADUCAO_ESPERADA2);<2>
+  char* mensagemTraduzida = traduzParaLingaDoI(MENSAGEM_ORIGINAL);<1>
+  verificaConteudosSaoIguais(mensagemTraduzida,TRADUCAO_ESPERADA);<1>
+  verificaConteudosSaoIguais(traduzParaLingaDoI(MENSAGEM_ORIGINAL2), TRADUCAO_ESPERADA2);<2>
 }
 ----
 <1> Techos já existiam no testes anteriormente.
@@ -2385,9 +2385,9 @@ esperamos:
 .Fazendo o teste passar com esforço mínimo
 ----
 void traduzFluxoDeEntradaNaSaida(FILE* entrada, FILE* saida){
-	char* traducao = lerConteudoDoArquivo("musica-completa-traduzida.txt");
-	int tamanhoDaTraducao = strlen(traducao);
-	fwrite(traducao,1,tamanhoDaTraducao,saida);
+  char* traducao = lerConteudoDoArquivo("musica-completa-traduzida.txt");
+  int tamanhoDaTraducao = strlen(traducao);
+  fwrite(traducao,1,tamanhoDaTraducao,saida);
 }
 ----
 
@@ -2568,15 +2568,14 @@ aplicação para utilizar a nova implementação:
 .Atualizando main em lingua-do-i.c para processar fluxos
 ----
 int main(int argc, const char* argv[]) {
-	FILE* entrada = determinaEntrada(argc, argv);
-	if (entrada){
-		traduzFluxoDeEntradaNaSaida(entrada, stdout);
-	}else{
-		fprintf(stderr, "Problema ao abrir arquivo: %s\n",
-				argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	return EXIT_SUCCESS;
+  FILE* entrada = determinaEntrada(argc, argv);
+  if (entrada){
+    traduzFluxoDeEntradaNaSaida(entrada, stdout);
+  }else{
+    fprintf(stderr, "Problema ao abrir arquivo: %s\n",argv[1]);
+    exit(EXIT_FAILURE);
+  }
+  return EXIT_SUCCESS;
 }
 ----
 
@@ -2717,21 +2716,21 @@ responsável por traduzir uma linha para a língua do i:
 [source,c]
 ----
 char* traduzParaLingaDoI(char* mensagemOriginal){
-	int tamanhoDaMensagem = strlen(mensagemOriginal);
-	char* traducao = calloc(1, tamanhoDaMensagem+1);
+  int tamanhoDaMensagem = strlen(mensagemOriginal);
+  char* traducao = calloc(1, tamanhoDaMensagem+1);
 
-	for(int i=0; i<tamanhoDaMensagem; i++){
-		char caracterDaMensagemOriginal = mensagemOriginal[i];
-		if (podeSerVogalAcentuada(caracterDaMensagemOriginal)){ <1>
-			int incremento = traduzCaracteresAcentuados(
-					mensagemOriginal,i,traducao);<2>
-			i+=incremento;<3>
-		}else{ <1>
-			traducao[i] = traduzCaracterParaLinguaDoI(<1>
-				caracterDaMensagemOriginal);<1>
-		}
-	}
-	return traducao;
+  for(int i=0; i<tamanhoDaMensagem; i++){
+    char caracterDaMensagemOriginal = mensagemOriginal[i];
+    if (podeSerVogalAcentuada(caracterDaMensagemOriginal)){ <1>
+      int incremento = traduzCaracteresAcentuados(
+          mensagemOriginal,i,traducao);<2>
+      i+=incremento;<3>
+    }else{ <1>
+      traducao[i] = traduzCaracterParaLinguaDoI(<1>
+        caracterDaMensagemOriginal);<1>
+    }
+  }
+  return traducao;
 }
 ----
 <1> Nossa primeira modificação consiste em verificar se o primeiro
@@ -3055,57 +3054,57 @@ Em seguida, atualizamos a regra de tradução na função
 .Atualização da função para incluir tradução com tio
 ----
 int traduzCaracteresAcentuados(char* mensagem, int i,
-		char* traducao){
-	int incremento = 1; // por padrão ler dois bytes
-	char primeiroByte = mensagem [i];
-	char s = mensagem [i+1]; // segundo byte
+    char* traducao){
+  int incremento = 1; // por padrão ler dois bytes
+  char primeiroByte = mensagem [i];
+  char s = mensagem [i+1]; // segundo byte
 
-	assert (primeiroByte == -61); // prefixo dos acentos
-	traducao[i] = primeiroByte; // passa o primeiro byte por padrão
+  assert (primeiroByte == -61); // prefixo dos acentos
+  traducao[i] = primeiroByte; // passa o primeiro byte por padrão
 
-	if (primeiroByte == -61){
-		if (s==-94 or s==-86 or s==-76 or s==-69){//âêôû
-			traducao[i+1] = -82; //î
-		}else if (s==-95 or s==-87 or s==-77 or s==-70){//áéóú
-			traducao[i+1] = -83; // í
-		}else if (s==-96 or s==-88 or s==-78 or s==-71){//àèòù
-			traducao[i+1] = -84; //ì
-		}else if (s==-126 or s==-118 or s==-108 or s==-101){//ÂÊÔÛ
-			traducao[i+1] = -114; //Î
-		}else if (s==-127 or s==-119 or s==-109 or s==-102){//ÁÉÓÚ
-			traducao[i+1] = -115; //Í
-		}else if (s==-128 or s==-120 or s==-110 or s==-103){//ÀÈÒÙ
-			traducao[i+1] = -116; //Ì
-		}else if (s==-93 or s==-75){//ãõ
-			traducao[i] = -60; //ĩ - substitui primeiro byte
-			traducao[i+1] = -87; //ĩ
-		}else{
-			traducao[i+1] = mensagem[i+1];
-		}
-	}else if (primeiroByte == -31){
-		char terceiro = mensagem[i+2];
-		if (s == -70 and terceiro == -67){ // ẽ
-			traducao[i] = -60; // ĩ
-			traducao[i+1] = -87; // ĩ
-			incremento = 2; // descartamos o terceiro byte
-		}else{
-			traducao[i] = primeiroByte;
-			traducao[i+1] = s;
-			incremento = 1;
-		}
-	}else if (primeiroByte == -59){
-		if ( s == -87 ) { // ũ
-			traducao[i] = -60; // ĩ
-			traducao[i+1] = -87; // ĩ
-		}else{
-			traducao[i] = primeiroByte;
-			traducao[i+1] = s;
-		}
-	}else{
-		traducao[i] = primeiroByte;
-		traducao[i+1] = s;
-	}
-	return incremento;
+  if (primeiroByte == -61){
+    if (s==-94 or s==-86 or s==-76 or s==-69){//âêôû
+      traducao[i+1] = -82; //î
+    }else if (s==-95 or s==-87 or s==-77 or s==-70){//áéóú
+      traducao[i+1] = -83; // í
+    }else if (s==-96 or s==-88 or s==-78 or s==-71){//àèòù
+      traducao[i+1] = -84; //ì
+    }else if (s==-126 or s==-118 or s==-108 or s==-101){//ÂÊÔÛ
+      traducao[i+1] = -114; //Î
+    }else if (s==-127 or s==-119 or s==-109 or s==-102){//ÁÉÓÚ
+      traducao[i+1] = -115; //Í
+    }else if (s==-128 or s==-120 or s==-110 or s==-103){//ÀÈÒÙ
+      traducao[i+1] = -116; //Ì
+    }else if (s==-93 or s==-75){//ãõ
+      traducao[i] = -60; //ĩ - substitui primeiro byte
+      traducao[i+1] = -87; //ĩ
+    }else{
+      traducao[i+1] = mensagem[i+1];
+    }
+  }else if (primeiroByte == -31){
+    char terceiro = mensagem[i+2];
+    if (s == -70 and terceiro == -67){ // ẽ
+      traducao[i] = -60; // ĩ
+      traducao[i+1] = -87; // ĩ
+      incremento = 2; // descartamos o terceiro byte
+    }else{
+      traducao[i] = primeiroByte;
+      traducao[i+1] = s;
+      incremento = 1;
+    }
+  }else if (primeiroByte == -59){
+    if ( s == -87 ) { // ũ
+      traducao[i] = -60; // ĩ
+      traducao[i+1] = -87; // ĩ
+    }else{
+      traducao[i] = primeiroByte;
+      traducao[i+1] = s;
+    }
+  }else{
+    traducao[i] = primeiroByte;
+    traducao[i+1] = s;
+  }
+  return incremento;
 }
 ----
 
