@@ -21,6 +21,8 @@
 - Revisão geral do livro (#72).
 - Correção na ilustração de pilha de execução (#75).
 - Melhoria na Figura 6.1: Ilustração de leitura com fgets (#76).
+- Melhoria na identação dos códigos (#77).
+- Movendo seção sobre Arquivos especiais para Apêndice (#78).
       </revremark>
     </revision>
 

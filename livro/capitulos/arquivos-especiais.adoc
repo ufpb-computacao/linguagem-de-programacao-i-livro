@@ -1,0 +1,188 @@
+[appendix]
+[[ap_arquivos_especiais]]
+== Conteúdo extra: Arquivos especiais
+
+*Arquivo* e *Diretório* são um conceitos abordados em disciplinas
+de programação, no entanto, somente em disciplinas de Sistemas
+Operacionais é que estes conceitos são aprofundados.
+
+*((Arquivos especiais))* são arquivos que não armazenam conteúdo. As
+seções a seguir apresentam como são os arquivos especiais no Windows e
+no Linux.
+
+IMPORTANT: Embora este assunto não seja exigido numa disciplina de
+Programação, este conhecimento possibilitará escrever programas que
+leiam e escrevam em dispositivos.
+
+=== Arquivos especiais que representam dispositivos
+
+Alguns arquivos podem representar dispositivos, de tal forma que
+escrever ou ler nesses arquivos corresponde a enviar ou ler dados no
+dispositivo.
+
+Existem arquivos que representam os discos, partições, impressoras,
+placa de rede, placa de som, microfone entre outros dispositivos.
+
+==== No Linux
+
+Como exemplo da utilização deste tipo de arquivo especial, temos o
+seguinte comando no Linux, que o ler do arquivo `/dev/cdrom` (que
+representa o CD-ROM) e salva a imagem do CD-ROM no arquivo
+`cdrom_image.iso`:
+
+.Utilização do comando dd para criar uma imagem de cd
+....
+$ dd if=/dev/cdrom of=cdrom_image.iso
+....
+
+Neste comando o parâmetro `if` (_input file_) especifica o arquivo de
+entrada, que neste caso é um arquivo especial que representa o CD-ROM
+(`/dev/cdrom`).  Enquanto que `of` (_output file_) especifica o
+arquivo de saída que será criado: `cdrom_image.iso`.
+
+==== No Windows
+
+No Windows os seguintes arquivos representam dispositivos:
+
+`CON`:: O console do sistema. É uma combinação do teclado (quando
+utilizado como leitura) e a tela (durante a escrita). 
+
+`PRN`:: Representa a impressora padrão.
+
+`LPT1` à `LPT4`:: Representa as portas paralelas. Os computadores
+modernos não costumam mais possuir esta entrada.
+
+`COM1` à `COM4`:: Representa as portas seriais.
+
+`NUL` :: Tudo que for enviado para este arquivo é descartado.
+
+`CLOCK$`:: Representa o dispositivo do relógio do sistema. Este
+arquivo não funciona nos sistemas modernos.
+
+
+
+////
+http://wiki.xdroop.com/space/Windows/File+Naming+Rules
+http://books.google.com.br/books?id=Ua819DVKQPwC&pg=PA27&lpg=PA27&dq=read+clock%24+file+windows&source=bl&ots=MlBXjE4rAq&sig=ex2BCxzzqS3_wTG4vgfout9afI8&hl=pt-BR&sa=X&ei=XU90U7eFFdTNsQSvpYHgDA&redir_esc=y#v=onepage&q=read%20clock%24%20file%20windows&f=false
+Windows Administration at the Command Line for Windows Vista, Windows 2003
+////
+
+===== Testando arquivos de dispositivos no Windows
+
+Para testar os arquivos especiais no Windows, abra o *Prompt de
+Comando do MS-DOS* e digite os comandos informados a seguir.
+
+Neste primeiro teste vamos comparar a escrita em arquivo normal e a
+escrita no arquivo especial `NUL`, no Windows:
+
+.Testando arquivo especial NUL do Windows
+....
+> echo "oi" > saida.txt <1>
+> type saida.txt <2>
+oi <3>
+> echo "oi" > nul <4>
+> type nul <4>
+<5>
+....
+<1> Invoca o comando `echo` para escrever a mensagem `oi` e
+    redireciona a saída ao arquivo `saida.txt` que será criado ou
+    sobrescrito, caso exista.
+<2> Utiliza o comando `type` para ler o conteúdo do arquivo.
+<3> Exibição do conteúdo do arquivo lido.
+<4> Faz o mesmo, mas redireciona o conteúdo para o arquivo especial
+    `NUL`.
+<5> Nada é exibido, pois tudo que foi enviado para `NUL` foi
+    descartado.
+
+Neste segundo teste, vamos comparar a criação de um diretório com a tentativa
+de criar um novo diretório com um nome de arquivo reservado
+(especial):
+
+.Testando arquivo especial CON no Windows
+....
+> mkdir novodir <1>
+> mkdir con <2>
+O nome de pasta é inválido <3>
+....
+<1> Utiliza o comando `mkdir` para criar um diretório chamado
+    `novodir`. O diretório é criado com sucesso.
+<2> Tenta criar um diretório utilizando o nome de um arquivo especial:
+    `con`.
+<3> Mensagem de erro ao tentar criar diretório com o nome reservado.
+
+
+[TIP]
+====
+
+*Como desafio, deixamos um último teste para você*. O que iria acontecer
+se utilizássemos o comando `TYPE` para ler o conteúdo do arquivo
+`CON`? Reflita um pouco sobre o resultado esperado depois execute: 
+
+.Lendo do arquivo especial CON no Windows
+....
+> TYPE CON
+....
+
+====
+
+=== Arquivos especiais que criam um Pipe em memória
+
+(((Pipe)))
+
+Um _Pipe_ é um recurso que possibilita dois processos transmitirem
+dados entre eles. Enquanto um processo _produz_ bytes o segundo
+_consome_ os bytes produzidos.
+
+Você pode imaginar que o sistema operacional utiliza o arquivo para
+criar meio de comunicação entre os dois processos, os bytes que forem
+escritos no arquivo pelo primeiro processo estarão disponíveis para
+leitura no segundo processo. O arquivo continua existindo antes e
+depois da execução dos processos, no entanto ele não possui conteúdo
+salvo no disco, diferente de um arquivo regular (não especial).
+
+TIP: No <<cap_mkfifo>> demonstramos a criação e utilização deste tipo
+de arquivo no Linux. Recomendamos esta leitura caso deseje conhecer a
+utilização deste tipo de arquivo.
+
+=== Arquivos especiais devido ao conteúdo
+
+Alguns arquivos são especiais devido ao conteúdo que apresentam
+durante sua leitura.
+
+No Linux, quando lemos o arquivo `/proc/uptime` o sistema retorna
+quanto tempo (em segundos) o sistema está ligado:
+
+// Documentação sobbre /proc/uptime
+// https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-proc-uptime.html
+
+.Exibindo o conteúdo do arquivo /proc/uptime
+....
+$ cat /proc/uptime 
+9913.84 38485.65
+....
+
+Neste caso podemos ver que o computador permaneceu ligado por
+`9913.84` segundos, que equivale a aproximadamente  2,7
+horas.footnote:[O segundo número é a soma da quantidade de segundos
+que os _cores_ permaneceram ociosos.]
+
+
+////
+Também pensei em utilizar o seguinte exemplo, mas fiquei na dúvida se
+/dev/urandom era especial por ser dispositivo ou pelo conteúdo:
+
+Leitura de números aleatórios através de /dev/urandom
+
+dd if=/dev/urandom of=saida.bin bs=1 count=4
+od -t d1 saida.bin
+
+////
+
+NOTE: O tipo de arquivo _especial devido ao conteúdo_ não existe no
+Windows, todos os arquivos especiais neste sistema estão relacionados
+aos dispositivos.
+
+////
+Sempre terminar o arquivo com uma nova linha.
+////
+
