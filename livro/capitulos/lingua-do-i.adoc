@@ -2486,24 +2486,26 @@ A função <<fgets>> só poderá indicar que chegou ao final do arquivo
 quando ela _atingir_ o final do arquivo. A <<fig_fgets>> ilustra o
 funcionamento da função `fgets`, estamos evidenciando dois casos:
 
-Quando última linha não termina com o carácter de final de linha::
-Neste caso, os bytes são lidos até quando tentou ler o próximo byte e
-identificou que chegou no final do arquivo. Neste momento a função irá
-retornar todos os bytes lidos e registrar que o final do arquivo foi
-_atingido_. Chamadas subsequentes a `feof` saberão do ocorrido.
-
-Quando a última linha termina com carácter final de linha::
-A função `fgets` irá retornar todos os carácteres da última linha,
-inclusive o `\n`. Ao encontrar o final de linha, a leitura da linha é
-finalizada. Não houve nenhum registo de que se chegou ao final do
-arquivo. Somente ao tentar ler mais uma linha, é que a função
-`fgets` irá perceber que chegou ao final do arquivo e irá registrar o
-ocorrido. Diferente do caso anterior, o retorno da função será `NULL`,
-indicando que não houve nenhum conteúdo lido.
-
 [[fig_fgets]]
 .Ilustração de leitura com fgets
-image::images/lingua-do-i/fgets.eps[scaledwidth="80%"]
+image::images/lingua-do-i/fgets.eps[scaledwidth="100%"]
+
+Quando arquivo termina sem final de linha::
+Neste primeiro caso (ver <<fig_fgets>>), na terceira chamada de `fgets`
+os bytes são lidos até quando tentou ler o próximo byte e identificou
+que chegou no final do arquivo. Neste momento a função irá retornar
+todos os bytes lidos e registrar que o final do arquivo foi
+_atingido_.  Chamadas subsequentes a `feof` saberão que o final do
+arquivo foi encontrado.
+
+Quando arquivo termina com final de linha::
+No segundo caso, a terceira chamada de `fgets` retornará todos os
+carácteres da última linha, inclusive o `\n`. Ao encontrar o final de
+linha (`\n`) a leitura da linha é finalizada. Não houve nenhum registo
+de que se chegou ao final do arquivo. Somente na quarta leitura que
+a função `fgets` irá perceber que chegou ao final do arquivo e então
+irá registrar o ocorrido. Apenas na 4ª chamada à `fgets` que seu
+retorno será `NULL`, indicando que não houve nenhum conteúdo lido.
 
 ===== Condição de parada tentouLerAposFinalDoArquivo
 
