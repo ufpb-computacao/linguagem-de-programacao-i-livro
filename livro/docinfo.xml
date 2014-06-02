@@ -8,21 +8,15 @@
       <date>02/06/2014</date>
       <authorinitials> Daniele, Eduardo, Iguatemi </authorinitials>
       <revremark>
-- Substituição de Quadros por Exemplos (#48).
-- Remoção de nota sobre onde os Registros serão abordados (#59).
 - Adição de programa com estrutura completa no Capítulo 1  (#60).
-- Alteração da Ordem dos exercícios no Capítulo 1 (#61).
 - Melhorias nos exemplos de leitura e escrita no capítulo de arquivos (#67).
-- Utilização de exemplos para referenciação dos códigos (#65).
 - Remoção das referências a restrict (#68).
-- Correção ortográfica: FORMATADOS (#69).
-- Correção do título do código matriz.c no capítulo 1  (#70).
 - Inclusão de exercício resolvido sobre leitura e impressão de CPFs (#71).
 - Revisão geral do livro (#72).
 - Correção na ilustração de pilha de execução (#75).
 - Melhoria na Figura 6.1: Ilustração de leitura com fgets (#76).
-- Melhoria na identação dos códigos (#77).
 - Movendo seção sobre Arquivos especiais para Apêndice (#78).
+- Outras alterações: #48 #59 #61 #65 #69 #70 #77.
       </revremark>
     </revision>
 
