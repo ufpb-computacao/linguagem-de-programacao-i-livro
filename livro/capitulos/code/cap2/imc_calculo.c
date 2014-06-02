@@ -16,13 +16,13 @@ int main(){
 	printf("Campos: nome, altura, peso, cpf, sexo\n");
 	for(int i=0; (i < QUANTIDADE_DE_PESSOAS); i++){
 		printf("\nInforme os dados da pessoa(%i): ",i+1);
-		scanf("%s %f %f %Lu %c",pessoas[i].nome, &pessoas[i].altura,
+		scanf("%s %f %f %lld %c",pessoas[i].nome, &pessoas[i].altura,
 			&pessoas[i].peso, &pessoas[i].cpf, &pessoas[i].sexo);
 	}
 
-	printf("\nInforme o CPF da pessoa: ");
 	long long cpf_localizador;
-	scanf("%Lu",&cpf_localizador); // <1>
+	printf("\nInforme o CPF da pessoa: ");
+	scanf("%lld",&cpf_localizador); // <1>
 
 	printf("\nSexo\tNome\tIMC");
 	for(int i=0; (i < QUANTIDADE_DE_PESSOAS); i++){ //<2>
@@ -31,7 +31,7 @@ int main(){
 				pessoas[i].altura);
 			printf("\n%c\t%s\t%1.2f\n",pessoas[i].sexo, 
 				pessoas[i].nome, imc);
-			break;
+			break; //<3>
 		}
 	}
 

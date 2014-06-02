@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-int
-main ()
+int main ()
 {
   float s0 = 3.0, v0 = 10.0, a = 5.0, t = 3.0;
   float s, v;

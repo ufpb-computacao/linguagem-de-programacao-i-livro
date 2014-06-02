@@ -22,7 +22,7 @@ int main(){
   printf("Campos: cpf nome deposito-inicial\n");
   for(long i=0; (i < QUANTIDADE_DE_CLIENTES); i++){
     printf("\nDados para abertura da conta(%ld): ",i+1);
-    scanf("%Ld %s %lf",&clientes[i].cpf,clientes[i].nome,
+    scanf("%lld %s %lf",&clientes[i].cpf,clientes[i].nome,
       &contas[i].saldo);
 
     contas[i].numero_da_conta = i;
@@ -38,7 +38,7 @@ int main(){
   double valor;
   int sair=0; // FALSE
 
-  while (!sair){
+  while (!sair){ // <1>
     printf("\nInforme a operação: 1-Saque 2-Deposito 3-Sair: ");
     scanf("%d", &operacao);
 

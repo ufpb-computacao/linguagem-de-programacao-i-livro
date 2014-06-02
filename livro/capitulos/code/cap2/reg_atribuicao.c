@@ -18,7 +18,7 @@ int main() {
 
 	printf("Aluno: %s Mat.: %d Nota1: %1.2f Nota2: %1.2f\n", 
 		a.nome, a.matricula, a.nota1, a.nota2);
-	printf("Cliente: %s CPF: %1Ld\n", c.nome,c.cpf);
+	printf("Cliente: %s CPF: %11lld\n", c.nome,c.cpf);
 
 	return 0;
 }

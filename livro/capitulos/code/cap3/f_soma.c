@@ -14,11 +14,11 @@ int main() {
 }
 // Corpo da função f_soma. Soma os números pares entre 200 e zero
 float f_soma(int PAR){
-   float s=0; // declara e inicializa em 0 uma variável do tipo float
-   while (PAR!=0){
-   s = s + PAR;
-   PAR= PAR - 2;
-   }
-   return s;
+    float s=0; // declara e inicializa em 0 uma variável do tipo float
+    while (PAR!=0){
+        s = s + PAR;
+        PAR= PAR - 2;
+    }
+    return s;
 }
 

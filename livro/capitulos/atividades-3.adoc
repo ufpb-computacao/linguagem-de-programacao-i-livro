@@ -2,7 +2,8 @@
 
 :local: code/cap3/atividades
 
-. Defina ponteiros e explique usando exemplos a função dos operadores de indireção `*` e de endereço `&`.
+. Defina ponteiros e explique usando exemplos a função dos operadores
+  de indireção `*` e de endereço `&`.
 
 . Considere o código a seguir. Quais valores serão impressos na tela?
 +
@@ -40,24 +41,59 @@ e. Inicialize a variável V1 em 12,5 e depois modifique o seu valor
 +
 Para cada caso faça/desenhe a pilha de execução do programa.
 
-. Elabore um programa em C que receba três valores (obrigatoriamente maiores do que zero), representando as medidas dos três lados de um triângulo. Além da função main, o programa deve conter outra função para: i) determinar se esses lados formam um triângulo; ii) determinar e mostrar o tipo de triângulo (equilátero, isósceles ou escaleno), caso as medidas formem um triângulo. Na solução deve-se usar passagem de parâmetros por referência.
+. Elabore um programa em C que receba três valores (obrigatoriamente
+  maiores do que zero), representando as medidas dos três lados de um
+  triângulo. Além da função main, o programa deve conter outra função
+  para: i) determinar se esses lados formam um triângulo; ii)
+  determinar e mostrar o tipo de triângulo (equilátero, isósceles ou
+  escaleno), caso as medidas formem um triângulo. Na solução deve-se
+  usar passagem de parâmetros por referência.
 +
 --
+
 [TIP]
 ====
-Sabe-se que para ser triângulo, a medida de um lado qualquer deve ser inferior ou igual à soma das medidas dos outros dois lados. Triângulo equilátero possui todos os lados iguais; triângulo isósceles possui pelo menos dois lados de medidas iguais; triângulo escaleno possui as medidas dos três lados diferentes.
+Sabe-se que para ser triângulo, a medida de um lado qualquer deve ser
+inferior ou igual à soma das medidas dos outros dois lados. Triângulo
+equilátero possui todos os lados iguais; triângulo isósceles possui
+pelo menos dois lados de medidas iguais; triângulo escaleno possui as
+medidas dos três lados diferentes.
+
 ====
 --
-. Considere uma equação de movimento para calcular a posição (s) e velocidade (v) de uma partícula em um determinado instante t, dado sua aceleração a, posição s0 e velocidade v0. O programa abaixo ilustra o uso dessa equação, imprimindo os valores 55.5 e 25.0, que representam a posição e velocidade calculadas para os valores utilizados pelo programa.
+
+. Considere uma equação de movimento para calcular a posição (s) e
+  velocidade (v) de uma partícula em um determinado instante t, dado
+  sua aceleração a, posição s0 e velocidade v0. O programa abaixo
+  ilustra o uso dessa equação, imprimindo os valores 55.5 e 25.0, que
+  representam a posição e velocidade calculadas para os valores
+  utilizados pelo programa.
 +
+--
+
 [source,c]
 ----
 include::{local}/movimento.c[]
 ----
-+
-Implemente a função movimento de tal forma que o exemplo acima funcione adequadamente. A solução deve funcionar para quaisquer valores de t, a, s0 e v0, não podendo ser particularizada para o programa acima. Para o cálculo da velocidade (v) use a equação v= v0 + a.t e da posição (s) use s= s0 + v0.t + (a.t2)/2.
 
-. Considere o programa abaixo que possui uma função calculadora que serve para calcular soma (s) e o produto (p) de dois números reais (c e d). O programa abaixo ilustra o uso dessa função para quando os valores 2.5 e 3.9 são utilizados pelo programa. Implemente a função calculadora de tal forma que o código abaixo funcione adequadamente. A solução deve funcionar para quaisquer valores de c e d, não podendo ser particularizada para os valores usados no programa abaixo, i.e., c= 2.5 e d=3.9. Após montar o código, faça/desenhe a pilha de execução do programa para o caso quando c= 2.5 e d=3.9.
+Implemente a função movimento de tal forma que o exemplo acima
+funcione adequadamente. A solução deve funcionar para quaisquer
+valores de t, a, s0 e v0, não podendo ser particularizada para o
+programa acima. Para o cálculo da velocidade (v) use a equação v=v~0~ + a.t 
+e da posição (s) use s= s~0~ + v~0~.t + (a.t^2^)/2.
+
+
+--
+
+. Considere o programa abaixo que possui uma função calculadora que
+  serve para calcular soma (s) e o produto (p) de dois números reais
+  (c e d). O programa abaixo ilustra o uso dessa função para quando os
+  valores 2.5 e 3.9 são utilizados pelo programa. Implemente a função
+  calculadora de tal forma que o código abaixo funcione adequadamente.
+  A solução deve funcionar para quaisquer valores de c e d, não
+  podendo ser particularizada para os valores usados no programa
+  abaixo, i.e., c= 2.5 e d=3.9. Após montar o código, faça/desenhe a
+  pilha de execução do programa para o caso quando c= 2.5 e d=3.9.
 +
 [source,c]
 ----
@@ -71,7 +107,9 @@ include::{local}/calculadora.c[]
 void calc_esfera(float r, float *area, float *volume).
 ----
 +
-Em seguida, monte um programa que peça o raio da esfera ao usuário e calcule os valores da área e volume da esfera. Dica: a área e volume da esfera são calculados como area=4.π.r2, volume=(4.π.r3)/3.
+Em seguida, monte um programa que peça o raio da esfera ao usuário e
+calcule os valores da área e volume da esfera. Dica: a área e volume
+da esfera são calculados como area=4.π.r^2^, volume=(4.π.r^3^)/3.
 
 
 ////

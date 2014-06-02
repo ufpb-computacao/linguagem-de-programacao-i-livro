@@ -14,7 +14,7 @@ Ao final deste capítulo você deverá ser capaz de:
 
 ____
 
-No início do capitulo anterior, foi discutido que o conhecimento de linguagens 
+No início do Capitulo 1, foi discutido que o conhecimento de linguagens 
 de programação específicas, por si só, não habilita ou não é suficiente 
 para programadores, é imprescindível saber usá-las de maneira eficiente. Foi 
 visto também que o projeto de um algoritmo ou programa engloba, entre outras, 
@@ -49,7 +49,7 @@ Como ilustrado na <<fig_uso_memoria_por_variavel>>, nesse caso, são realizados 
 passos, a declaração da variável em si e a atribuição de um valor a essa 
 variável. Note na <<fig_uso_memoria_por_variavel>> que no momento em que a variável `soma` é 
 declarada, é alocado na memória RAM do computador um espaço de memória para 
-a essa variável (posições `0xCB22` e `0xCB23`). Esse espaço de memória é 
+essa variável (posições `0xCB22` e `0xCB23`). Esse espaço de memória é 
 preenchido quando um valor é atribuído a variável, como por exemplo, o valor 3126.
 
 // FIXME: dois bytes não equivale a uma short?
@@ -171,10 +171,10 @@ Um ponteiro pode ser inicializado com `NULL`, 0 (zero) ou um endereço de uma
 variável usando o operador de endereço ``&''. Um ponteiro com valor `NULL` não 
 aponta para nada. `NULL` é uma constante simbólica definida na biblioteca 
 `<stddef.h>` e também em `<stdio.h>`. A inicialização do ponteiro com o valor `0` 
-(zero) é equivalente a inicializar com `NULL`, todavia em geral usa-se a 
+(zero) é equivalente a inicializar com `NULL`, todavia, em geral, usa-se a 
 inicialização com `NULL`.
 
-NOTE: Outras linguagens de programação utilizam `nil`, ou `null` com o mesmo significado.
+NOTE: Outras linguagens de programação utilizam `nil` ou `null` com o mesmo significado.
 
 Outra maneira de se inicializar ponteiros é associando-o diretamente a uma variável. Para isso o ((operador de endereço)) ``&'' deve ser utilizado.  A <<fig_inicializacao_ponteiro>>(a) ilustra que, ao declarar um ponteiro, o computador não aloca automaticamente 
 memória para guardar o valor apontado e, nesse caso, o comando `*pt = 230.8` 
@@ -333,8 +333,8 @@ impresso o valor 200 e após o `while` da função `f_soma` será impresso o val
 
 Continuando o debate, será mostrada agora a _((pilha de execução))_ na
 memória do programa em questão. Será utilizada a notação descrita na
-Fig. 3.4.  Resumidamente, a pilha de execução funciona da seguinte
-forma. Cada variável local de uma função de uma função é colocada na
+<<fig_pilha_de_execucao>>.  Resumidamente, a pilha de execução funciona da seguinte
+forma. Cada variável local de uma função é colocada na
 pilha de execução. As chamar uma função, os parâmetros da função são
 copiados para a pilha e tratados como se fossem variáveis locais da
 função chamada. Quando a execução da função é concluída, a parte da
@@ -477,11 +477,12 @@ código do <<ex_passagem_por_referencia>>.
 ----
 include::{local}/passagem_por_referencia.c[]
 ----
-<1> Protótipo da função cabeçalho definindo receber ponteiros como
-    parâmetros.
+<1> Protótipo da função cabeçalho definindo receber dois números
+    inteiros e dois ponteiros como para inteiros como parâmetros.
 <2> Chamada da função calculadora, similar ao programa anterior, mas
-    agora passa o endereço das variáveis.
-<3> Implementação da função com os ponteiros, similar ao cabeçalho.
+    agora passa o endereço das variáveis `sub` e `soma`.
+<3> Implementação da função com os ponteiros, similar ao cabeçalho;
+    `ptr1` recebe o endereço de memória de `sub` e `ptr2` o de `soma`.
 <4> Atualização das variáveis utilizando os ponteiros e o operador de
     indireção `*`.
 
@@ -504,10 +505,10 @@ entrada os endereços de memória das variáveis `sub` e `soma` (i.e.,
 `&sub` e `&soma`). Compare esse trecho do código com o exemplo
 anterior (forma incorreta).
 
-A implementação da função `calculadora` utilizar dois inteiros (`x` e
+A implementação da função `calculadora` utiliza dois inteiros (`x` e
 `y`) e dois ponteiros para inteiros como parâmetros de entrada (i.e.,
 `ptr1` e `ptr2`), conforme foi definido no protótipo da função. Nesse
-cenário, quando a função `calculadora` é chamada na linha, os
+cenário, quando a função `calculadora` é chamada, os
 endereços de memória das variáveis `sub` e `soma` (i.e., `&sub` e
 `&soma`) são armazenados nos ponteiros `ptr1` e `ptr2`. A partir desse
 momento, é possível atualizar o conteúdo das variáveis `sub` e `soma`

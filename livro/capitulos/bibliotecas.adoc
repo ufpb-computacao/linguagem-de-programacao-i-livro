@@ -620,6 +620,15 @@ int fprintf(FILE * arquivo,
 
 // TODO fprintf
 
+////
+Difference between format specifiers %i and %d in printf?
+
+These are identical for printf but different for scanf. For printf,
+both %d and %i designate a signed decimal integer. For scanf, %d and
+%i also means a signed integer but %i inteprets the input as a
+hexadecimal number if preceded by 0x and octal if preceded by 0 and
+otherwise interprets the input as decimal.
+////
 
 [id="feof", reftext="feof()"]
 ==== feof

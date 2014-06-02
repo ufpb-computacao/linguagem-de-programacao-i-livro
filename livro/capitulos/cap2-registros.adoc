@@ -53,7 +53,7 @@ descrito na <<tab_registro_cliente>>.
 |====
 
 [[tab_registro_cliente]]
-.Representação de um registro Cliente
+.Representação de um registro Cliente.
 [width="80%",cols="1,2,1m",frame="topbot",options="header"]
 |====
 ^| Novo tipo ^| Campo ^| Tipo do campo
@@ -84,7 +84,7 @@ DECLARE var1,var2,var3: NUMÉRICO
 .Em C
 [source, c]
 ----
-char[] nome_da_variavel;
+char nome_da_variavel[];
 double var1,var2,var3;
 ----
 
@@ -210,7 +210,7 @@ Em cada situação apresentada faremos a seguinte *análise*:
 
 [[situacao_aluno]]
 ==== Situação do cálculo das notas de um aluno
-Em uma disciplina onde os alunos possuem *duas notas*, e precisamos registrar e 
+Em uma disciplina na qual os alunos possuem *duas notas*, e precisamos registrar e 
 *calcular as médias* de todos eles, como seria um registro para representar 
 esta situação?
 
@@ -335,9 +335,9 @@ Nome do Registro:: Ponto
 Campos:: Quais as informações que precisamos para registrar um ponto no plano 
 cartesiano? Apenas suas coordenadas _(x,y)_. Existe mais alguma informação
 que desejamos registrar? O ponto possui um lugar associado a ele, como um região
-geográfica? *Não!* Os pontos serão plotados com colorações específicas? *Não!*.
-Para identificar os campos identificadores nos perguntamos: se dois pontos possuem
-as mesmas coordenadas eles são os mesmos? *Sim!* Concluímos que, neste caso, as
+geográfica? *Não!* Os pontos serão plotados com colorações específicas? *Não!*
+Para identificar os campos identificadores, nos perguntamos: se dois pontos possuem
+as mesmas coordenadas, eles são os mesmos? *Sim!* Concluímos que, neste caso, as
 duas coordenadas juntas identificam o ponto.
 
 
@@ -390,7 +390,7 @@ Campos:: Para registrar um produto vamos precisar do seu *nome* e o seu
 *preço*. 'Mas como identificar um produto cadastrado?' Quando vamos no supermercado
 e compramos alguma mercadoria no peso, o caixa do supermercado precisa fornecer 
 um código para cadastrar o produto pesado. 
-Geralmente ele utiliza uma tabela, onde há o nome do produto e o seu código. Para a nossa
+Geralmente ele utiliza uma tabela, na qual há o nome do produto e o seu código. Para a nossa
 aplicação vamos utilizar este mesmo *código* para identificar unicamente cada produto.
 
 [width="80%",cols="^1s,^1m,^1m",frame="topbot",options="header"]
@@ -421,7 +421,7 @@ include::code/cap2/reg_produto.c[]
 ====
 Neste registro tivemos contato com um provável campo *identificador* universal,
 o `codigo`. Geralmente, quando nos deparamos com um campo código, ele será 
-utilizado  como o identificador.footnote:[A não ser quando o 
+utilizado  como o identificador.footnote:[Exceto quando o 
 código for utilizado para designar uma senha.]
 ====
 
@@ -650,7 +650,7 @@ include::code/cap2/imc_calculo.c[]
 ----
 <1> O ler o campo *identificador* de Pessoa (`cpf`).
 <2> Pesquisa pelo registro Pessoa identificado pelo CPF lido.
-
+<3> Realiza quebra na execução.
 
 .Resultado ao simular a execução do programa
 ----
@@ -753,13 +753,18 @@ include::code/cap2/prob_conta_bancaria_pseudo.txt[]
 ----
 include::code/cap2/conta_bancaria.c[]
 ----
+<1> Poderia ser também: `while (sair!=0)`
+
+////
+Todo: Utilizar o tipo bool em stdbool.h para variáveis booleanas #73 
+////
 
 .Resultado ao simular a execução do programa
 ----
 include::code/cap2/conta_bancaria_simulacao.txt[]
 ----
 
-Após todos estes programas, agora vamos ver uma técnica que não utilizada ainda,
+Após todos estes programas, agora vamos ver uma técnica não utilizada ainda,
 a inicialização de 'registro' com valores pré-definidos.
 
 [[sec_registro_inicializacao]]
@@ -828,7 +833,7 @@ include::code/cap2/reg_triangulo.c[]
 
 [NOTE]
 ====
-Neste exemplo, o registro do tipo Triângulo foi criado com campos
+Neste exemplo, o registro do tipo `Triangulo` foi criado com campos
 do tipo `Ponto`, os três campos foram: `p1`, `p2` e `p3`. Para acessar a 
 coordenada `x` do primeiro ponto do Triângulo `t`, chamamos: `t.p1.x`.
 
@@ -883,8 +888,8 @@ A tabela a seguir mostra uma comparação entre Arranjos e Registros.
 * Armazena vários valores, mas *todos do mesmo tipo*.
 |
 * Estrutura de dados heterogênea
-** Coleção de variáveis referencias por um mesmo nome
-* Armazena vários valores, e *podem ser de diferentes tipos*
+** Coleção de variáveis referenciadas por um mesmo nome
+* Armazena vários valores e *podem ser de diferentes tipos*
 * Cada valor é armazenado num campo com um tipo próprio
 |====
 
@@ -894,13 +899,13 @@ A tabela a seguir mostra uma comparação entre Arranjos e Registros.
 Iniciamos este capítulo conhecendo a definição de *Registro* e sua utilidade. 
 
 Em seguida aprendemos a sua *sintaxe* de criação. Vimos o que é um 
-campo *identificador*, e como ele é utilizado para diferenciar
+campo *identificador* e como ele é utilizado para diferenciar
 um registro de outro.
 
 Realizamos *análises* em 5 situações demonstrando como criamos registros em
 cada uma delas.
 
-Na <<sec_registro_programas>> vimos como implementamos diversos programas em
+Na <<sec_registro_programas>> vimos como implementar diversos programas em
 pseudocódigo e em C.
 
 Por fim, aprendemos como um registro pode ser inicializado 
