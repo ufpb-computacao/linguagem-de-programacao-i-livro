@@ -4,6 +4,15 @@
   <revhistory>
 
     <revision>
+      <revnumber>v0.5.3</revnumber>
+      <date>13/08/2014</date>
+      <authorinitials> Eduardo </authorinitials>
+      <revremark>
+- Inclusão de Ficha Catalográfica (#79);
+      </revremark>
+    </revision>
+
+    <revision>
       <revnumber>v0.5.2</revnumber>
       <date>02/06/2014</date>
       <authorinitials> Daniele, Eduardo, Iguatemi </authorinitials>
@@ -19,8 +28,6 @@
 - Outras alterações: #48 #59 #61 #65 #69 #70 #77.
       </revremark>
     </revision>
-
-
 
     <revision>
       <revnumber>v0.5.1</revnumber>
