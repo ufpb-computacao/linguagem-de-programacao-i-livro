@@ -4,6 +4,15 @@
   <revhistory>
 
     <revision>
+      <revnumber>v0.5.4</revnumber>
+      <date>13/08/2014</date>
+      <authorinitials> Eduardo </authorinitials>
+      <revremark>
+- Atualização da Ficha Técnica (#80);
+      </revremark>
+    </revision>
+
+    <revision>
       <revnumber>v0.5.3</revnumber>
       <date>13/08/2014</date>
       <authorinitials> Eduardo </authorinitials>
