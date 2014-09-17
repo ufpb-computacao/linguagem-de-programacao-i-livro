@@ -618,7 +618,73 @@ int fprintf(FILE * arquivo,
     const char * formato, ...);
 ----
 
-// TODO fprintf
+===== Flags
+
+`-`::
+O resultado é justificado a esquerda, se não for especificado é justificado a direita.
+
+`+`::
+O resultado da conversão sempre será prefixado com o sinal do número (positivo ou negativo).
+
+_espaço_::
+Se o resultado for prefixado com _espaço_ então ele será impresso.
+
+`0`::
+Imprime zeros a esquerda do número.
+
+===== Modifidores de tamanho
+
+
+[width="60%",cols="^,^m",frame="topbot",options="header"]
+|====
+| Modificador | Tamando do tipo
+| hh(...) | char 
+| h(...)  | short
+| l(...)  | long
+| ll(...) | long long
+| L(...)  | long double
+|====
+
+===== Conversão de tipos
+
+`d,i` (tipo decimal com sinal)::
+O argumento int é convertivo para um decimal com sinal no estilo
+[-]dddd.  A precisão especifica o número mínimo de dígitos a aparecer;
+se o valor convertido pode ser representado com menos dígitos, ele é
+expandido com zeros.  A precisão padrão é 1. O resultado da conversão
+de Zero com a precisão de Zero é nenhum carácter.
+
+`u,o,x,X` (tipo decimal sem sinal, octal, ou hexadecimal)::
+O argumento unsigned int é convertido para unsigned octal *(o)*,
+unsigned decimal *(u)*, ou notação unsigned hexadecimal (*x* or *X*)
+no estilo dddd; as letras abcdef (de hexadecimal) são usadas na
+conversão com _x_ e ABCDEF para conversão com _X_. A precisão
+especifica o número mínimo de dígitos a aparecer; se o valor a ser
+convertido pode ser representado com menos dígitos, ele é expandido
+com zeros a esquerda. A precisão padrão é 1. O resultado da conversão
+de Zero com a precisão de Zero é nenhum carácter.
+
+`f,F` (tipo double)::
+O argumento double representando o número de ponto flutuante é
+convertido para a notação decimal no estilo [-]ddd.ddd, em que o
+número de dígitos depois do carácter ponto é igual a especificação da
+precisão. Se a precisão não for especificada, é assumido 6; se a
+precisão for zero e a flag `#` não for utilizada, o ponto não irá
+aparecer. Se o ponto foi espeficado então pelo menos um dígito é
+impresso antes dele. O valor é arredondado para o número de dígitos
+apropriados.
+
+`c` (tipo carácter)::
+O argumento inteiro é convertido para `unsigned char`, e o carácter
+resultante é escrito.
+
+`s` (tipo string)::
+O argumento deve um ponteiro para o início de um array de `char`. Os
+carácteres do array serão impressos até encontrar o carácter null `\0`
+(que não será impresso).
+
+`%`::
+O carácter `%` é escrito. A especificação completa deve ser ``%%''.
 
 ////
 Difference between format specifiers %i and %d in printf?
