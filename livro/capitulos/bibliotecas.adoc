@@ -718,6 +718,74 @@ Testa se o indicador do final de arquivo de `arquivo`.
 
 Retorna um valor não zero se o indicador de final de arquivo foi setado em `arquivo`.
 
+
+
+[id="math_h",reftext="math.h"]
+=== math.h
+
+(((math.h)))
+
+Funções matemáticas.
+
+
+[id="M_PI",reftext="M_PI"]
+==== M_PI
+
+[source,c]
+----
+#include <math.h>
+#define M_PI 3.14159265358979323846
+----
+
+`M_PI` é uma macro que contém uma definição de π.
+
+
+[id="fabs",reftext="fabs()"]
+==== fabs()
+
+(((fabs)))
+
+[source,c]
+----
+#include <math.h>
+double fabs(double x);
+float fabsf(float x);
+long double fabsl(long double x);
+----
+
+Calcula módulo ou valor absoluto de x: `|x|`.
+
+[id="pow",reftext="pow()"]
+==== pow()
+
+(((pow))) (((potência)))
+
+[source,c]
+----
+#include <math.h>
+double pow(double x, double y);
+float powf(float x, float y);
+long double powl(long double x, long double y);
+----
+
+Retorna x elevado a y: x^y^.
+
+[id="sqrt",reftext="sqrt()"]
+==== sqrt()
+
+(((sqrt))) (((raiz quadrada)))
+
+[source,c]
+----
+#include <math.h>
+double sqrt(double x);
+float sqrtf(float x);
+long double sqrtl(long double x);
+----
+
+Calcula a raiz quadrada de x: x:[\sqrt{x}].
+
+
 ////
 Terminando arquivo com linha em branco
 ////
