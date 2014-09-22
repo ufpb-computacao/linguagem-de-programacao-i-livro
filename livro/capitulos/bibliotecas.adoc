@@ -545,7 +545,7 @@ Ver http://www.cplusplus.com/reference/cstdio/fseek/.
 [id="ftell", reftext="ftell()"]
 ==== ftell()
 
-(((ftell)))
+(((ftell)))(((Arquivo,posição atual)))
 
 Retorna a posição atual no arquivo.
 
@@ -561,7 +561,7 @@ Ver http://www.cplusplus.com/reference/cstdio/ftell/, <<fseek>>.
 [id="rewind", reftext="rewind()"]
 ==== rewind()
 
-(((rewind)))
+(((rewind)))(((Arquivo,retroceder)))
 
 [source,c]
 ----
@@ -695,6 +695,8 @@ O carácter `%` é escrito. A especificação completa deve ser ``%%''.
 
 ===== Resumo e utilização do formato
 
+(((printf)))(((fprintf)))
+
 A <<fig_printf>> resume o formato utilizado nas funções
 <<fprintf>> e <<printf>>. 
 
@@ -738,7 +740,7 @@ otherwise interprets the input as decimal.
 [id="feof", reftext="feof()"]
 ==== feof
 
-(((feof)))
+(((feof)))(((Arquivo, final de arquivo)))
 
 [source,c]
 ----
@@ -770,6 +772,8 @@ Funções matemáticas.
 [id="M_PI",reftext="M_PI"]
 ==== M_PI
 
+(((Pi)))
+
 [source,c]
 ----
 #include <math.h>
@@ -792,7 +796,7 @@ float fabsf(float x);
 long double fabsl(long double x);
 ----
 
-Calcula módulo ou valor absoluto de x: `|x|`.
+Calcula ((módulo)) ou valor absoluto de x: `|x|`.
 
 [id="pow",reftext="pow()"]
 ==== pow()
