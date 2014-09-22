@@ -1,8 +1,8 @@
 [appendix]
 == Bibliotecas
 
-:online: {gitrepo}/blob/master/livro/capitulos/code/biblioteca
-:local: code/biblioteca
+:online: {gitrepo}/blob/master/livro/capitulos/code/bibliotecas
+:local: code/bibliotecas
 
 [[c1x]]
 === Padrão C1X da Linguagem C
@@ -632,20 +632,27 @@ Se o resultado for prefixado com _espaço_ então ele será impresso.
 `0`::
 Imprime zeros a esquerda do número.
 
+`#`::
+O Resultado é apresentado utilizando um _formato alternativo_.
+
+
 ===== Modifidores de tamanho
 
+Os modificadores de tamanho especficam qual o tamanho será
+utilizado na conversão. O tamanho independete do sinal 
+(`signed` ou `unsigned`).
 
-[width="60%",cols="^,^m",frame="topbot",options="header"]
+[width="60%",cols="^m,^m",frame="topbot",options="header"]
 |====
 | Modificador | Tamando do tipo
-| hh(...) | char 
-| h(...)  | short
-| l(...)  | long
-| ll(...) | long long
-| L(...)  | long double
+| hh | char 
+| h  | short
+| l  | long
+| ll | long long
+| L  | long double
 |====
 
-===== Conversão de tipos
+===== Especificaadores de Conversão de tipos
 
 `d,i` (tipo decimal com sinal)::
 O argumento int é convertivo para um decimal com sinal no estilo
@@ -685,6 +692,38 @@ carácteres do array serão impressos até encontrar o carácter null `\0`
 
 `%`::
 O carácter `%` é escrito. A especificação completa deve ser ``%%''.
+
+===== Resumo e utilização do formato
+
+A <<fig_printf>> resume o formato utilizado nas funções
+<<fprintf>> e <<printf>>. 
+
+NOTE: Na plataforma em que esta figura foi
+criada os tipos `long int` e `int` possuem o mesmo tamanho.
+
+[[fig_printf]]
+.Resumo do formato de fprintf e printf
+image::images/bibliotecas/fprintf-formato.pdf[scaledwidth="100%"]
+
+[[ex_formato_printf]]
+.Exemplo de utilizações do formato de `printf`
+====
+.Código fonte
+{online}/aprendendo_printf.c[{local}/aprendendo_printf.c]
+
+[source, c]
+----
+include::{local}/aprendendo_printf.c[]
+----
+
+.Saída da execução
+....
+include::{local}/aprendendo_printf.out[]
+....
+
+====
+
+
 
 ////
 Difference between format specifiers %i and %d in printf?
