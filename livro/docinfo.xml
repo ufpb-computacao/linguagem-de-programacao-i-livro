@@ -4,11 +4,22 @@
   <revhistory>
 
     <revision>
+      <revnumber>v0.5.5</revnumber>
+      <date>22/08/2014</date>
+      <authorinitials> Eduardo </authorinitials>
+      <revremark>
+<ulink url="{gitrepo}/issues/81">Detalhamento da função fprintf no apêndice;</ulink>
+<ulink url="{gitrepo}/issues/82">Inclusão de math.h no apêndice;</ulink>
+<ulink url="{gitrepo}/issues/83">Adição de links no histórico de revisão;</ulink>
+      </revremark>
+    </revision>
+
+    <revision>
       <revnumber>v0.5.4</revnumber>
       <date>13/08/2014</date>
       <authorinitials> Eduardo </authorinitials>
       <revremark>
-- Atualização da Ficha Técnica (#80);
+<ulink url="{gitrepo}/issues/80">Atualização da Ficha Técnica;</ulink>
       </revremark>
     </revision>
 
@@ -17,7 +28,7 @@
       <date>13/08/2014</date>
       <authorinitials> Eduardo </authorinitials>
       <revremark>
-- Inclusão de Ficha Catalográfica (#79);
+<ulink url="{gitrepo}/issues/79">Inclusão de Ficha Catalográfica;</ulink>
       </revremark>
     </revision>
 
@@ -26,15 +37,23 @@
       <date>02/06/2014</date>
       <authorinitials> Daniele, Eduardo, Iguatemi </authorinitials>
       <revremark>
-- Adição de programa com estrutura completa no Capítulo 1  (#60).
-- Melhorias nos exemplos de leitura e escrita no capítulo de arquivos (#67).
-- Remoção das referências a restrict (#68).
-- Inclusão de exercício resolvido sobre leitura e impressão de CPFs (#71).
-- Revisão geral do livro (#72).
-- Correção na ilustração de pilha de execução (#75).
-- Melhoria na Figura 6.1: Ilustração de leitura com fgets (#76).
-- Movendo seção sobre Arquivos especiais para Apêndice (#78).
-- Outras alterações: #48 #59 #61 #65 #69 #70 #77.
+<ulink url="{gitrepo}/issues/60">Adição de programa com estrutura completa no Capítulo 1;</ulink>
+<ulink url="{gitrepo}/issues/67">Melhorias nos exemplos de leitura e escrita no capítulo de arquivos;</ulink>
+<ulink url="{gitrepo}/issues/68">Remoção das referências a restrict;</ulink>
+<ulink url="{gitrepo}/issues/71">Inclusão de exercício resolvido sobre leitura e impressão de CPFs;</ulink>
+<ulink url="{gitrepo}/issues/72">Revisão geral do livro;</ulink>
+<ulink url="{gitrepo}/issues/75">Correção na ilustração de pilha de execução;</ulink>
+<ulink url="{gitrepo}/issues/76">Melhoria na Figura 6.1: Ilustração de leitura com fgets;</ulink>
+<ulink url="{gitrepo}/issues/78">Movendo seção sobre Arquivos especiais para Apêndice;</ulink>
+<ulink url="{gitrepo}/issues/"></ulink>
+Outras alterações: 
+<ulink url="{gitrepo}/issues/48">#48</ulink>,
+<ulink url="{gitrepo}/issues/59">#59</ulink>,
+<ulink url="{gitrepo}/issues/61">#61</ulink>,
+<ulink url="{gitrepo}/issues/65">#65</ulink>,
+<ulink url="{gitrepo}/issues/69">#69</ulink>,
+<ulink url="{gitrepo}/issues/70">#70</ulink> e 
+<ulink url="{gitrepo}/issues/77">#77</ulink>;
       </revremark>
     </revision>
 
@@ -43,21 +62,28 @@
       <date>15/Maio/2014</date>
       <authorinitials>Eduardo, Daniele, Iguatemi</authorinitials>
       <revremark>
-- Documentação de funções no apêndice #23. 
-- Padronizar cpf com o tipo long long #25 
-- Correção da saída de soma_vetores.c #35. 
-- Uso de função calloc() no lugar de malloc() em registro_dinamico.c #40. 
-- Ilustrar separadamente Declaração e Inicliação de Vetor #41.  
-- Informar que o vetor inicia com índice "0" #42. 
-- Adicionar exemplo de código para estrutura condicional #43. 
-- Evidenciar estrutura geral dos Arrays multidimensionais #57. 
-- Evidenciar propósito das funções printf e scanf na seção 1.3.1 #44. 
-- Explicar o que é estrutura estática e dinâmica #45. 
-- Deixar ainda mais clara a figura 1.2 #58. 
-- Atualização dos objetivos do capítulo de Arquivos #63. 
-- Utilizando Inocente em vez de Estúpido #32. 
-- Explicando arquivos especiais no Windows #63. 
-- Correções ortográficas: #33, #30, #36, #37, #38, #39 e #46.
+<ulink url="{gitrepo}/issues/23">Documentação de funções no apêndice;</ulink>
+<ulink url="{gitrepo}/issues/25">Padronizar cpf com o tipo long long;</ulink>
+<ulink url="{gitrepo}/issues/35">Correção da saída de soma_vetores.c;</ulink>
+<ulink url="{gitrepo}/issues/40">Uso de função calloc() no lugar de malloc() em registro_dinamico.c;</ulink> 
+<ulink url="{gitrepo}/issues/41">Ilustrar separadamente Declaração e Inicliação de Vetor;</ulink>
+<ulink url="{gitrepo}/issues/42">Informar que o vetor inicia com índice "0";</ulink>
+<ulink url="{gitrepo}/issues/43">Adicionar exemplo de código para estrutura condicional;</ulink> 
+<ulink url="{gitrepo}/issues/57">Evidenciar estrutura geral dos Arrays multidimensionais;</ulink>
+<ulink url="{gitrepo}/issues/44">Evidenciar propósito das funções printf e scanf na seção 1.3.1;</ulink>
+<ulink url="{gitrepo}/issues/45">Explicar o que é estrutura estática e dinâmica;</ulink>
+<ulink url="{gitrepo}/issues/58">Deixar ainda mais clara a figura 1.2;</ulink>
+<ulink url="{gitrepo}/issues/63">Atualização dos objetivos do capítulo de Arquivos;</ulink> 
+<ulink url="{gitrepo}/issues/32">Utilizando Inocente em vez de Estúpido #32;</ulink>
+<ulink url="{gitrepo}/issues/63">Explicando arquivos especiais no Windows;</ulink>
+Correções ortográficas: 
+<ulink url="{gitrepo}/issues/33">#33</ulink>, 
+<ulink url="{gitrepo}/issues/30">#30</ulink>, 
+<ulink url="{gitrepo}/issues/36">#36</ulink>, 
+<ulink url="{gitrepo}/issues/37">#37</ulink>, 
+<ulink url="{gitrepo}/issues/38">#38</ulink>, 
+<ulink url="{gitrepo}/issues/39">#39</ulink> e 
+<ulink url="{gitrepo}/issues/46">#46</ulink>;
       </revremark>
     </revision>
 
@@ -67,10 +93,10 @@
       <date>17/Março/2014</date>
       <authorinitials>Eduardo</authorinitials>
       <revremark>
-- Documentação de funções no apêndice #23
-- Revisão do capítulo de memória dinâmica #21
-- Inclusão de experimento mkfifo no apêndice #22
-- Inclusão do Capítulo de Arquivos #22
+<ulink url="{gitrepo}/issues/23">Documentação de funções no apêndice;</ulink>
+<ulink url="{gitrepo}/issues/21">Revisão do capítulo de memória dinâmica;</ulink>
+<ulink url="{gitrepo}/issues/22">Inclusão de experimento mkfifo no apêndice;</ulink>
+<ulink url="{gitrepo}/issues/22">Inclusão do Capítulo de Arquivos;</ulink>
       </revremark>
     </revision>
 
@@ -80,11 +106,11 @@
       <date>27/Fevereiro/2014</date>
       <authorinitials>Eduardo</authorinitials>
       <revremark>
-- Inclusão do capítulo de Alocação Dinâmica (Falta revisão);
-- Inclusão de capítulo de Arquivo (Falta conteúdo);
-- Inclusão de Projeto Lingua do i;
-- Inclusão do capítulo Depuração;
-- Inclusão do capítulo Biblioteca;
+Inclusão do capítulo de Alocação Dinâmica (Falta revisão);
+Inclusão de capítulo de Arquivo (Falta conteúdo);
+Inclusão de Projeto Lingua do i;
+Inclusão do capítulo Depuração;
+Inclusão do capítulo Biblioteca;
       </revremark>
     </revision>
 

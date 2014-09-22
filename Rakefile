@@ -232,10 +232,11 @@ namespace "github" do
 #    require 'highline/import'
     client = Octokit::Client.new
     milestone = nil
-    milestones = client.list_milestones(GITHUB_REPO)
+    milestones = client.list_milestones(GITHUB_REPO, state: "all")
     opcoes = milestones.map {|m| m[:title]}
 
     if (args.milestone) then
+      #puts "milestones: #{milestones}"
       milestones.each do |m|
         if m[:title] == args.milestone then
           milestone = m
@@ -246,9 +247,17 @@ namespace "github" do
     end
     puts "Milestone: #{milestone[:title]}"
 
+    puts ""
+    puts "Para adicionar ao docinfo.xml:\n"
     issues = client.list_issues(GITHUB_REPO, state:'Closed', milestone:milestone[:number], direction:'asc')
+    issues.each do |i|
+      puts "<ulink url=\"{gitrepo}/issues/#{i[:number]}\">#{i[:title]};</ulink>"
+    end
+    puts ""
+    puts "Para adicionar ao release notes no github:"
     issues.each do |i|
       puts "- #{i[:title]} (##{i[:number]});"
     end
+
   end
 end
