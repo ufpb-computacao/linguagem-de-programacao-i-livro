@@ -4,6 +4,15 @@
   <revhistory>
 
     <revision>
+      <revnumber>v0.5.6</revnumber>
+      <date>29/09/2014</date>
+      <authorinitials> Eduardo </authorinitials>
+      <revremark>
+<ulink url="{gitrepo}/issues/84">Solicitando feedback ao final de cada capítulo;</ulink>
+      </revremark>
+    </revision>
+
+    <revision>
       <revnumber>v0.5.5</revnumber>
       <date>22/09/2014</date>
       <authorinitials> Eduardo </authorinitials>
