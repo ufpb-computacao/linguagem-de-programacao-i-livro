@@ -1,5 +1,6 @@
 == Alocação Dinâmica de Memória
 
+:cap: cap4
 :online: {gitrepo}/blob/master/livro/capitulos/code/cap4
 :local: code/cap4
 :img: images/cap4

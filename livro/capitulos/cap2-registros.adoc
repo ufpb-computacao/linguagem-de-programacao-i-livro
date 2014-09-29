@@ -1,6 +1,8 @@
 [[cap_registros]]
 == Registros
 
+:cap: cap2
+
 .Objetivos do capítulo
 ____________________
 Ao final deste capítulo você deverá ser capaz de:

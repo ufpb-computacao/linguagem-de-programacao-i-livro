@@ -1,5 +1,7 @@
 == Ponteiros
 
+:cap: cap3
+
 :online: {gitrepo}/blob/master/livro/capitulos/code/cap3
 :local: code/cap3
 

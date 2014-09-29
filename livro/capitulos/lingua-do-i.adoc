@@ -1,6 +1,7 @@
 [[cap_lingua_do_i]]
 == Lingua do i
 
+:cap: lingua-do-i
 :online: {gitrepo}/blob/master/livro/capitulos/code/lingua-do-i
 :local: code/lingua-do-i
 
