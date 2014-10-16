@@ -4,6 +4,16 @@
   <revhistory>
 
     <revision>
+      <revnumber>v1.0.0</revnumber>
+      <date>16/10/2014</date>
+      <authorinitials> Eduardo </authorinitials>
+      <revremark>
+<ulink url="{gitrepo}/issues/86">Inclusão do ISBN;</ulink>
+      </revremark>
+    </revision>
+
+
+    <revision>
       <revnumber>v0.5.6</revnumber>
       <date>29/09/2014</date>
       <authorinitials> Eduardo </authorinitials>
