@@ -7,7 +7,8 @@ require 'open3'
 task :default => [:wip]
 
 SOURCE_FILES = FileList['livro/livro.asc', 'livro/capitulos/*']
-@RELEASE_DIR = 'releases/current'
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`.strip
+@RELEASE_DIR = "releases/#{CURRENT_BRANCH}"
 @BOOK_SOURCE_DIR = 'livro'
 @BOOK_SOURCE = 'livro/livro.asc'
 @BOOK_TARGET = 'livro/livro.pdf'
@@ -18,7 +19,9 @@ RELEASE_BOOK  = "#{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/livro.pdf"
 RELEASE_WIP_ADOC =  "#{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.adoc"
 RELEASE_WIP_PDF  =  "#{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.pdf"
 OPEN_PDF_CMD=`git config --get producao.pdfviewer`.strip
-A2X_COMMAND="-v -k -f pdf --icons -a docinfo1 -a edition=`git describe` -a lang=pt-BR -d book --dblatex-opts '-T computacao -P latex.babel.language=brazilian' -a livro-pdf"
+
+A2X_COMMAND="-v -k -f pdf --icons -a docinfo1 -a edition=`git describe` -a lang=pt-BR -d book --dblatex-opts '-T computacao -P latex.babel.language=brazilian -P preface.tocdepth=1' -a livro-pdf"
+A2X_EPUB_COMMAND="-v -k -f epub --icons -a docinfo1 -a edition=`git describe` -a lang=pt-BR -d book "
 PROJECT_NAME = File.basename(Dir.getwd)
 LIVRO_URL = `git config --get livro.url`.strip
 GITHUB_REPO = `git config remote.origin.url`.strip.gsub('git@github.com:','').gsub('.git','')
@@ -36,7 +39,7 @@ CLEAN.include('releases')
 desc "Sync, build and open wip file"
 task :wip => [WIP_ADOC, "sync", "wip:build", "wip:open"]
 task :edit => ["wip:edit"]
-
+task :epub
 
 namespace "wip" do
 
@@ -49,8 +52,12 @@ namespace "wip" do
     Rake::Task["wip:new"].invoke
   end
 
-  file RELEASE_WIP_PDF do
-    system "#{@A2X_BIN} #{A2X_COMMAND} #{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.adoc"
+  EDITORA_PDF = "#{@BOOK_SOURCE_DIR}/editora/editora.pdf"
+  
+  desc "build book from #{@RELEASE_DIR}"
+  task :build => [WIP_ADOC, :sync] do
+    DRAFT_COMMAND = "--dblatex-opts '-P draft.mode=yes'"
+    system "#{@A2X_BIN} #{A2X_COMMAND} #{DRAFT_COMMAND} #{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.adoc"
   end
 
   desc "Open wip pdf"
@@ -60,7 +67,7 @@ namespace "wip" do
   end
 
   desc "Open docbook xml from wip build"
-  task "xml" do
+  task "xml" => ["#{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.xml"] do
     system "#{OPEN_PDF_CMD} #{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.xml"
   end
 
@@ -69,12 +76,15 @@ namespace "wip" do
     system "gvim #{WIP_ADOC}"
   end
 
-  desc "build book from #{@RELEASE_DIR}"
-  task :build => [WIP_ADOC, :sync] do
-    system "#{@A2X_BIN} #{A2X_COMMAND} #{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.adoc"
+
+  desc "build wip epub book"
+  task :epub do
+    system "#{@A2X_BIN} #{A2X_EPUB_COMMAND} #{@RELEASE_DIR}/#{@BOOK_SOURCE_DIR}/wip.adoc"
   end
 
+
 end
+
 
 
 
@@ -285,6 +295,7 @@ namespace "github" do
 
   end
 end
+
 
 namespace "release" do
 
