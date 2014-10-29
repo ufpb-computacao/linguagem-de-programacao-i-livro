@@ -1,6 +1,0 @@
-Etapa: 
-
-* Estrutura dos arquivos
-* Teste inicial com saída hardcode
-* Makefile
-

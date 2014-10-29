@@ -1,0 +1,15 @@
+task :compile do
+  puts "compiling"
+
+end
+
+task :cap5, [:compile, "lendo_e_escrevendo_char"] do
+  sh "make clean && make"
+  system "./abrindo_arquivo_binario_para_escrita > abrindo_arquivo_binario_para_escrita.out"
+  system "./abrindo_arquivo_de_texto > abrindo_arquivo_de_texto.out"
+  system "./cria_arquivo_binario > cria_arquivo_binario.out"
+  system "./fechando_arquivo > fechando_arquivo.out"
+  system "./lendo_e_escrevendo_char > lendo_e_escrevendo_char.out"
+  system "./lendo_e_escrevendo_linha > lendo_e_escrevendo_linha.out"
+end
+

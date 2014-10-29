@@ -1,26 +1,37 @@
-[[prefacio]]
-[preface]
-== Prefácio
-
-Este livro é destinado a alunos de cursos como Ciência da Computação, Sistemas de Informação, Engenharia da Computação e, sobretudo, Licenciatura em Computação. Ele tem o objetivo de continuar o estudo da Linguagem C, iniciado em disciplina anterior de Introdução a Programação.
-
+Este livro é destinado a alunos de cursos como Ciência da Computação,
+Sistemas de Informação, Engenharia da Computação e, sobretudo,
+Licenciatura em Computação. Ele tem o objetivo de continuar o estudo
+da Linguagem C, iniciado em disciplina anterior de Introdução a
+Programação.
 
 A primeira parte deste livro contém:
 
-_Capítulo 1_:: Será realizada uma revisão dos conteúdos introdutórios da Linguaguem C, que são pré-requisitos para os demais capítulos do livro.
-_Capítulo 2_:: Será apresentado o conceito de Registro e como utilizá-lo na Linguagem C.
-_Capítulo 3_:: Veremos a utilização de Ponteiros e os tipos de passagem de parâmetros.
-_Capítulo 4_:: Aprenderemos o que é Alocação Dinâmica de Memória e como realizá-la.
-_Capítulo 5_:: Conheceremos os diferentes tipos de Arquivos e aprenderemos como manipulá-los em C.
+_Capítulo 1_:: Será realizada uma revisão dos conteúdos introdutórios
+da Linguaguem C, que são pré-requisitos para os demais capítulos do
+livro.
+_Capítulo 2_:: Será apresentado o conceito de Registro e como
+utilizá-lo na Linguagem C.
+_Capítulo 3_:: Veremos a utilização de
+Ponteiros e os tipos de passagem de parâmetros.
+_Capítulo 4_::
+Aprenderemos o que é Alocação Dinâmica de Memória e como realizá-la.
+_Capítulo 5_:: Conheceremos os diferentes tipos de Arquivos e
+aprenderemos como manipulá-los em C.
 
 A segunda parte deste livro contém:
 
-_Capítulo 6_:: Apresentação de todas as etapas do desenvolvimento do projeto _lingua do i_, demonstrando a utilização de arquivos e testes para guiar o desenvolvimento.
-Apêndice A:: Demonstração da depuração de uma aplicação com o `gdb`.
-Apêndice B:: Experimento com `mkfifo` para demonstrar a existência de arquivos especias.
-Apêndice C:: Documentação das bibliotecas em C, utilizadas no livro.
-Apêndice D:: Contém respostas de algumas atividades.
-
+_Capítulo 6_:: Apresentação de todas as etapas do desenvolvimento do
+projeto _lingua do i_, demonstrando a utilização de arquivos e testes
+para guiar o desenvolvimento.
+Apêndice A:: Demonstração da depuração
+de uma aplicação com o `gdb`.
+Apêndice B:: Experimento com `mkfifo`
+para demonstrar a existência de arquivos especias.
+Apêndice C::
+Documentação das bibliotecas em C, utilizadas no livro.
+Apêndice D::
+Contém respostas de algumas atividades.
+ 
 
 
 
@@ -48,233 +59,6 @@ semestre do curso.
 * Leia materiais complementares eventualmente disponibilizados
 * Realize as atividades propostas pelo professor da disciplina
 
-[[caixas_de_dialogo]]
-=== Caixas de diálogo
-
-Nesta seção apresentamos as caixas de diálogo que poderão ser utilizadas durante o texto.
-Confira os significados delas.
-
-[NOTE]
-========
-Esta caixa é utilizada para realizar alguma reflexão.
-========
-
-[TIP]
-========
-Esta caixa é utilizada quando desejamos remeter a materiais complementares.
-========
-
-[IMPORTANT]
-========
-Esta caixa é utilizada para chamar atenção sobre algo importante.
-========
-
-[CAUTION]
-========
-Esta caixa é utilizada para alertar sobre algo que exige cautela.
-========
-
-[WARNING]
-========
-Esta caixa é utilizada para alertar sobre algo potencialmente perigoso.
-========
-
-Os significados das caixas são apenas uma referência, podendo ser adaptados 
-conforme as intenções dos autores.
-
-=== Vídeos
-
-Os vídeos são apresentados da seguinte forma:
-
-.Como baixar os códigos fontes: http://youtu.be/Od90rVXJV78.
-ifdef::livro-pdf[]
-["qrcode", size=10, scaledwidth="30%"]
--------------------------
-http://youtu.be/Od90rVXJV78
--------------------------
-endif::livro-pdf[]
-ifdef::livro-html[]
-+++
-<?dbhtml-include href="videos/baixar-codigo.html"?>
-+++
-endif::livro-html[]
-
-
-[NOTE]
-==================
-Na *versão impressa* irá aparecer uma imagem quadriculada. Isto é o
-qrcode (http://pt.wikipedia.org/wiki/C%C3%B3digo_QR) contendo o link
-do vídeo. Caso você tenha um celular com acesso a Internet poderá
-acionar um programafootnote:[Busque na loja virtual do seu celular por
-``qrcode''.] de leitura de qrcode para acessar o vídeo.
-
-Na *versão digital* você poderá assistir o vídeo clicando diretamente
-sobre o link ou acionando o play (na versão em HTML).
-==================
-
-
-=== Compreendendo as referências
-
-As referências são apresentadas conforme o elemento que está sendo referenciado:
-
-Referências a capítulos:: <<prefacio>>, <<cap_respostas>>
-
-Referências a seções:: <<como_estudar>>, <<caixas_de_dialogo>>.
-
-Referências a imagens e tabelas:: <<fig_issue_contribuicao>> <<tab_metodos_contribuicao_livro>>
-
-NOTE: Na *versão impressa*, o número que aparece entre chaves ``[ ]'' corresponde
-ao número da página onde está o conteúdo referenciado. Nas *versões digitais*
-do livro você poderá clicar no link da referência.
-
-=== Códigos e comandos
-
-Os códigos ou comandos são apresentados com a seguinte formação:
-
- cc -S helloworld.c
-
-No exemplo a seguir, temos outra apresentação de código fonte. Desta
-vez de um arquivo `helloworld.c`, que se encontra dentro do diretório
-`livro/capitulos/code/cap1`.  O diretório `cap1` indica o capítulo
-onde o código será apresentado.
-
-.Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/helloworld.c[code/cap1/helloworld.c]
-
-[source, c]
-.Hello world em C
-----
-include::code/cap1/helloworld.c[]
-----
-
-
-TIP: Nas *versões digitais* do livro você poderá clicar no nome do arquivo
-indicado em *Código fonte* para acessar a versão mais nova do arquivo, através
-da Internet. Na seção <<codigo_fonte>> é apresentado como baixar os códigos
-do livro.
-
-
-[[codigo_fonte]]
-=== Baixando os códigos fontes
-
-Existem duas formas de acessar os códigos fontes contidos neste livro.
-
-Acesso on-line individual:: Você pode acessar individualmente os arquivos deste 
-livro pelo endereço: {gitrepo}/tree/master/livro/capitulos/code.
-
-Baixando todos os códigos:: 
-Você também pode baixar o código fonte do livro
-inteiro, que contém todos os códigos mencionados no livro. Existem duas formas
-de baixar o código inteiro, através de um arquivo zip ou clonando o repositório.
-
-Arquivo zip;; {gitrepo}/archive/master.zip. Depois de baixar o arquivo, descompacte-o. 
-Clonando o repositório;; No terminal, use o comando: git clone {gitrepo}
-
-.Como baixar os códigos fontes: http://youtu.be/Od90rVXJV78
-ifdef::livro-pdf[]
-["qrcode", size=10, scaledwidth="30%"]
--------------------------
-http://youtu.be/Od90rVXJV78
-
--------------------------
-endif::livro-pdf[]
-ifdef::livro-html[]
-+++
-<?dbhtml-include href="videos/baixar-codigo.html"?>
-+++
-endif::livro-html[]
-
-
-NOTE: Independente do método utilizado para acessar os arquivos, os códigos
-fontes estão organizados por capítulos no diretório `livro/capitulos/code`.
-
-WARNING: Os códigos acessados por estes métodos são referentes à versão mais 
-nova do livro (em produção). É possível que eles sejam diferentes da versão 
-do livro que você esteja lendo. Para baixar os códigos de uma versão específica
-troque a palavra `master` no link para uma versão desejada, exemplo: `v0.2.0`.
-
-==== Compilando e executando os arquivos
-
-A forma mais simples de compilar e executar os arquivos do livro é entrando
-no diretório do capítulo e digitando o seguinte comando `make`:
-
-.Comandos para compilar os programas do capítulo
-....
-cd livro/capitulos/code/cap1
-make
-....
-
-.Comando para executar o programa helloworld
-....
-./helloworld
-....
-
-.Comando para apagar todos os programas compilados
-....
-make clean
-....
-
-
-=== Contribuindo com o livro
-
-Você pode contribuir com a atualização e correção deste livro. A
-<<tab_metodos_contribuicao_livro>> resume os métodos de contribuições
-disponíveis:
-
-[[tab_metodos_contribuicao_livro]]
-.Métodos para contribuição do livro.
-[width="100%",cols="1.^,2.^a,4.^",frame="topbot",options="header"]
-|======================
-|Método de contribuição | Habilidades necessárias | Descrição
-| Issue track 
-| 
-- Inscrição no site do github
-- Preenchimento de um formulário
-| Consiste em acessar o repositório do livro e submeter um erro, uma sugestão
-ou uma crítica -- através da criação de um 'Issue'. Quando providências forem 
-tomadas você será notificado disso.
-
-| Submissão de correção
-| 
-
-- Realizar fork de projetos
-- Atualizar texto do livro
-- Realizar PullRequest
-
-| Consiste em acessar os arquivos fontes do livro, realizar a correção desejada
-e submetê-la para avaliação. Este processo é o mesmo utilizado na produção de
-softwares livres.
-|======================
-
-IMPORTANT: Quando for enviar sua contribuição lembre-se de informar qual a versão
-e página do livro que está se referindo.
-
-Contribuição através do Issue track:: Para contribuir com um erro, sugestão ou 
-crítica através de um envio de uma mensagem acesse: {gitrepo}/issues/new 
-+
-[[fig_issue_contribuicao]]
-.Exemplo de contribuição através do 'Issue track'.
-image::images/prefacio/issue.png[scaledwidth="70%"]
-
-=== Atividades
-
-No final de cada capítulo há uma seção *Atividades* com exercícios para serem resolvidos. 
-
-O significado dos ícones relativos aos exercícios são:
-
-Resposta disponível {resposta}:: a resposta do exercício se encontra disponível no <<cap_respostas>>.
-Resolução disponível {solucao}:: a resolução do exercício se encontra disponível.
-
-NOTE: Você pode contribuir enviando respostas ou soluções dos exercícios.
-
-=== Baixando a edição mais nova deste livro
-
-Nós estamos constantemente atualizando o nosso material didático. 
-Todas as versões deste livro encontram-se disponíveis para download.
-
-TIP: Acesse {gitrepo}/releases para baixar a versão mais nova deste livro.
-
 ////
 Sempre terminar o arquivo com uma nova linha.
 ////
-
