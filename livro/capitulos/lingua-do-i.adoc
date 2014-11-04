@@ -648,7 +648,7 @@ testes com operações em arquivo, você pode utilizá-lo para consultar
 como realizar diversas operações, algumas funções deste capítulo estão
 disponíveis lá. Este link é um bom recurso de aprendizagem.
 
-===== Abrindo e fechando arquivo para leitura
+==== Abrindo e fechando arquivo para leitura
 
 Antes de iniciar a leitura do conteúdo do arquivos,
 é necessário abrir o arquivo para leitura:
@@ -1245,7 +1245,7 @@ Vamos atualizar nossa implementação para possibilitar esta conversão
 também:
 
 [source,c]
-....
+----
 char traduzCaracterParaLinguaDoI(char original){
 	char resposta;
 	switch (original) {
@@ -1275,7 +1275,7 @@ char traduzCaracterParaLinguaDoI(char original){
 	}
 	return resposta;
 }
-....
+----
 
 <1> Inclusão de conversão de letra maiúscula.
 <2> Conversão de caracteres com acentos.
@@ -1426,7 +1426,6 @@ atividades que gostaríamos de realizar no futuro:
 .Código fonte
 {online}/{etapa}/src/lingua-do-i.c[{local}/{etapa}/TODO.txt]
 
-[source, c]
 .Criação do arquivo TODO.txt
 ....
 include::{local}/{etapa}/TODO.txt[]
