@@ -8,9 +8,9 @@
       <date>3/11/2014</date>
       <authorinitials> Eduardo </authorinitials>
       <revremark>
-- cap5 Atualização do link de fechando_arquivo.c (#87);
-- Padronização da inserção de código (#88);
-- Inclusão de mini-sumário por capítulo(#89);
+<ulink url="{gitrepo}/issues/87">cap5 Atualização do link de fechando_arquivo.c;</ulink>
+<ulink url="{gitrepo}/issues/88">Padronização da inserção de código;</ulink>
+<ulink url="{gitrepo}/issues/89">Inclusão de mini-sumário por capítulo;</ulink>
       </revremark>
     </revision>
 
