@@ -26,13 +26,11 @@ sendo desenvolvido na <<sec_etapa8>>.
 (((Makefile)))
 Vamos verificar o `Makefile` do projeto:
 
-:srcfile: Makefile
 .Código fonte
-{online}/{srcfile}[{local}/{srcfile}]
+{online}/{etapa}/src/Makefile[{local}/{etapa}/src/Makefile]
 
-[source, c]
 ----
-include::{local}/{srcfile}[]
+include::{local}/{etapa}/src/Makefile[]
 ----
 
 Percebam que o parâmetro `-g` está presente nas ((flags de compilação)):
@@ -54,17 +52,14 @@ Abortado (imagem do núcleo gravada)
 
 O código fonte utilizado na execução foi:
 
-.Código fonte para os testes
-====
-:srcfile: lingua-do-i-test.c
 .Código fonte
-{online}/{srcfile}[{local}/{srcfile}]
+{online}/{etapa}/src/lingua-do-i-test.c[{local}/{etapa}/src/lingua-do-i-test.c]
 
-[source, c]
+[source, c, numbered]
+.Código fonte para os testes
 ----
-include::{local}/{srcfile}[]
+include::{local}/{etapa}/src/lingua-do-i-test.c[]
 ----
-====
 
 ==== Escolha do ponto de parada
 
