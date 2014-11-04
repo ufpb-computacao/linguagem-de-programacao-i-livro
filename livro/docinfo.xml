@@ -4,6 +4,17 @@
   <revhistory>
 
     <revision>
+      <revnumber>v1.0.1</revnumber>
+      <date>3/11/2014</date>
+      <authorinitials> Eduardo </authorinitials>
+      <revremark>
+- cap5 Atualização do link de fechando_arquivo.c (#87);
+- Padronização da inserção de código (#88);
+- Inclusão de mini-sumário por capítulo(#89);
+      </revremark>
+    </revision>
+
+    <revision>
       <revnumber>v1.0.0</revnumber>
       <date>16/10/2014</date>
       <authorinitials> Eduardo </authorinitials>
