@@ -1,6 +1,9 @@
 == Revisão
 
 :cap: cap1
+:online: {gitrepo}/blob/{edition}/livro/capitulos/code/{cap}
+:local: code/{cap}
+
 
 .Objetivos do capítulo
 ____
@@ -240,17 +243,21 @@ pode-se usar 16 ou 32 bits (ou 8*s na <<tab_tipo_de_dados>>).
 
 .Programa para demonstrar os tamanhos dos tipos em bits
 ====
+
+:srcfile: tamanho_dos_tipos.c
+:saida:  tamanho_dos_tipos.out
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/tamanho_dos_tipos.c[code/cap1/tamanho_dos_tipos.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
 ----
-include::code/cap1/tamanho_dos_tipos.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Saída da execução do programa
 ....
-include::code/cap1/tamanho_dos_tipos.out[]
+include::{local}/{saida}[]
 ....
 ====
 
@@ -274,15 +281,17 @@ sequenciais.
 // comando3;
 ....
 
-.Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/sequencial.c[code/cap1/sequencial.c]
+:srcfile: estrutura_sequencial.c
 
-[source,c]
+.Código fonte
+{online}/{srcfile}[{local}/{srcfile}]
+
+[source, c]
 ----
-    float nota1 = 6;
-    float nota2 = 8;
-    float media = (nota1 + nota2)/2;
-    printf("Media = %f\n", media);
+float nota1 = 6;
+float nota2 = 8;
+float media = (nota1 + nota2)/2;
+printf("Media = %f\n", media);
 ----
 
 
@@ -313,7 +322,7 @@ seja *verdadeira*, o bloco de comandos 1 é executado. Caso seja
 ----
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/decisao_simples.c[code/cap1/decisao_simples.c]
+{gitrepo}/blob/{edition}/livro/capitulos/code/cap1/decisao_simples.c[code/cap1/decisao_simples.c]
 
 [source,c]
 ----
@@ -367,7 +376,7 @@ comandos 2*; e assim por diante, até ser testada a última condição.
 ----
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/decisao_composta.c[code/cap1/decisao_composta.c]
+{gitrepo}/blob/{edition}/livro/capitulos/code/cap1/decisao_composta.c[code/cap1/decisao_composta.c]
 
 [source,c]
 ----
@@ -421,7 +430,7 @@ switch (variável) {
 ----
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/decisao_multipla.c[code/cap1/decisao_multipla.c]
+{gitrepo}/blob/{edition}/livro/capitulos/code/cap1/decisao_multipla.c[code/cap1/decisao_multipla.c]
 
 [source,c]
 ----
@@ -523,7 +532,7 @@ conhece o número de repetições, como demonstrado no <<ex_uso_while>>.
 .Uso do `while`
 ====
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/while_exemplo.c[code/cap1/while_exemplo.c]
+{gitrepo}/blob/{edition}/livro/capitulos/code/cap1/while_exemplo.c[code/cap1/while_exemplo.c]
 
 [source,c]
 ----
@@ -566,7 +575,7 @@ escolher uma das opções 1, 2 ou 3.
 ====
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/do_while_exemplo.c[code/cap1/do_while_exemplo.c]
+{gitrepo}/blob/{edition}/livro/capitulos/code/cap1/do_while_exemplo.c[code/cap1/do_while_exemplo.c]
 
 [source, c]
 .Exemplo do do-while 
@@ -605,11 +614,11 @@ bytes para armazenamento deste vetor.
 
 [[fig_vetor]]
 .Vetor de float com tamanho 8, durante sua definição. Seu conteúdo é indeterminado e cada posição ocupa o tamanho de um float.
-image::images/cap1-revisao/vetor-declarado.pdf[scaledwidth="60%"]
+image::images/cap1/vetor-declarado.pdf[scaledwidth="60%"]
 
 [[fig_vetor_inicializado]]
 .Exemplo do mesmo vetor preenchido com alguns valores.
-image::images/cap1-revisao/vetor-inicializado.pdf[scaledwidth="60%"]
+image::images/cap1/vetor-inicializado.pdf[scaledwidth="60%"]
 
 As operações básicas que se pode fazer com vetores são: atribuir
 valores a posições dos vetores, preencher por completo o vetor e
@@ -690,7 +699,7 @@ armazenar números do tipo `double`.
 
 [[fig_matriz]]
 .Exemplo de definição de um array bidimensional ou matriz
-image::images/cap1-revisao/matriz.pdf[scaledwidth="40%"]
+image::images/cap1/matriz.pdf[scaledwidth="40%"]
 
 
 As operações básicas que se pode fazer com matrizes são: atribuir
@@ -717,18 +726,22 @@ da <<fig_matriz>>, pode ser feito como no <<ex_matriz>>.
 [[ex_matriz]]
 .Preenchimento de uma matriz de duas dimensões
 ====
+:srcfile: matriz.c
+:saida:   matriz.out
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/matriz.c[code/cap1/matriz.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
 ----
-include::code/cap1/matriz.c[]
+include::{local}/{srcfile}[]
 ----
 
-.Exemplo da execução do código
+.Saída da execução do programa
 ....
-include::code/cap1/matriz.out[]
+include::{local}/{saida}[]
 ....
+
 ====
 
 Observe que nos códigos do preenchimento e impressão da matriz
@@ -777,18 +790,23 @@ precisa, que tipo de saída irá gerar, como pode ser visto no
 [[ex_programa_completo]]
 .Programa com estrutura completa em C
 ====
+
+:srcfile: programa_completo.c
+:saida:   programa_completo.out
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/programa_completo.c[code/cap1/programa_completo.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
 ----
-include::code/cap1/programa_completo.c[]
+include::{local}/{srcfile}[]
 ----
 
-.Saída da execução
+.Saída da execução do programa
 ....
-include::code/cap1/programa_completo.out[]
+include::{local}/{saida}[]
 ....
+
 ====
 
 

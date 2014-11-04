@@ -18,7 +18,7 @@ dúvidas sobre eles.
 +
 --
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap1/cpf_formatado.c[code/cap1/cpf_formatado.c]
+{gitrepo}/blob/{edition}/livro/capitulos/code/cap1/cpf_formatado.c[code/cap1/cpf_formatado.c]
 
 [source, c]
 ----
@@ -70,7 +70,7 @@ compromisso com o mesmo título. Outro possível campo seria o `horario`, no ent
 No tipo `Horario` percebemos que todos os campos juntos identificam um registro. Caso dois registros possuam os mesmos valores então eles representam um mesmo `Horario`.
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/respostas/reg_compromisso.c[code/respostas/reg_compromisso.c]
+{gitrepo}/blob/{edition}/livro/capitulos/code/respostas/reg_compromisso.c[code/respostas/reg_compromisso.c]
 
 [source, c]
 .Tipos dos registros `Compromisso` e `Horario`.

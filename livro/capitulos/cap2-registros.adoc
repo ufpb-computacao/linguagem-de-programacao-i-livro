@@ -2,6 +2,9 @@
 == Registros
 
 :cap: cap2
+:online: {gitrepo}/blob/{edition}/livro/capitulos/code/{cap}
+:local: code/{cap}
+
 
 .Objetivos do capítulo
 ____________________
@@ -243,17 +246,19 @@ e suas notas.
 
 .Registro em Pseudocódigo
 ----
-include::code/cap2/reg_aluno_pseudo.txt[]
+include::{local}/reg_aluno_pseudo.txt[]
 ----
 
+:srcfile: reg_aluno.c
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_aluno.c[code/cap2/reg_aluno.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [[ex_reg_aluno]]
 [source, c]
 .Registro de Aluno em C
 ----
-include::code/cap2/reg_aluno.c[]
+include::{local}/{srcfile}[]
 ----
 
 [NOTE]
@@ -294,18 +299,21 @@ registrá-lo também.
 
 .Registro em Pseudocódigo
 ----
-include::code/cap2/reg_pessoa_pseudo.txt[]
+include::{local}/reg_pessoa_pseudo.txt[]
 ----
 
+:srcfile: reg_pessoa.c
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_pessoa.c[code/cap2/reg_pessoa.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [[ex_reg_pessoa]]
 [source, c]
 .Registro de Pessoa em C
 ----
-include::code/cap2/reg_pessoa.c[]
+include::{local}/{srcfile}[]
 ----
+
 
 [NOTE]
 ====
@@ -353,17 +361,19 @@ duas coordenadas juntas identificam o ponto.
 
 .Registro em Pseudocódigo
 ----
-include::code/cap2/reg_ponto_matematica_pseudo.txt[]
+include::{local}/reg_ponto_matematica_pseudo.txt[]
 ----
 
+:srcfile: reg_ponto.c
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_ponto.c[code/cap2/reg_ponto.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [[ex_reg_ponto]]
 [source, c]
 .Registro de Ponto em C
 ----
-include::code/cap2/reg_ponto.c[]
+include::{local}/{srcfile}[]
 ----
 
 [NOTE]
@@ -406,17 +416,19 @@ aplicação vamos utilizar este mesmo *código* para identificar unicamente cada
 
 .Registro em Pseudocódigo
 ----
-include::code/cap2/reg_produto_supermercado_pseudo.txt[]
+include::{local}/reg_produto_supermercado_pseudo.txt[]
 ----
 
+:srcfile: reg_produto.c
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_protudo.c[code/cap2/reg_protudo.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [[ex_reg_produto]]
 [source, c]
 .Registro de Produto em C
 ----
-include::code/cap2/reg_produto.c[]
+include::{local}/{srcfile}[]
 ----
 
 [NOTE]
@@ -457,18 +469,19 @@ identificar o seu *dono*.
 
 .Registro em Pseudocódigo
 ----
-include::code/cap2/reg_conta_pseudo.txt[]
+include::{local}/reg_conta_pseudo.txt[]
 ----
 
+:srcfile: reg_conta.c
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_conta.c[code/cap2/reg_conta.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [[ex_reg_conta]]
 [source, c]
 .Registro de Conta em C
 ----
-include::code/cap2/reg_conta.c[]
+include::{local}/{srcfile}[]
 ----
 
 [width="80%",cols="^1s,^1m,^1m",frame="topbot",options="header"]
@@ -481,18 +494,21 @@ include::code/cap2/reg_conta.c[]
 
 .Registro em Pseudocódigo
 ----
-include::code/cap2/reg_cliente_pseudo.txt[]
+include::{local}/reg_cliente_pseudo.txt[]
 ----
 
+:srcfile: reg_cliente.c
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_cliente.c[code/cap2/reg_cliente.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [[ex_reg_cliente]]
 [source, c]
 .Registro de Cliente em C
 ----
-include::code/cap2/reg_cliente.c[]
+include::{local}/{srcfile}[]
 ----
+
 
 [NOTE]
 ====
@@ -523,13 +539,16 @@ Nestes exemplos você irá aprender:
 ==== Aluno
 Exemplo de utilização do registro Aluno.
 
+:srcfile: reg_aluno_exemplo.c
+:saida:   reg_aluno_exemplo_simulacao.txt
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_aluno_exemplo.c[code/cap2/reg_aluno_exemplo.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
 .Exemplo de utilização do registro Aluno
 ----
-include::code/cap2/reg_aluno_exemplo.c[]
+include::{local}/{srcfile}[]
 ----
 <1> Como atribuir valores aos campos do registro.
 <2> Como atribuir valores de texto aos campos do registro. Você já estudou a
@@ -538,19 +557,23 @@ função `strcpy` antes.
 
 .Resultado ao simular a execução do programa
 ----
-include::code/cap2/reg_aluno_exemplo_simulacao.txt[]
+include::{local}/{saida}[]
 ----
 
 ==== Produto
 Exemplo de utilização do registro Produto.
 
+.Utilização do registro Produto em C
+====
+:srcfile: reg_produto_exemplo.c
+:saida:   reg_produto_exemplo.txt
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_produto_exemplo.c[code/cap2/reg_produto_exemplo.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
-.Exemplo de utilização do registro Produto em C
 ----
-include::code/cap2/reg_produto_exemplo.c[]
+include::{local}/{srcfile}[]
 ----
 <1> Como ler da entrada os valores e atribuí-los aos campos. Consulte a 
 documentação de `scanf` (ou `fscanf`) para conhecer a sintaxe de leitura e 
@@ -558,28 +581,30 @@ conversão dos dados. Percebam a ausência de `&` antes do campo `nome`.
 
 .Resultado ao simular a execução do programa
 ----
-include::code/cap2/reg_produto_exemplo_simulacao.txt[]
+include::{local}/{saida}[]
 ----
-
-[WARNING]
 ====
-Percebam que quando atribuímos um valor de texto aos campos do tipo *char[]*,
+
+WARNING: Percebam que quando atribuímos um valor de texto aos campos do tipo *char[]*,
 nós *suprimimos* o `&`. Isto correu com o campo `aluno.nome` em `strncpy` e `p.nome`
 no `scanf`.
-====
 
 
 ==== Pontos
 Exemplo de utilização do registro Ponto com Arranjo.
 
-.Exemplo de utilização do Registro Ponto
+.Utilização do Registro Ponto
 ====
+
+:srcfile: reg_ponto_exemplo.c
+:saida:   reg_ponto_exemplo_simulacao.txt
+
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_ponto_exemplo.c[code/cap2/reg_ponto_exemplo.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
 ----
-include::code/cap2/reg_ponto_exemplo.c[]
+include::{local}/{srcfile}[]
 ----
 <1> Declaração de *constante* que definirá o tamanho do arranjo.
 <2> Como declarar um arranjo de registros do tipo Ponto, com o tamanho definido 
@@ -590,7 +615,7 @@ sintaxe: `[índice]`.
 
 .Resultado ao simular a execução do programa
 ----
-include::code/cap2/reg_ponto_exemplo_simulacao.txt[]
+include::{local}/{saida}[]
 ----
 ====
 
@@ -609,24 +634,29 @@ Em seguida imprima a matrícula, o nome e a média de cada um deles.
 
 .Pseudocódigo do programa
 ----
-include::code/cap2/reg_aluno_pseudo.txt[]
-include::code/cap2/calculo_das_medias_pseudo.txt[]
+include::{local}/reg_aluno_pseudo.txt[]
+include::{local}/calculo_das_medias_pseudo.txt[]
 ----
 <1> Imprime a média calculada.
 
-.Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/calculo_das_medias.c[code/cap2/calculo_das_medias.c]
+.Implementação de calculo_das_medias.c
+====
+:srcfile: calculo_das_medias.c
+:saida:   calculo_das_medias_simulacao.txt
 
-.Programa em C
-[source,c]
+.Código fonte
+{online}/{srcfile}[{local}/{srcfile}]
+
+[source, c]
 ----
-include::code/cap2/calculo_das_medias.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Resultado ao simular a execução do programa
-----
-include::code/cap2/calculo_das_medias_simulacao.txt[]
-----
+....
+include::{local}/{saida}[]
+....
+====
 
 ==== Problema do cálculo e consulta do IMC de uma pessoa
 
@@ -636,28 +666,33 @@ através do seu CPF e imprimir o seu IMC.
 
 .Pseudocódigo do programa
 ----
-include::code/cap2/reg_pessoa_pseudo.txt[]
-include::code/cap2/imc_calculo_pseudo.txt[]
+include::{local}/reg_pessoa_pseudo.txt[]
+include::{local}/imc_calculo_pseudo.txt[]
 ----
 <1> O ler o campo *identificador* de Pessoa (CPF).
 <2> Pesquisa pelo registro Pessoa identificado pelo CPF lido.
 
-.Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/imc_calculo.c[code/cap2/imc_calculo.c]
+.Implementação de imc_calculo.c
+====
+:srcfile: imc_calculo.c
+:saida:   imc_calculo_simulacao.txt
 
-.Programa em C
-[source,c]
+.Código fonte
+{online}/{srcfile}[{local}/{srcfile}]
+
+[source, c]
 ----
-include::code/cap2/imc_calculo.c[]
+include::{local}/{srcfile}[]
 ----
 <1> O ler o campo *identificador* de Pessoa (`cpf`).
 <2> Pesquisa pelo registro Pessoa identificado pelo CPF lido.
 <3> Realiza quebra na execução.
 
 .Resultado ao simular a execução do programa
-----
-include::code/cap2/imc_calculo_simulacao.txt[]
-----
+....
+include::{local}/{saida}[]
+....
+====
 
 ==== Problema de pontos no plano cartesiano
 
@@ -666,8 +701,8 @@ próximo do primeiro ponto lido.
 
 .Pseudocódigo do programa
 ----
-include::code/cap2/reg_ponto_matematica_pseudo.txt[]
-include::code/cap2/ponto_proximo_pseudo.txt[]
+include::{local}/reg_ponto_matematica_pseudo.txt[]
+include::{local}/ponto_proximo_pseudo.txt[]
 ----
 
 <1> `MAIOR_INTEIRO` representa o maior número inteiro que podemos armazenar numa
@@ -686,19 +721,24 @@ não há diferença em comparar a distância ao quadrado. Sabemos, por exemplo,
 que a *raiz* de `x` é *menor do que a raiz* de `y` se `x` for *menor* do 
 que `y`.
 
-.Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/ponto_proximo.c[code/cap2/ponto_proximo.c]
+.Implementação de ponto_proximo.c
+====
+:srcfile: ponto_proximo.c
+:saida:   ponto_proximo_simulacao.txt
 
-.Programa em C
-[source,c]
+.Código fonte
+{online}/{srcfile}[{local}/{srcfile}]
+
+[source, c]
 ----
-include::code/cap2/ponto_proximo.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Resultado ao simular a execução do programa
-----
-include::code/cap2/ponto_proximo_simulacao.txt[]
-----
+....
+include::{local}/{saida}[]
+....
+====
 
 
 ==== Problema sobre cadastro de produtos no supermercado
@@ -709,23 +749,28 @@ através de seu código.
 
 .Pseudocódigo do programa
 ----
-include::code/cap2/reg_produto_supermercado_pseudo.txt[]
-include::code/cap2/prob_supermercado_pseudo.txt[]
+include::{local}/reg_produto_supermercado_pseudo.txt[]
+include::{local}/prob_supermercado_pseudo.txt[]
 ----
+
+.Implementação de supermercado.c
+====
+:srcfile: supermercado.c
+:saida:   supermercado_simulacao.txt
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/supermercado.c[code/cap2/supermercado.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
-[source,c]
-.Programa em C
+[source, c]
 ----
-include::code/cap2/supermercado.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Resultado ao simular a execução do programa
-----
-include::code/cap2/supermercado_simulacao.txt[]
-----
+....
+include::{local}/{saida}[]
+....
+====
 
 ==== Problema sobre gerenciamento de contas bancárias
 
@@ -742,29 +787,30 @@ imprimir o nome do titular e o saldo final da conta.
 
 .Pseudocódigo do programa
 ----
-include::code/cap2/reg_conta_pseudo.txt[]
-include::code/cap2/reg_cliente_pseudo.txt[]
-include::code/cap2/prob_conta_bancaria_pseudo.txt[]
+include::{local}/reg_conta_pseudo.txt[]
+include::{local}/reg_cliente_pseudo.txt[]
+include::{local}/prob_conta_bancaria_pseudo.txt[]
 ----
+
+.Implementação de conta_bancaria.c
+====
+
+:srcfile: conta_bancaria.c
+:saida:   conta_bancaria_simulacao.txt
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/conta_bancaria.c[code/cap2/conta_bancaria.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
-.Programa em C
-[source,c]
+[source, c]
 ----
-include::code/cap2/conta_bancaria.c[]
+include::{local}/{srcfile}[]
 ----
-<1> Poderia ser também: `while (sair!=0)`
-
-////
-Todo: Utilizar o tipo bool em stdbool.h para variáveis booleanas #73 
-////
 
 .Resultado ao simular a execução do programa
-----
-include::code/cap2/conta_bancaria_simulacao.txt[]
-----
+....
+include::{local}/{saida}[]
+....
+====
 
 Após todos estes programas, agora vamos ver uma técnica não utilizada ainda,
 a inicialização de 'registro' com valores pré-definidos.
@@ -779,14 +825,17 @@ esta atribuição.
 WARNING: Para a atribuição poder ocorrer, os campos precisam ser inseridos
 *na ordem que foram declarados* no tipo do registro.
 
-.Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_atribuicao.c[code/cap2/reg_atribuicao.c]
-
-
 .Programa em C
-[source,c]
+====
+:srcfile: reg_atribuicao.c
+:saida:   reg_atribuicao_simulacao.txt
+
+.Código fonte
+{online}/{srcfile}[{local}/{srcfile}]
+
+[source, c]
 ----
-include::code/cap2/reg_atribuicao.c[]
+include::{local}/{srcfile}[]
 ----
 <1> Seguindo a ordem da declaração do registro, `matricula` recebe `15`, `nome` 
 recebe ``Virgulino da Silva'', `nota1` recebe `9` e `nota2` recebe `10`.
@@ -794,9 +843,10 @@ recebe ``Virgulino da Silva'', `nota1` recebe `9` e `nota2` recebe `10`.
 e `cpf` recebe `72779162201`.
 
 .Resultado ao simular a execução do programa
-----
-include::code/cap2/reg_atribuicao_simulacao.txt[]
-----
+....
+include::{local}/{saida}[]
+....
+====
 
 NOTE: O *Registro* é um tipo de dado composto por campos com outros tipos. 'Mas
 será que é possível declarar um campo do tipo Registro?' Veremos a resposta
@@ -821,17 +871,20 @@ tipo `Ponto`.
 
 .Composição de registro em Pseudocódigo
 ----
-include::code/cap2/reg_triangulo_pseudo.txt[]
+include::{local}/reg_triangulo_pseudo.txt[]
 ----
 
+.Composição de registro em C - Triângulo
+====
+:srcfile: reg_triangulo.c
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_triangulo.c[code/cap2/reg_triangulo.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
-.Composição de registro em C - Triângulo
 ----
-include::code/cap2/reg_triangulo.c[]
+include::{local}/{srcfile}[]
 ----
+====
 
 [NOTE]
 ====
@@ -850,17 +903,21 @@ Nesta seção vamos definir um Registro `InformacaoPessoal` e utilizá-lo no Reg
 
 .Composição de registro em Pseudocódigo
 ----
-include::code/cap2/reg_infopessoal_pseudo.txt[]
+include::{local}/reg_infopessoal_pseudo.txt[]
 ----
+
+.Composição de registro em C - Informação Pessoal
+====
+:srcfile: reg_infopessoal.c
 
 .Código fonte
-{gitrepo}/blob/master/livro/capitulos/code/cap2/reg_infopessoal.c[code/cap2/reg_infopessoal.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
-.Composição de registro em C - Informação Pessoal
 ----
-include::code/cap2/reg_infopessoal.c[]
+include::{local}/{srcfile}[]
 ----
+====
 
 [NOTE]
 ====

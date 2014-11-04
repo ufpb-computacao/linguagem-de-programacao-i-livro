@@ -1,8 +1,8 @@
 == Alocação Dinâmica de Memória
 
 :cap: cap4
-:online: {gitrepo}/blob/master/livro/capitulos/code/cap4
-:local: code/cap4
+:online: {gitrepo}/blob/{edition}/livro/capitulos/code/{cap}
+:local: code/{cap}
 :img: images/cap4
 
 .Objetivos do capítulo
@@ -256,17 +256,19 @@ alocação dinâmica de memória (linha 19).
 .Reutilizando um ponteiro
 ====
 
+:srcfile: reutilizando_ponteiro.c
+:saida:   reutilizando_ponteiro.out
 .Código fonte
-{online}/reutilizando_ponteiro.c[{local}/reutilizando_ponteiro.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
-[source, c, numbered]
+[source, c]
 ----
-include::{local}/reutilizando_ponteiro.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Saída da execução
 ....
-include::{local}/reutilizando_ponteiro.out[]
+include::{local}/{saida}[]
 ....
 ====
 
@@ -330,17 +332,19 @@ um vetor dinâmico que calcula a soma de dois vetores.
 [[ex_soma_vetores]]
 .Programa que realiza soma de dois vetores
 ====
+:srcfile: soma_vetores.c
+:saida:   soma_vetores.out
 .Código fonte
-{online}/soma_vetores.c[{local}/soma_vetores.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
-[source, c, numbered]
+[source, c]
 ----
-include::{local}/soma_vetores.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Saída da execução
 ....
-include::{local}/soma_vetores.out[]
+include::{local}/{saida}[]
 ....
 ====
 
@@ -412,17 +416,19 @@ O <<ex_vetor_matriz>> mostra o uso dessa estratégia para uma matriz com
 [[ex_vetor_matriz]]
 .Utilização de vetor para alocação de uma matriz
 ====
+:srcfile: vetor_matriz.c
+:saida:   vetor_matriz.out
 .Código fonte
-{online}/vetor_matriz.c[{local}/vetor_matriz.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
 [source, c]
 ----
-include::{local}/vetor_matriz.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Saída da execução
 ....
-include::{local}/vetor_matriz.out[]
+include::{local}/{saida}[]
 ....
 ====
 
@@ -485,17 +491,19 @@ usando o comando `free(ptr)`.
 [[ex_aloca_registro_dinamicamente]]
 .Programa que demonstra aloção de registro dinamicamente
 ====
+:srcfile: aloca_registro_dinamicamente.c
+:saida:   aloca_registro_dinamicamente.out
 .Código fonte
-{online}/aloca_registro_dinamicamente.c[{local}/aloca_registro_dinamicamente.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
-[source, c, numbered]
+[source, c]
 ----
-include::{local}/aloca_registro_dinamicamente.c[]
+include::{local}/{srcfile}[]
 ----
 
 .Saída da execução
 ....
-include::{local}/aloca_registro_dinamicamente.out[]
+include::{local}/{saida}[]
 ....
 ====
 
@@ -537,12 +545,13 @@ do registro.
 [[ex_registros_estaticos]]
 .Utilização de registros estáticos
 ====
+:srcfile: registros_estaticos.c
 .Código fonte
-{online}/registros_estaticos.c[{local}/registros_estaticos.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
-[source, c, numbered]
+[source, c]
 ----
-include::{local}/registros_estaticos.c[]
+include::{local}/{srcfile}[]
 ----
 ====
 
@@ -572,12 +581,13 @@ a notação de vetor. A notação de ponteiro é demonstrada na linha 30.
 .Utilização de registros alocados dinamicamente
 ====
 
+:srcfile: registro_dinamico.c
 .Código fonte
-{online}/registro_dinamico.c[{local}/registro_dinamico.c]
+{online}/{srcfile}[{local}/{srcfile}]
 
-[source, c, numbered]
+[source, c]
 ----
-include::{local}/registro_dinamico.c[]
+include::{local}/{srcfile}[]
 ----
 
 ====
